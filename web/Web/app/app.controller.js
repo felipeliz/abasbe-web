@@ -55,6 +55,7 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
         $scope.sections.push({ title: 'Associados', icon: 'home', link: 'restricted.layout.associado-lista' });
         $scope.sections.push({ title: 'Certificados', icon: 'home', link: 'restricted.layout.certificado-lista' });
         $scope.sections.push({ title: 'Profissões', icon: 'home', link: 'restricted.layout.profissao-lista' });
+        $scope.sections.push({ title: 'Equipamentos', icon: 'home', link: 'restricted.layout.equipamento-lista' });
     })();
 
 

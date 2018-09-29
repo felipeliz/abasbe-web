@@ -280,5 +280,53 @@
             pageTitle: 'Editar Associado'
         }
     });
+
+    $stateProvider.state("restricted.layout.equipamento-lista", {
+        url: "/equipamento",
+        templateUrl: 'app/views/equipamento/list.html',
+        controller: 'equipamento',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/equipamento.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Equipamentos'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.equipamento-novo", {
+        url: "/equipamento/form",
+        templateUrl: 'app/views/equipamento/form.html',
+        controller: 'equipamento',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/equipamento.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Equipamento'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.equipamento-editar", {
+        url: "/equipamento/form/:id",
+        templateUrl: 'app/views/equipamento/form.html',
+        controller: 'equipamento',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/equipamento.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Equipamento'
+        }
+    });
 }
 ]);

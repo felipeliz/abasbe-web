@@ -140,12 +140,15 @@
     <Content Include="app\controllers\certificado.js" />
     <Content Include="app\controllers\dashboard.js" />
     <Content Include="app\controllers\associado.js" />
+    <Content Include="app\controllers\equipamento.js" />
     <Content Include="app\controllers\usuario.js" />
     <Content Include="app\controllers\profissao.js" />
     <Content Include="app\controllers\senha.js" />
     <Content Include="app\shared\mail-templates\basic.html" />
     <Content Include="app\views\associado\form.html" />
     <Content Include="app\views\associado\list.html" />
+    <Content Include="app\views\equipamento\form.html" />
+    <Content Include="app\views\equipamento\list.html" />
     <Content Include="app\views\usuario\form.html" />
     <Content Include="app\views\usuario\list.html" />
     <Content Include="app\views\certificado\form.html" />
