@@ -23,12 +23,14 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAssociado" Type="int" Nullable="false" />
+          <Property Name="IdPlano" Type="int" Nullable="false" />
           <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Dias" Type="int" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="DataCriacao" Type="datetime" Nullable="false" />
           <Property Name="Situacao" Type="int" Nullable="false" />
-          <Property Name="IdPlano" Type="int" Nullable="false" />
+          <Property Name="CheckoutIdentifier" Type="varchar" MaxLength="100" />
+          <Property Name="DataConfirmacao" Type="datetime" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -418,6 +420,8 @@
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdPlano" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="AssociadoPagamento" ToRole="Plano" />
+          <Property Name="CheckoutIdentifier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataConfirmacao" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -821,6 +825,8 @@
           <EntitySetMapping Name="AssociadoPagamento">
             <EntityTypeMapping TypeName="AbasbeModel.AssociadoPagamento">
               <MappingFragment StoreEntitySet="AssociadoPagamento">
+                <ScalarProperty Name="DataConfirmacao" ColumnName="DataConfirmacao" />
+                <ScalarProperty Name="CheckoutIdentifier" ColumnName="CheckoutIdentifier" />
                 <ScalarProperty Name="IdPlano" ColumnName="IdPlano" />
                 <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

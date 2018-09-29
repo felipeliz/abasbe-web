@@ -62,17 +62,23 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
+                                <th>Identificador</th>
                                 <th>Descrição</th>
                                 <th>Valor</th>
                                 <th>Dias</th>
+                                <th>Registro</th>
+                                <th>Confirmação</th>
                                 <th>Situação</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="pagamento in form.Pagamentos">
+                                <td>{{pagamento.CheckoutIdentifier}}</td>
                                 <td>{{pagamento.Descricao}}</td>
                                 <td>{{pagamento.Valor}}</td>
                                 <td>{{pagamento.Dias}}</td>
+                                <td>{{pagamento.DataCriacao}}</td>
+                                <td>{{pagamento.DataConfirmacao}}</td>
                                 <td>{{pagamento.Situacao}}</td>
                             </tr>
                         </tbody>

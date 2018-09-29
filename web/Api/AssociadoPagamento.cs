@@ -22,6 +22,8 @@ namespace Api
         public int Situacao { get; set; }
         public System.DateTime DataCriacao { get; set; }
         public int IdPlano { get; set; }
+        public string CheckoutIdentifier { get; set; }
+        public Nullable<System.DateTime> DataConfirmacao { get; set; }
     
         public virtual Associado Associado { get; set; }
         public virtual Plano Plano { get; set; }
