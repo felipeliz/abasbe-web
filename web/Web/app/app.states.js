@@ -232,5 +232,53 @@
             pageTitle: 'Editar Usuário'
         }
     });
+
+    $stateProvider.state("restricted.layout.associado-lista", {
+        url: "/associado",
+        templateUrl: 'app/views/associado/list.html',
+        controller: 'associado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/associado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Associados'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.associado-novo", {
+        url: "/associado/form",
+        templateUrl: 'app/views/associado/form.html',
+        controller: 'associado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/associado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Associado'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.associado-editar", {
+        url: "/associado/form/:id",
+        templateUrl: 'app/views/associado/form.html',
+        controller: 'associado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/associado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Associado'
+        }
+    });
 }
 ]);

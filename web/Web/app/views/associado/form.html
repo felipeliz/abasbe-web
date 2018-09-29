@@ -1,8 +1,8 @@
-﻿<div id="page_content"  ng-init="init()">
+﻿<div id="page_content" ng-init="init()">
     <div id="page_content_inner">
         <div class="md-card">
             <div class="md-card-content">
-                <h3 class="heading_a">Registro de Usuário</h3>
+                <h3 class="heading_a">Registro de Associado</h3>
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
                         <label>Nome</label>
@@ -12,9 +12,24 @@
                         <label>E-mail</label>
                         <input type="text" class="md-input label-fixed" ng-model="form.Email" md-input />
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin">
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Telefone</label>
+                        <input type="text" class="md-input label-fixed" ui-mask="(99) 99999-9999" ng-model="form.Telefone" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Data Expiração</label>
+                        <input type="text" class="md-input label-fixed" ui-mask="99/99/9999" ng-model="form.DataExpiracao" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
                         <label>Senha</label>
                         <input type="password" autocomplete='new-password' class="md-input label-fixed" ng-model="form.Senha" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Situação</label>
+                        <select class="md-input label-fixed" ng-model="form.Situacao" md-input>
+                            <option value="True">Ativo</option>
+                            <option value="False">Inativo</option>
+                        </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">

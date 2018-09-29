@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\ProfissaoController.cs" />
+    <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Disponibilidade.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -170,6 +171,7 @@
     </Compile>
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />
+    <Compile Include="Models\AssociadoViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Plano.cs">
       <DependentUpon>Model.tt</DependentUpon>
