@@ -1,8 +1,12 @@
 ﻿<div id="page_content" ng-init="init()">
     <div id="page_content_inner">
         <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Profissões
+                </h3>
+            </div>
             <div class="md-card-content">
-                <h3 class="heading_a">Profissões</h3>
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
                         <label>Descrição</label>
@@ -37,7 +41,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-medium-top">
+                    <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-top">
                         <li ng-repeat="p in lista.pages" ng-class="p == lista.current ? 'uk-active' : ''"><a ng-click="filtrar(p)" href="javascript:void(0)">{{p}}</a></li>
                     </ul>
                 </div>
