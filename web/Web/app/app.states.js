@@ -1,4 +1,4 @@
-app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
+Ôªøapp.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function ($locationProvider, $stateProvider, $urlRouterProvider) {
 
     $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -149,7 +149,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
             }]
         },
         data: {
-            pageTitle: 'Profissıes'
+            pageTitle: 'Profiss√µes'
         }
     });
 
@@ -165,7 +165,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
             }]
         },
         data: {
-            pageTitle: 'Criar Profiss„o'
+            pageTitle: 'Criar Profiss√£o'
         }
     });
 
@@ -181,7 +181,7 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
             }]
         },
         data: {
-            pageTitle: 'Editar Profiss„o'
+            pageTitle: 'Editar Profiss√£o'
         }
     });
 }

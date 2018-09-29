@@ -1,4 +1,15 @@
 app
+    .factory('$loading', function () {
+        return {
+            loading: null,
+            show: function () {
+                this.loading = $.UIkit.modal.blockUI('<div class="uk-grid"><div class="uk-width-1-4"><img src="assets/img/spinners/spinner_medium.gif" alt="" width="36" height="36"></div><div class="uk-width-1-4 uk-flex" style="align-items:center;">Processando...</div></div>');
+            },
+            hide: function () {
+                this.loading.hide();
+            }
+        }
+    })
     .factory('windowDimensions', [
         '$window',
         function($window) {
