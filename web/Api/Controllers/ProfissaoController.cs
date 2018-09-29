@@ -11,7 +11,7 @@ namespace Api.Controllers
     public class ProfissaoController : ApiController
     {
         [HttpPost]
-        public PagedList lista([FromBody] dynamic param)
+        public PagedList Lista([FromBody] dynamic param)
         {
             string descricao = param.Descricao;
 
@@ -25,11 +25,11 @@ namespace Api.Controllers
                 lista.Add(new ProfissaoViewModel(obj));
             });
 
-            return PagedList.create(param.page?.ToString(), 10, lista);
+            return PagedList.Create(param.page?.ToString(), 10, lista);
         }
 
         [HttpGet]
-        public ProfissaoViewModel obter(int id)
+        public ProfissaoViewModel Obter(int id)
         {
             Entities context = new Entities();
 
@@ -45,7 +45,7 @@ namespace Api.Controllers
 
 
         [HttpPost]
-        public bool salvar([FromBody] dynamic param)
+        public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);
 

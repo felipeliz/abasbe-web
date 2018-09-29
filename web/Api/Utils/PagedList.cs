@@ -11,7 +11,7 @@ namespace Api.Utils
         public int current { get; set; }
         public List<int> pages { get; set; }
         public List<object> list { get; set; }
-        public static PagedList create(string pageStr, int pagesize, IEnumerable<object> list)
+        public static PagedList Create(string pageStr, int pagesize, IEnumerable<object> list)
         {
             PagedList pagedList = new PagedList();
             try

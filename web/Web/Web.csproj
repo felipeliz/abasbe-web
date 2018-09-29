@@ -139,9 +139,12 @@
   <ItemGroup>
     <Content Include="app\controllers\certificado.js" />
     <Content Include="app\controllers\dashboard.js" />
+    <Content Include="app\controllers\usuario.js" />
     <Content Include="app\controllers\profissao.js" />
     <Content Include="app\controllers\senha.js" />
     <Content Include="app\shared\mail-templates\basic.html" />
+    <Content Include="app\views\usuario\form.html" />
+    <Content Include="app\views\usuario\list.html" />
     <Content Include="app\views\certificado\form.html" />
     <Content Include="app\views\certificado\list.html" />
     <Content Include="app\views\dashboard.html" />

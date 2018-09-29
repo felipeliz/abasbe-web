@@ -184,5 +184,53 @@
             pageTitle: 'Editar Profissão'
         }
     });
+
+    $stateProvider.state("restricted.layout.usuario-lista", {
+        url: "/usuario",
+        templateUrl: 'app/views/usuario/list.html',
+        controller: 'usuario',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/usuario.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Usuários'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.usuario-novo", {
+        url: "/usuario/form",
+        templateUrl: 'app/views/usuario/form.html',
+        controller: 'usuario',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/usuario.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Usuário'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.usuario-editar", {
+        url: "/usuario/form/:id",
+        templateUrl: 'app/views/usuario/form.html',
+        controller: 'usuario',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/usuario.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Usuário'
+        }
+    });
 }
 ]);

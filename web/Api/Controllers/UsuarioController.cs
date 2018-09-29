@@ -12,7 +12,7 @@ namespace Api.Controllers
     public class UsuarioController : ApiController
     {
         [HttpPost]
-        public UsuarioViewModel login([FromBody] dynamic param)
+        public UsuarioViewModel Login([FromBody] dynamic param)
         {
             string email = param.email;
             string senha = param.senha;
@@ -30,7 +30,7 @@ namespace Api.Controllers
         }
         
         [HttpPost]
-        public bool alterarSenha([FromBody] dynamic param)
+        public bool AlterarSenha([FromBody] dynamic param)
         {
             int id = AppExtension.IdUsuarioLogado();
 
@@ -59,6 +59,85 @@ namespace Api.Controllers
             }
 
             throw new Exception("A Senha Atual está incorreta.");
+        }
+        
+        [HttpPost]
+        public PagedList Lista([FromBody] dynamic param)
+        {
+            string nome = param.Nome;
+
+            Entities context = new Entities();
+            List<UsuarioViewModel> lista = new List<UsuarioViewModel>();
+
+            var query = context.Usuario.Where(obj => obj.Nome.Contains(nome)).ToList();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new UsuarioViewModel(obj));
+            });
+
+            return PagedList.Create(param.page?.ToString(), 10, lista);
+        }
+
+        [HttpGet]
+        public UsuarioViewModel Obter(int id)
+        {
+            Entities context = new Entities();
+
+            var obj = context.Usuario.FirstOrDefault(obj => obj.Id == id);
+
+            if (obj == null)
+            {
+                throw new Exception("Registro não identificado.");
+            }
+
+            return new UsuarioViewModel(obj);
+        }
+
+
+        [HttpPost]
+        public bool Salvar([FromBody] dynamic param)
+        {
+            int id = Convert.ToInt32(param.Id);
+
+            Entities context = new Entities();
+            var obj = context.Usuario.FirstOrDefault(pro => pro.Id == id) ?? new Usuario();
+
+            obj.Nome = param.Nome?.ToString();
+            obj.Senha = param.Senha?.ToString();
+            obj.Email = param.Email?.ToString();
+
+            if (id <= 0)
+            {
+                context.Usuario.Add(obj);
+            }
+            context.SaveChanges();
+            return true;
+        }
+
+        [HttpGet]
+        public void Excluir(int id)
+        {
+            Entities context = new Entities();
+
+            var obj = context.Usuario.FirstOrDefault(pro => pro.Id == id);
+            if (obj == null)
+            {
+                throw new Exception("Registro não identificado.");
+            }
+            else
+            {
+                try
+                {
+                    context.Usuario.Remove(obj);
+                    context.SaveChanges();
+                }
+                catch
+                {
+                    throw new Exception("Não foi possível excluir, existem registros dependentes.");
+                }
+
+            }
         }
     }
 }
