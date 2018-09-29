@@ -1,0 +1,47 @@
+﻿<div id="page_content" ng-init="init()">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <h3 class="heading_a">Profissões</h3>
+                <div class="uk-grid">
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <label>Descrição</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Descricao" md-input />
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
+                        <div class="uk-align-right">
+                            <a class="md-btn md-btn-primary" ng-click="novo()" href="javascript:void(0)">Novo</a>
+                            <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card uk-margin-medium-bottom" ng-hide="lista.list == undefined || lista.list.length == 0">
+            <div class="md-card-content">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th class="acoes-4">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="profissao in lista.list">
+                                <td>{{profissao.Descricao}}</td>
+                                <td>
+                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(profissao.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(profissao.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-medium-top">
+                        <li ng-repeat="p in lista.pages" ng-class="p == lista.current ? 'uk-active' : ''"><a ng-click="filtrar(p)" href="javascript:void(0)">{{p}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

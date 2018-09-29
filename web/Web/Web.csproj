@@ -137,10 +137,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\certificado.js" />
     <Content Include="app\controllers\dashboard.js" />
+    <Content Include="app\controllers\profissao.js" />
     <Content Include="app\controllers\senha.js" />
     <Content Include="app\shared\mail-templates\basic.html" />
+    <Content Include="app\views\certificado\form.html" />
+    <Content Include="app\views\certificado\list.html" />
     <Content Include="app\views\dashboard.html" />
+    <Content Include="app\views\profissao\form.html" />
+    <Content Include="app\views\profissao\list.html" />
     <Content Include="app\views\senha.html" />
     <Content Include="assets\img\logo.png" />
     <Content Include="bower_components\angular-autocomplete\autocomplete.css" />

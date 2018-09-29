@@ -88,5 +88,101 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
             pageTitle: 'Altera Senha'
         }
     });
+
+    $stateProvider.state("restricted.layout.certificado-lista", {
+        url: "/certificado",
+        templateUrl: 'app/views/certificado/list.html',
+        controller: 'certificado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/certificado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Certificados'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.certificado-novo", {
+        url: "/certificado/form",
+        templateUrl: 'app/views/certificado/form.html',
+        controller: 'certificado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/certificado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Certificado'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.certificado-editar", {
+        url: "/certificado/form/:id",
+        templateUrl: 'app/views/certificado/form.html',
+        controller: 'certificado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/certificado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Certificado'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.profissao-lista", {
+        url: "/profissao",
+        templateUrl: 'app/views/profissao/list.html',
+        controller: 'profissao',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissao.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Profissões'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.profissao-novo", {
+        url: "/profissao/form",
+        templateUrl: 'app/views/profissao/form.html',
+        controller: 'profissao',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissao.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Profissão'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.profissao-editar", {
+        url: "/profissao/form/:id",
+        templateUrl: 'app/views/profissao/form.html',
+        controller: 'profissao',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissao.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Profissão'
+        }
+    });
 }
 ]);

@@ -51,6 +51,8 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
     (function loader() {
         var user = Auth.get();
         $scope.sections.push({ title: 'Dashboard', icon: 'home', link: 'restricted.layout.dashboard' });
+        $scope.sections.push({ title: 'Certificados', icon: 'home', link: 'restricted.layout.certificado-lista' });
+        $scope.sections.push({ title: 'Profissões', icon: 'home', link: 'restricted.layout.profissao-lista' });
     })();
 
 
