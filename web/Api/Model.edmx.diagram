@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3aa8290eba3480e895f3925fc51fed2" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="AbasbeModel.Associado" Width="1.5" PointX="5.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.AssociadoPagamento" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Certificado" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Disponibilidade" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Equipamento" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Profissao" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Profissional" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalCertificado" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalEquipamentos" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalExperiencia" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AbasbeModel.Usuario" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="AbasbeModel.FK_Pagamento_Associado" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Certificado" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_Profissional_Disponibilidade" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Disponibilidade" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Equipamento" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_Profissional_Profissao" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissao" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" ManuallyRouted="false" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

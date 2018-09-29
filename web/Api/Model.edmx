@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AbasbeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Associado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="11" />
+          <Property Name="DataExpiracao" Type="datetime" Nullable="false" />
+          <Property Name="Situacao" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssociadoPagamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAssociado" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Dias" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Situacao" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imagem" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Expiracao" Type="date" />
+        </EntityType>
+        <EntityType Name="Certificado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Disponibilidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Plano">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Dias" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profissao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profissional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProfissao" Type="int" Nullable="false" />
+          <Property Name="IdDisponibilidade" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="250" />
+          <Property Name="CPF" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Nascimento" Type="date" />
+          <Property Name="TelefoneComercial" Type="varchar" MaxLength="11" />
+          <Property Name="TelefoneCelular" Type="varchar" MaxLength="11" />
+          <Property Name="TempoExperiencia" Type="int" Nullable="false" />
+          <Property Name="FlagLeiSalaoParceiro" Type="bit" Nullable="false" />
+          <Property Name="FlagBiosseguranca" Type="bit" Nullable="false" />
+          <Property Name="FlagEpi" Type="bit" Nullable="false" />
+          <Property Name="FlagFilhos" Type="bit" Nullable="false" />
+          <Property Name="FlagMei" Type="bit" Nullable="false" />
+          <Property Name="FlagDiarista" Type="bit" Nullable="false" />
+          <Property Name="PretensaoSalarial" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ObservacaoFilhos" Type="varchar" MaxLength="250" />
+          <Property Name="Observacoes" Type="varchar" MaxLength="500" />
+          <Property Name="Situacao" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfissionalCertificado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdProfissional" Type="int" Nullable="false" />
+          <Property Name="IdCertificado" Type="int" Nullable="false" />
+          <Property Name="FlagPrincipal" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfissionalEquipamentos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProfissional" Type="int" Nullable="false" />
+          <Property Name="IdEquipamento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfissionalExperiencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdProfissional" Type="int" Nullable="false" />
+          <Property Name="IdProfissao" Type="int" Nullable="false" />
+          <Property Name="IdDisponibilidade" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="500" />
+          <Property Name="DataInicial" Type="date" Nullable="false" />
+          <Property Name="DataFinal" Type="date" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pagamento_Associado">
+          <End Role="Associado" Type="Self.Associado" Multiplicity="1" />
+          <End Role="AssociadoPagamento" Type="Self.AssociadoPagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssociadoPagamento">
+              <PropertyRef Name="IdAssociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Disponibilidade">
+          <End Role="Disponibilidade" Type="Self.Disponibilidade" Multiplicity="1" />
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disponibilidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdDisponibilidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Profissao">
+          <End Role="Profissao" Type="Self.Profissao" Multiplicity="1" />
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdProfissao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalCertificado_Certificado">
+          <End Role="Certificado" Type="Self.Certificado" Multiplicity="1" />
+          <End Role="ProfissionalCertificado" Type="Self.ProfissionalCertificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Certificado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalCertificado">
+              <PropertyRef Name="IdCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalCertificado_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalCertificado" Type="Self.ProfissionalCertificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalCertificado">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalEquipamentos_Equipamento">
+          <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
+          <End Role="ProfissionalEquipamentos" Type="Self.ProfissionalEquipamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalEquipamentos">
+              <PropertyRef Name="IdEquipamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalEquipamentos_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalEquipamentos" Type="Self.ProfissionalEquipamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalEquipamentos">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Disponibilidade">
+          <End Role="Disponibilidade" Type="Self.Disponibilidade" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disponibilidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdDisponibilidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Profissao">
+          <End Role="Profissao" Type="Self.Profissao" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdProfissao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AbasbeModelStoreContainer">
+          <EntitySet Name="Associado" EntityType="Self.Associado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssociadoPagamento" EntityType="Self.AssociadoPagamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Certificado" EntityType="Self.Certificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disponibilidade" EntityType="Self.Disponibilidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipamento" EntityType="Self.Equipamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plano" EntityType="Self.Plano" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profissao" EntityType="Self.Profissao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profissional" EntityType="Self.Profissional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfissionalCertificado" EntityType="Self.ProfissionalCertificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfissionalEquipamentos" EntityType="Self.ProfissionalEquipamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfissionalExperiencia" EntityType="Self.ProfissionalExperiencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pagamento_Associado" Association="Self.FK_Pagamento_Associado">
+            <End Role="Associado" EntitySet="Associado" />
+            <End Role="AssociadoPagamento" EntitySet="AssociadoPagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Disponibilidade" Association="Self.FK_Profissional_Disponibilidade">
+            <End Role="Disponibilidade" EntitySet="Disponibilidade" />
+            <End Role="Profissional" EntitySet="Profissional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Profissao" Association="Self.FK_Profissional_Profissao">
+            <End Role="Profissao" EntitySet="Profissao" />
+            <End Role="Profissional" EntitySet="Profissional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalCertificado_Certificado" Association="Self.FK_ProfissionalCertificado_Certificado">
+            <End Role="Certificado" EntitySet="Certificado" />
+            <End Role="ProfissionalCertificado" EntitySet="ProfissionalCertificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalCertificado_Profissional" Association="Self.FK_ProfissionalCertificado_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalCertificado" EntitySet="ProfissionalCertificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalEquipamentos_Equipamento" Association="Self.FK_ProfissionalEquipamentos_Equipamento">
+            <End Role="Equipamento" EntitySet="Equipamento" />
+            <End Role="ProfissionalEquipamentos" EntitySet="ProfissionalEquipamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalEquipamentos_Profissional" Association="Self.FK_ProfissionalEquipamentos_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalEquipamentos" EntitySet="ProfissionalEquipamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Disponibilidade" Association="Self.FK_ProfissionalExperiencia_Disponibilidade">
+            <End Role="Disponibilidade" EntitySet="Disponibilidade" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Profissao" Association="Self.FK_ProfissionalExperiencia_Profissao">
+            <End Role="Profissao" EntitySet="Profissao" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Profissional" Association="Self.FK_ProfissionalExperiencia_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AbasbeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Associado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="DataExpiracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Situacao" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AssociadoPagamento" Relationship="Self.FK_Pagamento_Associado" FromRole="Associado" ToRole="AssociadoPagamento" />
+        </EntityType>
+        <EntityType Name="AssociadoPagamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAssociado" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Situacao" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Associado" Relationship="Self.FK_Pagamento_Associado" FromRole="AssociadoPagamento" ToRole="Associado" />
+        </EntityType>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imagem" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Expiracao" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Certificado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProfissionalCertificado" Relationship="Self.FK_ProfissionalCertificado_Certificado" FromRole="Certificado" ToRole="ProfissionalCertificado" />
+        </EntityType>
+        <EntityType Name="Disponibilidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Profissional" Relationship="Self.FK_Profissional_Disponibilidade" FromRole="Disponibilidade" ToRole="Profissional" />
+          <NavigationProperty Name="ProfissionalExperiencia" Relationship="Self.FK_ProfissionalExperiencia_Disponibilidade" FromRole="Disponibilidade" ToRole="ProfissionalExperiencia" />
+        </EntityType>
+        <EntityType Name="Equipamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProfissionalEquipamentos" Relationship="Self.FK_ProfissionalEquipamentos_Equipamento" FromRole="Equipamento" ToRole="ProfissionalEquipamentos" />
+        </EntityType>
+        <EntityType Name="Plano">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profissao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Profissional" Relationship="Self.FK_Profissional_Profissao" FromRole="Profissao" ToRole="Profissional" />
+          <NavigationProperty Name="ProfissionalExperiencia" Relationship="Self.FK_ProfissionalExperiencia_Profissao" FromRole="Profissao" ToRole="ProfissionalExperiencia" />
+        </EntityType>
+        <EntityType Name="Profissional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProfissao" Type="Int32" Nullable="false" />
+          <Property Name="IdDisponibilidade" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CPF" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nascimento" Type="DateTime" Precision="0" />
+          <Property Name="TelefoneComercial" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneCelular" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="TempoExperiencia" Type="Int32" Nullable="false" />
+          <Property Name="FlagLeiSalaoParceiro" Type="Boolean" Nullable="false" />
+          <Property Name="FlagBiosseguranca" Type="Boolean" Nullable="false" />
+          <Property Name="FlagEpi" Type="Boolean" Nullable="false" />
+          <Property Name="FlagFilhos" Type="Boolean" Nullable="false" />
+          <Property Name="FlagMei" Type="Boolean" Nullable="false" />
+          <Property Name="FlagDiarista" Type="Boolean" Nullable="false" />
+          <Property Name="PretensaoSalarial" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ObservacaoFilhos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Observacoes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Situacao" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Disponibilidade" Relationship="Self.FK_Profissional_Disponibilidade" FromRole="Profissional" ToRole="Disponibilidade" />
+          <NavigationProperty Name="Profissao" Relationship="Self.FK_Profissional_Profissao" FromRole="Profissional" ToRole="Profissao" />
+          <NavigationProperty Name="ProfissionalCertificado" Relationship="Self.FK_ProfissionalCertificado_Profissional" FromRole="Profissional" ToRole="ProfissionalCertificado" />
+          <NavigationProperty Name="ProfissionalEquipamentos" Relationship="Self.FK_ProfissionalEquipamentos_Profissional" FromRole="Profissional" ToRole="ProfissionalEquipamentos" />
+          <NavigationProperty Name="ProfissionalExperiencia" Relationship="Self.FK_ProfissionalExperiencia_Profissional" FromRole="Profissional" ToRole="ProfissionalExperiencia" />
+        </EntityType>
+        <EntityType Name="ProfissionalCertificado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdProfissional" Type="Int32" Nullable="false" />
+          <Property Name="IdCertificado" Type="Int32" Nullable="false" />
+          <Property Name="FlagPrincipal" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Certificado" Relationship="Self.FK_ProfissionalCertificado_Certificado" FromRole="ProfissionalCertificado" ToRole="Certificado" />
+          <NavigationProperty Name="Profissional" Relationship="Self.FK_ProfissionalCertificado_Profissional" FromRole="ProfissionalCertificado" ToRole="Profissional" />
+        </EntityType>
+        <EntityType Name="ProfissionalEquipamentos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProfissional" Type="Int32" Nullable="false" />
+          <Property Name="IdEquipamento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipamento" Relationship="Self.FK_ProfissionalEquipamentos_Equipamento" FromRole="ProfissionalEquipamentos" ToRole="Equipamento" />
+          <NavigationProperty Name="Profissional" Relationship="Self.FK_ProfissionalEquipamentos_Profissional" FromRole="ProfissionalEquipamentos" ToRole="Profissional" />
+        </EntityType>
+        <EntityType Name="ProfissionalExperiencia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdProfissional" Type="Int32" Nullable="false" />
+          <Property Name="IdProfissao" Type="Int32" Nullable="false" />
+          <Property Name="IdDisponibilidade" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DataInicial" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataFinal" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Disponibilidade" Relationship="Self.FK_ProfissionalExperiencia_Disponibilidade" FromRole="ProfissionalExperiencia" ToRole="Disponibilidade" />
+          <NavigationProperty Name="Profissao" Relationship="Self.FK_ProfissionalExperiencia_Profissao" FromRole="ProfissionalExperiencia" ToRole="Profissao" />
+          <NavigationProperty Name="Profissional" Relationship="Self.FK_ProfissionalExperiencia_Profissional" FromRole="ProfissionalExperiencia" ToRole="Profissional" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Senha" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pagamento_Associado">
+          <End Role="Associado" Type="Self.Associado" Multiplicity="1" />
+          <End Role="AssociadoPagamento" Type="Self.AssociadoPagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssociadoPagamento">
+              <PropertyRef Name="IdAssociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalCertificado_Certificado">
+          <End Role="Certificado" Type="Self.Certificado" Multiplicity="1" />
+          <End Role="ProfissionalCertificado" Type="Self.ProfissionalCertificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Certificado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalCertificado">
+              <PropertyRef Name="IdCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Disponibilidade">
+          <End Role="Disponibilidade" Type="Self.Disponibilidade" Multiplicity="1" />
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disponibilidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdDisponibilidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Disponibilidade">
+          <End Role="Disponibilidade" Type="Self.Disponibilidade" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disponibilidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdDisponibilidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalEquipamentos_Equipamento">
+          <End Role="Equipamento" Type="Self.Equipamento" Multiplicity="1" />
+          <End Role="ProfissionalEquipamentos" Type="Self.ProfissionalEquipamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipamento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalEquipamentos">
+              <PropertyRef Name="IdEquipamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Profissao">
+          <End Role="Profissao" Type="Self.Profissao" Multiplicity="1" />
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdProfissao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Profissao">
+          <End Role="Profissao" Type="Self.Profissao" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdProfissao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalCertificado_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalCertificado" Type="Self.ProfissionalCertificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalCertificado">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalEquipamentos_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalEquipamentos" Type="Self.ProfissionalEquipamentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalEquipamentos">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProfissionalExperiencia_Profissional">
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="1" />
+          <End Role="ProfissionalExperiencia" Type="Self.ProfissionalExperiencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profissional">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfissionalExperiencia">
+              <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Associado" EntityType="Self.Associado" />
+          <EntitySet Name="AssociadoPagamento" EntityType="Self.AssociadoPagamento" />
+          <EntitySet Name="Banner" EntityType="Self.Banner" />
+          <EntitySet Name="Certificado" EntityType="Self.Certificado" />
+          <EntitySet Name="Disponibilidade" EntityType="Self.Disponibilidade" />
+          <EntitySet Name="Equipamento" EntityType="Self.Equipamento" />
+          <EntitySet Name="Plano" EntityType="Self.Plano" />
+          <EntitySet Name="Profissao" EntityType="Self.Profissao" />
+          <EntitySet Name="Profissional" EntityType="Self.Profissional" />
+          <EntitySet Name="ProfissionalCertificado" EntityType="Self.ProfissionalCertificado" />
+          <EntitySet Name="ProfissionalEquipamentos" EntityType="Self.ProfissionalEquipamentos" />
+          <EntitySet Name="ProfissionalExperiencia" EntityType="Self.ProfissionalExperiencia" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Pagamento_Associado" Association="Self.FK_Pagamento_Associado">
+            <End Role="Associado" EntitySet="Associado" />
+            <End Role="AssociadoPagamento" EntitySet="AssociadoPagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalCertificado_Certificado" Association="Self.FK_ProfissionalCertificado_Certificado">
+            <End Role="Certificado" EntitySet="Certificado" />
+            <End Role="ProfissionalCertificado" EntitySet="ProfissionalCertificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Disponibilidade" Association="Self.FK_Profissional_Disponibilidade">
+            <End Role="Disponibilidade" EntitySet="Disponibilidade" />
+            <End Role="Profissional" EntitySet="Profissional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Disponibilidade" Association="Self.FK_ProfissionalExperiencia_Disponibilidade">
+            <End Role="Disponibilidade" EntitySet="Disponibilidade" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalEquipamentos_Equipamento" Association="Self.FK_ProfissionalEquipamentos_Equipamento">
+            <End Role="Equipamento" EntitySet="Equipamento" />
+            <End Role="ProfissionalEquipamentos" EntitySet="ProfissionalEquipamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Profissao" Association="Self.FK_Profissional_Profissao">
+            <End Role="Profissao" EntitySet="Profissao" />
+            <End Role="Profissional" EntitySet="Profissional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Profissao" Association="Self.FK_ProfissionalExperiencia_Profissao">
+            <End Role="Profissao" EntitySet="Profissao" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalCertificado_Profissional" Association="Self.FK_ProfissionalCertificado_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalCertificado" EntitySet="ProfissionalCertificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalEquipamentos_Profissional" Association="Self.FK_ProfissionalEquipamentos_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalEquipamentos" EntitySet="ProfissionalEquipamentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProfissionalExperiencia_Profissional" Association="Self.FK_ProfissionalExperiencia_Profissional">
+            <End Role="Profissional" EntitySet="Profissional" />
+            <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AbasbeModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Associado">
+            <EntityTypeMapping TypeName="AbasbeModel.Associado">
+              <MappingFragment StoreEntitySet="Associado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="DataExpiracao" ColumnName="DataExpiracao" />
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssociadoPagamento">
+            <EntityTypeMapping TypeName="AbasbeModel.AssociadoPagamento">
+              <MappingFragment StoreEntitySet="AssociadoPagamento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdAssociado" ColumnName="IdAssociado" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="AbasbeModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Expiracao" ColumnName="Expiracao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certificado">
+            <EntityTypeMapping TypeName="AbasbeModel.Certificado">
+              <MappingFragment StoreEntitySet="Certificado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disponibilidade">
+            <EntityTypeMapping TypeName="AbasbeModel.Disponibilidade">
+              <MappingFragment StoreEntitySet="Disponibilidade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipamento">
+            <EntityTypeMapping TypeName="AbasbeModel.Equipamento">
+              <MappingFragment StoreEntitySet="Equipamento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plano">
+            <EntityTypeMapping TypeName="AbasbeModel.Plano">
+              <MappingFragment StoreEntitySet="Plano">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profissao">
+            <EntityTypeMapping TypeName="AbasbeModel.Profissao">
+              <MappingFragment StoreEntitySet="Profissao">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profissional">
+            <EntityTypeMapping TypeName="AbasbeModel.Profissional">
+              <MappingFragment StoreEntitySet="Profissional">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProfissao" ColumnName="IdProfissao" />
+                <ScalarProperty Name="IdDisponibilidade" ColumnName="IdDisponibilidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Nascimento" ColumnName="Nascimento" />
+                <ScalarProperty Name="TelefoneComercial" ColumnName="TelefoneComercial" />
+                <ScalarProperty Name="TelefoneCelular" ColumnName="TelefoneCelular" />
+                <ScalarProperty Name="TempoExperiencia" ColumnName="TempoExperiencia" />
+                <ScalarProperty Name="FlagLeiSalaoParceiro" ColumnName="FlagLeiSalaoParceiro" />
+                <ScalarProperty Name="FlagBiosseguranca" ColumnName="FlagBiosseguranca" />
+                <ScalarProperty Name="FlagEpi" ColumnName="FlagEpi" />
+                <ScalarProperty Name="FlagFilhos" ColumnName="FlagFilhos" />
+                <ScalarProperty Name="FlagMei" ColumnName="FlagMei" />
+                <ScalarProperty Name="FlagDiarista" ColumnName="FlagDiarista" />
+                <ScalarProperty Name="PretensaoSalarial" ColumnName="PretensaoSalarial" />
+                <ScalarProperty Name="ObservacaoFilhos" ColumnName="ObservacaoFilhos" />
+                <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfissionalCertificado">
+            <EntityTypeMapping TypeName="AbasbeModel.ProfissionalCertificado">
+              <MappingFragment StoreEntitySet="ProfissionalCertificado">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProfissional" ColumnName="IdProfissional" />
+                <ScalarProperty Name="IdCertificado" ColumnName="IdCertificado" />
+                <ScalarProperty Name="FlagPrincipal" ColumnName="FlagPrincipal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfissionalEquipamentos">
+            <EntityTypeMapping TypeName="AbasbeModel.ProfissionalEquipamentos">
+              <MappingFragment StoreEntitySet="ProfissionalEquipamentos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProfissional" ColumnName="IdProfissional" />
+                <ScalarProperty Name="IdEquipamento" ColumnName="IdEquipamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfissionalExperiencia">
+            <EntityTypeMapping TypeName="AbasbeModel.ProfissionalExperiencia">
+              <MappingFragment StoreEntitySet="ProfissionalExperiencia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdProfissional" ColumnName="IdProfissional" />
+                <ScalarProperty Name="IdProfissao" ColumnName="IdProfissao" />
+                <ScalarProperty Name="IdDisponibilidade" ColumnName="IdDisponibilidade" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+                <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="AbasbeModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

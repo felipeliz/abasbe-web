@@ -1,0 +1,1100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{66D2AB7E-7828-4C61-A930-DF0149A8479D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plivo, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plivo.3.0.9\lib\net40\Plivo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.8.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.9.0\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.4.2\lib\net451\System.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\controllers\dashboard.js" />
+    <Content Include="app\controllers\senha.js" />
+    <Content Include="app\shared\mail-templates\basic.html" />
+    <Content Include="app\views\dashboard.html" />
+    <Content Include="app\views\senha.html" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="bower_components\angular-autocomplete\autocomplete.css" />
+    <Content Include="bower_components\angular-autocomplete\autocomplete.js" />
+    <Content Include="bower_components\angular-pt-br\angular-locale_pt-br.js" />
+    <Content Include="bower_components\angular-ui-select\select2.css" />
+    <Content Include="bower_components\cpf-cnpj\cpj-cnpj.directive.js" />
+    <Content Include="bower_components\filter-phone\filter-phone.js" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.css" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.skinFlat.css" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.skinModern.css" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.skinNice.css" />
+    <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.skinSimple.css" />
+    <Content Include="bower_components\ion.rangeslider\css\normalize.css" />
+    <Content Include="bower_components\ion.rangeslider\img\sprite-skin-flat.png" />
+    <Content Include="bower_components\ion.rangeslider\img\sprite-skin-modern.png" />
+    <Content Include="bower_components\ion.rangeslider\img\sprite-skin-nice.png" />
+    <Content Include="bower_components\ion.rangeslider\img\sprite-skin-simple.png" />
+    <Content Include="bower_components\ion.rangeslider\js\ion.rangeSlider.js" />
+    <Content Include="bower_components\ion.rangeslider\js\ion.rangeSlider.min.js" />
+    <Content Include="bower_components\ion.rangeslider\_tmp\logo-ion-range-slider.png" />
+    <Content Include="bower_components\money-mask\rw-money-mask.js" />
+    <Content Include="bower_components\tooltip\angular-tooltips.css" />
+    <Content Include="bower_components\tooltip\angular-tooltips.js" />
+    <Content Include="bower_components\ui-mask\mask.js" />
+    <Content Include="bower_components\datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="bower_components\datepicker\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="bower_components\datepicker\bootstrap-datepicker.standalone.css" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\js\custom.js" />
+    <Content Include="bower_components\angular-animate\angular-animate.js" />
+    <Content Include="bower_components\angular-animate\angular-animate.min.js" />
+    <Content Include="bower_components\angular-animate\index.js" />
+    <Content Include="bower_components\angular-sanitize\angular-sanitize.js" />
+    <Content Include="bower_components\angular-sanitize\angular-sanitize.min.js" />
+    <Content Include="bower_components\angular-sanitize\index.js" />
+    <Content Include="bower_components\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="bower_components\angular-ui-router\release\angular-ui-router.min.js" />
+    <Content Include="bower_components\angular-ui-router\src\common.js" />
+    <Content Include="bower_components\angular-ui-router\src\resolve.js" />
+    <Content Include="bower_components\angular-ui-router\src\state.js" />
+    <Content Include="bower_components\angular-ui-router\src\stateDirectives.js" />
+    <Content Include="bower_components\angular-ui-router\src\stateFilters.js" />
+    <Content Include="bower_components\angular-ui-router\src\templateFactory.js" />
+    <Content Include="bower_components\angular-ui-router\src\urlMatcherFactory.js" />
+    <Content Include="bower_components\angular-ui-router\src\urlRouter.js" />
+    <Content Include="bower_components\angular-ui-router\src\view.js" />
+    <Content Include="bower_components\angular-ui-router\src\viewDirective.js" />
+    <Content Include="bower_components\angular-ui-router\src\viewScroll.js" />
+    <Content Include="bower_components\angular\angular-csp.css" />
+    <Content Include="bower_components\angular\angular.js" />
+    <Content Include="bower_components\angular\angular.min.js" />
+    <Content Include="bower_components\angular\index.js" />
+    <Content Include="bower_components\autosize\build.js" />
+    <Content Include="bower_components\autosize\dist\autosize.js" />
+    <Content Include="bower_components\autosize\dist\autosize.min.js" />
+    <Content Include="bower_components\autosize\example\index.html" />
+    <Content Include="bower_components\autosize\src\autosize.js" />
+    <Content Include="bower_components\jquery-icheck\icheck.js" />
+    <Content Include="bower_components\jquery-icheck\icheck.min.js" />
+    <Content Include="bower_components\jquery-icheck\skins\all.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\aero%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\aero.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\aero.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\blue%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\blue.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\blue.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\flat%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\flat.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\flat.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\green%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\green.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\green.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\grey%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\grey.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\grey.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\orange%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\orange.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\orange.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\pink%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\pink.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\pink.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\purple%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\purple.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\purple.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\red%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\red.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\red.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\yellow%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\yellow.css" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\yellow.png" />
+    <Content Include="bower_components\jquery-icheck\skins\flat\_all.css" />
+    <Content Include="bower_components\jquery-icheck\skins\futurico\futurico%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\futurico\futurico.css" />
+    <Content Include="bower_components\jquery-icheck\skins\futurico\futurico.png" />
+    <Content Include="bower_components\jquery-icheck\skins\line\aero.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\blue.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\green.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\grey.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\line%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\line\line.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\line.png" />
+    <Content Include="bower_components\jquery-icheck\skins\line\orange.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\pink.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\purple.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\red.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\yellow.css" />
+    <Content Include="bower_components\jquery-icheck\skins\line\_all.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\aero%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\aero.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\aero.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\blue%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\blue.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\blue.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\green%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\green.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\green.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\grey%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\grey.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\grey.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\minimal%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\minimal.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\minimal.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\orange%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\orange.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\orange.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\pink%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\pink.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\pink.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\purple%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\purple.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\purple.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\red%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\red.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\red.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\yellow%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\yellow.css" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\yellow.png" />
+    <Content Include="bower_components\jquery-icheck\skins\minimal\_all.css" />
+    <Content Include="bower_components\jquery-icheck\skins\polaris\polaris%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\polaris\polaris.css" />
+    <Content Include="bower_components\jquery-icheck\skins\polaris\polaris.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\aero%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\aero.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\aero.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\blue%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\blue.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\blue.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\green%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\green.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\green.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\grey%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\grey.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\grey.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\orange%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\orange.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\orange.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\pink%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\pink.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\pink.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\purple%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\purple.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\purple.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\red%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\red.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\red.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\square%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\square.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\square.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\yellow%402x.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\yellow.css" />
+    <Content Include="bower_components\jquery-icheck\skins\square\yellow.png" />
+    <Content Include="bower_components\jquery-icheck\skins\square\_all.css" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.core.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.directive.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.common.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.core.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.cssLoader.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.jsLoader.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.requireJSLoader.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.loaders.templatesLoader.js" />
+    <Content Include="bower_components\oclazyload\dist\modules\ocLazyLoad.polyfill.ie8.js" />
+    <Content Include="bower_components\oclazyload\dist\ocLazyLoad.js" />
+    <Content Include="bower_components\oclazyload\dist\ocLazyLoad.min.js" />
+    <Content Include="bower_components\oclazyload\dist\ocLazyLoad.require.js" />
+    <Content Include="bower_components\oclazyload\dist\ocLazyLoad.require.min.js" />
+    <Content Include="bower_components\selectize\dist\css\selectize.bootstrap2.css" />
+    <Content Include="bower_components\selectize\dist\css\selectize.bootstrap3.css" />
+    <Content Include="bower_components\selectize\dist\css\selectize.css" />
+    <Content Include="bower_components\selectize\dist\css\selectize.default.css" />
+    <Content Include="bower_components\selectize\dist\css\selectize.legacy.css" />
+    <Content Include="bower_components\selectize\dist\js\selectize.js" />
+    <Content Include="bower_components\selectize\dist\js\selectize.min.js" />
+    <Content Include="bower_components\selectize\dist\js\standalone\selectize.js" />
+    <Content Include="bower_components\selectize\dist\js\standalone\selectize.min.js" />
+    <Content Include="bower_components\selectize\karma.conf.js" />
+    <Content Include="bower_components\switchery\dist\switchery.css" />
+    <Content Include="bower_components\switchery\dist\switchery.js" />
+    <Content Include="bower_components\switchery\dist\switchery.min.css" />
+    <Content Include="bower_components\switchery\dist\switchery.min.js" />
+    <Content Include="bower_components\switchery\meteor\export.js" />
+    <Content Include="bower_components\switchery\meteor\tests.js" />
+    <Content Include="bower_components\switchery\package.js" />
+    <Content Include="bower_components\switchery\switchery.css" />
+    <Content Include="bower_components\switchery\switchery.js" />
+    <Content Include="bower_components\toastr\toastr.min.css" />
+    <Content Include="bower_components\toastr\toastr.min.js" />
+    <Content Include="bower_components\angular-ui-select\select.css" />
+    <Content Include="bower_components\angular-ui-select\select.js" />
+    <Content Include="bower_components\angular-ui-select\select.min.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\accordion.min.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\autocomplete.min.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\datepicker.min.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\dotnav.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-advanced.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-file.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-password.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\form-select.min.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\htmleditor.min.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\nestable.min.css" />
+    <Content Include="bower_components\uikit\css\components\notify.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\notify.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\notify.css" />
+    <Content Include="bower_components\uikit\css\components\notify.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\notify.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\notify.min.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\placeholder.min.css" />
+    <Content Include="bower_components\uikit\css\components\progress.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\progress.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\progress.css" />
+    <Content Include="bower_components\uikit\css\components\progress.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\progress.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\progress.min.css" />
+    <Content Include="bower_components\uikit\css\components\search.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\search.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\search.css" />
+    <Content Include="bower_components\uikit\css\components\search.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\search.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\search.min.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\slidenav.min.css" />
+    <Content Include="bower_components\uikit\css\components\slider.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slider.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\slider.css" />
+    <Content Include="bower_components\uikit\css\components\slider.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\slider.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\slider.min.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\slideshow.min.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\sortable.min.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\sticky.min.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\tooltip.min.css" />
+    <Content Include="bower_components\uikit\css\components\upload.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\components\upload.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\components\upload.css" />
+    <Content Include="bower_components\uikit\css\components\upload.gradient.css" />
+    <Content Include="bower_components\uikit\css\components\upload.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\components\upload.min.css" />
+    <Content Include="bower_components\uikit\css\uikit.almost-flat.css" />
+    <Content Include="bower_components\uikit\css\uikit.almost-flat.min.css" />
+    <Content Include="bower_components\uikit\css\uikit.css" />
+    <Content Include="bower_components\uikit\css\uikit.gradient.css" />
+    <Content Include="bower_components\uikit\css\uikit.gradient.min.css" />
+    <Content Include="bower_components\uikit\css\uikit.min.css" />
+    <Content Include="bower_components\uikit\js\components\accordion.js" />
+    <Content Include="bower_components\uikit\js\components\accordion.min.js" />
+    <Content Include="bower_components\uikit\js\components\autocomplete.js" />
+    <Content Include="bower_components\uikit\js\components\autocomplete.min.js" />
+    <Content Include="bower_components\uikit\js\components\datepicker.js" />
+    <Content Include="bower_components\uikit\js\components\datepicker.min.js" />
+    <Content Include="bower_components\uikit\js\components\form-password.js" />
+    <Content Include="bower_components\uikit\js\components\form-password.min.js" />
+    <Content Include="bower_components\uikit\js\components\form-select.js" />
+    <Content Include="bower_components\uikit\js\components\form-select.min.js" />
+    <Content Include="bower_components\uikit\js\components\grid.js" />
+    <Content Include="bower_components\uikit\js\components\grid.min.js" />
+    <Content Include="bower_components\uikit\js\components\htmleditor.js" />
+    <Content Include="bower_components\uikit\js\components\htmleditor.min.js" />
+    <Content Include="bower_components\uikit\js\components\lightbox.js" />
+    <Content Include="bower_components\uikit\js\components\lightbox.min.js" />
+    <Content Include="bower_components\uikit\js\components\nestable.js" />
+    <Content Include="bower_components\uikit\js\components\nestable.min.js" />
+    <Content Include="bower_components\uikit\js\components\notify.js" />
+    <Content Include="bower_components\uikit\js\components\notify.min.js" />
+    <Content Include="bower_components\uikit\js\components\pagination.js" />
+    <Content Include="bower_components\uikit\js\components\pagination.min.js" />
+    <Content Include="bower_components\uikit\js\components\parallax.js" />
+    <Content Include="bower_components\uikit\js\components\parallax.min.js" />
+    <Content Include="bower_components\uikit\js\components\search.js" />
+    <Content Include="bower_components\uikit\js\components\search.min.js" />
+    <Content Include="bower_components\uikit\js\components\slider.js" />
+    <Content Include="bower_components\uikit\js\components\slider.min.js" />
+    <Content Include="bower_components\uikit\js\components\slideset.js" />
+    <Content Include="bower_components\uikit\js\components\slideset.min.js" />
+    <Content Include="bower_components\uikit\js\components\slideshow-fx.js" />
+    <Content Include="bower_components\uikit\js\components\slideshow-fx.min.js" />
+    <Content Include="bower_components\uikit\js\components\slideshow.js" />
+    <Content Include="bower_components\uikit\js\components\slideshow.min.js" />
+    <Content Include="bower_components\uikit\js\components\sortable.js" />
+    <Content Include="bower_components\uikit\js\components\sortable.min.js" />
+    <Content Include="bower_components\uikit\js\components\sticky.js" />
+    <Content Include="bower_components\uikit\js\components\sticky.min.js" />
+    <Content Include="bower_components\uikit\js\components\timepicker.js" />
+    <Content Include="bower_components\uikit\js\components\timepicker.min.js" />
+    <Content Include="bower_components\uikit\js\components\tooltip.js" />
+    <Content Include="bower_components\uikit\js\components\tooltip.min.js" />
+    <Content Include="bower_components\uikit\js\components\upload.js" />
+    <Content Include="bower_components\uikit\js\components\upload.min.js" />
+    <Content Include="bower_components\uikit\js\core\alert.js" />
+    <Content Include="bower_components\uikit\js\core\alert.min.js" />
+    <Content Include="bower_components\uikit\js\core\button.js" />
+    <Content Include="bower_components\uikit\js\core\button.min.js" />
+    <Content Include="bower_components\uikit\js\core\core.js" />
+    <Content Include="bower_components\uikit\js\core\core.min.js" />
+    <Content Include="bower_components\uikit\js\core\cover.js" />
+    <Content Include="bower_components\uikit\js\core\cover.min.js" />
+    <Content Include="bower_components\uikit\js\core\dropdown.js" />
+    <Content Include="bower_components\uikit\js\core\dropdown.min.js" />
+    <Content Include="bower_components\uikit\js\core\grid.js" />
+    <Content Include="bower_components\uikit\js\core\grid.min.js" />
+    <Content Include="bower_components\uikit\js\core\modal.js" />
+    <Content Include="bower_components\uikit\js\core\modal.min.js" />
+    <Content Include="bower_components\uikit\js\core\nav.js" />
+    <Content Include="bower_components\uikit\js\core\nav.min.js" />
+    <Content Include="bower_components\uikit\js\core\offcanvas.js" />
+    <Content Include="bower_components\uikit\js\core\offcanvas.min.js" />
+    <Content Include="bower_components\uikit\js\core\scrollspy.js" />
+    <Content Include="bower_components\uikit\js\core\scrollspy.min.js" />
+    <Content Include="bower_components\uikit\js\core\smooth-scroll.js" />
+    <Content Include="bower_components\uikit\js\core\smooth-scroll.min.js" />
+    <Content Include="bower_components\uikit\js\core\switcher.js" />
+    <Content Include="bower_components\uikit\js\core\switcher.min.js" />
+    <Content Include="bower_components\uikit\js\core\tab.js" />
+    <Content Include="bower_components\uikit\js\core\tab.min.js" />
+    <Content Include="bower_components\uikit\js\core\toggle.js" />
+    <Content Include="bower_components\uikit\js\core\toggle.min.js" />
+    <Content Include="bower_components\uikit\js\core\touch.js" />
+    <Content Include="bower_components\uikit\js\core\touch.min.js" />
+    <Content Include="bower_components\uikit\js\core\utility.js" />
+    <Content Include="bower_components\uikit\js\core\utility.min.js" />
+    <Content Include="bower_components\uikit\js\uikit.js" />
+    <Content Include="bower_components\uikit\js\uikit.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.eot" />
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.ijmap" />
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.ttf" />
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.woff" />
+    <Content Include="assets\icons\material-design-icons\MaterialIcons-Regular.woff2" />
+    <Content Include="assets\icons\material-design-icons\README.md" />
+    <Content Include="assets\less\angular\_app.less" />
+    <Content Include="assets\less\angular\_wizard.less" />
+    <Content Include="assets\less\components\_preloaders.less" />
+    <Content Include="assets\less\components\_timeline.less" />
+    <Content Include="assets\less\main.less" />
+    <Content Include="assets\less\md\md_main.less" />
+    <Content Include="assets\less\md\_md_buttons.less" />
+    <Content Include="assets\less\md\_md_cards.less" />
+    <Content Include="assets\less\md\_md_colors.less" />
+    <Content Include="assets\less\md\_md_forms.less" />
+    <Content Include="assets\less\md\_md_icons.less" />
+    <Content Include="assets\less\md\_md_list.less" />
+    <Content Include="assets\less\md\_md_panels.less" />
+    <Content Include="assets\less\md\_md_precompiled_colors.less" />
+    <Content Include="assets\less\md\_md_top_bar.less" />
+    <Content Include="assets\less\md\_md_utils.less" />
+    <Content Include="assets\less\md\_md_variables_mixins.less" />
+    <Content Include="assets\less\pages\_blog.less" />
+    <Content Include="assets\less\pages\_chat.less" />
+    <Content Include="assets\less\pages\_error_page.less" />
+    <Content Include="assets\less\pages\_gallery.less" />
+    <Content Include="assets\less\pages\_login_page.less" />
+    <Content Include="assets\less\pages\_pricing_table.less" />
+    <Content Include="assets\less\pages\_scrum_board.less" />
+    <Content Include="assets\less\pages\_user_profile.less" />
+    <Content Include="assets\less\partials\_bottom_sheet.less" />
+    <Content Include="assets\less\partials\_header_main.less" />
+    <Content Include="assets\less\partials\_menu_top.less" />
+    <Content Include="assets\less\partials\_menu_top_dropdown.less" />
+    <Content Include="assets\less\partials\_page_heading.less" />
+    <Content Include="assets\less\partials\_sidebars.less" />
+    <Content Include="assets\less\partials\_style_switcher.less" />
+    <Content Include="assets\less\partials\_top_bar.less" />
+    <Content Include="assets\less\plugins\_altair_plugins.less" />
+    <Content Include="assets\less\plugins\_animate_css.less" />
+    <Content Include="assets\less\plugins\_c3_charts.less" />
+    <Content Include="assets\less\plugins\_chartist.less" />
+    <Content Include="assets\less\plugins\_clndr.less" />
+    <Content Include="assets\less\plugins\_codemirror.less" />
+    <Content Include="assets\less\plugins\_custom_scrollbar.less" />
+    <Content Include="assets\less\plugins\_datatables.less" />
+    <Content Include="assets\less\plugins\_dragula.less" />
+    <Content Include="assets\less\plugins\_easy_pie_chart.less" />
+    <Content Include="assets\less\plugins\_fileinput.less" />
+    <Content Include="assets\less\plugins\_fullcalendar.less" />
+    <Content Include="assets\less\plugins\_gantt_chart.less" />
+    <Content Include="assets\less\plugins\_gmaps.less" />
+    <Content Include="assets\less\plugins\_icheck.less" />
+    <Content Include="assets\less\plugins\_ionrangeSlider.less" />
+    <Content Include="assets\less\plugins\_metrics_graphics.less" />
+    <Content Include="assets\less\plugins\_parsley.less" />
+    <Content Include="assets\less\plugins\_peity.less" />
+    <Content Include="assets\less\plugins\_prism.less" />
+    <Content Include="assets\less\plugins\_selectize.less" />
+    <Content Include="assets\less\plugins\_switchery.less" />
+    <Content Include="assets\less\plugins\_tablesorter.less" />
+    <Content Include="assets\less\plugins\_vector_maps.less" />
+    <Content Include="assets\less\plugins\_wizard.less" />
+    <Content Include="assets\less\themes\my_theme.less" />
+    <Content Include="assets\less\themes\_theme_a.less" />
+    <Content Include="assets\less\themes\_theme_b.less" />
+    <Content Include="assets\less\themes\_theme_c.less" />
+    <Content Include="assets\less\themes\_theme_d.less" />
+    <Content Include="assets\less\themes\_theme_e.less" />
+    <Content Include="assets\less\themes\_theme_f.less" />
+    <Content Include="assets\less\themes\_theme_g.less" />
+    <Content Include="assets\less\_altair_admin.less" />
+    <Content Include="assets\less\_kendo_ui_custom.less" />
+    <Content Include="assets\less\_print.less" />
+    <Content Include="assets\less\_uikit_custom.less" />
+    <Content Include="assets\less\_variables_mixins.less" />
+    <Content Include="bower_components\angular-animate\angular-animate.min.js.map" />
+    <Content Include="bower_components\angular-animate\bower.json" />
+    <Content Include="bower_components\angular-animate\package.json" />
+    <Content Include="bower_components\angular-animate\README.md" />
+    <Content Include="bower_components\angular-sanitize\angular-sanitize.min.js.map" />
+    <Content Include="bower_components\angular-sanitize\bower.json" />
+    <Content Include="bower_components\angular-sanitize\package.json" />
+    <Content Include="bower_components\angular-sanitize\README.md" />
+    <Content Include="bower_components\angular-ui-router\bower.json" />
+    <Content Include="bower_components\angular-ui-router\CHANGELOG.md" />
+    <Content Include="bower_components\angular-ui-router\CONTRIBUTING.md" />
+    <Content Include="bower_components\angular-ui-router\LICENSE" />
+    <Content Include="bower_components\angular-ui-router\README.md" />
+    <Content Include="bower_components\angular\angular.min.js.gzip" />
+    <Content Include="bower_components\angular\angular.min.js.map" />
+    <Content Include="bower_components\angular\bower.json" />
+    <Content Include="bower_components\angular\package.json" />
+    <Content Include="bower_components\angular\README.md" />
+    <Content Include="bower_components\autosize\bower.json" />
+    <Content Include="bower_components\autosize\changelog.md" />
+    <Content Include="bower_components\autosize\package.json" />
+    <Content Include="bower_components\autosize\readme.md" />
+    <Content Include="bower_components\jquery-icheck\bower.json" />
+    <Content Include="bower_components\jquery-icheck\icheck.jquery.json" />
+    <Content Include="bower_components\oclazyload\bower.json" />
+    <Content Include="bower_components\oclazyload\CHANGELOG.md" />
+    <Content Include="bower_components\oclazyload\LICENSE.md" />
+    <Content Include="bower_components\oclazyload\README.md" />
+    <Content Include="bower_components\selectize\bower.json" />
+    <Content Include="bower_components\selectize\dist\less\plugins\drag_drop.less" />
+    <Content Include="bower_components\selectize\dist\less\plugins\dropdown_header.less" />
+    <Content Include="bower_components\selectize\dist\less\plugins\optgroup_columns.less" />
+    <Content Include="bower_components\selectize\dist\less\plugins\remove_button.less" />
+    <Content Include="bower_components\selectize\dist\less\selectize.bootstrap2.less" />
+    <Content Include="bower_components\selectize\dist\less\selectize.bootstrap3.less" />
+    <Content Include="bower_components\selectize\dist\less\selectize.default.less" />
+    <Content Include="bower_components\selectize\dist\less\selectize.legacy.less" />
+    <Content Include="bower_components\selectize\dist\less\selectize.less" />
+    <Content Include="bower_components\selectize\LICENSE" />
+    <Content Include="bower_components\selectize\README.md" />
+    <Content Include="bower_components\switchery\bower.json" />
+    <Content Include="bower_components\switchery\CHANGELOG.md" />
+    <Content Include="bower_components\switchery\package.json" />
+    <Content Include="bower_components\uikit\bower.json" />
+    <Content Include="bower_components\uikit\fonts\fontawesome-webfont.ttf" />
+    <Content Include="bower_components\uikit\fonts\fontawesome-webfont.woff" />
+    <Content Include="bower_components\uikit\fonts\fontawesome-webfont.woff2" />
+    <Content Include="bower_components\uikit\fonts\FontAwesome.otf" />
+    <Content Include="bower_components\uikit\less\components\accordion.less" />
+    <Content Include="bower_components\uikit\less\components\autocomplete.less" />
+    <Content Include="bower_components\uikit\less\components\datepicker.less" />
+    <Content Include="bower_components\uikit\less\components\dotnav.less" />
+    <Content Include="bower_components\uikit\less\components\form-advanced.less" />
+    <Content Include="bower_components\uikit\less\components\form-file.less" />
+    <Content Include="bower_components\uikit\less\components\form-password.less" />
+    <Content Include="bower_components\uikit\less\components\form-select.less" />
+    <Content Include="bower_components\uikit\less\components\htmleditor.less" />
+    <Content Include="bower_components\uikit\less\components\nestable.less" />
+    <Content Include="bower_components\uikit\less\components\notify.less" />
+    <Content Include="bower_components\uikit\less\components\placeholder.less" />
+    <Content Include="bower_components\uikit\less\components\progress.less" />
+    <Content Include="bower_components\uikit\less\components\search.less" />
+    <Content Include="bower_components\uikit\less\components\slidenav.less" />
+    <Content Include="bower_components\uikit\less\components\slider.less" />
+    <Content Include="bower_components\uikit\less\components\slideshow.less" />
+    <Content Include="bower_components\uikit\less\components\sortable.less" />
+    <Content Include="bower_components\uikit\less\components\sticky.less" />
+    <Content Include="bower_components\uikit\less\components\tooltip.less" />
+    <Content Include="bower_components\uikit\less\components\upload.less" />
+    <Content Include="bower_components\uikit\less\core\alert.less" />
+    <Content Include="bower_components\uikit\less\core\animation.less" />
+    <Content Include="bower_components\uikit\less\core\article.less" />
+    <Content Include="bower_components\uikit\less\core\badge.less" />
+    <Content Include="bower_components\uikit\less\core\base.less" />
+    <Content Include="bower_components\uikit\less\core\block.less" />
+    <Content Include="bower_components\uikit\less\core\breadcrumb.less" />
+    <Content Include="bower_components\uikit\less\core\button.less" />
+    <Content Include="bower_components\uikit\less\core\close.less" />
+    <Content Include="bower_components\uikit\less\core\column.less" />
+    <Content Include="bower_components\uikit\less\core\comment.less" />
+    <Content Include="bower_components\uikit\less\core\contrast.less" />
+    <Content Include="bower_components\uikit\less\core\cover.less" />
+    <Content Include="bower_components\uikit\less\core\description-list.less" />
+    <Content Include="bower_components\uikit\less\core\dropdown.less" />
+    <Content Include="bower_components\uikit\less\core\flex.less" />
+    <Content Include="bower_components\uikit\less\core\form.less" />
+    <Content Include="bower_components\uikit\less\core\grid.less" />
+    <Content Include="bower_components\uikit\less\core\icon.less" />
+    <Content Include="bower_components\uikit\less\core\list.less" />
+    <Content Include="bower_components\uikit\less\core\modal.less" />
+    <Content Include="bower_components\uikit\less\core\nav.less" />
+    <Content Include="bower_components\uikit\less\core\navbar.less" />
+    <Content Include="bower_components\uikit\less\core\offcanvas.less" />
+    <Content Include="bower_components\uikit\less\core\overlay.less" />
+    <Content Include="bower_components\uikit\less\core\pagination.less" />
+    <Content Include="bower_components\uikit\less\core\panel.less" />
+    <Content Include="bower_components\uikit\less\core\print.less" />
+    <Content Include="bower_components\uikit\less\core\subnav.less" />
+    <Content Include="bower_components\uikit\less\core\switcher.less" />
+    <Content Include="bower_components\uikit\less\core\tab.less" />
+    <Content Include="bower_components\uikit\less\core\table.less" />
+    <Content Include="bower_components\uikit\less\core\text.less" />
+    <Content Include="bower_components\uikit\less\core\thumbnail.less" />
+    <Content Include="bower_components\uikit\less\core\thumbnav.less" />
+    <Content Include="bower_components\uikit\less\core\utility.less" />
+    <Content Include="bower_components\uikit\less\core\variables.less" />
+    <Content Include="bower_components\uikit\less\uikit-variables.less" />
+    <Content Include="bower_components\uikit\less\uikit.less" />
+    <Content Include="bower_components\uikit\README.md" />
+    <Content Include="bower_components\uikit\scss\components\accordion.scss" />
+    <Content Include="bower_components\uikit\scss\components\autocomplete.scss" />
+    <Content Include="bower_components\uikit\scss\components\datepicker.scss" />
+    <Content Include="bower_components\uikit\scss\components\dotnav.scss" />
+    <Content Include="bower_components\uikit\scss\components\form-advanced.scss" />
+    <Content Include="bower_components\uikit\scss\components\form-file.scss" />
+    <Content Include="bower_components\uikit\scss\components\form-password.scss" />
+    <Content Include="bower_components\uikit\scss\components\form-select.scss" />
+    <Content Include="bower_components\uikit\scss\components\htmleditor.scss" />
+    <Content Include="bower_components\uikit\scss\components\nestable.scss" />
+    <Content Include="bower_components\uikit\scss\components\notify.scss" />
+    <Content Include="bower_components\uikit\scss\components\placeholder.scss" />
+    <Content Include="bower_components\uikit\scss\components\progress.scss" />
+    <Content Include="bower_components\uikit\scss\components\search.scss" />
+    <Content Include="bower_components\uikit\scss\components\slidenav.scss" />
+    <Content Include="bower_components\uikit\scss\components\slider.scss" />
+    <Content Include="bower_components\uikit\scss\components\slideshow.scss" />
+    <Content Include="bower_components\uikit\scss\components\sortable.scss" />
+    <Content Include="bower_components\uikit\scss\components\sticky.scss" />
+    <Content Include="bower_components\uikit\scss\components\tooltip.scss" />
+    <Content Include="bower_components\uikit\scss\components\upload.scss" />
+    <Content Include="bower_components\uikit\scss\core\alert.scss" />
+    <Content Include="bower_components\uikit\scss\core\animation.scss" />
+    <Content Include="bower_components\uikit\scss\core\article.scss" />
+    <Content Include="bower_components\uikit\scss\core\badge.scss" />
+    <Content Include="bower_components\uikit\scss\core\base.scss" />
+    <Content Include="bower_components\uikit\scss\core\block.scss" />
+    <Content Include="bower_components\uikit\scss\core\breadcrumb.scss" />
+    <Content Include="bower_components\uikit\scss\core\button.scss" />
+    <Content Include="bower_components\uikit\scss\core\close.scss" />
+    <Content Include="bower_components\uikit\scss\core\column.scss" />
+    <Content Include="bower_components\uikit\scss\core\comment.scss" />
+    <Content Include="bower_components\uikit\scss\core\contrast.scss" />
+    <Content Include="bower_components\uikit\scss\core\cover.scss" />
+    <Content Include="bower_components\uikit\scss\core\description-list.scss" />
+    <Content Include="bower_components\uikit\scss\core\dropdown.scss" />
+    <Content Include="bower_components\uikit\scss\core\flex.scss" />
+    <Content Include="bower_components\uikit\scss\core\form.scss" />
+    <Content Include="bower_components\uikit\scss\core\grid.scss" />
+    <Content Include="bower_components\uikit\scss\core\icon.scss" />
+    <Content Include="bower_components\uikit\scss\core\list.scss" />
+    <Content Include="bower_components\uikit\scss\core\modal.scss" />
+    <Content Include="bower_components\uikit\scss\core\nav.scss" />
+    <Content Include="bower_components\uikit\scss\core\navbar.scss" />
+    <Content Include="bower_components\uikit\scss\core\offcanvas.scss" />
+    <Content Include="bower_components\uikit\scss\core\overlay.scss" />
+    <Content Include="bower_components\uikit\scss\core\pagination.scss" />
+    <Content Include="bower_components\uikit\scss\core\panel.scss" />
+    <Content Include="bower_components\uikit\scss\core\print.scss" />
+    <Content Include="bower_components\uikit\scss\core\subnav.scss" />
+    <Content Include="bower_components\uikit\scss\core\switcher.scss" />
+    <Content Include="bower_components\uikit\scss\core\tab.scss" />
+    <Content Include="bower_components\uikit\scss\core\table.scss" />
+    <Content Include="bower_components\uikit\scss\core\text.scss" />
+    <Content Include="bower_components\uikit\scss\core\thumbnail.scss" />
+    <Content Include="bower_components\uikit\scss\core\thumbnav.scss" />
+    <Content Include="bower_components\uikit\scss\core\utility.scss" />
+    <Content Include="bower_components\uikit\scss\core\variables.scss" />
+    <Content Include="bower_components\uikit\scss\uikit-mixins.scss" />
+    <Content Include="bower_components\uikit\scss\uikit-variables.scss" />
+    <Content Include="bower_components\uikit\scss\uikit.scss" />
+    <Content Include="bower_components\ion.rangeslider\bower.json" />
+    <Content Include="bower_components\ion.rangeslider\designer.md" />
+    <Content Include="bower_components\ion.rangeslider\history.md" />
+    <Content Include="bower_components\ion.rangeslider\index.md" />
+    <Content Include="bower_components\ion.rangeslider\package.json" />
+    <Content Include="bower_components\ion.rangeslider\readme.md" />
+    <Content Include="bower_components\ion.rangeslider\readme.ru.md" />
+    <Content Include="bower_components\angular-ui-select\select.min.css.map" />
+    <Content Include="bower_components\angular-ui-select\select.min.js.map" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.controller.js" />
+    <Content Include="app\app.directive.js" />
+    <Content Include="app\app.factory.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\app.oc_lazy_load.js" />
+    <Content Include="app\app.service.js" />
+    <Content Include="app\app.states.js" />
+    <Content Include="app\controllers\login.js" />
+    <Content Include="app\views\login.html" />
+    <Content Include="app\modules\angular-autosize.js" />
+    <Content Include="app\modules\angular-character-counter.js" />
+    <Content Include="app\modules\angular-chartist.js" />
+    <Content Include="app\modules\angular-ckeditor.js" />
+    <Content Include="app\modules\angular-codemirror.js" />
+    <Content Include="app\modules\angular-countUp.js" />
+    <Content Include="app\modules\angular-icheck.js" />
+    <Content Include="app\modules\angular-ionRangeSlider.js" />
+    <Content Include="app\modules\angular-metrics-graphics.js" />
+    <Content Include="app\modules\angular-peity.js" />
+    <Content Include="app\modules\angular-prism.js" />
+    <Content Include="app\modules\angular-retina.js" />
+    <Content Include="app\modules\angular-selectize.js" />
+    <Content Include="app\modules\angular-switchery.js" />
+    <Content Include="app\modules\angular-tinymce.js" />
+    <Content Include="app\shared\header.html" />
+    <Content Include="app\shared\sidebar.html" />
+    <Content Include="app\views\restricted.html" />
+    <Content Include="assets\css\codemirror_themes.min.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\main.min.css" />
+    <Content Include="assets\icons\material-design-icons\iconjar-map.js" />
+    <Content Include="assets\img\avatars\avatar_01%402x.png" />
+    <Content Include="assets\img\avatars\avatar_01.png" />
+    <Content Include="assets\img\avatars\avatar_01_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_01_tn.png" />
+    <Content Include="assets\img\avatars\avatar_02%402x.png" />
+    <Content Include="assets\img\avatars\avatar_02.png" />
+    <Content Include="assets\img\avatars\avatar_02_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_02_tn.png" />
+    <Content Include="assets\img\avatars\avatar_03%402x.png" />
+    <Content Include="assets\img\avatars\avatar_03.png" />
+    <Content Include="assets\img\avatars\avatar_03_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_03_tn.png" />
+    <Content Include="assets\img\avatars\avatar_04%402x.png" />
+    <Content Include="assets\img\avatars\avatar_04.png" />
+    <Content Include="assets\img\avatars\avatar_04_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_04_tn.png" />
+    <Content Include="assets\img\avatars\avatar_05%402x.png" />
+    <Content Include="assets\img\avatars\avatar_05.png" />
+    <Content Include="assets\img\avatars\avatar_05_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_05_tn.png" />
+    <Content Include="assets\img\avatars\avatar_06%402x.png" />
+    <Content Include="assets\img\avatars\avatar_06.png" />
+    <Content Include="assets\img\avatars\avatar_06_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_06_tn.png" />
+    <Content Include="assets\img\avatars\avatar_07%402x.png" />
+    <Content Include="assets\img\avatars\avatar_07.png" />
+    <Content Include="assets\img\avatars\avatar_07_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_07_tn.png" />
+    <Content Include="assets\img\avatars\avatar_08%402x.png" />
+    <Content Include="assets\img\avatars\avatar_08.png" />
+    <Content Include="assets\img\avatars\avatar_08_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_08_tn.png" />
+    <Content Include="assets\img\avatars\avatar_09%402x.png" />
+    <Content Include="assets\img\avatars\avatar_09.png" />
+    <Content Include="assets\img\avatars\avatar_09_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_09_tn.png" />
+    <Content Include="assets\img\avatars\avatar_10%402x.png" />
+    <Content Include="assets\img\avatars\avatar_10.png" />
+    <Content Include="assets\img\avatars\avatar_10_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_10_tn.png" />
+    <Content Include="assets\img\avatars\avatar_11%402x.png" />
+    <Content Include="assets\img\avatars\avatar_11.png" />
+    <Content Include="assets\img\avatars\avatar_11_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_11_tn.png" />
+    <Content Include="assets\img\avatars\avatar_12%402x.png" />
+    <Content Include="assets\img\avatars\avatar_12.png" />
+    <Content Include="assets\img\avatars\avatar_12_tn%402x.png" />
+    <Content Include="assets\img\avatars\avatar_12_tn.png" />
+    <Content Include="assets\img\avatars\user%402x.png" />
+    <Content Include="assets\img\avatars\user-alt%402x.png" />
+    <Content Include="assets\img\avatars\user-alt.png" />
+    <Content Include="assets\img\avatars\user.png" />
+    <Content Include="assets\img\blank.png" />
+    <Content Include="assets\img\ecommerce\s6_edge%402x.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_1%402x.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_1.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_2%402x.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_2.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_3%402x.jpg" />
+    <Content Include="assets\img\ecommerce\s6_edge_3.jpg" />
+    <Content Include="assets\img\favicon-16x16.png" />
+    <Content Include="assets\img\favicon-32x32.png" />
+    <Content Include="assets\img\gallery\Image01%402x.jpg" />
+    <Content Include="assets\img\gallery\Image01.jpg" />
+    <Content Include="assets\img\gallery\Image02%402x.jpg" />
+    <Content Include="assets\img\gallery\Image02.jpg" />
+    <Content Include="assets\img\gallery\Image03%402x.jpg" />
+    <Content Include="assets\img\gallery\Image03.jpg" />
+    <Content Include="assets\img\gallery\Image04%402x.jpg" />
+    <Content Include="assets\img\gallery\Image04.jpg" />
+    <Content Include="assets\img\gallery\Image05%402x.jpg" />
+    <Content Include="assets\img\gallery\Image05.jpg" />
+    <Content Include="assets\img\gallery\Image06%402x.jpg" />
+    <Content Include="assets\img\gallery\Image06.jpg" />
+    <Content Include="assets\img\gallery\Image07%402x.jpg" />
+    <Content Include="assets\img\gallery\Image07.jpg" />
+    <Content Include="assets\img\gallery\Image08%402x.jpg" />
+    <Content Include="assets\img\gallery\Image08.jpg" />
+    <Content Include="assets\img\gallery\Image09%402x.jpg" />
+    <Content Include="assets\img\gallery\Image09.jpg" />
+    <Content Include="assets\img\gallery\Image10%402x.jpg" />
+    <Content Include="assets\img\gallery\Image10.jpg" />
+    <Content Include="assets\img\gallery\Image11%402x.jpg" />
+    <Content Include="assets\img\gallery\Image11.jpg" />
+    <Content Include="assets\img\gallery\Image12%402x.jpg" />
+    <Content Include="assets\img\gallery\Image12.jpg" />
+    <Content Include="assets\img\gallery\Image13%402x.jpg" />
+    <Content Include="assets\img\gallery\Image13.jpg" />
+    <Content Include="assets\img\gallery\Image14%402x.jpg" />
+    <Content Include="assets\img\gallery\Image14.jpg" />
+    <Content Include="assets\img\gallery\Image15%402x.jpg" />
+    <Content Include="assets\img\gallery\Image15.jpg" />
+    <Content Include="assets\img\gallery\Image16%402x.jpg" />
+    <Content Include="assets\img\gallery\Image16.jpg" />
+    <Content Include="assets\img\gallery\Image17%402x.jpg" />
+    <Content Include="assets\img\gallery\Image17.jpg" />
+    <Content Include="assets\img\gallery\Image18%402x.jpg" />
+    <Content Include="assets\img\gallery\Image18.jpg" />
+    <Content Include="assets\img\gallery\Image19%402x.jpg" />
+    <Content Include="assets\img\gallery\Image19.jpg" />
+    <Content Include="assets\img\gallery\Image20%402x.jpg" />
+    <Content Include="assets\img\gallery\Image20.jpg" />
+    <Content Include="assets\img\gallery\Image21%402x.jpg" />
+    <Content Include="assets\img\gallery\Image21.jpg" />
+    <Content Include="assets\img\gallery\Image22%402x.jpg" />
+    <Content Include="assets\img\gallery\Image22.jpg" />
+    <Content Include="assets\img\gallery\Image23%402x.jpg" />
+    <Content Include="assets\img\gallery\Image23.jpg" />
+    <Content Include="assets\img\gallery\Image24%402x.jpg" />
+    <Content Include="assets\img\gallery\Image24.jpg" />
+    <Content Include="assets\img\logo_main%402x.png" />
+    <Content Include="assets\img\logo_main.png" />
+    <Content Include="assets\img\logo_main_small%402x.png" />
+    <Content Include="assets\img\logo_main_small.png" />
+    <Content Include="assets\img\logo_main_white%402x.png" />
+    <Content Include="assets\img\logo_main_white.png" />
+    <Content Include="assets\img\md-images\ic_beenhere_black_24dp.png" />
+    <Content Include="assets\img\md-images\ic_beenhere_black_48dp.png" />
+    <Content Include="assets\img\md-images\ic_local_dining_black_24dp.png" />
+    <Content Include="assets\img\md-images\ic_local_dining_black_48dp.png" />
+    <Content Include="assets\img\md-images\ic_location_history_black_24dp.png" />
+    <Content Include="assets\img\md-images\ic_location_history_black_48dp.png" />
+    <Content Include="assets\img\md-images\ic_place_black_24dp.png" />
+    <Content Include="assets\img\md-images\ic_place_black_48dp.png" />
+    <Content Include="assets\img\page_preloader.gif" />
+    <Content Include="assets\img\sidebar_head_bg%402x.png" />
+    <Content Include="assets\img\sidebar_head_bg.png" />
+    <Content Include="assets\img\spinners\spinner%402x.gif" />
+    <Content Include="assets\img\spinners\spinner.gif" />
+    <Content Include="assets\img\spinners\spinner_danger%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_danger.gif" />
+    <Content Include="assets\img\spinners\spinner_large%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_large.gif" />
+    <Content Include="assets\img\spinners\spinner_medium%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_medium.gif" />
+    <Content Include="assets\img\spinners\spinner_small%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_small.gif" />
+    <Content Include="assets\img\spinners\spinner_success%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_success.gif" />
+    <Content Include="assets\img\spinners\spinner_warning%402x.gif" />
+    <Content Include="assets\img\spinners\spinner_warning.gif" />
+    <Content Include="assets\js\common.js" />
+    <Content Include="assets\js\common.min.js" />
+    <Content Include="assets\js\custom\ckeditor_config.js" />
+    <Content Include="assets\js\custom\ckeditor_config.min.js" />
+    <Content Include="assets\js\custom\codemirror_fullscreen.js" />
+    <Content Include="assets\js\custom\codemirror_fullscreen.min.js" />
+    <Content Include="assets\js\custom\datatables_uikit.js" />
+    <Content Include="assets\js\custom\datatables_uikit.min.js" />
+    <Content Include="assets\js\custom\gantt_chart.js" />
+    <Content Include="assets\js\custom\gantt_chart.min.js" />
+    <Content Include="assets\js\custom\jquery.dataTables.columnFilter.js" />
+    <Content Include="assets\js\custom\jquery.dataTables.columnFilter.min.js" />
+    <Content Include="assets\js\custom\jquery.scrollbarWidth.js" />
+    <Content Include="assets\js\custom\jquery.scrollbarWidth.min.js" />
+    <Content Include="assets\js\custom\parsleyjs_config.js" />
+    <Content Include="assets\js\custom\parsleyjs_config.min.js" />
+    <Content Include="assets\js\custom\uikit_beforeready.js" />
+    <Content Include="assets\js\custom\uikit_beforeready.min.js" />
+    <Content Include="assets\js\custom\uikit_datepicker.js" />
+    <Content Include="assets\js\custom\uikit_datepicker.min.js" />
+    <Content Include="assets\js\custom\uikit_fileinput.js" />
+    <Content Include="assets\js\custom\uikit_fileinput.min.js" />
+    <Content Include="assets\js\custom\uikit_sticky.js" />
+    <Content Include="assets\js\custom\uikit_sticky.min.js" />
+    <Content Include="assets\js\custom\uikit_timepicker.js" />
+    <Content Include="assets\js\custom\uikit_timepicker.min.js" />
+    <Content Include="assets\js\custom\wizard_steps.js" />
+    <Content Include="assets\js\custom\wizard_steps.min.js" />
+    <Content Include="assets\js\kendoui_custom.js" />
+    <Content Include="assets\js\kendoui_custom.min.js" />
+    <Content Include="assets\js\uikit_custom.js" />
+    <Content Include="assets\js\uikit_custom.min.js" />
+    <Content Include="index.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api\Api.csproj">
+      <Project>{2347fd97-cedb-43d9-8f20-558b2d215a77}</Project>
+      <Name>Api</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53580</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53581/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
