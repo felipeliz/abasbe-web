@@ -18,7 +18,7 @@
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
                         <label>Data Expiração</label>
-                        <input type="text" class="md-input label-fixed" ui-mask="99/99/9999" ng-model="form.DataExpiracao" md-input />
+                        <input type="text" class="md-input label-fixed" datepicker ui-mask="99/99/9999" ng-model="form.DataExpiracao" md-input />
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
                         <label>Senha</label>
@@ -37,6 +37,42 @@
                             <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card uk-margin-medium-bottom" ng-if="form.Pagamentos.length == 0">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Não há registro de pagamentos.
+                </h3>
+            </div>
+        </div>
+        <div class="md-card uk-margin-medium-bottom" ng-hide="form.Pagamentos == undefined || form.Pagamentos.length == 0">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Histórico de pagamentos
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Dias</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="pagamento in form.Pagamentos">
+                                <td>{{pagamento.Descricao}}</td>
+                                <td>{{pagamento.Valor}}</td>
+                                <td>{{pagamento.Dias}}</td>
+                                <td>{{pagamento.Situacao}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -44,6 +44,10 @@ namespace Api
         public string ObservacaoFilhos { get; set; }
         public string Observacoes { get; set; }
         public bool Situacao { get; set; }
+        public int IdCidade { get; set; }
+        public string Bairro { get; set; }
+        public string Cep { get; set; }
+        public string Logradouro { get; set; }
     
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
@@ -53,5 +57,6 @@ namespace Api
         public virtual ICollection<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
+        public virtual Cidade Cidade { get; set; }
     }
 }

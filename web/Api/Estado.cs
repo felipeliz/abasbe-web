@@ -12,20 +12,18 @@ namespace Api
     using System;
     using System.Collections.Generic;
     
-    public partial class Plano
+    public partial class Estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Plano()
+        public Estado()
         {
-            this.AssociadoPagamento = new HashSet<AssociadoPagamento>();
+            this.Cidade = new HashSet<Cidade>();
         }
     
         public int Id { get; set; }
-        public string Descricao { get; set; }
-        public decimal Valor { get; set; }
-        public int Dias { get; set; }
+        public string Sigla { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AssociadoPagamento> AssociadoPagamento { get; set; }
+        public virtual ICollection<Cidade> Cidade { get; set; }
     }
 }

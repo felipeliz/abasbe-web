@@ -144,6 +144,9 @@
     <Compile Include="Certificado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cidade.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
     <Compile Include="Controllers\ProfissaoController.cs" />
@@ -153,6 +156,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Equipamento.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model.Context.cs">
@@ -170,6 +176,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssociadoPagamentoViewModel.cs" />
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />

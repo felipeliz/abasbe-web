@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AbasbeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AbasbeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Associado">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,7 +26,9 @@
           <Property Name="Valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Dias" Type="int" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DataCriacao" Type="datetime" Nullable="false" />
           <Property Name="Situacao" Type="int" Nullable="false" />
+          <Property Name="IdPlano" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -45,6 +47,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEstado" Type="int" Nullable="false" />
+          <Property Name="Capital" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Disponibilidade">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,6 +69,13 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Sigla" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Plano">
           <Key>
@@ -91,6 +109,10 @@
           <Property Name="TelefoneComercial" Type="varchar" MaxLength="11" />
           <Property Name="TelefoneCelular" Type="varchar" MaxLength="11" />
           <Property Name="TempoExperiencia" Type="int" Nullable="false" />
+          <Property Name="IdCidade" Type="int" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" MaxLength="50" />
+          <Property Name="Cep" Type="varchar" MaxLength="9" />
+          <Property Name="Logradouro" Type="varchar" MaxLength="100" />
           <Property Name="FlagLeiSalaoParceiro" Type="bit" Nullable="false" />
           <Property Name="FlagBiosseguranca" Type="bit" Nullable="false" />
           <Property Name="FlagEpi" Type="bit" Nullable="false" />
@@ -140,6 +162,30 @@
           <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AssociadoPagamento_Plano">
+          <End Role="Plano" Type="Self.Plano" Multiplicity="1" />
+          <End Role="AssociadoPagamento" Type="Self.AssociadoPagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plano">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssociadoPagamento">
+              <PropertyRef Name="IdPlano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pagamento_Associado">
           <End Role="Associado" Type="Self.Associado" Multiplicity="1" />
           <End Role="AssociadoPagamento" Type="Self.AssociadoPagamento" Multiplicity="*" />
@@ -149,6 +195,18 @@
             </Principal>
             <Dependent Role="AssociadoPagamento">
               <PropertyRef Name="IdAssociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Profissional" Type="Self.Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdCidade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -265,8 +323,10 @@
           <EntitySet Name="AssociadoPagamento" EntityType="Self.AssociadoPagamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Certificado" EntityType="Self.Certificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Disponibilidade" EntityType="Self.Disponibilidade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipamento" EntityType="Self.Equipamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plano" EntityType="Self.Plano" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profissao" EntityType="Self.Profissao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profissional" EntityType="Self.Profissional" Schema="dbo" store:Type="Tables" />
@@ -274,9 +334,21 @@
           <EntitySet Name="ProfissionalEquipamentos" EntityType="Self.ProfissionalEquipamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfissionalExperiencia" EntityType="Self.ProfissionalExperiencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="Self.FK_AssociadoPagamento_Plano">
+            <End Role="Plano" EntitySet="Plano" />
+            <End Role="AssociadoPagamento" EntitySet="AssociadoPagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Estado" Association="Self.FK_Cidade_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pagamento_Associado" Association="Self.FK_Pagamento_Associado">
             <End Role="Associado" EntitySet="Associado" />
             <End Role="AssociadoPagamento" EntitySet="AssociadoPagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Cidade" Association="Self.FK_Profissional_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Profissional" EntitySet="Profissional" />
           </AssociationSet>
           <AssociationSet Name="FK_Profissional_Disponibilidade" Association="Self.FK_Profissional_Disponibilidade">
             <End Role="Disponibilidade" EntitySet="Disponibilidade" />
@@ -315,8 +387,7 @@
             <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AbasbeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -344,6 +415,9 @@
           <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Situacao" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Associado" Relationship="Self.FK_Pagamento_Associado" FromRole="AssociadoPagamento" ToRole="Associado" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdPlano" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="AssociadoPagamento" ToRole="Plano" />
         </EntityType>
         <EntityType Name="Banner">
           <Key>
@@ -388,6 +462,7 @@
           <Property Name="Descricao" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Dias" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AssociadoPagamento" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="Plano" ToRole="AssociadoPagamento" />
         </EntityType>
         <EntityType Name="Profissao">
           <Key>
@@ -429,6 +504,11 @@
           <NavigationProperty Name="ProfissionalCertificado" Relationship="Self.FK_ProfissionalCertificado_Profissional" FromRole="Profissional" ToRole="ProfissionalCertificado" />
           <NavigationProperty Name="ProfissionalEquipamentos" Relationship="Self.FK_ProfissionalEquipamentos_Profissional" FromRole="Profissional" ToRole="ProfissionalEquipamentos" />
           <NavigationProperty Name="ProfissionalExperiencia" Relationship="Self.FK_ProfissionalExperiencia_Profissional" FromRole="Profissional" ToRole="ProfissionalExperiencia" />
+          <Property Name="IdCidade" Type="Int32" Nullable="false" />
+          <Property Name="Bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cep" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Logradouro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cidade" Relationship="AbasbeModel.FK_Profissional_Cidade" FromRole="Profissional" ToRole="Cidade" />
         </EntityType>
         <EntityType Name="ProfissionalCertificado">
           <Key>
@@ -649,7 +729,76 @@
             <End Role="Profissional" EntitySet="Profissional" />
             <End Role="ProfissionalExperiencia" EntitySet="ProfissionalExperiencia" />
           </AssociationSet>
+          <EntitySet Name="Cidade" EntityType="AbasbeModel.Cidade" />
+          <EntitySet Name="Estado" EntityType="AbasbeModel.Estado" />
+          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="AbasbeModel.FK_AssociadoPagamento_Plano">
+            <End Role="Plano" EntitySet="Plano" />
+            <End Role="AssociadoPagamento" EntitySet="AssociadoPagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Estado" Association="AbasbeModel.FK_Cidade_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profissional_Cidade" Association="AbasbeModel.FK_Profissional_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Profissional" EntitySet="Profissional" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstado" Type="Int32" Nullable="false" />
+          <Property Name="Capital" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Estado" Relationship="AbasbeModel.FK_Cidade_Estado" FromRole="Cidade" ToRole="Estado" />
+          <NavigationProperty Name="Profissional" Relationship="AbasbeModel.FK_Profissional_Cidade" FromRole="Cidade" ToRole="Profissional" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Sigla" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cidade" Relationship="AbasbeModel.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
+        </EntityType>
+        <Association Name="FK_AssociadoPagamento_Plano">
+          <End Type="AbasbeModel.Plano" Role="Plano" Multiplicity="1" />
+          <End Type="AbasbeModel.AssociadoPagamento" Role="AssociadoPagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plano">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AssociadoPagamento">
+              <PropertyRef Name="IdPlano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Estado">
+          <End Type="AbasbeModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="AbasbeModel.Cidade" Role="Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profissional_Cidade">
+          <End Type="AbasbeModel.Cidade" Role="Cidade" Multiplicity="1" />
+          <End Type="AbasbeModel.Profissional" Role="Profissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Profissional">
+              <PropertyRef Name="IdCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -672,6 +821,8 @@
           <EntitySetMapping Name="AssociadoPagamento">
             <EntityTypeMapping TypeName="AbasbeModel.AssociadoPagamento">
               <MappingFragment StoreEntitySet="AssociadoPagamento">
+                <ScalarProperty Name="IdPlano" ColumnName="IdPlano" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdAssociado" ColumnName="IdAssociado" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -737,6 +888,10 @@
           <EntitySetMapping Name="Profissional">
             <EntityTypeMapping TypeName="AbasbeModel.Profissional">
               <MappingFragment StoreEntitySet="Profissional">
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdProfissao" ColumnName="IdProfissao" />
                 <ScalarProperty Name="IdDisponibilidade" ColumnName="IdDisponibilidade" />
@@ -801,6 +956,24 @@
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="AbasbeModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="AbasbeModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

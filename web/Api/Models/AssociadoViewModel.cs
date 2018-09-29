@@ -15,6 +15,7 @@ namespace Api.Models
         public string Telefone { get; set; }
         public string DataExpiracao { get; set; }
         public string Situacao { get; set; }
+        public List<AssociadoPagamentoViewModel> Pagamentos { get; set; }
         public string Token { get; set; }
 
         public AssociadoViewModel(Associado obj)
@@ -31,6 +32,13 @@ namespace Api.Models
             Telefone = obj.Telefone;
             DataExpiracao = obj.DataExpiracao.ToString("dd/MM/yyyy");
             Situacao = obj.Situacao.ToString();
+
+            Pagamentos = new List<AssociadoPagamentoViewModel>();
+            obj.AssociadoPagamento.OrderByDescending(ass => ass.DataCriacao).ToList().ForEach(ass =>
+            {
+                Pagamentos.Add(new AssociadoPagamentoViewModel(ass));
+            });
+
             Token = EncryptionHelper.Encrypt(Id.ToString());
         }
     }

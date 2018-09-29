@@ -20,7 +20,10 @@ namespace Api
         public int Dias { get; set; }
         public string Descricao { get; set; }
         public int Situacao { get; set; }
+        public System.DateTime DataCriacao { get; set; }
+        public int IdPlano { get; set; }
     
         public virtual Associado Associado { get; set; }
+        public virtual Plano Plano { get; set; }
     }
 }

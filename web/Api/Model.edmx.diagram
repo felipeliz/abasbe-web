@@ -28,6 +28,11 @@
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AbasbeModel.Cidade" Width="1.5" PointX="12.625" PointY="7.875" />
+        <EntityTypeShape EntityType="AbasbeModel.Estado" Width="1.5" PointX="10.375" PointY="8.25" />
+        <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
+        <AssociationConnector Association="AbasbeModel.FK_Cidade_Estado" />
+        <AssociationConnector Association="AbasbeModel.FK_Profissional_Cidade" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
