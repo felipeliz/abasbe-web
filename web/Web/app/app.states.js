@@ -328,5 +328,53 @@
             pageTitle: 'Editar Equipamento'
         }
     });
+
+    $stateProvider.state("restricted.layout.disponibilidade-lista", {
+        url: "/disponibilidade",
+        templateUrl: 'app/views/disponibilidade/list.html',
+        controller: 'disponibilidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/disponibilidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Disponibilidades'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.disponibilidade-novo", {
+        url: "/disponibilidade/form",
+        templateUrl: 'app/views/disponibilidade/form.html',
+        controller: 'disponibilidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/disponibilidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Disponibilidade'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.disponibilidade-editar", {
+        url: "/disponibilidade/form/:id",
+        templateUrl: 'app/views/disponibilidade/form.html',
+        controller: 'disponibilidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/disponibilidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Disponibilidade'
+        }
+    });
 }
 ]);
