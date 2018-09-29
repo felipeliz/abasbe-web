@@ -84,7 +84,7 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
 
-            var obj = context.Usuario.FirstOrDefault(obj => obj.Id == id);
+            var obj = context.Usuario.FirstOrDefault(pro => pro.Id == id);
 
             if (obj == null)
             {
@@ -106,6 +106,11 @@ namespace Api.Controllers
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
+
+            if (obj.Senha.Count() < 4)
+            {
+                throw new Exception("A senha precisa ter mais do que 4 caracteres.");
+            }
 
             if (id <= 0)
             {
