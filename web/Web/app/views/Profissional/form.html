@@ -1,0 +1,140 @@
+﻿<div id="page_content" ng-init="init()">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Registro de Profissional
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid">
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <label>Foto <red>*</red></label>
+                        <input type="text" class="md-input label-fixed" ng-model="form.Foto" md-input />
+                    </div>
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <label>Nome <red>*</red></label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Nome" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>CPF <red>*</red></label>
+                        <input type="text" ui-mask="999.999.999-99" class="md-input label-fixed" ng-model="form.CPF" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>E-mail</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Email" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Senha</label>
+                        <input type="password" class="md-input label-fixed" ng-model="form.Senha" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Data de nascimento</label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="form.Nascimento" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Telefone Celular</label>
+                        <input type="text" ui-mask="(99)99999-9999" maxlength="15" class="md-input uk-input" ng-model="form.TelefoneCelular" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Telefone Comercial</label>
+                        <input type="text" ui-mask="(99)9999-9999" maxlength="14" class="md-input uk-input" ng-model="form.TelefoneComercial" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>tempo de Experiência</label>
+                        <input type="number" class="md-input label-fixed" ng-model="form.TempoExperiencia" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Bairro</label>
+                        <input type="text" maxlength="50" class="md-input label-fixed" ng-model="form.Bairro" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Cidade</label>
+                        <input type="text" maxlength="150" class="md-input label-fixed" ng-model="form.Cidade" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>CEP</label>
+                        <input type="text" ui-mask="99.999-999" class="md-input label-fixed" ng-model="form.CEP" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Logradouro</label>
+                        <input type="text" maxlength="100" class="md-input label-fixed" ng-model="form.Logradouro" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Pretensão Salarial <red>*</red></label>
+                        <input type="text" class="md-input label-fixed" ng-model="form.PretensaoSalarial" money-mask md-input />
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagLeiSalaoParceiro" icheck />
+                            </span>
+                            <label>Lei Salao Parceiro</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagBiosseguranca" icheck />
+                            </span>
+                            <label>Bio Segurança</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagEpi" icheck />
+                            </span>
+                            <label>Epi</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagMei" icheck />
+                            </span>
+                            <label>Mei</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagDiarista" icheck />
+                            </span>
+                            <label>Diarista</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-4 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagFilhos" icheck />
+                            </span>
+                            <label>Filhos</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Observações Filhos</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.ObservacaoFilhos" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Observações</label>
+                        <input type="text" maxlength="500" class="md-input label-fixed" ng-model="form.Observacoes" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Situação</label>
+                        <select class="md-input label-fixed" ng-model="form.Situacao" md-input>
+                            <option value="True">Ativo</option>
+                            <option value="False">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
+                        <div class="uk-align-right">
+                            <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
+                            <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

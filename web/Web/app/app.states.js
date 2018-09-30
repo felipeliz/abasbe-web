@@ -472,5 +472,53 @@
             pageTitle: 'Editar Banner'
         }
     });
+
+    $stateProvider.state("restricted.layout.profissional-lista", {
+        url: "/profissional",
+        templateUrl: 'app/views/profissional/list.html',
+        controller: 'profissional',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissional.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Banner'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.profissional-novo", {
+        url: "/profissional/form",
+        templateUrl: 'app/views/profissional/form.html',
+        controller: 'profissional',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissional.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Banner'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.profissional-editar", {
+        url: "/profissional/form/:id",
+        templateUrl: 'app/views/profissional/form.html',
+        controller: 'profissional',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/profissional.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Profissional'
+        }
+    });
 }
 ]);

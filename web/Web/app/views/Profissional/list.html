@@ -3,14 +3,14 @@
         <div class="md-card">
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
-                    Equipamentos
+                    Profissionais
                 </h3>
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
                         <label>Descrição</label>
-                        <input type="text" maxlength="150" class="md-input label-fixed" ng-model="filter.Descricao" md-input />
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Descricao" md-input />
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
@@ -32,11 +32,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="equipamento in lista.list">
-                                <td>{{equipamento.Descricao}}</td>
+                            <tr ng-repeat="profissional in lista.list">
+                                <td>{{profissional.Descricao}}</td>
                                 <td>
-                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(equipamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(equipamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(profissional.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(profissional.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
                         </tbody>
