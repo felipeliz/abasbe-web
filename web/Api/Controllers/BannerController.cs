@@ -15,12 +15,12 @@ namespace Api.Controllers
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
-            string descricao = param.Descricao;
+            string titulo = param.Titulo;
 
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
 
-            var query = context.Banner.Where(ban => ban.Titulo.Contains(descricao)).ToList();
+            var query = context.Banner.Where(ban => ban.Titulo.Contains(titulo)).ToList();
 
             query.ToList().ForEach(obj =>
             {
