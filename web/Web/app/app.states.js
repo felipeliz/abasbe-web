@@ -424,5 +424,53 @@
             pageTitle: 'Editar Plano'
         }
     });
+
+    $stateProvider.state("restricted.layout.banner-lista", {
+        url: "/banner",
+        templateUrl: 'app/views/banner/list.html',
+        controller: 'banner',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/banner.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Banner'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.banner-novo", {
+        url: "/banner/form",
+        templateUrl: 'app/views/banner/form.html',
+        controller: 'banner',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/banner.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Banner'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.banner-editar", {
+        url: "/banner/form/:id",
+        templateUrl: 'app/views/banner/form.html',
+        controller: 'banner',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/banner.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Banner'
+        }
+    });
 }
 ]);

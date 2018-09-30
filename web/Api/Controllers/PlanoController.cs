@@ -18,7 +18,7 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<PlanoViewModel> lista = new List<PlanoViewModel>();
 
-            var query = context.Plano.Where(cer => cer.Descricao.Contains(descricao)).ToList();
+            var query = context.Plano.Where(pla => pla.Descricao.Contains(descricao)).ToList();
 
             query.ToList().ForEach(obj =>
             {
@@ -33,7 +33,7 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
 
-            var obj = context.Plano.FirstOrDefault(cer => cer.Id == id);
+            var obj = context.Plano.FirstOrDefault(pla => pla.Id == id);
 
             if (obj == null)
             {
@@ -50,7 +50,7 @@ namespace Api.Controllers
             int id = Convert.ToInt32(param.Id);
 
             Entities context = new Entities();
-            var obj = context.Plano.FirstOrDefault(cer => cer.Id == id) ?? new Plano();
+            var obj = context.Plano.FirstOrDefault(pla => pla.Id == id) ?? new Plano();
             obj.Descricao = param.Descricao.ToString();
             obj.Dias = Convert.ToInt32(param.Dias);
             obj.Valor = Convert.ToDecimal(param.Valor);
@@ -68,7 +68,7 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
 
-            var obj = context.Plano.FirstOrDefault(cer => cer.Id == id);
+            var obj = context.Plano.FirstOrDefault(pla => pla.Id == id);
             if (obj == null)
             {
                 throw new Exception("Registro não identificado.");

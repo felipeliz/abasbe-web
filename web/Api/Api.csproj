@@ -147,6 +147,7 @@
     <Compile Include="Cidade.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\DisponibilidadeController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
@@ -179,6 +180,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AssociadoPagamentoViewModel.cs" />
+    <Compile Include="Models\BannerViewModel.cs" />
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\DisponibilidadeViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />

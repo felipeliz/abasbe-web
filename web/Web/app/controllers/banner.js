@@ -1,9 +1,9 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Descricao: "", Dias: 0, Valor: ''};
+    $scope.form = { Descricao: "" };
     $scope.lista = {};
     $scope.filter = {
-        Descricao: ""
+        Descricao: "",
     };
     $scope.edicao = false;
 
@@ -11,7 +11,7 @@
         if (typeof ($stateParams.id) == "string") {
             $scope.carregarEditar($stateParams.id);
         }
-        else if ($location.path() == "/plano") {
+        else if ($location.path() == "/banner") {
             $scope.filtrar(0, true);
         }
     }
@@ -21,7 +21,7 @@
         $scope.filter.page = page == null ? 0 : page;
         $http({
             method: "POST",
-            url: "api/plano/lista",
+            url: "api/banner/lista",
             data: $scope.filter
         }).then(function mySuccess(response) {
             $loading.hide();
@@ -36,7 +36,7 @@
     }
 
     $scope.editar = function (id) {
-        $location.path("/plano/form/" + id);
+        $location.path("/banner/form/" + id);
     }
 
     $scope.carregarEditar = function (id) {
@@ -44,7 +44,7 @@
         $loading.show();
         $http({
             method: "GET",
-            url: "api/plano/obter/" + id
+            url: "api/banner/obter/" + id
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.form = response.data;
@@ -55,14 +55,21 @@
         });
     }
 
+    $scope.uploadPhoto = function (file) {
+        $scope.form.Imagem = file;
+    };
+
     $scope.salvar = function () {
-        Validation.required("Valor", $scope.form.Valor);
-        Validation.required("Dias", $scope.form.Dias);
+        
+        Validation.required("Imagem", $scope.form.Imagem);
+        Validation.required("Data de Expiração", $scope.form.Expiracao);
+        Validation.required("Título", $scope.form.Titulo);
         Validation.required("Descrição", $scope.form.Descricao);
+       
         $loading.show();
         $http({
             method: "POST",
-            url: "api/plano/salvar",
+            url: "api/banner/salvar",
             data: $scope.form
         }).then(function mySuccess(response) {
             $loading.hide();
@@ -75,18 +82,18 @@
     }
 
     $scope.voltar = function () {
-        $location.path("/plano");
+        $location.path("/banner");
     }
 
     $scope.novo = function () {
-        $location.path("/plano/form");
+        $location.path("/banner/form");
     }
 
     $scope.excluir = function (id) {
         $loading.show();
         $http({
             method: "GET",
-            url: "api/plano/excluir/" + id
+            url: "api/banner/excluir/" + id
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.filtrar();
@@ -95,5 +102,7 @@
             toastr.error(response.data.ExceptionMessage);
         });
     }
+
+
 }
-angular.module('app').controller('plano', controller);
+angular.module('app').controller('banner', controller);
