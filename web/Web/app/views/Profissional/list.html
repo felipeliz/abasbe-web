@@ -8,9 +8,29 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-1">
-                        <label>Descrição</label>
-                        <input type="text" class="md-input label-fixed" ng-model="filter.Descricao" md-input />
+                    <div class="uk-width-1-2">
+                        <label>Nome</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Nome" md-input />
+                    </div>
+                    <div class="uk-width-1-2">
+                        <label>Profissão</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Profissao" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Cidade</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Cidade" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Disponibilidade</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Disponibilidade" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Situação</label>
+                        <select class="md-input label-fixed" ng-model="filter.Situacao" md-input>
+                            <option value="Todas">Todos</option>
+                            <option value="True">Ativo</option>
+                            <option value="False">Inativo</option>
+                        </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
@@ -27,13 +47,27 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
-                                <th>Descrição</th>
+                                <th>Profissão</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Celular</th>
+                                <th>Experiência</th>
+                                <th>Cidade</th>
+                                <th>Disponibilidade</th>
+                                <th>Situação</th>
                                 <th class="acoes-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="profissional in lista.list">
-                                <td>{{profissional.Descricao}}</td>
+                                <td>{{profissional.ProfissaoFormatada}}</td>
+                                <td>{{profissional.Nome}}</td>
+                                <td>{{profissional.Email}}</td>
+                                <td>{{profissional.TelefoneCelular}}</td>
+                                <td>{{profissional.TempoExperiencia + " anos"}}</td>
+                                <td>{{profissional.CidadeFormatada}}</td>
+                                <td>{{profissional.DisponibilidadeFormatada}}</td>
+                                <td>{{profissional.Situacao == "True" ? "Ativo" : "Inativo"}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(profissional.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
                                     <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(profissional.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>

@@ -485,7 +485,7 @@
             }]
         },
         data: {
-            pageTitle: 'Banner'
+            pageTitle: 'Profissionais'
         }
     });
 
@@ -501,7 +501,7 @@
             }]
         },
         data: {
-            pageTitle: 'Criar Banner'
+            pageTitle: 'Criar Profissional'
         }
     });
 

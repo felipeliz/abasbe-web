@@ -29,6 +29,22 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        public List<ProfissaoViewModel> Todos()
+        {
+            Entities context = new Entities();
+            List<ProfissaoViewModel> lista = new List<ProfissaoViewModel>();
+
+            var query = context.Profissao.ToList();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new ProfissaoViewModel(obj));
+            });
+
+            return lista;
+        }
+
+        [HttpGet]
         public ProfissaoViewModel Obter(int id)
         {
             Entities context = new Entities();

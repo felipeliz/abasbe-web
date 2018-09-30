@@ -11,9 +11,10 @@ namespace Api.Models
         public int IdProfissao { get; set; }
         public int IdDisponibilidade { get; set; }
         public int IdCidade { get; set; }
+        public int IdEstado { get; set; }
         public string Nome { get; set; }
         public string Foto { get; set; }
-        public string Cpf { get; set; }
+        public string CPF { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Nascimento { get; set; }
@@ -21,7 +22,7 @@ namespace Api.Models
         public string TelefoneCelular { get; set; }
         public int TempoExperiencia { get; set; }
         public string Bairro { get; set; }
-        public string Cep { get; set; }
+        public string CEP { get; set; }
         public string Logradouro { get; set; }
         public bool FlagLeiSalaoParceiro { get; set; }
         public bool FlagBiosseguranca { get; set; }
@@ -31,7 +32,11 @@ namespace Api.Models
         public bool FlagDiarista { get; set; }
         public decimal PretensaoSalarial { get; set; }
         public string ObservacaoFilhos { get; set; }
-        public bool Situacao { get; set; }
+        public string Observacoes { get; set; }
+        public string CidadeFormatada { get; set; }
+        public string ProfissaoFormatada { get; set; }
+        public string DisponibilidadeFormatada { get; set; }
+        public string Situacao { get; set; }
 
         public ProfissionalViewModel(Profissional obj)
         {
@@ -44,9 +49,10 @@ namespace Api.Models
             IdProfissao = obj.IdProfissao;
             IdDisponibilidade = obj.IdDisponibilidade;
             IdCidade = obj.IdCidade;
+            IdEstado = obj.Cidade.Estado.Id;
             Nome = obj.Nome;
             Foto = obj.Foto;
-            Cpf = Convert.ToUInt64(obj.CPF).ToString(@"000\.000\.000\-00"); 
+            CPF = obj.CPF;
             Email = obj.Email;
             Senha = obj.Senha;
             Nascimento = obj.Nascimento?.ToString("dd/MM/yyyy");
@@ -54,7 +60,7 @@ namespace Api.Models
             TelefoneCelular = obj.TelefoneCelular;
             TempoExperiencia = obj.TempoExperiencia;
             Bairro = obj.Bairro;
-            Cep = obj.Cep;
+            CEP = obj.Cep;
             Logradouro = obj.Logradouro;
             FlagLeiSalaoParceiro = obj.FlagLeiSalaoParceiro;
             FlagBiosseguranca = obj.FlagBiosseguranca;
@@ -64,7 +70,13 @@ namespace Api.Models
             FlagDiarista = obj.FlagDiarista;
             PretensaoSalarial = obj.PretensaoSalarial;
             ObservacaoFilhos = obj.ObservacaoFilhos;
-            Situacao = obj.Situacao;
+            Observacoes = obj.Observacoes;
+
+            CidadeFormatada = obj.Cidade.Nome;
+            ProfissaoFormatada = obj.Profissao.Descricao;
+            DisponibilidadeFormatada = obj.Disponibilidade.Descricao;
+
+            Situacao = obj.Situacao.ToString();
         }
     }
 }

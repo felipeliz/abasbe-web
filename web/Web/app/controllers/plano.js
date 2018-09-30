@@ -1,6 +1,6 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Descricao: "", Dias: 0, Valor: ''};
+    $scope.form = { Descricao: "", Dias: "", Valor: ''};
     $scope.lista = {};
     $scope.filter = {
         Descricao: ""
@@ -56,9 +56,9 @@
     }
 
     $scope.salvar = function () {
+        Validation.required("Descrição", $scope.form.Descricao);
         Validation.required("Valor", $scope.form.Valor);
         Validation.required("Dias", $scope.form.Dias);
-        Validation.required("Descrição", $scope.form.Descricao);
         $loading.show();
         $http({
             method: "POST",

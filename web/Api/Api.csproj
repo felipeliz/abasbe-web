@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
+    <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\DisponibilidadeController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
     <Compile Include="Controllers\PlanoController.cs" />
@@ -182,6 +183,8 @@
     </Compile>
     <Compile Include="Models\AssociadoPagamentoViewModel.cs" />
     <Compile Include="Models\BannerViewModel.cs" />
+    <Compile Include="Models\CidadeViewModel.cs" />
+    <Compile Include="Models\EstadoViewModel.cs" />
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\DisponibilidadeViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />

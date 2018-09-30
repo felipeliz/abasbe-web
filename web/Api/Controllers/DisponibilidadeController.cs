@@ -29,6 +29,22 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        public List<DisponibilidadeViewModel> Todos()
+        {
+            Entities context = new Entities();
+            List<DisponibilidadeViewModel> lista = new List<DisponibilidadeViewModel>();
+
+            var query = context.Disponibilidade.ToList();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new DisponibilidadeViewModel(obj));
+            });
+
+            return lista;
+        }
+
+        [HttpGet]
         public DisponibilidadeViewModel Obter(int id)
         {
             Entities context = new Entities();

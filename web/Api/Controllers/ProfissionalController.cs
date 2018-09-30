@@ -14,12 +14,25 @@ namespace Api.Controllers
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
-            string nome = param.Nome;
+            string nome = param.Nome?.ToString();
+            string disponibilidade = param.Disponibilidade?.ToString();
+            string cidade = param.Cidade?.ToString();
+            string profissao = param.Profissao?.ToString();
+            string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
             List<ProfissionalViewModel> lista = new List<ProfissionalViewModel>();
 
             var query = context.Profissional.Where(pro => pro.Nome.Contains(nome)).ToList();
+            query = query.Where(pro => pro.Disponibilidade.Descricao.Contains(disponibilidade)).ToList();
+            query = query.Where(pro => pro.Cidade.Nome.Contains(cidade)).ToList();
+            query = query.Where(pro => pro.Profissao.Descricao.Contains(profissao)).ToList();
+
+            if(situacao != "Todas")
+            {
+                bool s = Convert.ToBoolean(situacao);
+                query = query.Where(pro => pro.Situacao == s).ToList();
+            }
 
             query.ToList().ForEach(obj =>
             {
@@ -49,11 +62,11 @@ namespace Api.Controllers
         public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);
-            string senha = param.Nomes;
+            string senha = param.Senha;
 
             Entities context = new Entities();
 
-            if (senha.Count() <= 4)
+            if (senha.Count() < 4)
             {
                 throw new Exception("Sua senha precisa ter mais do que 4 caracteres.");
             }
@@ -73,7 +86,7 @@ namespace Api.Controllers
             obj.TelefoneCelular = param.TelefoneCelular;
             obj.TempoExperiencia = param.TempoExperiencia;
             obj.Bairro = param.Bairro;
-            obj.Cep = param.Cep;
+            obj.Cep = param.CEP;
             obj.Logradouro = param.Logradouro;
             obj.FlagLeiSalaoParceiro = param.FlagLeiSalaoParceiro;
             obj.FlagBiosseguranca = param.FlagBiosseguranca;
@@ -83,7 +96,8 @@ namespace Api.Controllers
             obj.FlagDiarista = param.FlagDiarista;
             obj.PretensaoSalarial = param.PretensaoSalarial;
             obj.ObservacaoFilhos = param.ObservacaoFilhos;
-            obj.Situacao = param.Situacao;
+            obj.Observacoes = param.Observacoes;
+            obj.Situacao = Convert.ToBoolean(param.Situacao);
 
             if (id <= 0)
             {
