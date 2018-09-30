@@ -376,5 +376,53 @@
             pageTitle: 'Editar Disponibilidade'
         }
     });
+
+    $stateProvider.state("restricted.layout.plano-lista", {
+        url: "/plano",
+        templateUrl: 'app/views/plano/list.html',
+        controller: 'plano',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/plano.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Planos'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.plano-novo", {
+        url: "/plano/form",
+        templateUrl: 'app/views/plano/form.html',
+        controller: 'plano',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/plano.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Plano'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.plano-editar", {
+        url: "/plano/form/:id",
+        templateUrl: 'app/views/plano/form.html',
+        controller: 'plano',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/plano.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Plano'
+        }
+    });
 }
 ]);

@@ -142,6 +142,7 @@
     <Content Include="app\controllers\associado.js" />
     <Content Include="app\controllers\disponibilidade.js" />
     <Content Include="app\controllers\equipamento.js" />
+    <Content Include="app\controllers\plano.js" />
     <Content Include="app\controllers\usuario.js" />
     <Content Include="app\controllers\profissao.js" />
     <Content Include="app\controllers\senha.js" />
@@ -152,6 +153,8 @@
     <Content Include="app\views\disponibilidade\list.html" />
     <Content Include="app\views\equipamento\form.html" />
     <Content Include="app\views\equipamento\list.html" />
+    <Content Include="app\views\plano\form.html" />
+    <Content Include="app\views\plano\list.html" />
     <Content Include="app\views\usuario\form.html" />
     <Content Include="app\views\usuario\list.html" />
     <Content Include="app\views\certificado\form.html" />
