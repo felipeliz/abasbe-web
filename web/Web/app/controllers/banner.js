@@ -1,9 +1,9 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Descricao: "" };
+    $scope.form = { Titulo: "", Descricao: "" };
     $scope.lista = {};
     $scope.filter = {
-        Descricao: "",
+        Titulo: "",
     };
     $scope.edicao = false;
 
@@ -55,17 +55,34 @@
         });
     }
 
+    $scope.getPhoto = function () {
+        if ($scope.form.Imagem == null || $scope.form.Imagem == "") {
+            return "assets/img/banner-prototype.png";
+        }
+        return $scope.form.Imagem;
+    }
+
     $scope.uploadPhoto = function (file) {
-        $scope.form.Imagem = file;
+        file.filter = "ImageSquared";
+        $http({
+            method: "POST",
+            url: "api/file/upload",
+            data: file
+        }).then(function mySuccess(response) {
+            $scope.form.Imagem = response.data;
+            toastr.success("Imagem enviada com sucesso.");
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
     };
 
     $scope.salvar = function () {
-        
-        Validation.required("Imagem", $scope.form.Imagem);
-        Validation.required("Data de Expiração", $scope.form.Expiracao);
+
         Validation.required("Título", $scope.form.Titulo);
+        Validation.required("Data de Expiração", $scope.form.Expiracao);
         Validation.required("Descrição", $scope.form.Descricao);
-       
+        Validation.required("Imagem", $scope.form.Imagem);
+
         $loading.show();
         $http({
             method: "POST",

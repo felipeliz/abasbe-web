@@ -169,6 +169,9 @@
     <Content Include="app\views\profissao\form.html" />
     <Content Include="app\views\profissao\list.html" />
     <Content Include="app\views\senha.html" />
+    <Content Include="assets\img\avatars\photo-camera.png" />
+    <Content Include="assets\img\avatars\female-avatar.png" />
+    <Content Include="assets\img\banner-prototype.png" />
     <Content Include="assets\img\logo.png" />
     <Content Include="bower_components\angular-autocomplete\autocomplete.css" />
     <Content Include="bower_components\angular-autocomplete\autocomplete.js" />

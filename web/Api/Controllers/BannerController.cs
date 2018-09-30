@@ -20,7 +20,7 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
 
-            var query = context.Banner.Where(ban => ban.Descricao.Contains(descricao)).ToList();
+            var query = context.Banner.Where(ban => ban.Titulo.Contains(descricao)).ToList();
 
             query.ToList().ForEach(obj =>
             {
@@ -56,7 +56,7 @@ namespace Api.Controllers
             obj.Descricao = param.Descricao.ToString();
             obj.Titulo = param.Titulo.ToString();
             obj.Expiracao = AppExtension.ToDateTime(param.Expiracao);
-            obj.Imagem = " ";
+            obj.Imagem = param.Imagem?.ToString();
 
             if (id <= 0)
             {

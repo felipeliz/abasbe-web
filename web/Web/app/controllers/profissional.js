@@ -121,15 +121,58 @@
         });
     }
 
+    $scope.profissaoPrincipal = function () {
+        if ($scope.form.IdProfissao != null && $scope.form.IdProfissao > 0) {
+            var prof = $scope.profissoes.find((row) => { return row.Id == $scope.form.IdProfissao })
+            if (prof != null) {
+                return prof.Descricao;
+            }
+        }
+        return "";
+    }
+
+    $scope.getPhoto = function () {
+        if ($scope.form.Foto == null || $scope.form.Foto == "") {
+            return "assets/img/avatars/photo-camera.png";
+        }
+        return $scope.form.Foto;
+    }
+
+    $scope.getPhotoLista = function (profissional) {
+        if (profissional.Foto == null || profissional.Foto == "") {
+            return "assets/img/avatars/user.png";
+        }
+        return profissional.Foto;
+    }
+
+    $scope.uploadPhoto = function (file) {
+        file.filter = "ImageSquared";
+        $http({
+            method: "POST",
+            url: "api/file/upload",
+            data: file
+        }).then(function mySuccess(response) {
+            $scope.form.Foto = response.data;
+            toastr.success("Foto enviada com sucesso.");
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+    };
+
+
     $scope.salvar = function () {
         Validation.required("Nome", $scope.form.Nome);
         Validation.required("CPF", $scope.form.CPF);
+        Validation.required("Profissão principal", $scope.form.IdProfissao);
+        Validation.required("Disponibilidade", $scope.form.IdDisponibilidade);
+        Validation.required("Tempo de experiência", $scope.form.TempoExperiencia);
+        Validation.required("Pretensão salarial", $scope.form.PretensaoSalarial);
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Senha", $scope.form.Senha);
         Validation.required("Telefone Celular", $scope.form.TelefoneCelular);
-        Validation.required("Nome", $scope.form.Nome);
-        Validation.required("Nome", $scope.form.Nome);
-        Validation.required("Nome", $scope.form.Nome);
+        Validation.required("Estado", $scope.form.IdEstado);
+        Validation.required("Cidade", $scope.form.IdCidade);
+
         $loading.show();
         $http({
             method: "POST",

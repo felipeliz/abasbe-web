@@ -48,6 +48,7 @@ namespace Api
         public string Bairro { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }
+        public string Sexo { get; set; }
     
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }

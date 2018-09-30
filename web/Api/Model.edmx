@@ -124,6 +124,7 @@
           <Property Name="PretensaoSalarial" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ObservacaoFilhos" Type="varchar" MaxLength="250" />
           <Property Name="Observacoes" Type="varchar" MaxLength="500" />
+          <Property Name="Sexo" Type="varchar" MaxLength="1" />
           <Property Name="Situacao" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProfissionalCertificado">
@@ -513,6 +514,7 @@
           <Property Name="Cep" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="Logradouro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cidade" Relationship="AbasbeModel.FK_Profissional_Cidade" FromRole="Profissional" ToRole="Cidade" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ProfissionalCertificado">
           <Key>
@@ -894,6 +896,7 @@
           <EntitySetMapping Name="Profissional">
             <EntityTypeMapping TypeName="AbasbeModel.Profissional">
               <MappingFragment StoreEntitySet="Profissional">
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
                 <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
                 <ScalarProperty Name="Cep" ColumnName="Cep" />
                 <ScalarProperty Name="Bairro" ColumnName="Bairro" />

@@ -79,6 +79,7 @@ namespace Api.Controllers
             obj.Nome = param.Nome;
             obj.Foto = param.Foto;
             obj.CPF = Regex.Replace(param.CPF?.ToString(), "[^0-9]", "");
+            obj.Sexo = param.Sexo;
             obj.Email = param.Email;
             obj.Senha = param.Senha;
             obj.Nascimento = AppExtension.ToDateTime(param.Nascimento);

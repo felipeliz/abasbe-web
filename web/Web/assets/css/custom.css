@@ -32,7 +32,7 @@ red {
     height: auto;
 }
 
-#sidebar_main .sidebar_main_header{
+#sidebar_main .sidebar_main_header {
     background-image: none;
     background-color: white;
 }
@@ -239,4 +239,8 @@ input.ui-select-search {
 
 .autocomplete li.active {
     width: calc(100% - 16px);
+}
+
+.user_heading_avatar img {
+    background-image: none;
 }

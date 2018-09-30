@@ -58,8 +58,8 @@
     $scope.salvar = function () {
         Validation.required("Nome", $scope.form.Nome);
         Validation.required("E-mail", $scope.form.Email);
-        Validation.required("Senha", $scope.form.Senha);
         Validation.required("Data Expiração", $scope.form.DataExpiracao);
+        Validation.required("Senha", $scope.form.Senha);
         $loading.show();
         $http({
             method: "POST",

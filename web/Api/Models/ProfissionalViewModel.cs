@@ -17,6 +17,7 @@ namespace Api.Models
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
+        public string Sexo { get; set; }
         public string Nascimento { get; set; }
         public string TelefoneComercial { get; set; }
         public string TelefoneCelular { get; set; }
@@ -55,6 +56,7 @@ namespace Api.Models
             CPF = obj.CPF;
             Email = obj.Email;
             Senha = obj.Senha;
+            Sexo = obj.Sexo;
             Nascimento = obj.Nascimento?.ToString("dd/MM/yyyy");
             TelefoneComercial = obj.TelefoneComercial;
             TelefoneCelular = obj.TelefoneCelular;

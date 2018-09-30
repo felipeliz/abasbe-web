@@ -47,9 +47,8 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
-                                <th>Profissão</th>
+                                <th></th>
                                 <th>Nome</th>
-                                <th>E-mail</th>
                                 <th>Celular</th>
                                 <th>Experiência</th>
                                 <th>Cidade</th>
@@ -60,9 +59,11 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="profissional in lista.list">
-                                <td>{{profissional.ProfissaoFormatada}}</td>
-                                <td>{{profissional.Nome}}</td>
-                                <td>{{profissional.Email}}</td>
+                                <td><img class="md-user-image md-list-addon-avatar" ng-src="{{getPhotoLista(profissional)}}" alt="" src="{{getPhotoLista(profissional)}}"></td>
+                                <td>
+                                    <p class="uk-margin-remove">{{profissional.Nome}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{profissional.ProfissaoFormatada}}</span></p>
+                                </td>
                                 <td>{{profissional.TelefoneCelular}}</td>
                                 <td>{{profissional.TempoExperiencia + " anos"}}</td>
                                 <td>{{profissional.CidadeFormatada}}</td>

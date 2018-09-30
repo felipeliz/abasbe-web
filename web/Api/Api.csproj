@@ -147,6 +147,7 @@
     <Compile Include="Cidade.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
