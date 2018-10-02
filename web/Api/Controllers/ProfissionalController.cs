@@ -23,11 +23,24 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<ProfissionalViewModel> lista = new List<ProfissionalViewModel>();
 
-            var query = context.Profissional.Where(pro => pro.Nome.Contains(nome)).ToList();
-            query = query.Where(pro => pro.Disponibilidade.Descricao.Contains(disponibilidade)).ToList();
-            query = query.Where(pro => pro.Cidade.Nome.Contains(cidade)).ToList();
-            query = query.Where(pro => pro.Profissao.Descricao.Contains(profissao)).ToList();
-
+            var query = context.Profissional.ToList();
+            if (!String.IsNullOrEmpty(nome))
+            {
+                query = query.Where(pro => pro.Nome.ToLower().Contains(nome.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(disponibilidade))
+            {
+                query = query.Where(pro => pro.Disponibilidade.Descricao.ToLower().Contains(disponibilidade.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(cidade))
+            {
+                query = query.Where(pro => pro.Cidade.Nome.ToLower().Contains(cidade.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(profissao))
+            {
+                query = query.Where(pro => pro.Profissao.Descricao.ToLower().Contains(profissao.ToLower())).ToList();
+            }
+            
             if (situacao != "Todas")
             {
                 bool s = Convert.ToBoolean(situacao);
