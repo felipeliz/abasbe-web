@@ -126,39 +126,49 @@ namespace Api.Controllers
                 }
 
                 // Equipamentos
-                foreach (var element in param.Equipamentos)
+                if (param.Equipamentos != null)
                 {
-                    ProfissionalEquipamentos relation = new ProfissionalEquipamentos();
-                    relation.Id = Guid.NewGuid().ToString();
-                    relation.IdEquipamento = Convert.ToInt32(element.Equipamento.Id);
-                    relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
-                    obj.ProfissionalEquipamentos.Add(relation);
+                    foreach (var element in param.Equipamentos)
+                    {
+                        ProfissionalEquipamentos relation = new ProfissionalEquipamentos();
+                        relation.Id = Guid.NewGuid().ToString();
+                        relation.IdEquipamento = Convert.ToInt32(element.Equipamento.Id);
+                        relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
+                        obj.ProfissionalEquipamentos.Add(relation);
+                    }
                 }
 
                 // Certificados
-                foreach (var element in param.Certificados)
+                if (param.Certificados != null)
                 {
-                    ProfissionalCertificado relation = new ProfissionalCertificado();
-                    relation.Id = Guid.NewGuid().ToString();
-                    relation.IdCertificado = Convert.ToInt32(element.Certificado.Id);
-                    relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
-                    obj.ProfissionalCertificado.Add(relation);
+                    foreach (var element in param.Certificados)
+                    {
+                        ProfissionalCertificado relation = new ProfissionalCertificado();
+                        relation.Id = Guid.NewGuid().ToString();
+                        relation.IdCertificado = Convert.ToInt32(element.Certificado.Id);
+                        relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
+                        obj.ProfissionalCertificado.Add(relation);
+                    }
                 }
+
 
                 // Experiencias
-                foreach (var element in param.Experiencias)
+                if (param.Certificados != null)
                 {
-                    ProfissionalExperiencia relation = new ProfissionalExperiencia();
-                    relation.Id = Guid.NewGuid().ToString();
-                    relation.IdDisponibilidade = Convert.ToInt32(element.Disponibilidade.Id);
-                    relation.IdProfissao = Convert.ToInt32(element.Profissao.Id);
-                    relation.DataInicial = AppExtension.ToDateTime(element.DataInicial);
-                    relation.DataFinal = AppExtension.ToDateTime(element.DataFinal);
-                    relation.Descricao = element.Descricao?.ToString();
-                    relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
-                    obj.ProfissionalExperiencia.Add(relation);
+                    foreach (var element in param.Experiencias)
+                    {
+                        ProfissionalExperiencia relation = new ProfissionalExperiencia();
+                        relation.Id = Guid.NewGuid().ToString();
+                        relation.IdDisponibilidade = Convert.ToInt32(element.Disponibilidade.Id);
+                        relation.IdProfissao = Convert.ToInt32(element.Profissao.Id);
+                        relation.DataInicial = AppExtension.ToDateTime(element.DataInicial);
+                        relation.DataFinal = AppExtension.ToDateTime(element.DataFinal);
+                        relation.Descricao = element.Descricao?.ToString();
+                        relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
+                        obj.ProfissionalExperiencia.Add(relation);
+                    }
                 }
-
+                   
                 if (id <= 0)
                 {
                     context.Profissional.Add(obj);
