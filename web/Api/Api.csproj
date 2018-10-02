@@ -192,6 +192,9 @@
     <Compile Include="Models\PlanoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />
     <Compile Include="Models\AssociadoViewModel.cs" />
+    <Compile Include="Models\ProfissionalExperienciaViewModel.cs" />
+    <Compile Include="Models\ProfissionalCertificadoViewModel.cs" />
+    <Compile Include="Models\ProfissionalEquipamentoViewModel.cs" />
     <Compile Include="Models\ProfissionalViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Plano.cs">

@@ -14,6 +14,8 @@
     $scope.disponibilidades = [];
     $scope.estados = [];
     $scope.cidades = [];
+    $scope.equipamentos = [];
+    $scope.certificados = [];
     $scope.filter = {
         Nome: "",
         Profissao: "",
@@ -60,6 +62,24 @@
             url: "api/estado/todos"
         }).then(function mySuccess(response) {
             $scope.estados = response.data;
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+
+        $http({
+            method: "GET",
+            url: "api/equipamento/todos"
+        }).then(function mySuccess(response) {
+            $scope.equipamentos = response.data;
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+
+        $http({
+            method: "GET",
+            url: "api/certificado/todos"
+        }).then(function mySuccess(response) {
+            $scope.certificados = response.data;
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
@@ -147,6 +167,7 @@
 
     $scope.uploadPhoto = function (file) {
         file.filter = "ImageSquared";
+        file.size = 256;
         $http({
             method: "POST",
             url: "api/file/upload",
@@ -209,6 +230,84 @@
             toastr.error(response.data.ExceptionMessage);
         });
     }
+
+
+    //// equipamento
+
+    $scope.openEquipamento = function () {
+        $scope.equipamento = null;
+        UIkit.modal("#equipamento").show();
+    }
+
+    $scope.addEquipamento = function () {
+        Validation.requiredChild("Equipamento", $scope.equipamento, "Id");
+        if ($scope.equipamento != null) {
+            if ($scope.form.Equipamentos == null) {
+                $scope.form.Equipamentos = [];
+            }
+            $scope.form.Equipamentos.push({ Id: -1, Equipamento: JSON.parse(JSON.stringify($scope.equipamento)) });
+            UIkit.modal("#equipamento").hide();
+        }
+    }
+
+    $scope.removeEquipamento = function (index) {
+        $scope.form.Equipamentos.splice(index, 1);
+    }
+
+
+    //// certificado
+
+    $scope.openCertificado = function () {
+        $scope.certificado = null;
+        UIkit.modal("#certificado").show();
+    }
+
+    $scope.addCertificado = function () {
+        Validation.requiredChild("Certificado", $scope.certificado, "Id");
+        if ($scope.certificado != null) {
+            if ($scope.form.Certificados == null) {
+                $scope.form.Certificados = [];
+            }
+            $scope.form.Certificados.push({ Id: -1, Certificado: JSON.parse(JSON.stringify($scope.certificado)) });
+            UIkit.modal("#certificado").hide();
+        }
+    }
+
+    $scope.removeCertificado = function (index) {
+        $scope.form.Certificados.splice(index, 1);
+    }
+
+    //// experiencias
+
+    $scope.openExperiencia = function () {
+        $scope.experiencia = {};
+        UIkit.modal("#experiencia").show();
+    }
+
+    $scope.viewExperiencia = function (index) {
+        $scope.experiencia = $scope.form.Experiencias[index];
+        UIkit.modal("#experienciaView").show();
+    }
+
+    $scope.addExperiencia = function () {
+        Validation.requiredChild("Profissão", $scope.experiencia.Profissao, "Id");
+        Validation.requiredChild("Disponibilidade", $scope.experiencia.Disponibilidade, "Id");
+        Validation.required("Data Inicial", $scope.experiencia.DataInicial);
+
+        if ($scope.form.Experiencias == null) {
+            $scope.form.Experiencias = [];
+        }
+
+        $scope.form.Experiencias.push(JSON.parse(JSON.stringify($scope.experiencia)));
+        UIkit.modal("#experiencia").hide();
+    }
+
+    $scope.removeExperiencia = function (index) {
+        $scope.form.Experiencias.splice(index, 1);
+    }
+
+
+
 
 
 }

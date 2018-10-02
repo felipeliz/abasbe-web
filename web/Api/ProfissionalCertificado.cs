@@ -14,10 +14,10 @@ namespace Api
     
     public partial class ProfissionalCertificado
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int IdProfissional { get; set; }
         public int IdCertificado { get; set; }
-        public bool FlagPrincipal { get; set; }
+        public Nullable<System.DateTime> DataCadastro { get; set; }
     
         public virtual Certificado Certificado { get; set; }
         public virtual Profissional Profissional { get; set; }

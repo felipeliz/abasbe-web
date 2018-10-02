@@ -12,7 +12,7 @@ namespace Api.Controllers
     {
 
         [HttpPost]
-        public PagedList lista([FromBody] dynamic param)
+        public PagedList Lista([FromBody] dynamic param)
         {
             string descricao = param.Descricao;
 
@@ -30,7 +30,23 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public EquipamentoViewModel obter(int id)
+        public List<EquipamentoViewModel> Todos()
+        {
+            Entities context = new Entities();
+            List<EquipamentoViewModel> lista = new List<EquipamentoViewModel>();
+
+            var query = context.Equipamento.ToList();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new EquipamentoViewModel(obj));
+            });
+
+            return lista;
+        }
+
+        [HttpGet]
+        public EquipamentoViewModel Obter(int id)
         {
             Entities context = new Entities();
 
@@ -46,7 +62,7 @@ namespace Api.Controllers
 
 
         [HttpPost]
-        public bool salvar([FromBody] dynamic param)
+        public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);
 

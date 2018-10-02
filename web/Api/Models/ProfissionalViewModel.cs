@@ -39,7 +39,11 @@ namespace Api.Models
         public string DisponibilidadeFormatada { get; set; }
         public string Situacao { get; set; }
 
-        public ProfissionalViewModel(Profissional obj)
+        public List<ProfissionalEquipamentoViewModel> Equipamentos { get; set; }
+        public List<ProfissionalCertificadoViewModel> Certificados { get; set; }
+        public List<ProfissionalExperienciaViewModel> Experiencias { get; set; }
+
+        public ProfissionalViewModel(Profissional obj, bool complete)
         {
             if (obj == null)
             {
@@ -79,6 +83,27 @@ namespace Api.Models
             DisponibilidadeFormatada = obj.Disponibilidade.Descricao;
 
             Situacao = obj.Situacao.ToString();
+
+            if (complete)
+            {
+                Equipamentos = new List<ProfissionalEquipamentoViewModel>();
+                obj.ProfissionalEquipamentos.ToList().ForEach(eq =>
+                {
+                    Equipamentos.Add(new ProfissionalEquipamentoViewModel(eq));
+                });
+
+                Certificados = new List<ProfissionalCertificadoViewModel>();
+                obj.ProfissionalCertificado.ToList().ForEach(eq =>
+                {
+                    Certificados.Add(new ProfissionalCertificadoViewModel(eq));
+                });
+
+                Experiencias = new List<ProfissionalExperienciaViewModel>();
+                obj.ProfissionalExperiencia.ToList().ForEach(eq =>
+                {
+                    Experiencias.Add(new ProfissionalExperienciaViewModel(eq));
+                });
+            }
         }
     }
 }

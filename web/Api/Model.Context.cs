@@ -34,11 +34,11 @@ namespace Api
         public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<Profissional> Profissional { get; set; }
-        public virtual DbSet<ProfissionalCertificado> ProfissionalCertificado { get; set; }
-        public virtual DbSet<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
-        public virtual DbSet<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<ProfissionalCertificado> ProfissionalCertificado { get; set; }
+        public virtual DbSet<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
+        public virtual DbSet<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
     }
 }

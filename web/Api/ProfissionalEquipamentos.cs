@@ -14,9 +14,10 @@ namespace Api
     
     public partial class ProfissionalEquipamentos
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int IdProfissional { get; set; }
         public int IdEquipamento { get; set; }
+        public Nullable<System.DateTime> DataCadastro { get; set; }
     
         public virtual Equipamento Equipamento { get; set; }
         public virtual Profissional Profissional { get; set; }

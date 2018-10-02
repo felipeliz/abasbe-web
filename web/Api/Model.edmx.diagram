@@ -14,25 +14,25 @@
         <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Profissao" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Profissional" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AbasbeModel.ProfissionalCertificado" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AbasbeModel.ProfissionalEquipamentos" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AbasbeModel.ProfissionalExperiencia" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Usuario" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="AbasbeModel.FK_Pagamento_Associado" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Certificado" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Disponibilidade" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Disponibilidade" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Equipamento" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Profissao" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissao" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" ManuallyRouted="false" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AbasbeModel.Cidade" Width="1.5" PointX="12.625" PointY="7.875" />
         <EntityTypeShape EntityType="AbasbeModel.Estado" Width="1.5" PointX="10.375" PointY="8.25" />
         <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
         <AssociationConnector Association="AbasbeModel.FK_Cidade_Estado" />
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Cidade" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalCertificado" Width="1.5" PointX="8.25" PointY="5.375" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalEquipamentos" Width="1.5" PointX="5.25" PointY="5.25" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalExperiencia" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Certificado" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Disponibilidade" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Equipamento" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissao" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,6 +29,22 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        public List<CertificadoViewModel> Todos()
+        {
+            Entities context = new Entities();
+            List<CertificadoViewModel> lista = new List<CertificadoViewModel>();
+
+            var query = context.Certificado.ToList();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new CertificadoViewModel(obj));
+            });
+
+            return lista;
+        }
+
+        [HttpGet]
         public CertificadoViewModel Obter(int id)
         {
             Entities context = new Entities();

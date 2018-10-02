@@ -18,9 +18,10 @@ namespace Api.Controllers
         {
             if (Convert.ToBoolean(param.hasFile))
             {
+                string folder = "temp";
                 string ext = param.ext.ToString();
                 string base64 = param.base64.ToString().Split(',')[1];
-                string uploadFolder = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + "uploads";
+                string uploadFolder = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + folder;
                 string fileName = Guid.NewGuid() + ext;
 
                 if (!Directory.Exists(uploadFolder))
@@ -29,11 +30,15 @@ namespace Api.Controllers
                 }
 
                 string filter = param.filter?.ToString();
+                string size = param.size?.ToString();
+                string width = param.width?.ToString();
+                string heigth = param.heigth?.ToString();
                 if (!string.IsNullOrEmpty(filter))
                 {
                     switch (filter)
                     {
-                        case "ImageSquared": base64 = ImageSquared(base64); break;
+                        case "ImageSquared": base64 = ImageSquared(base64, Convert.ToInt32(size)); break;
+                        case "ImageResize": base64 = ImageResize(base64, Convert.ToInt32(width), Convert.ToInt32(heigth)); break;
                     }
                 }
 
@@ -41,29 +46,50 @@ namespace Api.Controllers
 
                 Thread.Sleep(1500);
 
-                return "uploads" + "/" + fileName;
+                return folder + "/" + fileName;
             }
             throw new Exception("Não foi possivel adicionar o arquivo.");
         }
 
-        public string ImageSquared(string base64)
+        public static string ConfirmUpload(string temp)
+        {
+            if (temp != null && temp.StartsWith("temp/"))
+            {
+                string folder = "uploads";
+                string fileName = temp.Split('/').Last();
+                string uploadAbsolutePath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + folder + "/" + fileName;
+                string tempAbsolutePath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + temp;
+                if (File.Exists(tempAbsolutePath))
+                {
+                    File.Move(tempAbsolutePath, uploadAbsolutePath);
+                    return folder + "/" + fileName;
+                }
+            }
+            return temp;
+        }
+
+        public string ImageSquared(string base64, int size)
+        {
+            return ImageResize(base64, size, size);
+        }
+
+        public string ImageResize(string base64, int width, int heigth)
         {
             try
             {
                 Bitmap bmp;
-                int size = 256;
-                Bitmap res = new Bitmap(size, size);
+                Bitmap res = new Bitmap(width, heigth);
                 using (var ms = new MemoryStream(Convert.FromBase64String(base64)))
                 {
                     bmp = new Bitmap(ms);
                     Graphics g = Graphics.FromImage(res);
-                    g.FillRectangle(new SolidBrush(Color.White), 0, 0, size, size);
+                    g.FillRectangle(new SolidBrush(Color.White), 0, 0, width, heigth);
                     int t = 0, l = 0;
                     if (bmp.Height > bmp.Width)
                         t = (bmp.Height - bmp.Width) / 2;
                     else
                         l = (bmp.Width - bmp.Height) / 2;
-                    g.DrawImage(bmp, new Rectangle(0, 0, size, size), new Rectangle(l, t, bmp.Width - l * 2, bmp.Height - t * 2), GraphicsUnit.Pixel);
+                    g.DrawImage(bmp, new Rectangle(0, 0, width, heigth), new Rectangle(l, t, bmp.Width - l * 2, bmp.Height - t * 2), GraphicsUnit.Pixel);
                 }
                 using (var stream = new MemoryStream())
                 {

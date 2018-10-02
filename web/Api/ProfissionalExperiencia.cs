@@ -14,13 +14,14 @@ namespace Api
     
     public partial class ProfissionalExperiencia
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int IdProfissional { get; set; }
         public int IdProfissao { get; set; }
         public int IdDisponibilidade { get; set; }
         public string Descricao { get; set; }
         public System.DateTime DataInicial { get; set; }
         public Nullable<System.DateTime> DataFinal { get; set; }
+        public Nullable<System.DateTime> DataCadastro { get; set; }
     
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }

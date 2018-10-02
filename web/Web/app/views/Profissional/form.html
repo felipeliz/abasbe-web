@@ -66,7 +66,7 @@
                         <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="form.Nascimento" md-input />
                     </div>
                     <div class="uk-width-1-3 uk-grid-margin">
-                        <label>Tempo de experiência</label>
+                        <label>Tempo de experiência <red>*</red></label>
                         <input type="text" integer class="md-input label-fixed" ng-model="form.TempoExperiencia" md-input />
                     </div>
                     <div class="uk-width-1-3 uk-grid-margin">
@@ -218,6 +218,118 @@
         </div>
 
         <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Equipamentos
+                </h3>
+                <div class="md-card-toolbar-actions">
+                    <i class="md-icon material-icons" ng-click="openEquipamento()"></i>
+                </div>
+            </div>
+            <div class="md-card-content" ng-if="form.Equipamentos.length > 0">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Equipamento</th>
+                                <th class="acoes-1">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="element in form.Equipamentos">
+                                <td>
+                                    {{element.Equipamento.Descricao}}
+                                </td>
+                                <td>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeEquipamento($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Certificados
+                </h3>
+                <div class="md-card-toolbar-actions">
+                    <i class="md-icon material-icons" ng-click="openCertificado()"></i>
+                </div>
+            </div>
+            <div class="md-card-content" ng-if="form.Certificados.length > 0">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Certificado</th>
+                                <th class="acoes-1">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="element in form.Certificados">
+                                <td>
+                                    {{element.Certificado.Descricao}}
+                                </td>
+                                <td>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeCertificado($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Experiências Profissionais
+                </h3>
+                <div class="md-card-toolbar-actions">
+                    <i class="md-icon material-icons" ng-click="openExperiencia()"></i>
+                </div>
+            </div>
+            <div class="md-card-content" ng-if="form.Experiencias.length > 0">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Profissão</th>
+                                <th>Disponibilidade</th>
+                                <th>Inicio</th>
+                                <th>Final</th>
+                                <th class="acoes-2">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="element in form.Experiencias">
+                                <td>
+                                    {{element.Profissao.Descricao}}
+                                </td>
+                                <td>
+                                    {{element.Disponibilidade.Descricao}}
+                                </td>
+                                <td>
+                                    {{element.DataInicial}}
+                                </td>
+                                <td>
+                                    {{element.DataFinal}}
+                                </td>
+                                <td>
+                                    <a class="md-btn md-btn md-btn-small" title="Visualizar" ng-click="viewExperiencia($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">remove_red_eye</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeExperiencia($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-grid">
                     <div class="uk-width-1">
@@ -227,6 +339,165 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .uk-modal-dialog .md-card-toolbar {
+        height: 33px;
+        margin: -24px;
+        padding: 0px 16px;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+        background: #fff;
+    }
+
+    .uk-modal-dialog .md-card-toolbar-heading-text {
+        font: 500 14px/50px Roboto,sans-serif;
+        color: #212121;
+        margin: 0;
+        float: left;
+        overflow: hidden;
+        height: 48px;
+    }
+
+    .uk-modal-dialog .md-card-toolbar-actions {
+        float: right;
+        margin-top: 8px;
+    }
+</style>
+
+<div class="uk-modal" id="equipamento" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+                Adicionar Equipamento
+            </h3>
+            <div class="md-card-toolbar-actions">
+                <i class="md-icon material-icons uk-modal-close"></i>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <label>Equipamento <red>*</red></label>
+                <select class="md-input label-fixed" ng-model="equipamento" ng-options="item as item.Descricao for item in equipamentos" md-input>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="uk-width-1 uk-grid-margin">
+                <div class="uk-align-right">
+                    <a class="md-btn md-btn-primary" ng-click="addEquipamento()" href="javascript:void(0)">Adicionar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-modal" id="certificado" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+                Adicionar Certificado
+            </h3>
+            <div class="md-card-toolbar-actions">
+                <i class="md-icon material-icons uk-modal-close"></i>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <label>Certificado <red>*</red></label>
+                <select class="md-input label-fixed" ng-model="certificado" ng-options="item as item.Descricao for item in certificados" md-input>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="uk-width-1 uk-grid-margin">
+                <div class="uk-align-right">
+                    <a class="md-btn md-btn-primary" ng-click="addCertificado()" href="javascript:void(0)">Adicionar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-modal" id="experiencia" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+                Adicionar Experiência Profissional
+            </h3>
+            <div class="md-card-toolbar-actions">
+                <i class="md-icon material-icons uk-modal-close"></i>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <label>Profissão <red>*</red></label>
+                <select class="md-input label-fixed" ng-model="experiencia.Profissao" ng-options="item as item.Descricao for item in profissoes" md-input>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
+                <label>Disponibilidade <red>*</red></label>
+                <select class="md-input label-fixed" ng-model="experiencia.Disponibilidade" ng-options="item as item.Descricao for item in disponibilidades" md-input>
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Data Inicial <red>*</red></label>
+                <input type="text" ui-mask="99/99/9999" model-view-value="true" datepicker class="md-input uk-input" ng-model="experiencia.DataInicial" md-input />
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Data Final</label>
+                <input type="text" ui-mask="99/99/9999" model-view-value="true" datepicker class="md-input uk-input" ng-model="experiencia.DataFinal" md-input />
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
+                <label>Descrição</label>
+                <input type="text" class="md-input uk-input" ng-model="experiencia.Descricao" md-input />
+            </div>
+            <div class="uk-width-1 uk-grid-margin">
+                <div class="uk-align-right">
+                    <a class="md-btn md-btn-primary" ng-click="addExperiencia()" href="javascript:void(0)">Adicionar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-modal" id="experienciaView" aria-hidden="true">
+    <div class="uk-modal-dialog">
+        <div class="md-card-toolbar">
+            <h3 class="md-card-toolbar-heading-text">
+                Ver Experiência Profissional
+            </h3>
+            <div class="md-card-toolbar-actions">
+                <i class="md-icon material-icons uk-modal-close"></i>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-1">
+                <label>Profissão</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Profissao.Descricao" md-input />
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
+                <label>Disponibilidade</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Disponibilidade.Descricao" md-input />
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Data Inicial</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.DataInicial" md-input />
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Data Final</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.DataFinal" md-input />
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
+                <label>Descrição</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Descricao" md-input />
             </div>
         </div>
     </div>

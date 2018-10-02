@@ -52,12 +52,12 @@ namespace Api
     
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
+        public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfissionalCertificado> ProfissionalCertificado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
-        public virtual Cidade Cidade { get; set; }
     }
 }

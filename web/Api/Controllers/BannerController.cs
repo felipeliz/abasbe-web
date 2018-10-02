@@ -56,7 +56,7 @@ namespace Api.Controllers
             obj.Descricao = param.Descricao.ToString();
             obj.Titulo = param.Titulo.ToString();
             obj.Expiracao = AppExtension.ToDateTime(param.Expiracao);
-            obj.Imagem = param.Imagem?.ToString();
+            obj.Imagem = FileController.ConfirmUpload(param.Imagem?.ToString());
 
             if (id <= 0)
             {

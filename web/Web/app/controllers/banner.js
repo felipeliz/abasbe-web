@@ -64,6 +64,7 @@
 
     $scope.uploadPhoto = function (file) {
         file.filter = "ImageSquared";
+        file.size = 1024;
         $http({
             method: "POST",
             url: "api/file/upload",
