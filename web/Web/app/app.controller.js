@@ -54,12 +54,15 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
         $scope.sections.push({ title: 'Usuários', icon: 'home', link: 'restricted.layout.usuario-lista' });
         $scope.sections.push({ title: 'Associados', icon: 'home', link: 'restricted.layout.associado-lista' });
         $scope.sections.push({ title: 'Profissionais', icon: 'home', link: 'restricted.layout.profissional-lista' });
-        $scope.sections.push({ title: 'Certificados', icon: 'home', link: 'restricted.layout.certificado-lista' });
-        $scope.sections.push({ title: 'Profissões', icon: 'home', link: 'restricted.layout.profissao-lista' });
-        $scope.sections.push({ title: 'Equipamentos', icon: 'home', link: 'restricted.layout.equipamento-lista' });
-        $scope.sections.push({ title: 'Disponibilidades', icon: 'home', link: 'restricted.layout.disponibilidade-lista' });
-        $scope.sections.push({ title: 'Planos', icon: 'home', link: 'restricted.layout.plano-lista' });
-        $scope.sections.push({ title: 'Banner', icon: 'home', link: 'restricted.layout.banner-lista' });
+        $scope.sections.push({
+            title: 'Cadastros Básicos', icon: '&#xE8D2;', submenu:
+            [{ title: 'Banner', icon: 'home', link: 'restricted.layout.banner-lista' },
+                { title: 'Certificados', icon: 'home', link: 'restricted.layout.certificado-lista' },
+                { title: 'Disponibilidades', icon: 'home', link: 'restricted.layout.disponibilidade-lista' },
+                { title: 'Equipamentos', icon: 'home', link: 'restricted.layout.equipamento-lista' },
+                { title: 'Planos', icon: 'home', link: 'restricted.layout.plano-lista' },
+                { title: 'Profissões', icon: 'home', link: 'restricted.layout.profissao-lista' }]
+        });
     })();
 
 
