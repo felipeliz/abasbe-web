@@ -97,5 +97,12 @@ namespace Api.Controllers
 
             }
         }
+
+        [HttpPost]
+        public string ObterQtdAssociadosAtivosETotal([FromBody] dynamic param)
+        {
+            Entities context = new Entities();
+            return context.Associado.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Associado.Count().ToString();
+        }
     }
 }

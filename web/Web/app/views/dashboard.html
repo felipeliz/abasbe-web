@@ -1,6 +1,44 @@
 ﻿<div id="page_content" ng-init="init()">
     <div id="page_content_inner">
         <h1>Dashboard</h1>
-        <!-- insert dashboard here -->
+        <div data-uk-grid="{gutter: 20}">
+            <div class="uk-width-medium-1-3 uk-width-small-1-1">
+                <div class="md-card">
+                    <div class="md-card-content" style="background-color: #c4c4f1;">
+                        <h3 class="heading_a" style="text-align: center;">Profissionais</h3>
+                        <hr />
+                        <div class="uk-overflow-container">
+                            <p style="text-align: center; margin-bottom: 3px;">Ativos/Total</p>
+                           <h1 style="text-align: center; margin-top: 0;">{{QtdProfissionais}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-3 uk-width-small-1-1">
+                <div class="md-card">
+                    <div class="md-card-content" style="background-color: #f19292;">
+                        <h3 class="heading_a" style="text-align: center;">Associados</h3>
+                        <hr />
+                        <div class="uk-overflow-container">
+                            <p style="text-align: center; margin-bottom: 3px;">Ativos/Total</p>
+                            <h1 style="text-align: center; margin-top: 0;">{{QtdAssociados}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-3 uk-width-small-1-1">
+                <div class="md-card">
+                    <div class="md-card-content" style="background-color: #94f79b;">
+                        <h3 class="heading_a" style="text-align: center;">Banners</h3>
+                        <hr />
+                        <div class="uk-overflow-container">
+                            <p style="text-align: center; margin-bottom: 3px;">Ativos/Total</p>
+                            <h1 style="text-align: center; margin-top: 0;">{{QtdBanners}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

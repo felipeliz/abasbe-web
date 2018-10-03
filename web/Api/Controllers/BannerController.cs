@@ -117,5 +117,12 @@ namespace Api.Controllers
             }
             throw new Exception("Não foi possivel adicionar o arquivo.");
         }
+
+        [HttpPost]
+        public string ObterQtdBannersAtivosETotal([FromBody] dynamic param)
+        {
+            Entities context = new Entities();  
+            return context.Banner.Where(ban => ban.Expiracao.Value.Day > DateTime.Today.Day).Count().ToString() + " / " + context.Banner.Count().ToString();
+        }
     }
 }

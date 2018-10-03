@@ -212,5 +212,12 @@ namespace Api.Controllers
 
             }
         }
+
+        [HttpPost]
+        public string ObterQtdProfissionaisAtivosETotal([FromBody] dynamic param)
+        {
+            Entities context = new Entities();
+            return context.Profissional.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Profissional.Count().ToString();
+        }
     }
 }
