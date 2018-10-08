@@ -51,17 +51,17 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
     (function loader() {
         var user = Auth.get();
         $scope.sections.push({ title: 'Dashboard', icon: 'home', link: 'restricted.layout.dashboard' });
-        $scope.sections.push({ title: 'Usuários', icon: 'home', link: 'restricted.layout.usuario-lista' });
-        $scope.sections.push({ title: 'Associados', icon: 'home', link: 'restricted.layout.associado-lista' });
-        $scope.sections.push({ title: 'Profissionais', icon: 'home', link: 'restricted.layout.profissional-lista' });
+        $scope.sections.push({ title: 'Usuários', icon: 'people', link: 'restricted.layout.usuario-lista' });
+        $scope.sections.push({ title: 'Associados', icon: 'recent_actors', link: 'restricted.layout.associado-lista' });
+        $scope.sections.push({ title: 'Profissionais', icon: 'supervisor_account', link: 'restricted.layout.profissional-lista' });
+        $scope.sections.push({ title: 'Banner', icon: 'insert_photo', link: 'restricted.layout.banner-lista' });
         $scope.sections.push({
             title: 'Cadastros Básicos', icon: '&#xE8D2;', submenu:
-            [{ title: 'Banner', icon: 'home', link: 'restricted.layout.banner-lista' },
-                { title: 'Certificados', icon: 'home', link: 'restricted.layout.certificado-lista' },
-                { title: 'Disponibilidades', icon: 'home', link: 'restricted.layout.disponibilidade-lista' },
-                { title: 'Equipamentos', icon: 'home', link: 'restricted.layout.equipamento-lista' },
-                { title: 'Planos', icon: 'home', link: 'restricted.layout.plano-lista' },
-                { title: 'Profissões', icon: 'home', link: 'restricted.layout.profissao-lista' }]
+            [{ title: 'Certificados', link: 'restricted.layout.certificado-lista' },
+                { title: 'Disponibilidades', link: 'restricted.layout.disponibilidade-lista' },
+                { title: 'Equipamentos', link: 'restricted.layout.equipamento-lista' },
+                { title: 'Planos', link: 'restricted.layout.plano-lista' },
+                { title: 'Profissões', link: 'restricted.layout.profissao-lista' }]
         });
     })();
 
