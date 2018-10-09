@@ -11,6 +11,12 @@ namespace Api.Controllers
 {
     public class UsuarioController : ApiController
     {
+        [HttpGet]
+        public string Status()
+        {
+            return "online";
+        }
+
         [HttpPost]
         public UsuarioViewModel Login([FromBody] dynamic param)
         {
