@@ -12,6 +12,7 @@ var app = angular.module('app', [
     'ConsoleLogger',
     'ui.mask',
     'cpf-cnpj',
+    'cnpj',
     'tooltips',
     'rw.moneymask',
     'filterPhone',

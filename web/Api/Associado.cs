@@ -27,6 +27,8 @@ namespace Api
         public string Telefone { get; set; }
         public System.DateTime DataExpiracao { get; set; }
         public bool Situacao { get; set; }
+        public string NomeEmpresa { get; set; }
+        public string Cnpj { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssociadoPagamento> AssociadoPagamento { get; set; }

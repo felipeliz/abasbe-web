@@ -25,7 +25,7 @@ namespace Api
         public string CheckoutIdentifier { get; set; }
         public Nullable<System.DateTime> DataConfirmacao { get; set; }
     
-        public virtual Associado Associado { get; set; }
         public virtual Plano Plano { get; set; }
+        public virtual Associado Associado { get; set; }
     }
 }

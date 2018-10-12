@@ -2,6 +2,7 @@
 using Api.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -56,9 +57,11 @@ namespace Api.Controllers
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
-            obj.Telefone = param.Telefone?.ToString();
+            obj.Telefone = Regex.Replace(param.Telefone?.ToString(), "[^0-9]", ""); 
             obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
             obj.Situacao = Convert.ToBoolean(param.Situacao);
+            obj.NomeEmpresa = param.NomeEmpresa?.ToString();
+            obj.Cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
 
             if (obj.Senha.Count() < 4)
             {
@@ -69,7 +72,24 @@ namespace Api.Controllers
             {
                 context.Associado.Add(obj);
             }
-            context.SaveChanges();
+            try{
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            
             return true;
         }
 

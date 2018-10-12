@@ -153,7 +153,7 @@ namespace Api.Controllers
 
 
                 // Experiencias
-                if (param.Certificados != null)
+                if (param.Experiencias != null && param.Experiencias.Count > 0)
                 {
                     foreach (var element in param.Experiencias)
                     {

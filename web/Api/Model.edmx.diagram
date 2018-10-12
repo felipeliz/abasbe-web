@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b3aa8290eba3480e895f3925fc51fed2" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="AbasbeModel.Associado" Width="1.5" PointX="5.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.AssociadoPagamento" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Certificado" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
@@ -15,7 +14,6 @@
         <EntityTypeShape EntityType="AbasbeModel.Profissao" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Profissional" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Usuario" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="AbasbeModel.FK_Pagamento_Associado" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Disponibilidade" ManuallyRouted="false" />
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Profissao" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AbasbeModel.Cidade" Width="1.5" PointX="12.625" PointY="7.875" />
@@ -33,6 +31,8 @@
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" />
+        <EntityTypeShape EntityType="AbasbeModel.Associado" Width="1.5" PointX="10.375" PointY="12" />
+        <AssociationConnector Association="AbasbeModel.FK_Pagamento_Associado" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

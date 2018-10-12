@@ -177,6 +177,7 @@
     <Content Include="bower_components\angular-autocomplete\autocomplete.js" />
     <Content Include="bower_components\angular-pt-br\angular-locale_pt-br.js" />
     <Content Include="bower_components\angular-ui-select\select2.css" />
+    <Content Include="bower_components\cnpj\cnpj.directive.js" />
     <Content Include="bower_components\cpf-cnpj\cpj-cnpj.directive.js" />
     <Content Include="bower_components\filter-phone\filter-phone.js" />
     <Content Include="bower_components\ion.rangeslider\css\ion.rangeSlider.css" />

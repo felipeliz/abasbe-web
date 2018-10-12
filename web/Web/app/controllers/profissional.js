@@ -193,6 +193,11 @@
         Validation.required("Telefone Celular", $scope.form.TelefoneCelular);
         Validation.required("Estado", $scope.form.IdEstado);
         Validation.required("Cidade", $scope.form.IdCidade);
+        console.log($scope.form.Experiencias);
+        if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length > 0)) {
+            toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");
+            return;
+        }
 
         $loading.show();
         $http({
