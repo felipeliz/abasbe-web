@@ -50,9 +50,19 @@ namespace Api.Controllers
         public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);
-
+            
             Entities context = new Entities();
             var obj = context.Banner.FirstOrDefault(ban => ban.Id == id) ?? new Banner();
+            if (Convert.ToInt32(param.IdTipoAcao) == 0)
+            {
+                obj.Link = param.Link.ToString();
+                obj.Telefone = "";
+            }
+            else
+            {
+                obj.Link = "";
+                obj.Telefone = param.Telefone.ToString();
+            }
             obj.Descricao = param.Descricao.ToString();
             obj.Titulo = param.Titulo.ToString();
             obj.Expiracao = AppExtension.ToDateTime(param.Expiracao);
@@ -60,6 +70,7 @@ namespace Api.Controllers
 
             if (id <= 0)
             {
+                obj.Cadastro = DateTime.Now;
                 context.Banner.Add(obj);
             }
             //upload(param);

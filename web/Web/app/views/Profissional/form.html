@@ -417,11 +417,15 @@
                     <option value="">Selecione...</option>
                 </select>
             </div>
-            <div class="uk-width-1-1 uk-grid-margin">
+            <div class="uk-width-1-2 uk-grid-margin">
                 <label>Disponibilidade <red>*</red></label>
                 <select class="md-input label-fixed" ng-model="experiencia.Disponibilidade" ng-options="item as item.Descricao for item in disponibilidades" md-input>
                     <option value="">Selecione...</option>
                 </select>
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Telefone <red>*</red></label>
+                <input type="text" class="md-input label-fixed" ui-mask="(99) 99999-9999" ng-model="experiencia.Telefone" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Data Inicial <red>*</red></label>
@@ -459,9 +463,13 @@
                 <label>Profissão</label>
                 <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Profissao.Descricao" md-input />
             </div>
-            <div class="uk-width-1-1 uk-grid-margin">
+            <div class="uk-width-1-2 uk-grid-margin">
                 <label>Disponibilidade</label>
                 <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Disponibilidade.Descricao" md-input />
+            </div>
+            <div class="uk-width-1-2 uk-grid-margin">
+                <label>Telefone</label>
+                <input type="text"  ng-disabled="true" class="md-input label-fixed" ui-mask="(99) 99999-9999" ng-model="experiencia.Telefone" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Data Inicial</label>

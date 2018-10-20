@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b3aa8290eba3480e895f3925fc51fed2" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="AbasbeModel.AssociadoPagamento" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Certificado" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Disponibilidade" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AbasbeModel.Equipamento" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
@@ -23,16 +22,17 @@
         <AssociationConnector Association="AbasbeModel.FK_Profissional_Cidade" />
         <EntityTypeShape EntityType="AbasbeModel.ProfissionalCertificado" Width="1.5" PointX="8.25" PointY="5.375" />
         <EntityTypeShape EntityType="AbasbeModel.ProfissionalEquipamentos" Width="1.5" PointX="5.25" PointY="5.25" />
-        <EntityTypeShape EntityType="AbasbeModel.ProfissionalExperiencia" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Certificado" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Disponibilidade" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Equipamento" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissao" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalCertificado_Profissional" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalEquipamentos_Profissional" />
-        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" />
         <EntityTypeShape EntityType="AbasbeModel.Associado" Width="1.5" PointX="10.375" PointY="12" />
         <AssociationConnector Association="AbasbeModel.FK_Pagamento_Associado" />
+        <EntityTypeShape EntityType="AbasbeModel.ProfissionalExperiencia" Width="1.5" PointX="5.25" PointY="1.125" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Disponibilidade" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissao" />
+        <AssociationConnector Association="AbasbeModel.FK_ProfissionalExperiencia_Profissional" />
+        <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

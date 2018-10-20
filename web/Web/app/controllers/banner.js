@@ -1,7 +1,8 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Titulo: "", Descricao: "" };
+    $scope.form = { Id: 0, Titulo: "", Descricao: "", IdTipoAcao: 0 };
     $scope.lista = {};
+    $scope.tipoAcao = [{ Id: 0, Descricao: "Link" }, { Id: 1, Descricao: "Telefone" }];
     $scope.filter = {
         Titulo: "",
     };
@@ -48,6 +49,13 @@
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.form = response.data;
+            console.log(response.data);
+            if (response.data.Link != "" && response.data.Link != null) {
+                $scope.form.IdTipoAcao = 0;
+            }
+            else {
+                $scope.form.IdTipoAcao = 1;
+            }
         }, function myError(response) {
             $loading.hide();
             toastr.error(response.data.ExceptionMessage);
@@ -82,8 +90,14 @@
         Validation.required("Título", $scope.form.Titulo);
         Validation.required("Data de Expiração", $scope.form.Expiracao);
         Validation.required("Descrição", $scope.form.Descricao);
+        if ($scope.form.IdTipoAcao == 0) {
+            Validation.required("Link", $scope.form.Link);
+        }
+        else {
+            Validation.required("Telefone", $scope.form.Telefone);
+        }
         Validation.required("Imagem", $scope.form.Imagem);
-
+        
         $loading.show();
         $http({
             method: "POST",

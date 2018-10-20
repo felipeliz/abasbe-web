@@ -1,6 +1,6 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Nome: "", Email: "", Senha: "", Telefone: "", DataExpiracao: "", Situacao: "True" };
+    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", Telefone: "", DataExpiracao: "", Situacao: "True" };
     $scope.lista = {};
     $scope.filter = {
         Nome: "",

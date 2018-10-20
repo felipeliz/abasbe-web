@@ -15,6 +15,7 @@ namespace Api.Models
         public string DataFinal { get; set; }
         public string Descricao { get; set; }
         public string DataCadastro { get; set; }
+        public string Telefone { get; set; }
         public DisponibilidadeViewModel Disponibilidade { get; set; }
         public ProfissaoViewModel Profissao { get; set; }
 
@@ -28,6 +29,7 @@ namespace Api.Models
             DataInicial = obj.DataInicial.ToString("dd/MM/yyyy");
             DataFinal = obj.DataFinal?.ToString("dd/MM/yyyy");
             Descricao = obj.Descricao;
+            Telefone = obj.Telefone;
 
             DataCadastro = obj.DataCadastro?.ToString("dd/MM/yyyy HH:mm:ss");
 

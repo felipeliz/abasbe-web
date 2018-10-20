@@ -19,5 +19,8 @@ namespace Api
         public string Titulo { get; set; }
         public string Descricao { get; set; }
         public Nullable<System.DateTime> Expiracao { get; set; }
+        public string Telefone { get; set; }
+        public string Link { get; set; }
+        public Nullable<System.DateTime> Cadastro { get; set; }
     }
 }

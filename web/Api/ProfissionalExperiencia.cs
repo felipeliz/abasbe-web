@@ -22,6 +22,7 @@ namespace Api
         public System.DateTime DataInicial { get; set; }
         public Nullable<System.DateTime> DataFinal { get; set; }
         public Nullable<System.DateTime> DataCadastro { get; set; }
+        public string Telefone { get; set; }
     
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }

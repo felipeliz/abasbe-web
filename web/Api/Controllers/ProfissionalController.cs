@@ -153,7 +153,7 @@ namespace Api.Controllers
 
 
                 // Experiencias
-                if (param.Experiencias != null && param.Experiencias.Count > 0)
+                if (param.Experiencias != null && param.Experiencias.Count >= 2)
                 {
                     foreach (var element in param.Experiencias)
                     {
@@ -165,6 +165,7 @@ namespace Api.Controllers
                         relation.DataFinal = AppExtension.ToDateTime(element.DataFinal);
                         relation.Descricao = element.Descricao?.ToString();
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
+                        relation.Telefone = element.Telefone;
                         obj.ProfissionalExperiencia.Add(relation);
                     }
                 }
