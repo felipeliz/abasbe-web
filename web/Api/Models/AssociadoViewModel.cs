@@ -32,7 +32,7 @@ namespace Api.Models
             NomeEmpresa = obj.NomeEmpresa;
             Email = obj.Email;
             Senha = obj.Senha;
-            Telefone = Convert.ToUInt64(obj.Telefone).ToString(@"(00) 00000-0000"); 
+            Telefone = string.IsNullOrEmpty(obj.Telefone) ? obj.Telefone : Convert.ToUInt64(obj.Telefone).ToString(@"(00) 00000-0000"); 
             DataExpiracao = obj.DataExpiracao.ToString("dd/MM/yyyy");
             Situacao = obj.Situacao.ToString();
             Cnpj = Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");
