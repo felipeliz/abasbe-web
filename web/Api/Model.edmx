@@ -46,6 +46,7 @@
           <Property Name="Telefone" Type="varchar" MaxLength="11" />
           <Property Name="Link" Type="varchar" MaxLength="2000" />
           <Property Name="Cadastro" Type="date" />
+          <Property Name="Contador" Type="int" />
         </EntityType>
         <EntityType Name="Certificado">
           <Key>
@@ -820,6 +821,7 @@
           <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="Link" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="Cadastro" Type="DateTime" Precision="0" />
+          <Property Name="Contador" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -999,6 +1001,7 @@
           <EntitySetMapping Name="Banner">
             <EntityTypeMapping TypeName="AbasbeModel.Banner">
               <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="Contador" ColumnName="Contador" />
                 <ScalarProperty Name="Cadastro" ColumnName="Cadastro" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="Telefone" ColumnName="Telefone" />
