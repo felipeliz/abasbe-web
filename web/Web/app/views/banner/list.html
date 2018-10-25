@@ -30,6 +30,7 @@
                                 <th>Título</th>
                                 <th>Descrição</th>
                                 <th>Expiração</th>
+                                <th>Visualizações</th>
                                 <th class="acoes-2">Ações</th>
                             </tr>
                         </thead>
@@ -38,6 +39,7 @@
                                 <td>{{banner.Titulo}}</td>
                                 <td>{{banner.Descricao}}</td>
                                 <td>{{banner.Expiracao}}</td>
+                                <td>{{banner.Contador}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
                                     <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>

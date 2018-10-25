@@ -22,5 +22,6 @@ namespace Api
         public string Telefone { get; set; }
         public string Link { get; set; }
         public Nullable<System.DateTime> Cadastro { get; set; }
+        public Nullable<int> Contador { get; set; }
     }
 }

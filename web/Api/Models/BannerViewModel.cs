@@ -14,7 +14,8 @@ namespace Api.Models
         public string Imagem { get; set; }
         public string Link { get; set; }
         public string Telefone { get; set; }
-        
+        public int Contador { get; set; }
+
         public BannerViewModel(Banner obj)
         {
             if (obj == null)
@@ -29,6 +30,7 @@ namespace Api.Models
             Imagem = obj.Imagem;
             Telefone = obj.Telefone;
             Link = obj.Link;
+            Contador = Convert.ToInt32(obj.Contador);
         }
     }
 }

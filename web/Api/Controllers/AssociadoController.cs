@@ -15,12 +15,33 @@ namespace Api.Controllers
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
-            string nome = param.Nome;
+            string nome = param.Nome?.ToString();
+            string nomeEmpresa = param.NomeEmpresa?.ToString();
+            string cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
+            string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
             List<AssociadoViewModel> lista = new List<AssociadoViewModel>();
+            var query = context.Associado.ToList();
 
-            var query = context.Associado.Where(obj => obj.Nome.Contains(nome)).ToList();
+            if (!String.IsNullOrEmpty(nomeEmpresa))
+            {
+                query = query.Where(obj => obj.NomeEmpresa.ToLower().Contains(nomeEmpresa.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(cnpj))
+            {
+                query = query.Where(obj => obj.Cnpj.ToLower().Contains(cnpj.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(nome))
+            {
+                query = context.Associado.Where(obj => obj.Nome.ToLower().Contains(nome.ToLower())).ToList();
+            }
+
+            if (situacao != "Todas")
+            {
+                bool s = Convert.ToBoolean(situacao);
+                query = query.Where(obj => obj.Situacao == s).ToList();
+            }
 
             query.ToList().ForEach(obj =>
             {

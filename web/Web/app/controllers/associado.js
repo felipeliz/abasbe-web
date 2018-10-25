@@ -4,6 +4,9 @@
     $scope.lista = {};
     $scope.filter = {
         Nome: "",
+        NomeEmpresa: "",
+        Cnpj: "",
+        Situacao: "Todas"
     };
     $scope.edicao = false;
 
