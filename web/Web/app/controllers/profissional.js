@@ -297,6 +297,7 @@
     $scope.addExperiencia = function () {
         Validation.requiredChild("Profissão", $scope.experiencia.Profissao, "Id");
         Validation.requiredChild("Disponibilidade", $scope.experiencia.Disponibilidade, "Id");
+        Validation.required("Telefone", $scope.experiencia.Telefone);
         Validation.required("Data Inicial", $scope.experiencia.DataInicial);
 
         if ($scope.form.Experiencias == null) {
@@ -311,7 +312,12 @@
         $scope.form.Experiencias.splice(index, 1);
     }
 
-
+    $scope.mascaraTelefone = function (telefone) {
+        if (telefone == null || telefone == undefined || telefone == '') {
+            return '-';
+        }
+        return telefone.replace(/(\d\d)(\d\d\d\d\d)(\d\d\d\d)/, '($1) $2-$3');
+    }
 
 
 

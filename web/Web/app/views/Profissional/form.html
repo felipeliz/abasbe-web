@@ -299,6 +299,7 @@
                             <tr>
                                 <th>Profissão</th>
                                 <th>Disponibilidade</th>
+                                <th>Telefone</th>
                                 <th>Inicio</th>
                                 <th>Final</th>
                                 <th class="acoes-2">Ações</th>
@@ -311,6 +312,9 @@
                                 </td>
                                 <td>
                                     {{element.Disponibilidade.Descricao}}
+                                </td>
+                                <td>
+                                    {{mascaraTelefone(element.Telefone)}}
                                 </td>
                                 <td>
                                     {{element.DataInicial}}

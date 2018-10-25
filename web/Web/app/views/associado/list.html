@@ -27,7 +27,9 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th>Razão Social</th>
+                                <th>CNPJ</th>
+                                <th>Nome Responsável</th>
                                 <th>E-mail</th>
                                 <th>Telefone</th>
                                 <th>Situação</th>
@@ -36,6 +38,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="associado in lista.list">
+                                <td>{{associado.NomeEmpresa}}</td>
+                                <td>{{associado.Cnpj}}</td>
                                 <td>{{associado.Nome}}</td>
                                 <td>{{associado.Email}}</td>
                                 <td>{{associado.Telefone || '-'}}</td>

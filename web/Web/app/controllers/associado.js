@@ -56,9 +56,9 @@
     }
 
     $scope.salvar = function () {
-        Validation.required("Nome", $scope.form.Nome);
-        Validation.required("Nome da Empresa", $scope.form.NomeEmpresa);
+        Validation.required("Razão Social", $scope.form.NomeEmpresa);
         Validation.required("CNPJ", $scope.form.Cnpj);
+        Validation.required("Nome Responsável", $scope.form.Nome);
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Data Expiração", $scope.form.DataExpiracao);
         Validation.required("Senha", $scope.form.Senha);
