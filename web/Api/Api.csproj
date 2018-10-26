@@ -153,6 +153,7 @@
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\DisponibilidadeController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
+    <Compile Include="Controllers\ParceiroController.cs" />
     <Compile Include="Controllers\PlanoController.cs" />
     <Compile Include="Controllers\ProfissaoController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\DisponibilidadeViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />
+    <Compile Include="Models\ParceiroViewModel.cs" />
     <Compile Include="Models\PlanoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />
     <Compile Include="Models\AssociadoViewModel.cs" />
@@ -197,6 +199,9 @@
     <Compile Include="Models\ProfissionalEquipamentoViewModel.cs" />
     <Compile Include="Models\ProfissionalViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
+    <Compile Include="Parceiro.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Plano.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

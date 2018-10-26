@@ -520,5 +520,53 @@
             pageTitle: 'Editar Profissional'
         }
     });
+
+    $stateProvider.state("restricted.layout.parceiro-lista", {
+        url: "/parceiro",
+        templateUrl: 'app/views/parceiro/list.html',
+        controller: 'parceiro',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/parceiro.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Parceiros'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.parceiro-novo", {
+        url: "/parceiro/form",
+        templateUrl: 'app/views/parceiro/form.html',
+        controller: 'parceiro',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/parceiro.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Parceiro'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.parceiro-editar", {
+        url: "/parceiro/form/:id",
+        templateUrl: 'app/views/parceiro/form.html',
+        controller: 'parceiro',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/parceiro.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Parceiro'
+        }
+    });
 }
 ]);

@@ -24,6 +24,7 @@ namespace Api
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public int Dias { get; set; }
+        public bool TipoPlano { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssociadoPagamento> AssociadoPagamento { get; set; }

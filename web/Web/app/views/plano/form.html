@@ -8,17 +8,25 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-2-5">
                         <label>Descrição <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Descricao" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-1-5">
                         <label>Valor <red>*</red></label>
                         <input type="text" class="md-input label-fixed" ng-model="form.Valor" money-mask md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-1-5">
                         <label>Dias <red>*</red></label>
                         <input type="text" integer class="md-input label-fixed" ng-model="form.Dias" md-input />
+                    </div>
+                    <div class="uk-width-1-5">
+                        <label>Tipo de Plano <red>*</red></label>
+                        <select class="md-input label-fixed" ng-model="form.TipoPlano" md-input>
+                            <option value="Default">Selecione...</option>
+                            <option value="False">Associado</option>
+                            <option value="True">Banner</option>
+                        </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">

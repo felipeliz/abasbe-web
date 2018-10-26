@@ -14,11 +14,17 @@ namespace Api.Controllers
         public PagedList Lista([FromBody] dynamic param)
         {
             string descricao = param.Descricao;
+            string tipoPlano = param.TipoPlano?.ToString();
 
             Entities context = new Entities();
             List<PlanoViewModel> lista = new List<PlanoViewModel>();
 
             var query = context.Plano.Where(pla => pla.Descricao.Contains(descricao)).ToList();
+            if (tipoPlano != "Default")
+            {
+                bool s = Convert.ToBoolean(tipoPlano);
+                query = query.Where(obj => obj.TipoPlano == s).ToList();
+            }
 
             query.ToList().ForEach(obj =>
             {
@@ -54,6 +60,7 @@ namespace Api.Controllers
             obj.Descricao = param.Descricao.ToString();
             obj.Dias = Convert.ToInt32(param.Dias);
             obj.Valor = Convert.ToDecimal(param.Valor);
+            obj.TipoPlano = Convert.ToBoolean(param.TipoPlano);
 
             if (id <= 0)
             {

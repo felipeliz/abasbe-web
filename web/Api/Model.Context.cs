@@ -29,7 +29,6 @@ namespace Api
         public virtual DbSet<Certificado> Certificado { get; set; }
         public virtual DbSet<Disponibilidade> Disponibilidade { get; set; }
         public virtual DbSet<Equipamento> Equipamento { get; set; }
-        public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<Profissional> Profissional { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
@@ -40,5 +39,7 @@ namespace Api
         public virtual DbSet<Associado> Associado { get; set; }
         public virtual DbSet<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
+        public virtual DbSet<Parceiro> Parceiro { get; set; }
+        public virtual DbSet<Plano> Plano { get; set; }
     }
 }

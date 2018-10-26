@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace Api.Controllers
 {
-    public class AssociadoController : ApiController
+    public class ParceiroController : ApiController
     {
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
@@ -21,8 +21,8 @@ namespace Api.Controllers
             string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
-            List<AssociadoViewModel> lista = new List<AssociadoViewModel>();
-            var query = context.Associado.ToList();
+            List<ParceiroViewModel> lista = new List<ParceiroViewModel>();
+            var query = context.Parceiro.ToList();
 
             if (!String.IsNullOrEmpty(nomeEmpresa))
             {
@@ -45,25 +45,25 @@ namespace Api.Controllers
 
             query.ToList().ForEach(obj =>
             {
-                lista.Add(new AssociadoViewModel(obj));
+                lista.Add(new ParceiroViewModel(obj));
             });
 
             return PagedList.Create(param.page?.ToString(), 10, lista);
         }
 
         [HttpGet]
-        public AssociadoViewModel Obter(int id)
+        public ParceiroViewModel Obter(int id)
         {
             Entities context = new Entities();
 
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id);
+            var obj = context.Parceiro.FirstOrDefault(pro => pro.Id == id);
 
             if (obj == null)
             {
                 throw new Exception("Registro não identificado.");
             }
 
-            return new AssociadoViewModel(obj);
+            return new ParceiroViewModel(obj);
         }
 
 
@@ -73,12 +73,12 @@ namespace Api.Controllers
             int id = Convert.ToInt32(param.Id);
 
             Entities context = new Entities();
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id) ?? new Associado();
+            var obj = context.Parceiro.FirstOrDefault(par => par.Id == id) ?? new Parceiro();
 
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
-            obj.Telefone = Regex.Replace(param.Telefone?.ToString(), "[^0-9]", ""); 
+            obj.Telefone = Regex.Replace(param.Telefone?.ToString(), "[^0-9]", "");
             obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
             obj.Situacao = Convert.ToBoolean(param.Situacao);
             obj.NomeEmpresa = param.NomeEmpresa?.ToString();
@@ -91,9 +91,10 @@ namespace Api.Controllers
 
             if (id <= 0)
             {
-                context.Associado.Add(obj);
+                context.Parceiro.Add(obj);
             }
-            try{
+            try
+            {
                 context.SaveChanges();
             }
             catch (DbEntityValidationException e)
@@ -110,7 +111,7 @@ namespace Api.Controllers
                 }
                 throw;
             }
-            
+
             return true;
         }
 
@@ -119,7 +120,7 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
 
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id);
+            var obj = context.Parceiro.FirstOrDefault(par => par.Id == id);
             if (obj == null)
             {
                 throw new Exception("Registro não identificado.");
@@ -128,7 +129,7 @@ namespace Api.Controllers
             {
                 try
                 {
-                    context.Associado.Remove(obj);
+                    context.Parceiro.Remove(obj);
                     context.SaveChanges();
                 }
                 catch
@@ -139,11 +140,11 @@ namespace Api.Controllers
             }
         }
 
-        [HttpPost]
-        public string ObterQtdAssociadosAtivosETotal([FromBody] dynamic param)
-        {
-            Entities context = new Entities();
-            return context.Associado.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Associado.Count().ToString();
-        }
+        //[HttpPost]
+        //public string ObterQtdParceirosAtivosETotal([FromBody] dynamic param)
+        //{
+        //    Entities context = new Entities();
+        //    return context.Associado.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Associado.Count().ToString();
+        //}
     }
 }

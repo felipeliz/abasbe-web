@@ -1,10 +1,12 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Descricao: "", Dias: "", Valor: '', TipoPlano: "Default" };
+    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", Telefone: "", DataExpiracao: "", Situacao: "True" };
     $scope.lista = {};
     $scope.filter = {
-        Descricao: "",
-        TipoPlano: "Default"
+        Nome: "",
+        NomeEmpresa: "",
+        Cnpj: "",
+        Situacao: "Todas"
     };
     $scope.edicao = false;
 
@@ -12,7 +14,7 @@
         if (typeof ($stateParams.id) == "string") {
             $scope.carregarEditar($stateParams.id);
         }
-        else if ($location.path() == "/plano") {
+        else if ($location.path() == "/parceiro") {
             $scope.filtrar(0, true);
         }
     }
@@ -22,7 +24,7 @@
         $scope.filter.page = page == null ? 0 : page;
         $http({
             method: "POST",
-            url: "api/plano/lista",
+            url: "api/parceiro/lista",
             data: $scope.filter
         }).then(function mySuccess(response) {
             $loading.hide();
@@ -37,7 +39,7 @@
     }
 
     $scope.editar = function (id) {
-        $location.path("/plano/form/" + id);
+        $location.path("/parceiro/form/" + id);
     }
 
     $scope.carregarEditar = function (id) {
@@ -45,7 +47,7 @@
         $loading.show();
         $http({
             method: "GET",
-            url: "api/plano/obter/" + id
+            url: "api/parceiro/obter/" + id
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.form = response.data;
@@ -57,18 +59,16 @@
     }
 
     $scope.salvar = function () {
-        Validation.required("Descrição", $scope.form.Descricao);
-        Validation.required("Valor", $scope.form.Valor);
-        Validation.required("Dias", $scope.form.Dias);
-        if ($scope.form.TipoPlano != 'True' || $scope.form.TipoPlano != 'False') {
-            toastr.error('O campo Tipo de Plano é obrigatório.');
-            return;
-        }
-      
+        Validation.required("Razão Social", $scope.form.NomeEmpresa);
+        Validation.required("CNPJ", $scope.form.Cnpj);
+        Validation.required("Nome Responsável", $scope.form.Nome);
+        Validation.required("E-mail", $scope.form.Email);
+        Validation.required("Data Expiração", $scope.form.DataExpiracao);
+        Validation.required("Senha", $scope.form.Senha);
         $loading.show();
         $http({
             method: "POST",
-            url: "api/plano/salvar",
+            url: "api/parceiro/salvar",
             data: $scope.form
         }).then(function mySuccess(response) {
             $loading.hide();
@@ -81,18 +81,18 @@
     }
 
     $scope.voltar = function () {
-        $location.path("/plano");
+        $location.path("/parceiro");
     }
 
     $scope.novo = function () {
-        $location.path("/plano/form");
+        $location.path("/parceiro/form");
     }
 
     $scope.excluir = function (id) {
         $loading.show();
         $http({
             method: "GET",
-            url: "api/plano/excluir/" + id
+            url: "api/parceiro/excluir/" + id
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.filtrar();
@@ -102,14 +102,6 @@
         });
     }
 
-    $scope.retornarTipoPlano = function (tipoPlano) {
-        if (String(tipoPlano) === 'True') {
-            return 'Banner';
-        }
-        else {
-            return 'Associado';
-        }
 
-    }
 }
-angular.module('app').controller('plano', controller);
+angular.module('app').controller('parceiro', controller);
