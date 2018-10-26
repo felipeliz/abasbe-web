@@ -19,6 +19,7 @@ namespace Api.Models
         public string Situacao { get; set; }
         public string Cnpj { get; set; }
         public string Token { get; set; }
+        public List<ParceiroPagamentoViewModel> Pagamentos { get; set; }
 
         public ParceiroViewModel(Parceiro obj)
         {
@@ -36,6 +37,12 @@ namespace Api.Models
             DataExpiracao = obj.DataExpiracao.ToString("dd/MM/yyyy");
             Situacao = obj.Situacao.ToString();
             Cnpj = Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");
+
+            Pagamentos = new List<ParceiroPagamentoViewModel>();
+            obj.ParceiroPagamento.OrderByDescending(par => par.DataCriacao).ToList().ForEach(par =>
+            {
+                Pagamentos.Add(new ParceiroPagamentoViewModel(par));
+            });
 
             Token = EncryptionHelper.Encrypt(Id.ToString());
         }

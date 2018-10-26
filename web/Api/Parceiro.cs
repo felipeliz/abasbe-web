@@ -14,6 +14,12 @@ namespace Api
     
     public partial class Parceiro
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Parceiro()
+        {
+            this.ParceiroPagamento = new HashSet<ParceiroPagamento>();
+        }
+    
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
@@ -23,5 +29,8 @@ namespace Api
         public bool Situacao { get; set; }
         public string NomeEmpresa { get; set; }
         public string Cnpj { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParceiroPagamento> ParceiroPagamento { get; set; }
     }
 }

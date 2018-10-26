@@ -190,6 +190,7 @@
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\DisponibilidadeViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />
+    <Compile Include="Models\ParceiroPagamentoViewModel.cs" />
     <Compile Include="Models\ParceiroViewModel.cs" />
     <Compile Include="Models\PlanoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />
@@ -200,6 +201,9 @@
     <Compile Include="Models\ProfissionalViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Parceiro.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParceiroPagamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Plano.cs">

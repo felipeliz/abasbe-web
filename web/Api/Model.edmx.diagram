@@ -34,7 +34,10 @@
         <EntityTypeShape EntityType="AbasbeModel.Parceiro" Width="1.5" PointX="12.375" PointY="11.75" />
         <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="5.75" PointY="10.625" />
         <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
-      </Diagram>
+        <EntityTypeShape EntityType="AbasbeModel.ParceiroPagamento" Width="1.5" PointX="14.625" PointY="11" />
+        <AssociationConnector Association="AbasbeModel.FK__ParceiroP__IdPar__3587F3E0" />
+        <AssociationConnector Association="AbasbeModel.FK__ParceiroP__IdPla__367C1819" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

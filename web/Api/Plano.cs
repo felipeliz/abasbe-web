@@ -18,6 +18,7 @@ namespace Api
         public Plano()
         {
             this.AssociadoPagamento = new HashSet<AssociadoPagamento>();
+            this.ParceiroPagamento = new HashSet<ParceiroPagamento>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Api
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssociadoPagamento> AssociadoPagamento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParceiroPagamento> ParceiroPagamento { get; set; }
     }
 }

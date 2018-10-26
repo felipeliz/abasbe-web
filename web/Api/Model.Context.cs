@@ -41,5 +41,6 @@ namespace Api
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Parceiro> Parceiro { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
+        public virtual DbSet<ParceiroPagamento> ParceiroPagamento { get; set; }
     }
 }
