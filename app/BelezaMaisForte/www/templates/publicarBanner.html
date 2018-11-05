@@ -2,29 +2,37 @@
   <ion-content padding="true" class="has-header">
     <h3 id="publicarBanner-heading1" style="color:#000000;">Publicar banner</h3>
     <div id="publicarBanner-markdown6" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Selecione a imagem do banner</p>
+      <p style="color:#000000;">Selecione uma imagem para o banner</p>
     </div>
     <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
       <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
     </div>
     <form id="publicarBanner-form2" class="list">
-      <label class="item item-input" id="publicarBanner-input3">
+      <label class="item item-input item-stacked-label" id="publicarBanner-input3">
         <span class="input-label">Titulo</span>
         <input type="text" placeholder="">
       </label>
-      <label class="item item-input" id="publicarBanner-input4">
+      <label class="item item-input item-stacked-label" id="publicarBanner-input4">
         <span class="input-label">Descrição</span>
+        <input type="text" placeholder="">
+      </label>
+      <label class="item item-input item-stacked-label" id="publicarBanner-input6">
+        <span class="input-label">Data publicação</span>
         <input type="text" placeholder="">
       </label>
       <div id="publicarBanner-button-bar1" class="button-bar">
         <button id="publicarBanner-button6" class="button button-positive button-block button-outline">Telefone</button>
         <button id="publicarBanner-button5" class="button button-positive button-block button-outline">Link</button>
       </div>
-      <label class="item item-input" id="publicarBanner-input5">
+      <label class="item item-input item-stacked-label" id="publicarBanner-input5">
         <span class="input-label">Ação</span>
         <input type="text" placeholder="">
       </label>
-      <button id="publicarBanner-button1" class="button button-positive button-block">Registrar banner</button>
+      <label class="item item-select" id="publicarBanner-select1">
+        <span class="input-label">Plano</span>
+        <select></select>
+      </label>
+      <a ui-sref="menu.belezaMaisForte()" id="publicarBanner-button1" class="button button-positive button-block">Publicar</a>
     </form>
   </ion-content>
 </ion-view>
