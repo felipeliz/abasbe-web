@@ -14,6 +14,12 @@ namespace Api
     
     public partial class Banner
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Banner()
+        {
+            this.Pagamento = new HashSet<Pagamento>();
+        }
+    
         public int Id { get; set; }
         public string Imagem { get; set; }
         public string Titulo { get; set; }
@@ -23,5 +29,8 @@ namespace Api
         public string Link { get; set; }
         public Nullable<System.DateTime> Cadastro { get; set; }
         public Nullable<int> Contador { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pagamento> Pagamento { get; set; }
     }
 }

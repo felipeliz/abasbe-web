@@ -5,18 +5,18 @@ using System.Web;
 
 namespace Api.Models
 {
-    public class ProfissionalEquipamentoViewModel
+    public class ClienteEquipamentoViewModel
     {
         public string Id { get; set; }
-        public int IdProfissional { get; set; }
+        public int IdCliente { get; set; }
         public int IdEquipamento { get; set; }
         public string DataCadastro { get; set; }
         public EquipamentoViewModel Equipamento { get; set; }
 
-        public ProfissionalEquipamentoViewModel(ProfissionalEquipamentos obj)
+        public ClienteEquipamentoViewModel(ClienteEquipamentos obj)
         {
             Id = obj.Id;
-            IdProfissional = obj.IdProfissional;
+            IdCliente = obj.IdCliente;
             IdEquipamento = obj.IdEquipamento;
 
             DataCadastro = obj.DataCadastro?.ToString("dd/MM/yyyy HH:mm:ss");

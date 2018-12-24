@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Api.Models
 {
-    public class ProfissionalExperienciaViewModel
+    public class ClienteExperienciaViewModel
     {
         public string Id { get; set; }
-        public int IdProfissional { get; set; }
+        public int IdCliente { get; set; }
         public int IdProfissao { get; set; }
         public int IdDisponibilidade { get; set; }
         public string DataInicial { get; set; }
@@ -20,10 +20,10 @@ namespace Api.Models
         public ProfissaoViewModel Profissao { get; set; }
 
 
-        public ProfissionalExperienciaViewModel(ProfissionalExperiencia obj)
+        public ClienteExperienciaViewModel(ClienteExperiencia obj)
         {
             Id = obj.Id;
-            IdProfissional = obj.IdProfissional;
+            IdCliente = obj.IdCliente;
             IdProfissao = obj.IdProfissao;
             IdDisponibilidade = obj.IdDisponibilidade;
             DataInicial = obj.DataInicial.ToString("dd/MM/yyyy");

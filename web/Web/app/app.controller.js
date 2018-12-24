@@ -53,7 +53,6 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
         $scope.sections.push({ title: 'Dashboard', icon: 'home', link: 'restricted.layout.dashboard' });
         $scope.sections.push({ title: 'Usuários', icon: 'people', link: 'restricted.layout.usuario-lista' });
         $scope.sections.push({ title: 'Associados', icon: 'recent_actors', link: 'restricted.layout.associado-lista' });
-        $scope.sections.push({ title: 'Parceiros', icon: 'contacts', link: 'restricted.layout.parceiro-lista' });
         $scope.sections.push({ title: 'Profissionais', icon: 'supervisor_account', link: 'restricted.layout.profissional-lista' });
         $scope.sections.push({ title: 'Banner', icon: 'insert_photo', link: 'restricted.layout.banner-lista' });
         $scope.sections.push({

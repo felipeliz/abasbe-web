@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Api.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace Api.Models
 {
-    public class ParceiroPagamentoViewModel
+    public class PagamentoViewModel
     {
         public int Id { get; set; }
-        public int IdParceiro { get; set; }
+        public int IdCliente { get; set; }
         public int IdPlano { get; set; }
         public string Valor { get; set; }
         public int Dias { get; set; }
@@ -18,7 +19,7 @@ namespace Api.Models
         public string CheckoutIdentifier { get; set; }
         public string Situacao { get; set; }
 
-        public ParceiroPagamentoViewModel(ParceiroPagamento obj)
+        public PagamentoViewModel(Pagamento obj)
         {
             if (obj == null)
             {
@@ -26,7 +27,7 @@ namespace Api.Models
             }
 
             Id = obj.Id;
-            IdParceiro = obj.IdParceiro;
+            IdCliente = obj.IdCliente;
             IdPlano = obj.IdPlano;
             Valor = "R$ " + obj.Valor;
             Dias = obj.Dias;

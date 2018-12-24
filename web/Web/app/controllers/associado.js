@@ -1,21 +1,27 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", Telefone: "", DataExpiracao: "", Situacao: "True" };
+    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", TelefoneCelular: "", DataExpiracao: "", Situacao: "True", CPF: "" };
     $scope.lista = {};
+    $scope.estados = [];
+    $scope.cidades = [];
     $scope.filter = {
         Nome: "",
         NomeEmpresa: "",
         Cnpj: "",
-        Situacao: "Todas"
+        Situacao: "True"
     };
     $scope.edicao = false;
 
     $scope.init = function () {
         if (typeof ($stateParams.id) == "string") {
+            $scope.carregarListas();
             $scope.carregarEditar($stateParams.id);
         }
         else if ($location.path() == "/associado") {
             $scope.filtrar(0, true);
+        }
+        else {
+            $scope.carregarListas();
         }
     }
 
@@ -51,6 +57,7 @@
         }).then(function mySuccess(response) {
             $loading.hide();
             $scope.form = response.data;
+            $scope.carregarCidades(response.data.IdEstado);
         }, function myError(response) {
             $loading.hide();
             toastr.error(response.data.ExceptionMessage);
@@ -58,13 +65,43 @@
         });
     }
 
+    $scope.carregarListas = function () {
+        $http({
+            method: "GET",
+            url: "api/estado/todos"
+        }).then(function mySuccess(response) {
+            $scope.estados = response.data;
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
+
+    $scope.carregarCidades = function (idEstado) {
+        if (idEstado != null) {
+            $loading.show();
+            $http({
+                method: "GET",
+                url: "api/estado/cidades/" + idEstado
+            }).then(function mySuccess(response) {
+                $loading.hide();
+                $scope.cidades = response.data;
+            }, function myError(response) {
+                $loading.hide();
+                toastr.error(response.data.ExceptionMessage);
+            });
+        }
+    }
+
     $scope.salvar = function () {
-        Validation.required("Razão Social", $scope.form.NomeEmpresa);
-        Validation.required("CNPJ", $scope.form.Cnpj);
         Validation.required("Nome Responsável", $scope.form.Nome);
+        Validation.required("CPF", $scope.form.CPF);
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Data Expiração", $scope.form.DataExpiracao);
         Validation.required("Senha", $scope.form.Senha);
+        Validation.required("Razão Social", $scope.form.NomeEmpresa);
+        Validation.required("CNPJ", $scope.form.Cnpj);
+        Validation.required("Cidade", $scope.form.IdCidade);
+
         $loading.show();
         $http({
             method: "POST",

@@ -17,16 +17,16 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Profissao()
         {
-            this.Profissional = new HashSet<Profissional>();
-            this.ProfissionalExperiencia = new HashSet<ProfissionalExperiencia>();
+            this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
+            this.ClienteProfissional = new HashSet<ClienteProfissional>();
         }
     
         public int Id { get; set; }
         public string Descricao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profissional> Profissional { get; set; }
+        public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
+        public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
     }
 }

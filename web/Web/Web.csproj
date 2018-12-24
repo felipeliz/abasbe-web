@@ -162,8 +162,8 @@
     <Content Include="app\views\parceiro\list.html" />
     <Content Include="app\views\plano\form.html" />
     <Content Include="app\views\plano\list.html" />
-    <Content Include="app\views\Profissional\form.html" />
-    <Content Include="app\views\Profissional\list.html" />
+    <Content Include="app\views\profissional\form.html" />
+    <Content Include="app\views\profissional\list.html" />
     <Content Include="app\views\usuario\form.html" />
     <Content Include="app\views\usuario\list.html" />
     <Content Include="app\views\certificado\form.html" />

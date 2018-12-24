@@ -25,22 +25,20 @@ namespace Api
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AssociadoPagamento> AssociadoPagamento { get; set; }
+        public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Certificado> Certificado { get; set; }
+        public virtual DbSet<Cidade> Cidade { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<ClienteCertificado> ClienteCertificado { get; set; }
+        public virtual DbSet<ClienteEquipamentos> ClienteEquipamentos { get; set; }
+        public virtual DbSet<ClienteExperiencia> ClienteExperiencia { get; set; }
+        public virtual DbSet<ClienteProfissional> ClienteProfissional { get; set; }
         public virtual DbSet<Disponibilidade> Disponibilidade { get; set; }
         public virtual DbSet<Equipamento> Equipamento { get; set; }
-        public virtual DbSet<Profissao> Profissao { get; set; }
-        public virtual DbSet<Profissional> Profissional { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
-        public virtual DbSet<ProfissionalCertificado> ProfissionalCertificado { get; set; }
-        public virtual DbSet<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
-        public virtual DbSet<Associado> Associado { get; set; }
-        public virtual DbSet<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
-        public virtual DbSet<Banner> Banner { get; set; }
-        public virtual DbSet<Parceiro> Parceiro { get; set; }
+        public virtual DbSet<Pagamento> Pagamento { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
-        public virtual DbSet<ParceiroPagamento> ParceiroPagamento { get; set; }
+        public virtual DbSet<Profissao> Profissao { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

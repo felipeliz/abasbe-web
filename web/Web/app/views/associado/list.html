@@ -8,27 +8,26 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-2">
-                        <label>Razão Social</label>
-                        <input type="text" class="md-input label-fixed" ng-model="filter.NomeEmpresa" md-input />
-                    </div>
-                    <div class="uk-width-1-2">
-                        <label>CNPJ</label>
-                        <input type="text" class="md-input label-fixed" cnpj ng-model="filter.Cnpj" md-input />
-                    </div>
-                    <div class="uk-width-2-3 uk-grid-margin">
-                        <label>Nome Responsável</label>
+                    <div class="uk-width-2-3">
+                        <label>Nome / Responsável</label>
                         <input type="text" class="md-input label-fixed" ng-model="filter.Nome" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-1-3">
                         <label>Situação</label>
                         <select class="md-input label-fixed" ng-model="filter.Situacao" md-input>
-                            <option value="Todas">Todos</option>
                             <option value="True">Ativo</option>
                             <option value="False">Inativo</option>
                         </select>
                     </div>
-                    <div class="uk-width-1">
+                    <div class="uk-width-2-3 uk-grid-margin">
+                        <label>Razão Social</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.NomeEmpresa" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>CNPJ</label>
+                        <input type="text" class="md-input label-fixed" cnpj ng-model="filter.Cnpj" md-input />
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
                             <a class="md-btn md-btn-primary" ng-click="novo()" href="javascript:void(0)">Novo</a>
                             <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
@@ -43,22 +42,26 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
-                                <th>Razão Social</th>
-                                <th>CNPJ</th>
-                                <th>Nome Responsável</th>
+                                <th>Nome / Responsável</th>
+                                <th>Empresa</th>
                                 <th>E-mail</th>
-                                <th>Telefone</th>
+                                <th>Celular</th>
                                 <th>Situação</th>
                                 <th class="acoes-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="associado in lista.list">
-                                <td>{{associado.NomeEmpresa}}</td>
-                                <td>{{associado.Cnpj}}</td>
-                                <td>{{associado.Nome}}</td>
+                                <td>
+                                    <p class="uk-margin-remove">{{associado.Nome}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{associado.CPF}}</span></p>
+                                </td>
+                                <td>
+                                    <p class="uk-margin-remove">{{associado.NomeEmpresa}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{associado.Cnpj}}</span></p>
+                                </td>
                                 <td>{{associado.Email}}</td>
-                                <td>{{associado.Telefone || '-'}}</td>
+                                <td>{{associado.TelefoneCelular || '-'}}</td>
                                 <td>{{associado.Situacao == "True" ? "Ativo" : "Inativo"}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(associado.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>

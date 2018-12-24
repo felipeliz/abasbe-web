@@ -12,10 +12,10 @@ namespace Api
     using System;
     using System.Collections.Generic;
     
-    public partial class ProfissionalExperiencia
+    public partial class ClienteExperiencia
     {
         public string Id { get; set; }
-        public int IdProfissional { get; set; }
+        public int IdCliente { get; set; }
         public int IdProfissao { get; set; }
         public int IdDisponibilidade { get; set; }
         public string Descricao { get; set; }
@@ -24,8 +24,8 @@ namespace Api
         public Nullable<System.DateTime> DataCadastro { get; set; }
         public string Telefone { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
-        public virtual Profissional Profissional { get; set; }
     }
 }

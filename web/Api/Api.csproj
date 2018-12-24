@@ -132,12 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Associado.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AssociadoPagamento.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Banner.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -147,16 +141,30 @@
     <Compile Include="Cidade.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cliente.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteCertificado.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteEquipamentos.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteExperiencia.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteProfissional.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\DisponibilidadeController.cs" />
     <Compile Include="Controllers\EquipamentoController.cs" />
-    <Compile Include="Controllers\ParceiroController.cs" />
     <Compile Include="Controllers\PlanoController.cs" />
     <Compile Include="Controllers\ProfissaoController.cs" />
-    <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\ProfissionalController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Disponibilidade.cs">
@@ -183,45 +191,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AssociadoPagamentoViewModel.cs" />
+    <Compile Include="Models\PagamentoViewModel.cs" />
     <Compile Include="Models\BannerViewModel.cs" />
     <Compile Include="Models\CidadeViewModel.cs" />
     <Compile Include="Models\EstadoViewModel.cs" />
     <Compile Include="Models\CertificadoViewModel.cs" />
     <Compile Include="Models\DisponibilidadeViewModel.cs" />
     <Compile Include="Models\EquipamentoViewModel.cs" />
-    <Compile Include="Models\ParceiroPagamentoViewModel.cs" />
-    <Compile Include="Models\ParceiroViewModel.cs" />
     <Compile Include="Models\PlanoViewModel.cs" />
     <Compile Include="Models\ProfissaoViewModel.cs" />
-    <Compile Include="Models\AssociadoViewModel.cs" />
-    <Compile Include="Models\ProfissionalExperienciaViewModel.cs" />
-    <Compile Include="Models\ProfissionalCertificadoViewModel.cs" />
-    <Compile Include="Models\ProfissionalEquipamentoViewModel.cs" />
-    <Compile Include="Models\ProfissionalViewModel.cs" />
+    <Compile Include="Models\ClienteExperienciaViewModel.cs" />
+    <Compile Include="Models\ClienteCertificadoViewModel.cs" />
+    <Compile Include="Models\ClienteEquipamentoViewModel.cs" />
+    <Compile Include="Models\ClienteProfissionalViewModel.cs" />
+    <Compile Include="Models\ClienteViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
-    <Compile Include="Parceiro.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ParceiroPagamento.cs">
+    <Compile Include="Pagamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Plano.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Profissao.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Profissional.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProfissionalCertificado.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProfissionalEquipamentos.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProfissionalExperiencia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

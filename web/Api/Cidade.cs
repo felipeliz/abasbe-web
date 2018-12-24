@@ -17,7 +17,7 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cidade()
         {
-            this.Profissional = new HashSet<Profissional>();
+            this.Cliente = new HashSet<Cliente>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace Api
     
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profissional> Profissional { get; set; }
+        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }

@@ -12,10 +12,10 @@ namespace Api
     using System;
     using System.Collections.Generic;
     
-    public partial class ParceiroPagamento
+    public partial class Pagamento
     {
         public int Id { get; set; }
-        public int IdParceiro { get; set; }
+        public int IdCliente { get; set; }
         public int IdPlano { get; set; }
         public decimal Valor { get; set; }
         public int Dias { get; set; }
@@ -24,8 +24,10 @@ namespace Api
         public int Situacao { get; set; }
         public string CheckoutIdentifier { get; set; }
         public Nullable<System.DateTime> DataConfirmacao { get; set; }
+        public Nullable<int> IdBanner { get; set; }
     
-        public virtual Parceiro Parceiro { get; set; }
+        public virtual Banner Banner { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Plano Plano { get; set; }
     }
 }

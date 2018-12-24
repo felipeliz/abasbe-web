@@ -12,52 +12,46 @@ namespace Api
     using System;
     using System.Collections.Generic;
     
-    public partial class Profissional
+    public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Profissional()
+        public Cliente()
         {
-            this.ProfissionalCertificado = new HashSet<ProfissionalCertificado>();
-            this.ProfissionalEquipamentos = new HashSet<ProfissionalEquipamentos>();
-            this.ProfissionalExperiencia = new HashSet<ProfissionalExperiencia>();
+            this.Pagamento = new HashSet<Pagamento>();
+            this.ClienteCertificado = new HashSet<ClienteCertificado>();
+            this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
+            this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
+            this.ClienteProfissional = new HashSet<ClienteProfissional>();
         }
     
         public int Id { get; set; }
-        public int IdProfissao { get; set; }
-        public int IdDisponibilidade { get; set; }
         public string Nome { get; set; }
         public string Foto { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
         public Nullable<System.DateTime> Nascimento { get; set; }
-        public string TelefoneComercial { get; set; }
         public string TelefoneCelular { get; set; }
-        public int TempoExperiencia { get; set; }
-        public bool FlagLeiSalaoParceiro { get; set; }
-        public bool FlagBiosseguranca { get; set; }
-        public bool FlagEpi { get; set; }
-        public bool FlagFilhos { get; set; }
-        public bool FlagMei { get; set; }
-        public bool FlagDiarista { get; set; }
-        public decimal PretensaoSalarial { get; set; }
-        public string ObservacaoFilhos { get; set; }
-        public string Observacoes { get; set; }
-        public bool Situacao { get; set; }
         public int IdCidade { get; set; }
         public string Bairro { get; set; }
         public string Cep { get; set; }
         public string Logradouro { get; set; }
-        public string Sexo { get; set; }
+        public bool Situacao { get; set; }
+        public Nullable<System.DateTime> DataExpiracao { get; set; }
+        public string NomeEmpresa { get; set; }
+        public string Cnpj { get; set; }
+        public string FlagCliente { get; set; }
     
-        public virtual Disponibilidade Disponibilidade { get; set; }
-        public virtual Profissao Profissao { get; set; }
         public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProfissionalCertificado> ProfissionalCertificado { get; set; }
+        public virtual ICollection<Pagamento> Pagamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProfissionalEquipamentos> ProfissionalEquipamentos { get; set; }
+        public virtual ICollection<ClienteCertificado> ClienteCertificado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProfissionalExperiencia> ProfissionalExperiencia { get; set; }
+        public virtual ICollection<ClienteEquipamentos> ClienteEquipamentos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
     }
 }

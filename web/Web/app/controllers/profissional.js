@@ -2,12 +2,14 @@
 
     $scope.form = {
         Id: 0, Nome: "", CPF: "", CEP: "", Situacao: "True",
-        FlagLeiSalaoParceiro: false,
-        FlagBiosseguranca: false,
-        FlagEpi: false,
-        FlagMei: false,
-        FlagDiarista: false,
-        FlagFilhos: false,
+        Curriculo: {
+            FlagLeiSalaoParceiro: false,
+            FlagBiosseguranca: false,
+            FlagEpi: false,
+            FlagMei: false,
+            FlagDiarista: false,
+            FlagFilhos: false,
+        }
     };
     $scope.lista = {};
     $scope.profissoes = [];
@@ -21,7 +23,7 @@
         Profissao: "",
         Disponibilidade: "",
         Cidade: "",
-        Situacao: "Todas"
+        Situacao: "True"
     };
     $scope.edicao = false;
 
@@ -184,18 +186,19 @@
     $scope.salvar = function () {
         Validation.required("Nome", $scope.form.Nome);
         Validation.required("CPF", $scope.form.CPF);
-        Validation.required("Profissão principal", $scope.form.IdProfissao);
-        Validation.required("Disponibilidade", $scope.form.IdDisponibilidade);
-        Validation.required("Tempo de experiência", $scope.form.TempoExperiencia);
-        Validation.required("Pretensão salarial", $scope.form.PretensaoSalarial);
+        Validation.required("Profissão principal", $scope.form.Curriculo.IdProfissao);
+        Validation.required("Disponibilidade", $scope.form.Curriculo.IdDisponibilidade);
+        Validation.required("Tempo de experiência", $scope.form.Curriculo.TempoExperiencia);
+        Validation.required("Pretensão salarial", $scope.form.Curriculo.PretensaoSalarial);
+        Validation.required("Data Expiração", $scope.form.DataExpiracao);
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Senha", $scope.form.Senha);
         Validation.required("Telefone Celular", $scope.form.TelefoneCelular);
         Validation.required("Estado", $scope.form.IdEstado);
         Validation.required("Cidade", $scope.form.IdCidade);
-        console.log($scope.form.Experiencias);
-        if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length >= 2)) {
-            toastr.error("É obrigatório possuir pelo menos duas experiências profissionais.");
+
+        if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length >= 1)) {
+            toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");
             return;
         }
 

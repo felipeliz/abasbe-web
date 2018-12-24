@@ -2,6 +2,7 @@
 using Api.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -21,53 +22,53 @@ namespace Api.Controllers
             string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
-            List<ProfissionalViewModel> lista = new List<ProfissionalViewModel>();
+            List<ClienteViewModel> lista = new List<ClienteViewModel>();
 
-            var query = context.Profissional.ToList();
+            var query = context.Cliente.Where(pro => pro.FlagCliente == "P");
             if (!String.IsNullOrEmpty(nome))
             {
-                query = query.Where(pro => pro.Nome.ToLower().Contains(nome.ToLower())).ToList();
+                query = query.Where(pro => pro.Nome.ToLower().Contains(nome.ToLower()));
             }
             if (!String.IsNullOrEmpty(disponibilidade))
             {
-                query = query.Where(pro => pro.Disponibilidade.Descricao.ToLower().Contains(disponibilidade.ToLower())).ToList();
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Disponibilidade.Descricao.ToLower().Contains(disponibilidade.ToLower())));
             }
             if (!String.IsNullOrEmpty(cidade))
             {
-                query = query.Where(pro => pro.Cidade.Nome.ToLower().Contains(cidade.ToLower())).ToList();
+                query = query.Where(pro => pro.Cidade.Nome.ToLower().Contains(cidade.ToLower()));
             }
             if (!String.IsNullOrEmpty(profissao))
             {
-                query = query.Where(pro => pro.Profissao.Descricao.ToLower().Contains(profissao.ToLower())).ToList();
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Profissao.Descricao.ToLower().Contains(profissao.ToLower())));
             }
-            
+
             if (situacao != "Todas")
             {
                 bool s = Convert.ToBoolean(situacao);
-                query = query.Where(pro => pro.Situacao == s).ToList();
+                query = query.Where(pro => pro.Situacao == s);
             }
 
             query.ToList().ForEach(obj =>
             {
-                lista.Add(new ProfissionalViewModel(obj, false));
+                lista.Add(new ClienteViewModel(obj, false));
             });
 
             return PagedList.Create(param.page?.ToString(), 10, lista);
         }
 
         [HttpGet]
-        public ProfissionalViewModel Obter(int id)
+        public ClienteViewModel Obter(int id)
         {
             Entities context = new Entities();
 
-            var obj = context.Profissional.FirstOrDefault(pro => pro.Id == id);
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "P");
 
             if (obj == null)
             {
                 throw new Exception("Registro não identificado.");
             }
 
-            return new ProfissionalViewModel(obj, true);
+            return new ClienteViewModel(obj, true);
         }
 
 
@@ -81,48 +82,56 @@ namespace Api.Controllers
 
             using (var transaction = context.Database.BeginTransaction())
             {
-
-
                 if (senha.Count() < 4)
                 {
                     throw new Exception("Sua senha precisa ter mais do que 4 caracteres.");
                 }
 
-                var obj = context.Profissional.FirstOrDefault(pro => pro.Id == id) ?? new Profissional();
+                var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "P") ?? new Cliente();
 
-                obj.IdProfissao = param.IdProfissao;
-                obj.IdDisponibilidade = param.IdDisponibilidade;
-                obj.IdCidade = param.IdCidade;
+                var curr = obj.ClienteProfissional.Count() > 0 ? obj.ClienteProfissional.Last() : new ClienteProfissional();
+
                 obj.Nome = param.Nome;
                 obj.Foto = FileController.ConfirmUpload(param.Foto?.ToString());
                 obj.CPF = Regex.Replace(param.CPF?.ToString(), "[^0-9]", "");
-                obj.Sexo = param.Sexo;
                 obj.Email = param.Email;
                 obj.Senha = param.Senha;
                 obj.Nascimento = AppExtension.ToDateTime(param.Nascimento);
-                obj.TelefoneComercial = param.TelefoneComercial;
                 obj.TelefoneCelular = param.TelefoneCelular;
-                obj.TempoExperiencia = param.TempoExperiencia;
+                obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
+
+                obj.IdCidade = param.IdCidade;
                 obj.Bairro = param.Bairro;
                 obj.Cep = param.CEP;
                 obj.Logradouro = param.Logradouro;
-                obj.FlagLeiSalaoParceiro = param.FlagLeiSalaoParceiro;
-                obj.FlagBiosseguranca = param.FlagBiosseguranca;
-                obj.FlagEpi = param.FlagEpi;
-                obj.FlagFilhos = param.FlagFilhos;
-                obj.FlagMei = param.FlagMei;
-                obj.FlagDiarista = param.FlagDiarista;
-                obj.PretensaoSalarial = param.PretensaoSalarial;
-                obj.ObservacaoFilhos = param.ObservacaoFilhos;
-                obj.Observacoes = param.Observacoes;
+
                 obj.Situacao = Convert.ToBoolean(param.Situacao);
+
+                curr.IdProfissao = param.Curriculo.IdProfissao;
+                curr.IdDisponibilidade = param.Curriculo.IdDisponibilidade;
+                curr.Sexo = param.Curriculo.Sexo;
+                curr.TelefoneComercial = param.Curriculo.TelefoneComercial;
+                curr.TempoExperiencia = param.Curriculo.TempoExperiencia;
+                curr.FlagLeiSalaoParceiro = param.Curriculo.FlagLeiSalaoParceiro;
+                curr.FlagBiosseguranca = param.Curriculo.FlagBiosseguranca;
+                curr.FlagEpi = param.Curriculo.FlagEpi;
+                curr.FlagFilhos = param.Curriculo.FlagFilhos;
+                curr.FlagMei = param.Curriculo.FlagMei;
+                curr.FlagDiarista = param.Curriculo.FlagDiarista;
+                curr.PretensaoSalarial = param.Curriculo.PretensaoSalarial;
+                curr.ObservacaoFilhos = param.Curriculo.ObservacaoFilhos;
+                curr.Observacoes = param.Curriculo.Observacoes;
+
+                if (obj.ClienteProfissional.Count() == 0)
+                {
+                    obj.ClienteProfissional.Add(curr);
+                }
 
                 if (id > 0)
                 {
-                    context.ProfissionalEquipamentos.RemoveRange(obj.ProfissionalEquipamentos);
-                    context.ProfissionalCertificado.RemoveRange(obj.ProfissionalCertificado);
-                    context.ProfissionalExperiencia.RemoveRange(obj.ProfissionalExperiencia);
-                    context.SaveChanges();
+                    context.ClienteEquipamentos.RemoveRange(obj.ClienteEquipamentos);
+                    context.ClienteCertificado.RemoveRange(obj.ClienteCertificado);
+                    context.ClienteExperiencia.RemoveRange(obj.ClienteExperiencia);
                 }
 
                 // Equipamentos
@@ -130,11 +139,11 @@ namespace Api.Controllers
                 {
                     foreach (var element in param.Equipamentos)
                     {
-                        ProfissionalEquipamentos relation = new ProfissionalEquipamentos();
+                        ClienteEquipamentos relation = new ClienteEquipamentos();
                         relation.Id = Guid.NewGuid().ToString();
                         relation.IdEquipamento = Convert.ToInt32(element.Equipamento.Id);
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
-                        obj.ProfissionalEquipamentos.Add(relation);
+                        obj.ClienteEquipamentos.Add(relation);
                     }
                 }
 
@@ -143,21 +152,21 @@ namespace Api.Controllers
                 {
                     foreach (var element in param.Certificados)
                     {
-                        ProfissionalCertificado relation = new ProfissionalCertificado();
+                        ClienteCertificado relation = new ClienteCertificado();
                         relation.Id = Guid.NewGuid().ToString();
                         relation.IdCertificado = Convert.ToInt32(element.Certificado.Id);
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
-                        obj.ProfissionalCertificado.Add(relation);
+                        obj.ClienteCertificado.Add(relation);
                     }
                 }
 
 
                 // Experiencias
-                if (param.Experiencias != null && param.Experiencias.Count >= 2)
+                if (param.Experiencias != null)
                 {
                     foreach (var element in param.Experiencias)
                     {
-                        ProfissionalExperiencia relation = new ProfissionalExperiencia();
+                        ClienteExperiencia relation = new ClienteExperiencia();
                         relation.Id = Guid.NewGuid().ToString();
                         relation.IdDisponibilidade = Convert.ToInt32(element.Disponibilidade.Id);
                         relation.IdProfissao = Convert.ToInt32(element.Profissao.Id);
@@ -166,15 +175,24 @@ namespace Api.Controllers
                         relation.Descricao = element.Descricao?.ToString();
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
                         relation.Telefone = element.Telefone;
-                        obj.ProfissionalExperiencia.Add(relation);
+                        obj.ClienteExperiencia.Add(relation);
                     }
                 }
-                   
+
                 if (id <= 0)
                 {
-                    context.Profissional.Add(obj);
+                    obj.FlagCliente = "P";
+                    context.Cliente.Add(obj);
                 }
-                context.SaveChanges();
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException ex)
+                {
+                    throw ex;
+                }
 
                 transaction.Commit();
             }
@@ -182,43 +200,19 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public void Excluir(int id)
+        public bool Excluir(int id)
         {
             Entities context = new Entities();
-
-            var obj = context.Profissional.FirstOrDefault(pro => pro.Id == id);
-            if (obj == null)
-            {
-                throw new Exception("Registro não identificado.");
-            }
-            else
-            {
-                try
-                {
-                    using (var transaction = context.Database.BeginTransaction())
-                    {
-                        context.ProfissionalCertificado.RemoveRange(obj.ProfissionalCertificado);
-                        context.ProfissionalEquipamentos.RemoveRange(obj.ProfissionalEquipamentos);
-                        context.ProfissionalExperiencia.RemoveRange(obj.ProfissionalExperiencia);
-                        context.SaveChanges();
-                        context.Profissional.Remove(obj);
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                }
-                catch
-                {
-                    throw new Exception("Não foi possível excluir, existem registros dependentes.");
-                }
-
-            }
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "P");
+            obj.Situacao = false;
+            return context.SaveChanges() > 0;
         }
 
         [HttpPost]
         public string ObterQtdProfissionaisAtivosETotal([FromBody] dynamic param)
         {
             Entities context = new Entities();
-            return context.Profissional.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Profissional.Count().ToString();
+            return context.Cliente.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Cliente.Count().ToString();
         }
     }
 }

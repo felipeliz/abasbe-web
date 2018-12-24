@@ -12,14 +12,14 @@ namespace Api
     using System;
     using System.Collections.Generic;
     
-    public partial class ProfissionalEquipamentos
+    public partial class ClienteEquipamentos
     {
         public string Id { get; set; }
-        public int IdProfissional { get; set; }
+        public int IdCliente { get; set; }
         public int IdEquipamento { get; set; }
         public Nullable<System.DateTime> DataCadastro { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
         public virtual Equipamento Equipamento { get; set; }
-        public virtual Profissional Profissional { get; set; }
     }
 }

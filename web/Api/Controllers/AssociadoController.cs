@@ -21,49 +21,49 @@ namespace Api.Controllers
             string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
-            List<AssociadoViewModel> lista = new List<AssociadoViewModel>();
-            var query = context.Associado.ToList();
+            List<ClienteViewModel> lista = new List<ClienteViewModel>();
+            var query = context.Cliente.Where(pro => pro.FlagCliente == "A");
 
             if (!String.IsNullOrEmpty(nomeEmpresa))
             {
-                query = query.Where(obj => obj.NomeEmpresa.ToLower().Contains(nomeEmpresa.ToLower())).ToList();
+                query = query.Where(obj => obj.NomeEmpresa.ToLower().Contains(nomeEmpresa.ToLower()));
             }
             if (!String.IsNullOrEmpty(cnpj))
             {
-                query = query.Where(obj => obj.Cnpj.ToLower().Contains(cnpj.ToLower())).ToList();
+                query = query.Where(obj => obj.Cnpj.ToLower().Contains(cnpj.ToLower()));
             }
             if (!String.IsNullOrEmpty(nome))
             {
-                query = query.Where(obj => obj.Nome.ToLower().Contains(nome.ToLower())).ToList();
+                query = query.Where(obj => obj.Nome.ToLower().Contains(nome.ToLower()));
             }
 
             if (situacao != "Todas")
             {
                 bool s = Convert.ToBoolean(situacao);
-                query = query.Where(obj => obj.Situacao == s).ToList();
+                query = query.Where(obj => obj.Situacao == s);
             }
 
             query.ToList().ForEach(obj =>
             {
-                lista.Add(new AssociadoViewModel(obj));
+                lista.Add(new ClienteViewModel(obj, false));
             });
 
             return PagedList.Create(param.page?.ToString(), 10, lista);
         }
 
         [HttpGet]
-        public AssociadoViewModel Obter(int id)
+        public ClienteViewModel Obter(int id)
         {
             Entities context = new Entities();
 
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id);
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "A");
 
             if (obj == null)
             {
                 throw new Exception("Registro não identificado.");
             }
 
-            return new AssociadoViewModel(obj);
+            return new ClienteViewModel(obj, true);
         }
 
 
@@ -73,16 +73,23 @@ namespace Api.Controllers
             int id = Convert.ToInt32(param.Id);
 
             Entities context = new Entities();
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id) ?? new Associado();
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id) ?? new Cliente();
 
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
-            obj.Telefone = Regex.Replace(param.Telefone?.ToString(), "[^0-9]", ""); 
+            obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", ""); 
             obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
             obj.Situacao = Convert.ToBoolean(param.Situacao);
             obj.NomeEmpresa = param.NomeEmpresa?.ToString();
             obj.Cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
+            obj.CPF = Regex.Replace(param.CPF?.ToString(), "[^0-9]", "");
+            obj.FlagCliente = "A";
+
+            obj.IdCidade = param.IdCidade;
+            obj.Bairro = param.Bairro;
+            obj.Cep = param.CEP;
+            obj.Logradouro = param.Logradouro;
 
             if (obj.Senha.Count() < 4)
             {
@@ -91,59 +98,26 @@ namespace Api.Controllers
 
             if (id <= 0)
             {
-                context.Associado.Add(obj);
+                context.Cliente.Add(obj);
             }
-            try{
-                context.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
-            
-            return true;
+
+            return context.SaveChanges() > 0;
         }
 
         [HttpGet]
-        public void Excluir(int id)
+        public bool Excluir(int id)
         {
             Entities context = new Entities();
-
-            var obj = context.Associado.FirstOrDefault(pro => pro.Id == id);
-            if (obj == null)
-            {
-                throw new Exception("Registro não identificado.");
-            }
-            else
-            {
-                try
-                {
-                    context.Associado.Remove(obj);
-                    context.SaveChanges();
-                }
-                catch
-                {
-                    throw new Exception("Não foi possível excluir, existem registros dependentes.");
-                }
-
-            }
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "A");
+            obj.Situacao = false;
+            return context.SaveChanges() > 0;
         }
 
         [HttpPost]
         public string ObterQtdAssociadosAtivosETotal([FromBody] dynamic param)
         {
             Entities context = new Entities();
-            return context.Associado.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Associado.Count().ToString();
+            return context.Cliente.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Cliente.Count().ToString();
         }
     }
 }
