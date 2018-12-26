@@ -23,6 +23,7 @@ namespace Api.Models
         public string Logradouro { get; set; }
         public string CidadeFormatada { get; set; }
         public string Situacao { get; set; }
+        public string FlagCliente { get; set; }
 
         // for associado
 
@@ -62,6 +63,8 @@ namespace Api.Models
             NomeEmpresa = obj.NomeEmpresa;
             DataExpiracao = obj.DataExpiracao?.ToString("dd/MM/yyyy");
             Cnpj = string.IsNullOrEmpty(obj.Cnpj) ? obj.Cnpj : Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");
+
+            FlagCliente = obj.FlagCliente;
 
             Token = EncryptionHelper.Encrypt(Id.ToString());
             Curriculo = new ClienteProfissionalViewModel(obj.ClienteProfissional.LastOrDefault());

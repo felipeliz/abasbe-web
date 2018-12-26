@@ -42,6 +42,7 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Nome / Responsável</th>
                                 <th>Empresa</th>
                                 <th>E-mail</th>
@@ -52,12 +53,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="associado in lista.list">
+                                <td><img class="md-user-image md-list-addon-avatar" ng-src="{{getPhotoLista(associado)}}" alt="" src="{{getPhotoLista(associado)}}"></td>
                                 <td>
                                     <p class="uk-margin-remove">{{associado.Nome}}</p>
                                     <p class="uk-margin-remove"><span class="uk-text-muted">{{associado.CPF}}</span></p>
                                 </td>
                                 <td>
-                                    <p class="uk-margin-remove">{{associado.NomeEmpresa}}</p>
+                                    <p class="uk-margin-remove">{{ associado.FlagCliente=='E' ? associado.NomeEmpresa : 'Pessoa física'}}</p>
                                     <p class="uk-margin-remove"><span class="uk-text-muted">{{associado.Cnpj}}</span></p>
                                 </td>
                                 <td>{{associado.Email}}</td>

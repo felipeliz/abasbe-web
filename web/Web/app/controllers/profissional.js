@@ -168,6 +168,7 @@
     }
 
     $scope.uploadPhoto = function (file) {
+        $loading.show();
         file.filter = "ImageSquared";
         file.size = 256;
         $http({
@@ -175,9 +176,11 @@
             url: "api/file/upload",
             data: file
         }).then(function mySuccess(response) {
+            $loading.hide();
             $scope.form.Foto = response.data;
             toastr.success("Foto enviada com sucesso.");
         }, function myError(response) {
+            $loading.hide();
             toastr.error(response.data.ExceptionMessage);
         });
     };

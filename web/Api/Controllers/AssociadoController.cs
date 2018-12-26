@@ -12,6 +12,8 @@ namespace Api.Controllers
 {
     public class AssociadoController : ApiController
     {
+        private List<string> managed = new List<string> { "A", "E" };
+
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
@@ -22,7 +24,7 @@ namespace Api.Controllers
 
             Entities context = new Entities();
             List<ClienteViewModel> lista = new List<ClienteViewModel>();
-            var query = context.Cliente.Where(pro => pro.FlagCliente == "A");
+            var query = context.Cliente.Where(pro => managed.Contains(pro.FlagCliente));
 
             if (!String.IsNullOrEmpty(nomeEmpresa))
             {
@@ -56,7 +58,7 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
 
-            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "A");
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && managed.Contains(pro.FlagCliente));
 
             if (obj == null)
             {
@@ -78,18 +80,27 @@ namespace Api.Controllers
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
-            obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", ""); 
+            obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", "");
             obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
             obj.Situacao = Convert.ToBoolean(param.Situacao);
-            obj.NomeEmpresa = param.NomeEmpresa?.ToString();
-            obj.Cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
             obj.CPF = Regex.Replace(param.CPF?.ToString(), "[^0-9]", "");
-            obj.FlagCliente = "A";
+            obj.FlagCliente = param.FlagCliente;
+
+            obj.Foto = FileController.ConfirmUpload(param.Foto?.ToString());
+
 
             obj.IdCidade = param.IdCidade;
             obj.Bairro = param.Bairro;
             obj.Cep = param.CEP;
             obj.Logradouro = param.Logradouro;
+
+            obj.NomeEmpresa = null;
+            obj.Cnpj = null;
+            if (obj.FlagCliente == "E")
+            {
+                obj.NomeEmpresa = param.NomeEmpresa?.ToString();
+                obj.Cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
+            }
 
             if (obj.Senha.Count() < 4)
             {
@@ -108,7 +119,7 @@ namespace Api.Controllers
         public bool Excluir(int id)
         {
             Entities context = new Entities();
-            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && pro.FlagCliente == "A");
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id && managed.Contains(pro.FlagCliente));
             obj.Situacao = false;
             return context.SaveChanges() > 0;
         }

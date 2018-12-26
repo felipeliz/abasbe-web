@@ -1,6 +1,6 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", TelefoneCelular: "", DataExpiracao: "", Situacao: "True", CPF: "" };
+    $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", TelefoneCelular: "", DataExpiracao: "", Situacao: "True", CPF: "", FlagCliente: "A" };
     $scope.lista = {};
     $scope.estados = [];
     $scope.cidades = [];
@@ -98,8 +98,12 @@
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Data Expiração", $scope.form.DataExpiracao);
         Validation.required("Senha", $scope.form.Senha);
-        Validation.required("Razão Social", $scope.form.NomeEmpresa);
-        Validation.required("CNPJ", $scope.form.Cnpj);
+
+        if ($scope.form.FlagCliente == "E") {
+            Validation.required("Razão Social", $scope.form.NomeEmpresa);
+            Validation.required("CNPJ", $scope.form.Cnpj);
+        }
+
         Validation.required("Cidade", $scope.form.IdCidade);
 
         $loading.show();
@@ -139,6 +143,37 @@
         });
     }
 
+    $scope.getPhoto = function () {
+        if ($scope.form.Foto == null || $scope.form.Foto == "") {
+            return "assets/img/avatars/photo-camera.png";
+        }
+        return $scope.form.Foto;
+    }
+
+    $scope.getPhotoLista = function (obj) {
+        if (obj.Foto == null || obj.Foto == "") {
+            return "assets/img/avatars/user.png";
+        }
+        return obj.Foto;
+    }
+
+    $scope.uploadPhoto = function (file) {
+        $loading.show();
+        file.filter = "ImageSquared";
+        file.size = 256;
+        $http({
+            method: "POST",
+            url: "api/file/upload",
+            data: file
+        }).then(function mySuccess(response) {
+            $loading.hide();
+            $scope.form.Foto = response.data;
+            toastr.success("Foto enviada com sucesso.");
+        }, function myError(response) {
+            $loading.hide();
+            toastr.error(response.data.ExceptionMessage);
+        });
+    };
 
 }
 angular.module('app').controller('associado', controller);

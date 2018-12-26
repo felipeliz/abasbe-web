@@ -1,6 +1,30 @@
 ﻿<div id="page_content" ng-init="init()">
     <div id="page_content_inner">
         <div class="md-card">
+            <div class="uk-sticky-placeholder">
+                <div class="user_heading">
+                    <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail">
+                            <img class="custom" ng-src="{{getPhoto()}}" alt="user avatar">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                        <div class="user_avatar_controls">
+                            <span class="btn-file">
+                                <span class="fileinput-new"><i class="material-icons"></i></span>
+                                <span class="fileinput-exists"><i class="material-icons"></i></span>
+                                <input type="file" file-change="uploadPhoto" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                            </span>
+                            <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons"></i></a>
+                        </div>
+                    </div>
+                    <div class="user_heading_content">
+                        <h2 class="heading_b">
+                            <span class="uk-text-truncate ng-binding" id="user_edit_uname">{{form.Nome}}</span>
+                            <span class="sub-heading ng-binding">{{profissaoPrincipal()}}</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
                     Registro de Associado
@@ -9,7 +33,7 @@
             <div class="md-card-content">
                 <div class="uk-grid">
                     <div class="uk-width-2-3">
-                        <label>Nome / Responsável<red>*</red></label>
+                        <label>{{form.FlagCliente=='A' ? 'Nome' : 'Nome do responsável' }} <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Nome" md-input />
                     </div>
                     <div class="uk-width-1-3">
@@ -39,6 +63,14 @@
                             <option value="False">Inativo</option>
                         </select>
                     </div>
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagCliente" icheck ng-true-value="'E'" ng-false-value="'A'" />
+                            </span>
+                            <label>Inserir dados de empresa?</label>
+                        </div>
+                    </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
                             <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
@@ -49,7 +81,7 @@
             </div>
         </div>
 
-        <div class="md-card">
+        <div class="md-card" ng-if="form.FlagCliente=='E'">
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
                     Dados Empresariais
