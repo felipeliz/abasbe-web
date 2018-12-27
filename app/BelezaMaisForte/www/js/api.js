@@ -4,3 +4,4 @@ var api = {
         return this.prefix + suffix;
     }
 }
+api.prefix = "http://localhost:53581/"; //dev

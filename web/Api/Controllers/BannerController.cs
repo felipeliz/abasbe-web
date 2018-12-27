@@ -63,17 +63,19 @@ namespace Api.Controllers
                 obj.Link = "";
                 obj.Telefone = param.Telefone.ToString();
             }
+            obj.IdCliente = Convert.ToInt32(param.Cliente.Id);
             obj.Descricao = param.Descricao.ToString();
             obj.Titulo = param.Titulo.ToString();
+            obj.Estreia = AppExtension.ToDateTime(param.Estreia);
             obj.Expiracao = AppExtension.ToDateTime(param.Expiracao);
             obj.Imagem = FileController.ConfirmUpload(param.Imagem?.ToString());
+            obj.Situacao = param.Situacao.ToString();
 
             if (id <= 0)
             {
                 obj.Cadastro = DateTime.Now;
                 context.Banner.Add(obj);
             }
-            //upload(param);
             context.SaveChanges();
             return true;
         }
@@ -104,36 +106,55 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public string upload([FromBody] dynamic param)
-        {
-            if (Convert.ToBoolean(param.hasFile))
-            {
-                string ext = param.ext.ToString();
-                string base64 = param.base64.ToString().Split(',')[1];
-                string uploadFolder = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + "uploads";
-                string fileName = Guid.NewGuid() + ext;
-
-                if (!Directory.Exists(uploadFolder))
-                {
-                    Directory.CreateDirectory(uploadFolder);
-                }
-
-                string filter = param.filter?.ToString();
-               
-                File.WriteAllBytes(uploadFolder + "/" + fileName, Convert.FromBase64String(base64));
-
-                Thread.Sleep(1500);
-
-                return "uploads" + "/" + fileName;
-            }
-            throw new Exception("Não foi possivel adicionar o arquivo.");
-        }
-
-        [HttpPost]
         public string ObterQtdBannersAtivosETotal([FromBody] dynamic param)
         {
             Entities context = new Entities();  
-            return context.Banner.Where(ban => ban.Expiracao.Value.Day > DateTime.Today.Day).Count().ToString() + " / " + context.Banner.Count().ToString();
+            return context.Banner.Where(ban => ban.Expiracao.Day > DateTime.Today.Day).Count().ToString() + " / " + context.Banner.Count().ToString();
+        }
+
+        [HttpGet]
+        public List<BannerViewModel> EmExibicao([FromBody] dynamic param)
+        {
+            Entities context = new Entities();
+            List<BannerViewModel> lista = new List<BannerViewModel>();
+            DateTime now = DateTime.Now;
+
+            var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A").ToList();
+
+            query.OrderBy(ban => ban.Cadastro).ToList().ForEach(obj =>
+            {
+                lista.Add(new BannerViewModel(obj));
+            });
+
+            return lista;
+        }
+
+        [HttpGet]
+        public BannerGroupViewModel MeusBanners([FromBody] dynamic param)
+        {
+            int cliente = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+            DateTime now = DateTime.Now;
+
+            BannerGroupViewModel group = new BannerGroupViewModel();
+
+            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao != "I").ToList().ForEach(obj =>
+            {
+                group.EmExibicao.Add(new BannerViewModel(obj));
+            });
+
+            context.Banner.Where(ban => ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I").ToList().ForEach(obj =>
+            {
+                group.EmEspera.Add(new BannerViewModel(obj));
+            });
+
+            context.Banner.Where(ban => ban.Expiracao < now && ban.Situacao != "I").ToList().ForEach(obj =>
+            {
+                group.Expirados.Add(new BannerViewModel(obj));
+            });
+
+            return group;
         }
     }
 }

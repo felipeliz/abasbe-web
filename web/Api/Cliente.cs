@@ -22,6 +22,7 @@ namespace Api
             this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
             this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
             this.ClienteProfissional = new HashSet<ClienteProfissional>();
+            this.Banner = new HashSet<Banner>();
         }
     
         public int Id { get; set; }
@@ -53,5 +54,7 @@ namespace Api
         public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banner { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Api.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -10,9 +11,11 @@ namespace Api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.MessageHandlers.Add(new AllowOptionsHandler());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

@@ -9,17 +9,17 @@ angular.module('app.routes', ['oc.lazyLoad'])
     $stateProvider
 
 
-      .state('menu.belezaMaisForte', {
+      .state('menu.start', {
         url: '/start',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/belezaMaisForte.html',
-            controller: 'belezaMaisForteCtrl'
+            templateUrl: 'templates/start.html',
+            controller: 'start'
           }
         },
         resolve: {
           loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-            return $ocLazyLoad.load('controllers/belezaMaisForteCtrl.js');
+            return $ocLazyLoad.load('controllers/start.js');
           }]
         }
       })
@@ -60,13 +60,18 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.meusBanners', {
+      .state('menu.banners', {
         url: '/banners',
         views: {
           'side-menu21': {
-            templateUrl: 'templates/meusBanners.html',
-            controller: 'meusBannersCtrl'
+            templateUrl: 'templates/banners.html',
+            controller: 'banners'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/banners.js');
+          }]
         }
       })
 
@@ -91,12 +96,17 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('menu.login', {
-        url: '/page8',
+        url: '/login',
         views: {
           'side-menu21': {
             templateUrl: 'templates/login.html',
-            controller: 'loginCtrl'
+            controller: 'login'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/login.js');
+          }]
         }
       })
 

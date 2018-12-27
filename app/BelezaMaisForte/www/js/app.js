@@ -55,6 +55,57 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
     };
 }])
 
+
+.factory('Auth', function () {
+  return {
+      set: function (u) {
+          localStorage.setItem("user", JSON.stringify(u));
+      },
+      get: function () {
+          if (this.isLoggedIn()) {
+              return JSON.parse(localStorage.getItem("user"));
+          }
+          return null;
+      },
+      isLoggedIn: function () {
+          var item = localStorage.getItem("user");
+          return !(item == null || typeof (item) == "undefined")
+      },
+      logout: function () {
+          localStorage.removeItem("user")
+      }
+  }
+})
+
+
+.factory('httpRequestInterceptor', function ($q, Auth, $location) {
+  return {
+      request: function (config) {
+          if (Auth.isLoggedIn()) {
+              config.headers['Token'] = Auth.get().Token;
+          }
+          return config;
+      },
+      responseError: function (response) {
+          if (typeof (response.data) != "undefined") {
+              if (typeof (response.data.ExceptionMessage) == "string") {
+                  if (response.data.ExceptionMessage == "NotLoggedIn") {
+                      Auth.logout();
+                      $location.path('/');
+                      toastr.error("Sua sessão foi finalizada.");
+                      return;
+                  }
+              }
+          }
+          return $q.reject(response);
+      }
+  }
+})
+
+.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('httpRequestInterceptor');
+})
+
 /*
   This directive is used to open regular and dynamic href links inside of inappbrowser.
 */

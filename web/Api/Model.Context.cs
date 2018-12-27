@@ -25,7 +25,6 @@ namespace Api
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<Certificado> Certificado { get; set; }
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
@@ -40,5 +39,6 @@ namespace Api
         public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Banner> Banner { get; set; }
     }
 }

@@ -13,11 +13,14 @@
           <Property Name="Imagem" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Expiracao" Type="date" />
+          <Property Name="Estreia" Type="date" Nullable="false" />
+          <Property Name="Expiracao" Type="date" Nullable="false" />
           <Property Name="Telefone" Type="varchar" MaxLength="11" />
           <Property Name="Link" Type="varchar" MaxLength="2000" />
-          <Property Name="Cadastro" Type="date" />
+          <Property Name="Cadastro" Type="date" Nullable="false" />
           <Property Name="Contador" Type="int" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Situacao" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificado">
           <Key>
@@ -194,6 +197,18 @@
             </Principal>
             <Dependent Role="Pagamento">
               <PropertyRef Name="IdPlano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banner_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Banner" Type="Self.Banner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banner">
+              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -377,6 +392,10 @@
             <End Role="Plano" EntitySet="Plano" />
             <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Banner_Cliente" Association="Self.FK_Banner_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Banner" EntitySet="Banner" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cidade_Estado" Association="Self.FK_Cidade_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Cidade" EntitySet="Cidade" />
@@ -435,7 +454,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="AbasbeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Banner" EntityType="AbasbeModel.Banner" />
           <EntitySet Name="Certificado" EntityType="AbasbeModel.Certificado" />
           <EntitySet Name="Cidade" EntityType="AbasbeModel.Cidade" />
           <EntitySet Name="Cliente" EntityType="AbasbeModel.Cliente" />
@@ -450,10 +468,6 @@
           <EntitySet Name="Plano" EntityType="AbasbeModel.Plano" />
           <EntitySet Name="Profissao" EntityType="AbasbeModel.Profissao" />
           <EntitySet Name="Usuario" EntityType="AbasbeModel.Usuario" />
-          <AssociationSet Name="FK_Pagamento_Banner" Association="AbasbeModel.FK_Pagamento_Banner">
-            <End Role="Banner" EntitySet="Banner" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClienteCertificado_Certificado" Association="AbasbeModel.FK_ClienteCertificado_Certificado">
             <End Role="Certificado" EntitySet="Certificado" />
             <End Role="ClienteCertificado" EntitySet="ClienteCertificado" />
@@ -510,22 +524,16 @@
             <End Role="Plano" EntitySet="Plano" />
             <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
+          <EntitySet Name="Banner" EntityType="AbasbeModel.Banner" />
+          <AssociationSet Name="FK_Banner_Cliente" Association="AbasbeModel.FK_Banner_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Banner" EntitySet="Banner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pagamento_Banner" Association="AbasbeModel.FK_Pagamento_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="Pagamento" EntitySet="Pagamento" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Banner">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Imagem" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Expiracao" Type="DateTime" Precision="0" />
-          <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="Link" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="Cadastro" Type="DateTime" Precision="0" />
-          <Property Name="Contador" Type="Int32" />
-          <NavigationProperty Name="Pagamento" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Banner" ToRole="Pagamento" />
-        </EntityType>
         <EntityType Name="Certificado">
           <Key>
             <PropertyRef Name="Id" />
@@ -572,6 +580,7 @@
           <NavigationProperty Name="ClienteEquipamentos" Relationship="AbasbeModel.FK_ClienteEquipamentos_Cliente" FromRole="Cliente" ToRole="ClienteEquipamentos" />
           <NavigationProperty Name="ClienteExperiencia" Relationship="AbasbeModel.FK_ClienteExperiencia_Cliente" FromRole="Cliente" ToRole="ClienteExperiencia" />
           <NavigationProperty Name="ClienteProfissional" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="Cliente" ToRole="ClienteProfissional" />
+          <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Banner_Cliente" FromRole="Cliente" ToRole="Banner" />
         </EntityType>
         <EntityType Name="ClienteCertificado">
           <Key>
@@ -676,9 +685,9 @@
           <Property Name="CheckoutIdentifier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DataConfirmacao" Type="DateTime" Precision="3" />
           <Property Name="IdBanner" Type="Int32" />
-          <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Pagamento" ToRole="Banner" />
           <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_AssociadoPagamento_Cliente" FromRole="Pagamento" ToRole="Cliente" />
           <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="Pagamento" ToRole="Plano" />
+          <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Pagamento" ToRole="Banner" />
         </EntityType>
         <EntityType Name="Plano">
           <Key>
@@ -709,18 +718,6 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Senha" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_Pagamento_Banner">
-          <End Type="AbasbeModel.Banner" Role="Banner" Multiplicity="0..1" />
-          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Banner">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="IdBanner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClienteCertificado_Certificado">
           <End Type="AbasbeModel.Certificado" Role="Certificado" Multiplicity="1" />
           <End Type="AbasbeModel.ClienteCertificado" Role="ClienteCertificado" Multiplicity="*" />
@@ -889,27 +886,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Banner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imagem" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Estreia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Expiracao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Cadastro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Contador" Type="Int32" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_Banner_Cliente" FromRole="Banner" ToRole="Cliente" />
+          <NavigationProperty Name="Pagamento" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Banner" ToRole="Pagamento" />
+        </EntityType>
+        <Association Name="FK_Banner_Cliente">
+          <End Type="AbasbeModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="AbasbeModel.Banner" Role="Banner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banner">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pagamento_Banner">
+          <End Type="AbasbeModel.Banner" Role="Banner" Multiplicity="0..1" />
+          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagamento">
+              <PropertyRef Name="IdBanner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AbasbeModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="Banner">
-            <EntityTypeMapping TypeName="AbasbeModel.Banner">
-              <MappingFragment StoreEntitySet="Banner">
-                <ScalarProperty Name="Contador" ColumnName="Contador" />
-                <ScalarProperty Name="Cadastro" ColumnName="Cadastro" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
-                <ScalarProperty Name="Expiracao" ColumnName="Expiracao" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Certificado">
             <EntityTypeMapping TypeName="AbasbeModel.Certificado">
               <MappingFragment StoreEntitySet="Certificado">
@@ -1074,6 +1099,24 @@
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banner">
+            <EntityTypeMapping TypeName="AbasbeModel.Banner">
+              <MappingFragment StoreEntitySet="Banner">
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Contador" ColumnName="Contador" />
+                <ScalarProperty Name="Cadastro" ColumnName="Cadastro" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Expiracao" ColumnName="Expiracao" />
+                <ScalarProperty Name="Estreia" ColumnName="Estreia" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Imagem" ColumnName="Imagem" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -24,12 +24,16 @@ namespace Api
         public string Imagem { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
-        public Nullable<System.DateTime> Expiracao { get; set; }
+        public System.DateTime Estreia { get; set; }
+        public System.DateTime Expiracao { get; set; }
         public string Telefone { get; set; }
         public string Link { get; set; }
-        public Nullable<System.DateTime> Cadastro { get; set; }
+        public System.DateTime Cadastro { get; set; }
         public Nullable<int> Contador { get; set; }
+        public int IdCliente { get; set; }
+        public string Situacao { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagamento> Pagamento { get; set; }
     }

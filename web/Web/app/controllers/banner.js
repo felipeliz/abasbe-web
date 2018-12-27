@@ -1,19 +1,24 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Id: 0, Titulo: "", Descricao: "", IdTipoAcao: 0 };
+    $scope.form = { Id: 0, Titulo: "", Descricao: "", IdTipoAcao: 0, Situacao: "A" };
     $scope.lista = {};
     $scope.tipoAcao = [{ Id: 0, Descricao: "Link" }, { Id: 1, Descricao: "Telefone" }];
     $scope.filter = {
         Titulo: "",
     };
+    $scope.clientes = [];
     $scope.edicao = false;
 
     $scope.init = function () {
         if (typeof ($stateParams.id) == "string") {
             $scope.carregarEditar($stateParams.id);
+            $scope.carregarListas();
         }
         else if ($location.path() == "/banner") {
             $scope.filtrar(0, true);
+        }
+        else {
+            $scope.carregarListas();
         }
     }
 
@@ -32,6 +37,17 @@
             }
         }, function myError(response) {
             $loading.hide();
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
+
+    $scope.carregarListas = function () {
+        $http({
+            method: "GET",
+            url: "api/cliente/todos"
+        }).then(function mySuccess(response) {
+            $scope.clientes = response.data;
+        }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
@@ -70,6 +86,13 @@
         return $scope.form.Imagem;
     }
 
+    $scope.getPhotoLista = function (obj) {
+        if (obj.Foto == null || obj.Foto == "") {
+            return "assets/img/avatars/user.png";
+        }
+        return obj.Foto;
+    }
+
     $scope.uploadPhoto = function (file) {
         file.filter = "ImageSquared";
         file.size = 1024;
@@ -87,9 +110,12 @@
 
     $scope.salvar = function () {
 
+        Validation.requiredChild("Cliente", $scope.form.Cliente, "Id");
         Validation.required("Título", $scope.form.Titulo);
+        Validation.required("Data de Estreia", $scope.form.Estreia);
         Validation.required("Data de Expiração", $scope.form.Expiracao);
         Validation.required("Descrição", $scope.form.Descricao);
+        Validation.required("Situacao", $scope.form.Situacao);
         if ($scope.form.IdTipoAcao == 0) {
             Validation.required("Link", $scope.form.Link);
         }

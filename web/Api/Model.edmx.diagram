@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b3aa8290eba3480e895f3925fc51fed2" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="8.25" PointY="20.375" />
         <EntityTypeShape EntityType="AbasbeModel.Certificado" Width="1.5" PointX="8.25" PointY="14.625" />
         <EntityTypeShape EntityType="AbasbeModel.Cidade" Width="1.5" PointX="3" PointY="10.25" />
         <EntityTypeShape EntityType="AbasbeModel.Cliente" Width="1.5" PointX="5.25" PointY="8.625" />
@@ -20,7 +19,6 @@
         <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="8.25" PointY="17.5" />
         <EntityTypeShape EntityType="AbasbeModel.Profissao" Width="1.5" PointX="5.25" PointY="4.25" />
         <EntityTypeShape EntityType="AbasbeModel.Usuario" Width="1.5" PointX="0.75" PointY="0.875" />
-        <AssociationConnector Association="AbasbeModel.FK_Pagamento_Banner" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteCertificado_Certificado" />
         <AssociationConnector Association="AbasbeModel.FK_Cidade_Estado" />
         <AssociationConnector Association="AbasbeModel.FK_Cliente_Cidade" />
@@ -35,7 +33,10 @@
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Disponibilidade" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Profissao" />
         <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
-      </Diagram>
+        <EntityTypeShape EntityType="AbasbeModel.Banner" Width="1.5" PointX="7.5" PointY="20.625" />
+        <AssociationConnector Association="AbasbeModel.FK_Banner_Cliente" />
+        <AssociationConnector Association="AbasbeModel.FK_Pagamento_Banner" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

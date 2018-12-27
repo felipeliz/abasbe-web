@@ -27,18 +27,29 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
+                                <th></th>
+                                <th>Cliente</th>
                                 <th>Título</th>
                                 <th>Descrição</th>
+                                <th>Estreia</th>
                                 <th>Expiração</th>
+                                <th>Situação</th>
                                 <th>Visualizações</th>
                                 <th class="acoes-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="banner in lista.list">
+                                <td><img class="md-user-image md-list-addon-avatar" ng-src="{{getPhotoLista(banner.Cliente)}}" alt="" src="{{getPhotoLista(banner.Cliente)}}"></td>
+                                <td>
+                                    <p class="uk-margin-remove">{{banner.Cliente.Nome}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{banner.Cliente.CPF}}</span></p>
+                                </td>
                                 <td>{{banner.Titulo}}</td>
                                 <td>{{banner.Descricao}}</td>
+                                <td>{{banner.Estreia}}</td>
                                 <td>{{banner.Expiracao}}</td>
+                                <td>{{banner.SituacaoFormatada}}</td>
                                 <td>{{banner.Contador}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>

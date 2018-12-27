@@ -131,6 +131,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AllowOptionsHandler.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Banner.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -156,6 +157,7 @@
     <Compile Include="ClienteProfissional.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\BannerController.cs" />

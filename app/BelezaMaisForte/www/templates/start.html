@@ -1,0 +1,14 @@
+<ion-view title="Beleza + Forte" id="page1" ng-init="init()">
+  <ion-content padding="true" class="has-header">
+    <div class="list card" id="banners-card21" ng-if="banners.length > 0" ng-repeat="banner in banners">
+      <ion-item class="item-avatar" id="banners-list-item8">
+        <img ng-src="{{getPhotoLista(banner.Cliente)}}">
+        <h2>{{banner.Titulo}}</h2>
+        <p>{{banner.Descricao}}</p>
+      </ion-item>
+      <div>
+        <img class="card-image" ng-src="{{getImage(banner.Imagem)}}"></image>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
