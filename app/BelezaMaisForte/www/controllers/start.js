@@ -1,19 +1,23 @@
 var controller = function ($scope, $http, $state) {
 
     $scope.banners = [];
-    
+    $scope.loading = false;
+
     $scope.init = function(){
         $scope.filtrar();
     }
 
     $scope.filtrar = function () {
+        $scope.loading = true;
         $http({
             method: "GET",
             url: api.resolve("api/banner/EmExibicao")
         }).then(function(response) {
+            $scope.loading = false;
             $scope.banners = response.data;
         }, function(response) {
-            console.error(response.data.ExceptionMessage);
+            $scope.loading = false;
+            toastr.error(response.data.ExceptionMessage);
         });
     }
 

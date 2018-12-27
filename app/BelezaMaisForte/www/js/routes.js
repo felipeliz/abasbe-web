@@ -11,6 +11,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.start', {
         url: '/start',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/start.html',
@@ -26,6 +27,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.publicarBanner', {
         url: '/banner/publicar',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/publicarBanner.html',
@@ -36,6 +38,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.buscarProfissionais', {
         url: '/profissionais/buscar',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/buscarProfissionais.html',
@@ -46,12 +49,14 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu', {
         url: '/menu',
+        cache: false,
         templateUrl: 'templates/menu.html',
         controller: 'menuCtrl'
       })
 
       .state('menu.faleConosco', {
         url: '/contato',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/faleConosco.html',
@@ -62,6 +67,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.banners', {
         url: '/banners',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/banners.html',
@@ -77,6 +83,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.profissionais', {
         url: '/profissionais',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/profissionais.html',
@@ -87,6 +94,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.perfil', {
         url: '/perfil',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/perfil.html',
@@ -97,6 +105,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.login', {
         url: '/login',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/login.html',
@@ -112,6 +121,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.equipamentos', {
         url: '/page10',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/equipamentos.html',
@@ -122,6 +132,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.certificados', {
         url: '/page11',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/certificados.html',
@@ -132,6 +143,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.experiNcias', {
         url: '/page12',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/experiNcias.html',
@@ -142,6 +154,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.minhaAssinatura', {
         url: '/assinatura/me',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/minhaAssinatura.html',
@@ -152,6 +165,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
 
       .state('menu.assinaturas', {
         url: '/assinaturas',
+        cache: false,
         views: {
           'side-menu21': {
             templateUrl: 'templates/assinaturas.html',
@@ -161,7 +175,8 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('pagamentos', {
-        url: '/page14',
+        url: '/page14',    
+        cache: false,
         templateUrl: 'templates/pagamentos.html',
         controller: 'pagamentosCtrl'
       })

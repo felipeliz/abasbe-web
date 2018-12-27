@@ -1,39 +1,43 @@
 <ion-view title="Meus Banners" id="page5" ng-init="init()">
   <ion-content padding="true" class="has-header">
-    <div id="meusBanners-button-bar2" class="button-bar"></div>
-    <ion-list id="meusBanners-list2">
-      <ion-item class="item-divider" id="meusBanners-list-item-divider2"> Em espera</ion-item>
-      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.EmExibicao">
+    <div id="preloader" ng-if="loading">
+      <div class="preloader" style="background-size: cover;"></div>
+    </div>
+    <div ng-hide="loading">
+      <ion-list id="meusBanners-list2" ng-if="group.EmEspera.length > 0">
+        <ion-item class="item-divider" id="meusBanners-list-item-divider2">Em espera</ion-item>
+        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.EmEspera">
           <img ng-src="{{getImage(banner.Imagem)}}" />
           <h2>{{banner.Titulo}}</h2>
           <p style="white-space:normal;">{{banner.Descricao}}</p>
           <p style="white-space:normal;">{{banner.Estreia}} até {{banner.Expiracao}}</p>
-          <p style="white-space:normal;">{{banner.SituacaoFormatada}}</p>
-          <i class="icon ion-android-delete"></i>
+          <p style="white-space:normal;" ng-if="banner.Situacao=='E'">{{banner.SituacaoFormatada}}</p>
+          <i class="icon ion-android-delete" ng-click="desabilitar(banner)"></i>
         </ion-item>
-    </ion-list>
-    <ion-list id="meusBanners-list2">
-      <ion-item class="item-divider" id="meusBanners-list-item-divider3"> Em exibição</ion-item>
-      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.EmExibicao">
-        <img ng-src="{{getImage(banner.Imagem)}}" />
-        <h2>{{banner.Titulo}}</h2>
-        <p style="white-space:normal;">{{banner.Descricao}}</p>
-        <p style="white-space:normal;">{{banner.Estreia}} até {{banner.Expiracao}}</p>
-        <p style="white-space:normal;">{{banner.SituacaoFormatada}}</p>
-        <i class="icon ion-android-delete"></i>
-      </ion-item>
-    </ion-list>
-    <ion-list id="meusBanners-list3">
-      <ion-item class="item-divider" id="meusBanners-list-item-divider4"> Expirados</ion-item>
-      <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.EmExibicao">
+      </ion-list>
+      <ion-list id="meusBanners-list2" ng-if="group.EmExibicao.length > 0">
+        <ion-item class="item-divider" id="meusBanners-list-item-divider3">Em exibição</ion-item>
+        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.EmExibicao">
           <img ng-src="{{getImage(banner.Imagem)}}" />
           <h2>{{banner.Titulo}}</h2>
           <p style="white-space:normal;">{{banner.Descricao}}</p>
           <p style="white-space:normal;">{{banner.Estreia}} até {{banner.Expiracao}}</p>
-          <p style="white-space:normal;">{{banner.SituacaoFormatada}}</p>
-          <i class="icon ion-android-delete"></i>
+          <p style="white-space:normal;" ng-if="banner.Situacao=='E'">{{banner.SituacaoFormatada}}</p>
+          <i class="icon ion-android-delete" ng-click="desabilitar(banner)"></i>
         </ion-item>
-    </ion-list>
+      </ion-list>
+      <ion-list id="meusBanners-list3" ng-if="group.Expirados.length > 0">
+        <ion-item class="item-divider" id="meusBanners-list-item-divider4">Expirados</ion-item>
+        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="banner in group.Expirados">
+          <img ng-src="{{getImage(banner.Imagem)}}" />
+          <h2>{{banner.Titulo}}</h2>
+          <p style="white-space:normal;">{{banner.Descricao}}</p>
+          <p style="white-space:normal;">{{banner.Estreia}} até {{banner.Expiracao}}</p>
+          <p style="white-space:normal;" ng-if="banner.Situacao=='E'">{{banner.SituacaoFormatada}}</p>
+          <i class="icon ion-android-delete" ng-click="desabilitar(banner)"></i>
+        </ion-item>
+      </ion-list>
+    </div>
     <a ui-sref="menu.publicarBanner()" id="meusBanners-button9" class="button button-positive button-block">Publicar Banner</a>
   </ion-content>
 </ion-view>

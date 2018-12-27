@@ -113,7 +113,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public List<BannerViewModel> EmExibicao([FromBody] dynamic param)
+        public List<BannerViewModel> EmExibicao()
         {
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
@@ -130,7 +130,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public BannerGroupViewModel MeusBanners([FromBody] dynamic param)
+        public BannerGroupViewModel MeusBanners()
         {
             int cliente = AppExtension.IdUsuarioLogado();
 
@@ -139,22 +139,41 @@ namespace Api.Controllers
 
             BannerGroupViewModel group = new BannerGroupViewModel();
 
-            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao != "I").ToList().ForEach(obj =>
+            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
             {
                 group.EmExibicao.Add(new BannerViewModel(obj));
             });
 
-            context.Banner.Where(ban => ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I").ToList().ForEach(obj =>
+            context.Banner.Where(ban => ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
             {
                 group.EmEspera.Add(new BannerViewModel(obj));
             });
 
-            context.Banner.Where(ban => ban.Expiracao < now && ban.Situacao != "I").ToList().ForEach(obj =>
+            context.Banner.Where(ban => ban.Expiracao < now && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
             {
                 group.Expirados.Add(new BannerViewModel(obj));
             });
 
             return group;
+        }
+
+        [HttpGet]
+        public BannerGroupViewModel Desabilitar(int id)
+        {
+            int cliente = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var banner = context.Banner.FirstOrDefault(ban => ban.Id == id && ban.IdCliente == cliente);
+            if(banner == null)
+            {
+                throw new Exception("Registro não identificado.");
+            }
+
+            banner.Situacao = "I";
+            context.SaveChanges();
+
+            return MeusBanners();
         }
     }
 }
