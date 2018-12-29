@@ -36,14 +36,19 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.buscarProfissionais', {
+      .state('menu.buscar', {
         url: '/profissionais/buscar',
         cache: false,
         views: {
           'side-menu21': {
-            templateUrl: 'templates/buscarProfissionais.html',
-            controller: 'buscarProfissionaisCtrl'
+            templateUrl: 'templates/buscar.html',
+            controller: 'buscar'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/buscar.js');
+          }]
         }
       })
 
@@ -51,7 +56,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
         url: '/menu',
         cache: false,
         templateUrl: 'templates/menu.html',
-        controller: 'menuCtrl'
+        controller: 'menu'
       })
 
       .state('menu.faleConosco', {
@@ -87,8 +92,13 @@ angular.module('app.routes', ['oc.lazyLoad'])
         views: {
           'side-menu21': {
             templateUrl: 'templates/profissionais.html',
-            controller: 'profissionaisCtrl'
+            controller: 'profissionais'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/profissionais.js');
+          }]
         }
       })
 

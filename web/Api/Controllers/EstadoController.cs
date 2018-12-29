@@ -46,5 +46,22 @@ namespace Api.Controllers
 
             return lista;
         }
+
+
+        [HttpGet]
+        public List<CidadeViewModel> CidadesUsados()
+        {
+            Entities context = new Entities();
+            List<CidadeViewModel> lista = new List<CidadeViewModel>();
+
+            var query = context.Cidade.Where(cid => cid.Cliente.Any(cli => cli.Situacao == true));
+
+            query.OrderBy(dis => dis.Cliente.Count()).ToList().ForEach(obj =>
+            {
+                lista.Add(new CidadeViewModel(obj));
+            });
+
+            return lista;
+        }
     }
 }

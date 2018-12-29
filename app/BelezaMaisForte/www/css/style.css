@@ -52,3 +52,24 @@
         -webkit-transform: rotate(360deg);
     }
 }
+  
+.item-stacked.item-select select {
+  position: relative !important;
+}
+  
+  
+.item-stacked.item-select:after {
+  top: 60% !important;
+}
+
+.item-stacked.item-select select {
+    max-width: 100% !important;
+    width: 100% !important;
+    display: table;
+    padding: 7px 10px 7px 7px;
+    direction: ltr;
+}
+
+/* .item + .item {
+    margin-top: 8px !important;
+} */

@@ -3,15 +3,17 @@
     <div id="preloader" ng-if="loading">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
-    <div class="list card" id="banners-card21" ng-hide="loading" ng-repeat="banner in banners">
-      <ion-item class="item-avatar" id="banners-list-item8">
-        <img ng-src="{{getPhotoLista(banner.Cliente)}}">
-        <h2>{{banner.Titulo}}</h2>
-        <p>{{banner.Descricao}}</p>
-      </ion-item>
-      <div>
-        <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
+    <div class="list" id="banners-card21" ng-hide="loading">
+      <div class="card" ng-repeat="banner in banners">
+          <ion-item class="item-avatar">
+              <img ng-src="{{getPhotoLista(banner.Cliente)}}">
+              <h2>{{banner.Titulo}}</h2>
+              <p>{{banner.Descricao}}</p>
+            </ion-item>
+            <div class="banner-img">
+                <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
+            </div>
+          </div>
       </div>
-    </div>
   </ion-content>
 </ion-view>

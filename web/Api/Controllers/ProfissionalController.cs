@@ -3,6 +3,7 @@ using Api.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -97,7 +98,7 @@ namespace Api.Controllers
                 obj.Email = param.Email;
                 obj.Senha = param.Senha;
                 obj.Nascimento = AppExtension.ToDateTime(param.Nascimento);
-                obj.TelefoneCelular = param.TelefoneCelular;
+                obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", "");
                 obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
 
                 obj.IdCidade = param.IdCidade;
@@ -110,7 +111,7 @@ namespace Api.Controllers
                 curr.IdProfissao = param.Curriculo.IdProfissao;
                 curr.IdDisponibilidade = param.Curriculo.IdDisponibilidade;
                 curr.Sexo = param.Curriculo.Sexo;
-                curr.TelefoneComercial = param.Curriculo.TelefoneComercial;
+                curr.TelefoneComercial = Regex.Replace(param.Curriculo.TelefoneComercial?.ToString(), "[^0-9]", "");
                 curr.TempoExperiencia = param.Curriculo.TempoExperiencia;
                 curr.FlagLeiSalaoParceiro = param.Curriculo.FlagLeiSalaoParceiro;
                 curr.FlagBiosseguranca = param.Curriculo.FlagBiosseguranca;
@@ -189,7 +190,7 @@ namespace Api.Controllers
                 {
                     context.SaveChanges();
                 }
-                catch (DbUpdateException ex)
+                catch (DbEntityValidationException ex)
                 {
                     throw ex;
                 }
@@ -213,6 +214,57 @@ namespace Api.Controllers
         {
             Entities context = new Entities();
             return context.Cliente.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Cliente.Count().ToString();
+        }
+
+
+        [HttpPost]
+        public List<ClienteViewModel> Buscar([FromBody] dynamic param)
+        {
+            string profissao = param.profissao?.ToString();
+            string disponibilidade = param.disponibilidade?.ToString();
+            string sexo = param.sexo?.ToString();
+            string cidade = param.cidade?.ToString();
+            string experiencia = param.experiencia?.ToString();
+            string bairro = param.bairro?.ToString();
+
+            Entities context = new Entities();
+            List<ClienteViewModel> lista = new List<ClienteViewModel>();
+
+            var query = context.Cliente.Where(pro => pro.FlagCliente == "P");
+            if (!String.IsNullOrEmpty(profissao))
+            {
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Profissao.Id.ToString() == profissao));
+            }
+            if (!String.IsNullOrEmpty(disponibilidade))
+            {
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Disponibilidade.Id.ToString() == disponibilidade));
+            }
+            if (!String.IsNullOrEmpty(sexo))
+            {
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Sexo == sexo));
+            }
+            if (!String.IsNullOrEmpty(experiencia))
+            {
+                int tempExp = Convert.ToInt32(experiencia);
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.TempoExperiencia >= tempExp));
+            }
+            if (!String.IsNullOrEmpty(cidade))
+            {
+                query = query.Where(pro => pro.Cidade.Id.ToString() == cidade);
+            }
+            if (!String.IsNullOrEmpty(bairro))
+            {
+                query = query.Where(pro => pro.Bairro.Contains(bairro));
+            }
+
+            query = query.Where(pro => pro.Situacao == true);
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new ClienteViewModel(obj, false));
+            });
+
+            return lista;
         }
     }
 }

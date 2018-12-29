@@ -44,6 +44,23 @@ namespace Api.Controllers
             return lista;
         }
 
+
+        [HttpGet]
+        public List<ProfissaoViewModel> Usados()
+        {
+            Entities context = new Entities();
+            List<ProfissaoViewModel> lista = new List<ProfissaoViewModel>();
+
+            var query = context.Profissao.Where(pro => pro.ClienteProfissional.Any(cli => cli.Cliente.Situacao == true));
+
+            query.OrderBy(pro => pro.Descricao).ToList().ForEach(obj =>
+            {
+                lista.Add(new ProfissaoViewModel(obj));
+            });
+
+            return lista;
+        }
+
         [HttpGet]
         public ProfissaoViewModel Obter(int id)
         {
