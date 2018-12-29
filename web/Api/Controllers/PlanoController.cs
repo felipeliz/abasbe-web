@@ -61,7 +61,24 @@ namespace Api.Controllers
                 throw new Exception("Objeto não encontrado");
             }
 
-            cliente.IdPlano = Convert.ToInt32(param.Id);
+            var idPlano = Convert.ToInt32(param.Id);
+
+
+            Plano plano = context.Plano.Find(idPlano);
+
+            cliente.Plano = plano;
+
+            Pagamento pagamento = new Pagamento();
+            pagamento.Cliente = cliente;
+            pagamento.Plano = plano;
+            pagamento.Situacao = 0;
+            pagamento.Valor = plano.Valor;
+            pagamento.CheckoutIdentifier = Guid.NewGuid().ToString();
+            pagamento.DataCriacao = DateTime.Now;
+            pagamento.Dias = plano.Dias;
+            pagamento.Descricao = plano.Descricao;
+
+            context.Pagamento.Add(pagamento);
 
             return context.SaveChanges() > 0;
         }

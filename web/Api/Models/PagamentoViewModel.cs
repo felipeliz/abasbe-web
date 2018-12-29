@@ -29,7 +29,7 @@ namespace Api.Models
             Id = obj.Id;
             IdCliente = obj.IdCliente;
             IdPlano = obj.IdPlano;
-            Valor = "R$ " + obj.Valor;
+            Valor = String.Format("{0:C}", obj.Valor);
             Dias = obj.Dias;
             Descricao = obj.Descricao;
             DataCriacao = obj.DataCriacao.ToString("dd/MM/yyyy");

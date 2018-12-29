@@ -120,3 +120,7 @@ ion-content {
 .button.button-positive:active, .button.button-positive:hover, .button.button-positive:focus {
     background-color: #7f2358 !important;
 }
+
+ion-list + ion-list .list {
+    margin-top: 8px;
+}

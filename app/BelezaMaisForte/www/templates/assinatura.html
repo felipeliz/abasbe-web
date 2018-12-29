@@ -3,15 +3,27 @@
     <div id="preloader" ng-if="loading">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
-    <ion-list id="minhaAssinatura-list12" ng-hide="loading">
-      <ion-item class="item-divider"> Dados de Renovação</ion-item>
-      <ion-item id="minhaAssinatura-list-item56">{{assinatura.Plano.Descricao}}
-        <span class="item-note">{{assinatura.Plano.ValorFormatado}}</span>
-      </ion-item>
-      <ion-item id="minhaAssinatura-list-item57">Proxima renovação
-        <span class="item-note">{{assinatura.Cliente.DataExpiracao}}</span>
-      </ion-item>
+    <div ng-hide="loading">
+      <ion-list>
+        <ion-item class="item-divider"> Dados de Renovação</ion-item>
+        <ion-item>{{assinatura.Plano.Descricao}}
+          <span class="item-note">{{assinatura.Plano.ValorFormatado}}</span>
+        </ion-item>
+        <ion-item>Proxima renovação
+          <span class="item-note">{{assinatura.Cliente.DataExpiracao}}</span>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <div class="card">
+          <ion-item class="item-divider">Pagamentos</ion-item>
+          <ion-item ng-repeat="pagamento in assinatura.Pagamentos">
+            <h2>{{pagamento.Descricao}}</h2>
+            <span>{{pagamento.Situacao}}</span>
+            <span class="item-note">{{pagamento.Valor}}</span>
+          </ion-item>
+        </div>
+      </ion-list>
       <a ng-click="cancelar()" class="button button-assertive button-block">Cancelar Assinatura</a>
-    </ion-list>
+    </div>
   </ion-content>
 </ion-view>
