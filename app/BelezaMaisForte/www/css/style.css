@@ -30,7 +30,7 @@
 }
 
 .preloader {
-    border-top-color: #387ef5;
+    border-top-color: #8e2361;
 }
 
 @keyframes preloader {
@@ -70,6 +70,36 @@
     direction: ltr;
 }
 
-/* .item + .item {
-    margin-top: 8px !important;
-} */
+/** THEME OVERRIDE **/
+
+[nav-bar-transition="android"] [nav-bar="active"] .bar, [nav-bar-transition="android"] [nav-bar="entering"] .bar {
+    background: #7f2358 !important;
+}
+
+.bar.bar-stable .title {
+    color: white !important;
+}
+
+.bar-stable .button.button-icon, .bar button.back-button {
+    color: white !important;
+}
+
+.bar.bar-stable {
+    background: #7f2358 !important;
+}
+
+ion-content {
+    background: #f5f5f5;
+}
+
+.item-stacked-label {
+    background: white !important;
+}
+
+.button.button-positive {
+    background-color: #8e2361 !important;
+}
+
+.button.button-positive:active, .button.button-positive:hover, .button.button-positive:focus {
+    background-color: #7f2358 !important;
+}
