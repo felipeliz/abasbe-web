@@ -17,6 +17,7 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Plano()
         {
+            this.Cliente = new HashSet<Cliente>();
             this.Pagamento = new HashSet<Pagamento>();
         }
     
@@ -24,8 +25,10 @@ namespace Api
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
         public int Dias { get; set; }
-        public bool TipoPlano { get; set; }
+        public string TipoPlano { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagamento> Pagamento { get; set; }
     }

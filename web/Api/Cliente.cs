@@ -42,6 +42,7 @@ namespace Api
         public string NomeEmpresa { get; set; }
         public string Cnpj { get; set; }
         public string FlagCliente { get; set; }
+        public Nullable<int> IdPlano { get; set; }
     
         public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -56,5 +57,6 @@ namespace Api
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banner> Banner { get; set; }
+        public virtual Plano Plano { get; set; }
     }
 }

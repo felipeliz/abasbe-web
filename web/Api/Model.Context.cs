@@ -36,9 +36,9 @@ namespace Api
         public virtual DbSet<Equipamento> Equipamento { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Pagamento> Pagamento { get; set; }
-        public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
+        public virtual DbSet<Plano> Plano { get; set; }
     }
 }

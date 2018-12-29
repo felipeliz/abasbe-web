@@ -20,10 +20,9 @@ namespace Api.Controllers
             List<PlanoViewModel> lista = new List<PlanoViewModel>();
 
             var query = context.Plano.Where(pla => pla.Descricao.Contains(descricao)).ToList();
-            if (tipoPlano != "Default")
+            if (tipoPlano != "")
             {
-                bool s = Convert.ToBoolean(tipoPlano);
-                query = query.Where(obj => obj.TipoPlano == s).ToList();
+                query = query.Where(obj => obj.TipoPlano == tipoPlano).ToList();
             }
 
             query.ToList().ForEach(obj =>
@@ -49,6 +48,71 @@ namespace Api.Controllers
             return new PlanoViewModel(obj);
         }
 
+        [HttpPost]
+        public bool Assinar([FromBody] dynamic param)
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            cliente.IdPlano = Convert.ToInt32(param.Id);
+
+            return context.SaveChanges() > 0;
+        }
+
+        [HttpGet]
+        public bool CancelarAssinatura()
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            cliente.IdPlano = null;
+
+            return context.SaveChanges() > 0;
+        }
+
+        [HttpGet]
+        public List<PlanoViewModel> PlanosAssinatura()
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            if(cliente.Plano != null)
+            {
+                throw new Exception("has_plan");
+            }
+
+            var query = context.Plano.Where(pla => pla.TipoPlano == "A");
+            List<PlanoViewModel> lista = new List<PlanoViewModel>();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new PlanoViewModel(obj));
+            });
+
+            return lista;
+        }
+
 
         [HttpPost]
         public bool Salvar([FromBody] dynamic param)
@@ -60,7 +124,7 @@ namespace Api.Controllers
             obj.Descricao = param.Descricao.ToString();
             obj.Dias = Convert.ToInt32(param.Dias);
             obj.Valor = Convert.ToDecimal(param.Valor);
-            obj.TipoPlano = Convert.ToBoolean(param.TipoPlano);
+            obj.TipoPlano = param.TipoPlano.ToString();
 
             if (id <= 0)
             {

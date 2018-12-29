@@ -59,14 +59,19 @@ angular.module('app.routes', ['oc.lazyLoad'])
         controller: 'menu'
       })
 
-      .state('menu.faleConosco', {
+      .state('menu.contato', {
         url: '/contato',
         cache: false,
         views: {
           'side-menu21': {
-            templateUrl: 'templates/faleConosco.html',
-            controller: 'faleConoscoCtrl'
+            templateUrl: 'templates/contato.html',
+            controller: 'contato'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/contato.js');
+          }]
         }
       })
 
@@ -162,14 +167,19 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.minhaAssinatura', {
+      .state('menu.assinatura', {
         url: '/assinatura/me',
         cache: false,
         views: {
           'side-menu21': {
-            templateUrl: 'templates/minhaAssinatura.html',
-            controller: 'minhaAssinaturaCtrl'
+            templateUrl: 'templates/assinatura.html',
+            controller: 'assinatura'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/assinatura.js');
+          }]
         }
       })
 
@@ -179,8 +189,13 @@ angular.module('app.routes', ['oc.lazyLoad'])
         views: {
           'side-menu21': {
             templateUrl: 'templates/assinaturas.html',
-            controller: 'assinaturasCtrl'
+            controller: 'assinaturas'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/assinaturas.js');
+          }]
         }
       })
 

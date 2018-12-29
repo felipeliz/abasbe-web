@@ -1,10 +1,10 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
-    $scope.form = { Descricao: "", Dias: "", Valor: '', TipoPlano: "Default" };
+    $scope.form = { Descricao: "", Dias: "", Valor: '', TipoPlano: "" };
     $scope.lista = {};
     $scope.filter = {
         Descricao: "",
-        TipoPlano: "Default"
+        TipoPlano: ""
     };
     $scope.edicao = false;
 
@@ -60,11 +60,11 @@
         Validation.required("Descrição", $scope.form.Descricao);
         Validation.required("Valor", $scope.form.Valor);
         Validation.required("Dias", $scope.form.Dias);
-        if ($scope.form.TipoPlano != 'True' || $scope.form.TipoPlano != 'False') {
+        if ($scope.form.TipoPlano != 'A' && $scope.form.TipoPlano != 'B') {
             toastr.error('O campo Tipo de Plano é obrigatório.');
             return;
         }
-      
+
         $loading.show();
         $http({
             method: "POST",
@@ -103,7 +103,7 @@
     }
 
     $scope.retornarTipoPlano = function (tipoPlano) {
-        if (String(tipoPlano) === 'True') {
+        if (String(tipoPlano) === 'B') {
             return 'Banner';
         }
         else {

@@ -20,12 +20,12 @@
           <p>Profissão</p>
         </ion-item>
         <ion-item ui-sref="menu.start()" menu-close="">Início</ion-item>
-        <ion-item ui-sref="menu.buscar()" menu-close="">Buscar Profissionais</ion-item>
-        <ion-item ui-sref="menu.banners()" menu-close="">Meus Banners</ion-item>
-        <ion-item ui-sref="menu.publicarBanner()" menu-close="">Publicar Banner</ion-item>
-        <ion-item ui-sref="menu.assinaturas()" menu-close="">Assinatura</ion-item>
-        <ion-item ui-sref="menu.faleConosco()" menu-close="">Fale Conosco</ion-item>
-        <ion-item ui-sref="menu.login()" ng-if="!loggedIn" menu-close="">Login</ion-item>
+        <ion-item ui-sref="menu.buscar()" ng-if="loggedIn" menu-close="">Buscar Profissionais</ion-item>
+        <ion-item ui-sref="menu.banners()" ng-if="loggedIn" menu-close="">Meus Banners</ion-item>
+        <ion-item ui-sref="menu.publicarBanner()" ng-if="loggedIn" menu-close="">Publicar Banner</ion-item>
+        <ion-item ui-sref="menu.assinaturas()" ng-if="loggedIn" menu-close="">Assinaturas</ion-item>
+        <ion-item ui-sref="menu.contato()" menu-close="">Fale Conosco</ion-item>
+        <ion-item ui-sref="menu.login()" ng-if="!loggedIn" menu-close="">Entrar</ion-item>
         <ion-item ui-sref="menu.perfil()" ng-if="!loggedIn" menu-close="">Registre-se</ion-item>
         <ion-item class="assertive" ng-if="loggedIn" ng-click="logout()" menu-close="">Sair</ion-item>
       </ion-list>

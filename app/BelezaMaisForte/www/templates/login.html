@@ -1,21 +1,21 @@
 <ion-view title="Login" id="page8" ng-init="init()">
   <ion-content padding="true" class="has-header">
-    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-      <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+    <div class="login-logo">
+      <img src="imgs/logo.png">
     </div>
     <div class="spacer" style="width: 300px; height: 9px;"></div>
     <form id="login-form6" class="list">
-      <ion-list id="login-list5">
-        <label class="item item-input" id="login-input22">
+      <ion-list>
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Email</span>
           <input type="email" placeholder="" ng-model="form.email">
         </label>
-        <label class="item item-input" id="login-input23">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Senha</span>
           <input type="password" placeholder="" ng-model="form.senha">
         </label>
       </ion-list>
-      <a ng-click="login()" id="login-button10" class="button button-positive button-block">Log in</a>
+      <a ng-click="login()" id="login-button10" class="button button-positive button-block">Entrar</a>
     </form>
   </ion-content>
 </ion-view>

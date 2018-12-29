@@ -70,6 +70,23 @@
     direction: ltr;
 }
 
+.login-logo {
+    text-align: center;
+}
+
+.login-logo img {
+    width: 180px;
+    border-radius: 25px;
+}
+
+div.list .card:first-child {
+    margin-top: 0px;
+}
+
+div.list .card:last-child {
+    margin-bottom: 0px;
+}
+
 /** THEME OVERRIDE **/
 
 [nav-bar-transition="android"] [nav-bar="active"] .bar, [nav-bar-transition="android"] [nav-bar="entering"] .bar {

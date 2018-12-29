@@ -28,6 +28,31 @@ namespace Api.Controllers
             return lista;
         }
 
+
+        [HttpGet]
+        public AssinaturaViewModel MinhaAssinatura()
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+
+            if(cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            if(cliente.Plano != null)
+            {
+                return new AssinaturaViewModel(cliente, cliente.Plano);
+            }
+            else
+            {
+                throw new Exception("no_plan");
+            }
+        }
+
         [HttpPost]
         public ClienteViewModel Login([FromBody] dynamic param)
         {

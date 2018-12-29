@@ -1,0 +1,17 @@
+<ion-view title="Minha Assinatura" id="page13" ng-init="init()">
+  <ion-content padding="true" class="has-header">
+    <div id="preloader" ng-if="loading">
+      <div class="preloader" style="background-size: cover;"></div>
+    </div>
+    <ion-list id="minhaAssinatura-list12" ng-hide="loading">
+      <ion-item class="item-divider"> Dados de Renovação</ion-item>
+      <ion-item id="minhaAssinatura-list-item56">{{assinatura.Plano.Descricao}}
+        <span class="item-note">{{assinatura.Plano.ValorFormatado}}</span>
+      </ion-item>
+      <ion-item id="minhaAssinatura-list-item57">Proxima renovação
+        <span class="item-note">{{assinatura.Cliente.DataExpiracao}}</span>
+      </ion-item>
+      <a ng-click="cancelar()" class="button button-assertive button-block">Cancelar Assinatura</a>
+    </ion-list>
+  </ion-content>
+</ion-view>

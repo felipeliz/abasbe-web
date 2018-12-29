@@ -17,6 +17,8 @@ namespace Api.Models
         public string Email { get; set; }
         public string TelefoneCelular { get; set; }
         public string FlagCliente { get; set; }
+        public string DataExpiracao { get; set; }
+
 
         public SimpleClienteViewModel(Cliente obj)
         {
@@ -30,6 +32,7 @@ namespace Api.Models
             IdEstado = obj.Cidade.Estado.Id;
             Nome = obj.Nome;
             Foto = obj.Foto;
+            DataExpiracao = obj.DataExpiracao?.ToString("dd/MM/yyyy");
             CPF = string.IsNullOrEmpty(obj.CPF) ? obj.CPF : Convert.ToUInt64(obj.CPF).ToString(@"000\.000\.000-00");
             Email = obj.Email;
             TelefoneCelular = string.IsNullOrEmpty(obj.TelefoneCelular) ? obj.TelefoneCelular : Convert.ToUInt64(obj.TelefoneCelular).ToString(@"(00) 00000-0000");
@@ -50,7 +53,6 @@ namespace Api.Models
         // for associado
 
         public string Token { get; set; }
-        public string DataExpiracao { get; set; }
         public string Cnpj { get; set; }
         public string NomeEmpresa { get; set; }
         public List<PagamentoViewModel> Pagamentos { get; set; }
@@ -75,7 +77,6 @@ namespace Api.Models
             Situacao = obj.Situacao.ToString();
 
             NomeEmpresa = obj.NomeEmpresa;
-            DataExpiracao = obj.DataExpiracao?.ToString("dd/MM/yyyy");
             Cnpj = string.IsNullOrEmpty(obj.Cnpj) ? obj.Cnpj : Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");
 
             Token = EncryptionHelper.Encrypt(Id.ToString());
