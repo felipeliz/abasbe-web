@@ -1,41 +1,44 @@
-<ion-view title="Profissionais" id="page6" ng-init="init()">
+<ion-view title="Profissionais" ng-init="init()">
   <ion-content padding="true" class="has-header">
     <div id="preloader" ng-if="loading">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
     <div ng-hide="loading || profissionais.length > 0">
-      <h3 id="buscarProfissionais-heading2" style="color:#000000;">Desculpe, não achamos :(</h3>
-      <div id="buscarProfissionais-markdown9" class="show-list-numbers-and-dots">
-        <p style="color:#000000;">Não conseguimos identificar profissionais baseados no seu critério de busca, tente novamente.</p>
+      <h3>Desculpe, não achamos :(</h3>
+      <div class="show-list-numbers-and-dots">
+        <p>Não conseguimos identificar profissionais baseados no seu critério de busca, tente
+          novamente.</p>
       </div>
       <a ui-sref="menu.buscar()" id="meusBanners-button9" class="button button-positive button-block">Refinar busca</a>
     </div>
     <div ng-hide="loading || profissionais.length == 0">
-      <h3 id="buscarProfissionais-heading2" style="color:#000000;">Profissionais encontrados</h3>
-      <div id="buscarProfissionais-markdown9" class="show-list-numbers-and-dots">
-        <p style="color:#000000;">Selecionamos os seguintes profissionais baseados no seu critério de busca!</p>
+      <h3>Profissionais encontrados</h3>
+      <div class="show-list-numbers-and-dots">
+        <p>Selecionamos os seguintes profissionais baseados no seu critério de busca!</p>
       </div>
       <div class="list">
-        <div class="card" ng-repeat="profissional in profissionais">
-          <ion-item class="item-avatar">
-            <img ng-src="{{getPhotoLista(profissional)}}">
-            <h2>{{profissional.Nome}}</h2>
-            <p>{{profissional.Curriculo.ProfissaoFormatada}}</p>
-            <div id="profissionais-list-item-container4">
-              <div id="profissionais-markdown21" class="show-list-numbers-and-dots">
-                <p style="margin-top:0px;color:#3D3D3D;">{{profissional.Curriculo.TempoExperiencia}} anos de experiência</p>
+        <div class="card profissional" ng-repeat="profissional in profissionais">
+          <div class="item-profissional">
+            <div class="img-holder">
+              <div class="img-floater">
+                <img ng-src="{{getPhotoLista(profissional)}}">
               </div>
-              <div id="profissionais-markdown22" class="show-list-numbers-and-dots">
-                <p style="margin-top:0px;color:#3D3D3D;">{{profissional.CidadeFormatada}}{{profissional.Bairro == null ? '' : ' - ' + profissional.Bairro}}</p>
-              </div>
-              <div id="profissionais-markdown23" class="show-list-numbers-and-dots">
-                <p style="margin-top:0px;color:#3D3D3D;">{{profissional.Curriculo.DisponibilidadeFormatada}}</p>
-              </div>
+              <h4>{{profissional.Nome}}</h4>
+              <p class="text-muted">{{profissional.Curriculo.ProfissaoFormatada}}</p>
             </div>
-          </ion-item>
+            <p>
+              <span class="tag" ng-hide="profissional.Curriculo.Sexo==''">{{profissional.Curriculo.SexoFormatado}}</span>
+              <span class="tag" ng-hide="profissional.Curriculo.PretensaoSalarial==''">{{profissional.Curriculo.PretensaoSalarialFormatada}}</span>
+            </p>
+            <ul>
+              <li>{{profissional.Curriculo.TempoExperiencia}} anos de experiência</li>
+              <li>{{profissional.Curriculo.DisponibilidadeFormatada}}</li>
+              <li>{{profissional.EnderecoFormatado}}</li>
+            </ul>
+            <a ui-sref="menu.buscar()" id="meusBanners-button9" class="button button-positive button-block">Ver Perfil</a>
+          </div>
         </div>
       </div>
-      <a ui-sref="menu.buscar()" id="meusBanners-button9" class="button button-positive button-block">Refinar busca</a>
     </div>
   </ion-content>
 </ion-view>

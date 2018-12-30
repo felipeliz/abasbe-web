@@ -19,14 +19,15 @@
           <h2>Nome usuário</h2>
           <p>Profissão</p>
         </ion-item>
-        <ion-item ui-sref="menu.start()" menu-close="">Início</ion-item>
-        <ion-item ui-sref="menu.buscar()" ng-if="loggedIn" menu-close="">Buscar Profissionais</ion-item>
-        <ion-item ui-sref="menu.banners()" ng-if="loggedIn" menu-close="">Meus Banners</ion-item>
-        <ion-item ui-sref="menu.publicarBanner()" ng-if="loggedIn" menu-close="">Publicar Banner</ion-item>
-        <ion-item ui-sref="menu.assinaturas()" ng-if="loggedIn" menu-close="">Assinaturas</ion-item>
-        <ion-item ui-sref="menu.contato()" menu-close="">Fale Conosco</ion-item>
-        <ion-item ui-sref="menu.login()" ng-if="!loggedIn" menu-close="">Entrar</ion-item>
-        <ion-item ui-sref="menu.perfil()" ng-if="!loggedIn" menu-close="">Registre-se</ion-item>
+        <ion-item ng-click="go('menu.start')" menu-close="">Início</ion-item>
+        <ion-item ng-click="go('menu.buscar')" ng-if="loggedIn" menu-close="">Buscar Profissionais</ion-item>
+        <ion-item ng-click="go('menu.banners')" ng-if="loggedIn" menu-close="">Meus Banners</ion-item>
+        <ion-item ng-click="go('menu.publicar')" ng-if="loggedIn" menu-close="">Publicar Banner</ion-item>
+        <ion-item ng-click="assinaturaGo()" ng-if="loggedIn" menu-close="">Assinaturas</ion-item>
+        <ion-item ng-click="go('menu.pagamentos')" ng-if="loggedIn" menu-close="">Pagamentos</ion-item>
+        <ion-item ng-click="go('menu.contato')" menu-close="">Fale Conosco</ion-item>
+        <ion-item ng-click="go('menu.login')" ng-if="!loggedIn" menu-close="">Entrar</ion-item>
+        <ion-item ng-click="go('menu.perfil')" ng-if="!loggedIn" menu-close="">Registre-se</ion-item>
         <ion-item class="assertive" ng-if="loggedIn" ng-click="logout()" menu-close="">Sair</ion-item>
       </ion-list>
     </ion-content>

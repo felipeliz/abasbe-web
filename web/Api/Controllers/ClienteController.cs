@@ -28,6 +28,44 @@ namespace Api.Controllers
             return lista;
         }
 
+        [HttpGet]
+        public bool Assinante()
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            return (cliente.Plano != null);
+        }
+
+        [HttpGet]
+        public List<PagamentoViewModel> MeusPagamentos()
+        {
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            List<PagamentoViewModel> lista = new List<PagamentoViewModel>();
+            cliente.Pagamento.Where(pag => pag.Situacao != 2).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            {
+                lista.Add(new PagamentoViewModel(pag));
+            });
+
+            return lista;
+        }
 
         [HttpGet]
         public AssinaturaViewModel MinhaAssinatura()
@@ -38,12 +76,12 @@ namespace Api.Controllers
 
             var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
 
-            if(cliente == null)
+            if (cliente == null)
             {
                 throw new Exception("Objeto não encontrado");
             }
 
-            if(cliente.Plano != null)
+            if (cliente.Plano != null)
             {
                 return new AssinaturaViewModel(cliente, cliente.Plano);
             }

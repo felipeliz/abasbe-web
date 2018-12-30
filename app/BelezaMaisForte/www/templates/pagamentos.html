@@ -1,3 +1,26 @@
-<ion-view title="Pagamentos" id="page14">
-  <ion-content padding="true" class="has-header"></ion-content>
+<ion-view title="Pagamentos" id="page14" ng-init="init()">
+  <ion-content padding="true" class="has-header">
+    <div id="preloader" ng-if="loading">
+      <div class="preloader" style="background-size: cover;"></div>
+    </div>
+    <div ng-hide="loading || pagamentos.length > 0">
+      <h3>Não há registros</h3>
+      <div class="show-list-numbers-and-dots">
+        <p>Não existem pagamentos vinculados a sua conta de usuário.</p>
+      </div>
+    </div>
+    <div ng-hide="loading || pagamentos.length == 0">
+      <ion-list>
+        <div class="card">
+          <ion-item class="item-divider">Pagamentos</ion-item>
+          <ion-item ng-repeat="pagamento in pagamentos">
+            <h2>{{pagamento.Descricao}}</h2>
+            <span class="text-muted">{{pagamento.Situacao}}</span>
+            <span class="item-note">{{pagamento.Valor}}</span>
+            <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div>
+  </ion-content>
 </ion-view>

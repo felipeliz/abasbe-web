@@ -4,11 +4,11 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     $scope.planos = [];
     $scope.selecionado = {};
 
-    $scope.init = function(){
-       $scope.carregar();
+    $scope.init = function () {
+        $scope.carregar();
     }
 
-    $scope.carregar = function(){
+    $scope.carregar = function () {
         $scope.loading = true;
         $http({
             method: "GET",
@@ -17,35 +17,27 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             $scope.loading = false;
             $scope.planos = response.data;
         }, function (response) {
-            if(response.data.ExceptionMessage == "has_plan") {
-                $ionicHistory.nextViewOptions({
-                    disableBack: true
-                });
-                $state.go("menu.assinatura");
-                return;
-            }
-
             $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.select = function(plano){
-        for(var i in $scope.planos){
+    $scope.select = function (plano) {
+        for (var i in $scope.planos) {
             $scope.planos[i].selecionado = false;
         }
         plano.selecionado = true;
     }
 
-    $scope.assinar = function(){
+    $scope.assinar = function () {
         var plano = null;
-        for(var i in $scope.planos){
-            if($scope.planos[i].selecionado == true) {
+        for (var i in $scope.planos) {
+            if ($scope.planos[i].selecionado == true) {
                 plano = $scope.planos[i];
             }
         }
 
-        if(plano == null) {
+        if (plano == null) {
             toastr.error('Você precisa selecionar um plano');
             return;
         }
@@ -61,7 +53,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
-            $state.go("menu.assinatura");
+            $state.go("menu.pagamentos");
         }, function (response) {
             $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);

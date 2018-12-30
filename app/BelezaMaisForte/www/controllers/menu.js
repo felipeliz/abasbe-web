@@ -1,12 +1,12 @@
-var controller = function ($scope, Auth, $state, $rootScope) {
+var controller = function ($scope, Auth, $state, $ionicHistory, $http) {
 
     $scope.loggedIn = Auth.isLoggedIn();
 
-    $scope.$watch(function(){ return Auth.isLoggedIn(); }, function(){
+    $scope.$watch(function () { return Auth.isLoggedIn(); }, function () {
         $scope.loggedIn = Auth.isLoggedIn();
     })
 
-    $scope.logout = function(){
+    $scope.logout = function () {
         Auth.logout();
     }
 
@@ -16,6 +16,32 @@ var controller = function ($scope, Auth, $state, $rootScope) {
             return "imgs/user.png";
         }
         return api.resolve(obj.Foto);
+    }
+
+    $scope.go = function (page) {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go(page);
+    }
+
+    $scope.assinaturaGo = function () {
+        $http({
+            method: "GET",
+            url: api.resolve("api/cliente/assinante")
+        }).then(function (response) {
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            if (response.data) {
+                $state.go("menu.assinatura");
+            }
+            else {
+                $state.go("menu.assinaturas");
+            }
+        }, function (response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
     }
 }
 

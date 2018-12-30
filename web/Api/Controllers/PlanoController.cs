@@ -96,6 +96,11 @@ namespace Api.Controllers
                 throw new Exception("Objeto não encontrado");
             }
 
+            cliente.Pagamento.Where(pag => pag.Plano.TipoPlano == "A" && pag.Situacao == 0).ToList().ForEach(obj =>
+            {
+                obj.Situacao = 2;
+            });
+
             cliente.IdPlano = null;
 
             return context.SaveChanges() > 0;

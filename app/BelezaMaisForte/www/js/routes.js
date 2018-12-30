@@ -25,14 +25,19 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.publicarBanner', {
+      .state('menu.publicar', {
         url: '/banner/publicar',
         cache: false,
         views: {
           'side-menu21': {
-            templateUrl: 'templates/publicarBanner.html',
-            controller: 'publicarBannerCtrl'
+            templateUrl: 'templates/publicar.html',
+            controller: 'publicar'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/publicar.js');
+          }]
         }
       })
 
@@ -199,11 +204,20 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('pagamentos', {
-        url: '/page14',    
+      .state('menu.pagamentos', {
+        url: '/pagamentos',    
         cache: false,
-        templateUrl: 'templates/pagamentos.html',
-        controller: 'pagamentosCtrl'
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/pagamentos.html',
+            controller: 'pagamentos'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/pagamentos.js');
+          }]
+        }
       })
 
     $urlRouterProvider.otherwise('/menu/start')

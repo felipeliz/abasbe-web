@@ -114,7 +114,10 @@ ion-content {
 }
 
 .button.button-positive {
-    background-color: #8e2361 !important;
+    background: #7F2359;
+    background: -webkit-linear-gradient(bottom right, #7F2359, #B02374);
+    background: -moz-linear-gradient(bottom right, #7F2359, #B02374);
+    background: linear-gradient(bottom right, #7F2359, #B02374);
 }
 
 .button.button-positive:active, .button.button-positive:hover, .button.button-positive:focus {
@@ -123,4 +126,117 @@ ion-content {
 
 ion-list + ion-list .list {
     margin-top: 8px;
+}
+
+.item-profissional {
+    position: relative;
+
+}
+
+.item-profissional .img-holder {
+    width: 100%;
+    padding: 0 8px;
+    height: 61px;
+    background: #7F2359;
+    background: -webkit-linear-gradient(bottom right, #7F2359, #B02374);
+    background: -moz-linear-gradient(bottom right, #7F2359, #B02374);
+    background: linear-gradient(bottom right, #7F2359, #B02374);
+}
+
+.item-profissional .img-holder .img-floater {
+    position: absolute;
+    top: 8px;
+}
+
+.item-profissional .img-holder img {
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+    border: 3px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.item-profissional .img-holder h4 {
+    margin: 0;
+    color: white;
+    margin-left: 100px;
+    margin-right: 16px;
+    padding-top: 18px;
+}
+
+.item-profissional .img-holder p {
+    margin: 0;
+    color: white;
+    margin-left: 100px;
+    margin-right: 16px;
+    font-weight: lighter;
+    text-align: left;
+}
+
+.item-profissional p {
+    margin-left: 108px;
+    text-align: left;
+    margin-right: 16px;
+    margin-top: 4px;
+    font-weight: lighter;
+    margin-bottom: 0px;
+    height: 21px;
+    max-height: 21px;
+}
+
+.item-profissional p .tag {
+    padding: 3px 8px;
+    color: white;
+    font-size: 11px;
+    border-radius: 15px;
+    background: #7F2359;
+    background: -webkit-linear-gradient(bottom right, #7F2359, #B02374);
+    background: -moz-linear-gradient(bottom right, #7F2359, #B02374);
+    background: linear-gradient(bottom right, #7F2359, #B02374);
+}
+
+.item-profissional ul p {
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.item-profissional ul{
+    text-align: center;
+}
+
+.item-profissional ul li {
+    line-height: 16px;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+    padding: 12px;
+    font-weight: lighter;
+}
+
+.card .button {
+    min-height: 20px;
+    font-size: 14px;
+    margin: 12px 16px;
+    line-height: 32px;
+}
+
+.card h2.title {
+    font-size: 18px;
+    padding: 0px 16px;
+    margin-top: 8px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.card p.subtitle {
+    font-size: 14px;
+    padding: 0px 16px;
+    margin-top: 0px;
+    color: #666;
+    font-weight: lighter;
+}
+
+.text-muted {
+    font-size: 14px;
+    color: #666;
+    font-weight: lighter;
 }

@@ -13,16 +13,6 @@
           <span class="item-note">{{assinatura.Cliente.DataExpiracao}}</span>
         </ion-item>
       </ion-list>
-      <ion-list>
-        <div class="card">
-          <ion-item class="item-divider">Pagamentos</ion-item>
-          <ion-item ng-repeat="pagamento in assinatura.Pagamentos">
-            <h2>{{pagamento.Descricao}}</h2>
-            <span>{{pagamento.Situacao}}</span>
-            <span class="item-note">{{pagamento.Valor}}</span>
-          </ion-item>
-        </div>
-      </ion-list>
       <a ng-click="cancelar()" class="button button-assertive button-block">Cancelar Assinatura</a>
     </div>
   </ion-content>

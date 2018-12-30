@@ -48,6 +48,7 @@ namespace Api.Models
         public string CEP { get; set; }
         public string Logradouro { get; set; }
         public string CidadeFormatada { get; set; }
+        public string EnderecoFormatado { get; set; }
         public string Situacao { get; set; }
 
         // for associado
@@ -75,6 +76,13 @@ namespace Api.Models
             Logradouro = obj.Logradouro;
             CidadeFormatada = obj.Cidade.Nome;
             Situacao = obj.Situacao.ToString();
+
+            EnderecoFormatado = CidadeFormatada;
+            if(!string.IsNullOrEmpty(Bairro))
+            {
+                EnderecoFormatado += " - " + Bairro;
+            }
+
 
             NomeEmpresa = obj.NomeEmpresa;
             Cnpj = string.IsNullOrEmpty(obj.Cnpj) ? obj.Cnpj : Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");

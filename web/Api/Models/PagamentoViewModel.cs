@@ -17,6 +17,7 @@ namespace Api.Models
         public string DataCriacao { get; set; }
         public string DataConfirmacao { get; set; }
         public string CheckoutIdentifier { get; set; }
+        public string TipoPlanoFormatado { get; set; }
         public string Situacao { get; set; }
 
         public PagamentoViewModel(Pagamento obj)
@@ -35,6 +36,7 @@ namespace Api.Models
             DataCriacao = obj.DataCriacao.ToString("dd/MM/yyyy");
             DataConfirmacao = obj.DataConfirmacao?.ToString("dd/MM/yyyy");
             CheckoutIdentifier = obj.CheckoutIdentifier;
+            TipoPlanoFormatado = obj.Plano.TipoPlano == "A" ? "Pagamento de assinatura" : "Pagamento de banner";
             Situacao = GetSituacao(obj.Situacao);
         }
 

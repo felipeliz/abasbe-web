@@ -7,12 +7,14 @@
       <div class="card" ng-repeat="banner in banners">
           <ion-item class="item-avatar">
               <img ng-src="{{getPhotoLista(banner.Cliente)}}">
-              <h2>{{banner.Titulo}}</h2>
-              <p>{{banner.Descricao}}</p>
+              <h2>{{banner.Cliente.Nome}}</h2>
+              <p class="text-muted">{{banner.Cliente.Email}}</p>
             </ion-item>
             <div class="banner-img">
-                <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
+              <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
             </div>
+            <h2 class="title">{{banner.Titulo}}</h2>
+            <p class="subtitle">{{banner.Descricao}}</p>
           </div>
       </div>
   </ion-content>
