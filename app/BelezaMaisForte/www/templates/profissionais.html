@@ -1,17 +1,17 @@
 <ion-view title="Profissionais" ng-init="init()">
-  <ion-content padding="true" class="has-header">
-    <div id="preloader" ng-if="loading">
+  <ion-content padding="true" class="has-header" on-scroll="checkScroll()">
+    <div id="preloader" ng-if="loading && profissionais.length == 0">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
-    <div ng-hide="loading || profissionais.length > 0">
+    <div ng-hide="loading" ng-if="profissionais.length == 0">
       <h3>Desculpe, não achamos :(</h3>
       <div class="show-list-numbers-and-dots">
         <p>Não conseguimos identificar profissionais baseados no seu critério de busca, tente
           novamente.</p>
       </div>
-      <a ui-sref="menu.buscar()" id="meusBanners-button9" class="button button-positive button-block">Refinar busca</a>
+      <a ui-sref="menu.buscar()" class="button button-positive button-block">Refinar busca</a>
     </div>
-    <div ng-hide="loading || profissionais.length == 0">
+    <div ng-hide="loading && profissionais.length == 0" ng-if="profissionais.length > 0">
       <h3>Profissionais encontrados</h3>
       <div class="show-list-numbers-and-dots">
         <p>Selecionamos os seguintes profissionais baseados no seu critério de busca!</p>

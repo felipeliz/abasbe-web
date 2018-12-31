@@ -187,16 +187,20 @@ namespace Api.Controllers
             return context.Banner.Where(ban => ban.Expiracao.Day > DateTime.Today.Day).Count().ToString() + " / " + context.Banner.Count().ToString();
         }
 
-        [HttpGet]
-        public List<BannerViewModel> EmExibicao()
+        [HttpPost]
+        public List<BannerViewModel> EmExibicao([FromBody] dynamic param)
         {
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
             DateTime now = DateTime.Now;
 
-            var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A").ToList();
+            int page = Convert.ToInt32(param.page);
 
-            query.OrderBy(ban => ban.Cadastro).ToList().ForEach(obj =>
+            var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A");
+            query = query.OrderBy(ban => ban.Cadastro);
+            query = query.Skip(page * 20).Take(20);
+
+            query.ToList().ForEach(obj =>
             {
                 obj.Contador = obj.Contador == null ? 1 : obj.Contador + 1;
                 lista.Add(new BannerViewModel(obj));

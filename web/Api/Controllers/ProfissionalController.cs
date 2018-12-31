@@ -223,6 +223,7 @@ namespace Api.Controllers
             string cidade = param.cidade?.ToString();
             string experiencia = param.experiencia?.ToString();
             string bairro = param.bairro?.ToString();
+            int page = Convert.ToInt32(param.page);
 
             Entities context = new Entities();
             List<ClienteViewModel> lista = new List<ClienteViewModel>();
@@ -255,6 +256,8 @@ namespace Api.Controllers
             }
 
             query = query.Where(pro => pro.Situacao == true);
+            query = query.OrderBy(pro => pro.Nome);
+            query = query.Skip(page * 20).Take(20);
 
             query.ToList().ForEach(obj =>
             {

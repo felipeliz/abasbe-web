@@ -1,9 +1,9 @@
 <ion-view title="Beleza + Forte" id="page1" ng-init="init()">
-  <ion-content padding="true" class="has-header">
-    <div id="preloader" ng-if="loading">
+  <ion-content padding="true" class="has-header" on-scroll="checkScroll()">
+    <div id="preloader" ng-if="loading && banners.length==0">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
-    <div class="list" id="banners-card21" ng-hide="loading">
+    <div class="list" ng-hide="loading && banners.length==0">
       <div class="card" ng-repeat="banner in banners">
           <div ng-include="'templates/card-banner.html'"></div>
       </div>

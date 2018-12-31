@@ -10,7 +10,8 @@ var controller = function ($scope, $http, $state, $rootScope) {
         sexo: "",
         cidade: "",
         experiencia: 0,
-        bairro: ""
+        bairro: "",
+        page: 0
     }
 
     $scope.init = function () {
