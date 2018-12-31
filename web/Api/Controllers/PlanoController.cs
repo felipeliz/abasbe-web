@@ -135,6 +135,21 @@ namespace Api.Controllers
             return lista;
         }
 
+        [HttpGet]
+        public List<PlanoViewModel> PlanosBanner()
+        {
+            Entities context = new Entities();
+
+            var query = context.Plano.Where(pla => pla.TipoPlano == "B");
+            List<PlanoViewModel> lista = new List<PlanoViewModel>();
+
+            query.ToList().ForEach(obj =>
+            {
+                lista.Add(new PlanoViewModel(obj));
+            });
+
+            return lista;
+        }
 
         [HttpPost]
         public bool Salvar([FromBody] dynamic param)

@@ -16,8 +16,8 @@
       <ion-list>
         <ion-item class="item-avatar my-profile-menu" ng-if="loggedIn" ui-sref="menu.perfil()" menu-close="">
           <img ng-src="{{getPhotoLista()}}">
-          <h2>Nome usuário</h2>
-          <p>Profissão</p>
+          <h2>{{user.Nome}}</h2>
+          <p>{{user.Email}}</p>
         </ion-item>
         <ion-item ng-click="go('menu.start')" menu-close="">Início</ion-item>
         <ion-item ng-click="go('menu.buscar')" ng-if="loggedIn" menu-close="">Buscar Profissionais</ion-item>

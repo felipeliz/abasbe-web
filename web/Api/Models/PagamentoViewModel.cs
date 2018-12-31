@@ -6,6 +6,18 @@ using System.Web;
 
 namespace Api.Models
 {
+    public class PagamentoGroupViewModel
+    {
+        public List<PagamentoViewModel> Pendente { get; set; }
+        public List<PagamentoViewModel> Pago { get; set; }
+
+        public PagamentoGroupViewModel()
+        {
+            Pendente = new List<PagamentoViewModel>();
+            Pago = new List<PagamentoViewModel>();
+        }
+    }
+
     public class PagamentoViewModel
     {
         public int Id { get; set; }

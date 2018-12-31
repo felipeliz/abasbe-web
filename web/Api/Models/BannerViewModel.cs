@@ -33,6 +33,7 @@ namespace Api.Models
         public string SituacaoFormatada { get; set; }
         public int Contador { get; set; }
         public SimpleClienteViewModel Cliente { get; set; }
+        public List<PagamentoViewModel> Pagamentos { get; set; }
 
         public BannerViewModel(Banner obj)
         {
@@ -60,6 +61,12 @@ namespace Api.Models
             }
 
             Cliente = new SimpleClienteViewModel(obj.Cliente);
+
+            Pagamentos = new List<PagamentoViewModel>();
+            obj.Pagamento.OrderByDescending(ass => ass.DataCriacao).ToList().ForEach(ass =>
+            {
+                Pagamentos.Add(new PagamentoViewModel(ass));
+            });
         }
     }
 }

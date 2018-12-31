@@ -1,13 +1,18 @@
 var controller = function ($scope, Auth, $state, $ionicHistory, $http) {
-
+    $scope.user = {}
     $scope.loggedIn = Auth.isLoggedIn();
 
     $scope.$watch(function () { return Auth.isLoggedIn(); }, function () {
         $scope.loggedIn = Auth.isLoggedIn();
+        $scope.user = Auth.get();
     })
 
     $scope.logout = function () {
         Auth.logout();
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go("menu.start");
     }
 
     $scope.getPhotoLista = function () {

@@ -50,7 +50,7 @@ namespace Api.Controllers
         public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);
-            
+
             Entities context = new Entities();
             var obj = context.Banner.FirstOrDefault(ban => ban.Id == id) ?? new Banner();
             if (Convert.ToInt32(param.IdTipoAcao) == 0)
@@ -76,6 +76,56 @@ namespace Api.Controllers
                 obj.Cadastro = DateTime.Now;
                 context.Banner.Add(obj);
             }
+            context.SaveChanges();
+            return true;
+        }
+
+        [HttpPost]
+        public bool Publicar([FromBody] dynamic param)
+        {
+            Entities context = new Entities();
+            Banner obj = new Banner();
+            Plano plano = context.Plano.Find(Convert.ToInt32(param.IdPlano));
+            Cliente cliente = context.Cliente.Find(AppExtension.IdUsuarioLogado());
+
+            if (AppExtension.ToDateTime(param.Estreia) < DateTime.Today)
+            {
+                throw new Exception("Você não pode publicar um banner retroativo.");
+            }
+
+            if (Convert.ToInt32(param.IdTipoAcao) == 0)
+            {
+                obj.Link = param.Link.ToString();
+                obj.Telefone = "";
+            }
+            else
+            {
+                obj.Link = "";
+                obj.Telefone = param.Telefone.ToString();
+            }
+            obj.IdCliente = cliente.Id;
+            obj.Descricao = param.Descricao.ToString();
+            obj.Titulo = param.Titulo.ToString();
+            obj.Estreia = AppExtension.ToDateTime(param.Estreia);
+            obj.Expiracao = obj.Estreia.AddDays(plano.Dias);
+            obj.Situacao = param.Situacao.ToString();
+            obj.Imagem = FileController.ConfirmUpload(param.Imagem?.ToString());
+            obj.Cadastro = DateTime.Now;
+
+            Pagamento pagamento = new Pagamento();
+            pagamento.Cliente = cliente;
+            pagamento.Plano = plano;
+            pagamento.Situacao = 0;
+            pagamento.Valor = plano.Valor;
+            pagamento.CheckoutIdentifier = Guid.NewGuid().ToString();
+            pagamento.DataCriacao = DateTime.Now;
+            pagamento.Dias = plano.Dias;
+            pagamento.Descricao = plano.Descricao;
+
+            obj.Pagamento.Add(pagamento);
+
+            context.Banner.Add(obj);
+
             context.SaveChanges();
             return true;
         }
@@ -108,7 +158,7 @@ namespace Api.Controllers
         [HttpPost]
         public string ObterQtdBannersAtivosETotal([FromBody] dynamic param)
         {
-            Entities context = new Entities();  
+            Entities context = new Entities();
             return context.Banner.Where(ban => ban.Expiracao.Day > DateTime.Today.Day).Count().ToString() + " / " + context.Banner.Count().ToString();
         }
 
@@ -123,8 +173,11 @@ namespace Api.Controllers
 
             query.OrderBy(ban => ban.Cadastro).ToList().ForEach(obj =>
             {
+                obj.Contador = obj.Contador == null ? 1 : obj.Contador + 1;
                 lista.Add(new BannerViewModel(obj));
             });
+
+            context.SaveChanges();
 
             return lista;
         }
@@ -139,9 +192,14 @@ namespace Api.Controllers
 
             BannerGroupViewModel group = new BannerGroupViewModel();
 
-            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
+            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A" && ban.IdCliente == cliente).ToList().ForEach(obj =>
             {
                 group.EmExibicao.Add(new BannerViewModel(obj));
+            });
+
+            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "E" && ban.IdCliente == cliente).ToList().ForEach(obj =>
+            {
+                group.EmEspera.Add(new BannerViewModel(obj));
             });
 
             context.Banner.Where(ban => ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
@@ -165,7 +223,7 @@ namespace Api.Controllers
             Entities context = new Entities();
 
             var banner = context.Banner.FirstOrDefault(ban => ban.Id == id && ban.IdCliente == cliente);
-            if(banner == null)
+            if (banner == null)
             {
                 throw new Exception("Registro não identificado.");
             }

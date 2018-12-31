@@ -45,7 +45,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public List<PagamentoViewModel> MeusPagamentos()
+        public PagamentoGroupViewModel MeusPagamentos()
         {
             int id = AppExtension.IdUsuarioLogado();
 
@@ -58,13 +58,19 @@ namespace Api.Controllers
                 throw new Exception("Objeto não encontrado");
             }
 
-            List<PagamentoViewModel> lista = new List<PagamentoViewModel>();
-            cliente.Pagamento.Where(pag => pag.Situacao != 2).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            PagamentoGroupViewModel obj = new PagamentoGroupViewModel();
+
+            cliente.Pagamento.Where(pag => pag.Situacao == 1).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
-                lista.Add(new PagamentoViewModel(pag));
+                obj.Pago.Add(new PagamentoViewModel(pag));
             });
 
-            return lista;
+            cliente.Pagamento.Where(pag => pag.Situacao == 0).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            {
+                obj.Pendente.Add(new PagamentoViewModel(pag));
+            });
+
+            return obj;
         }
 
         [HttpGet]
@@ -107,6 +113,24 @@ namespace Api.Controllers
 
             ClienteViewModel res = new ClienteViewModel(obj, true);
             return res;
+        }
+
+        [HttpPost]
+        public bool Esqueceu([FromBody] dynamic param)
+        {
+            string email = param.email;
+          
+            Entities context = new Entities();
+            var obj = context.Cliente.FirstOrDefault(op => op.Email == email);
+
+            if (obj == null)
+            {
+                throw new Exception("E-mail inválido");
+            }
+
+            // enviar e-mail com a senha do cliente
+
+            return true;
         }
 
     }

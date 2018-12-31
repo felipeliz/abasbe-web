@@ -1,38 +1,45 @@
-<ion-view title="Publicar Banner" id="page2">
+<ion-view title="Publicar Banner" id="page2" ng-init="init()">
   <ion-content padding="true" class="has-header">
-    <h3 id="publicarBanner-heading1" style="color:#000000;">Publicar banner</h3>
-    <div id="publicarBanner-markdown6" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Selecione uma imagem para o banner</p>
+    <h3>Publicar banner</h3>
+    <div class="show-list-numbers-and-dots">
+      <p>Selecione uma imagem para o banner</p>
     </div>
-    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
-      <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+    <div class="banner-img-holder">
+      <input type="file" file-change="uploadPhoto">
+      <img src="{{getPhoto()}}">
     </div>
     <div class="list">
-      <label class="item item-input item-stacked-label" id="publicarBanner-input3">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">Titulo</span>
-        <input type="text" placeholder="">
+        <input type="text" ng-model="form.Titulo" placeholder="">
       </label>
-      <label class="item item-input item-stacked-label" id="publicarBanner-input4">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">Descrição</span>
-        <input type="text" placeholder="">
+        <input type="text" ng-model="form.Descricao" placeholder="">
       </label>
-      <label class="item item-input item-stacked-label" id="publicarBanner-input6">
+      <label class="item item-input item-stacked-label">
         <span class="input-label">Data de estreia</span>
-        <input type="text" placeholder="">
+        <input type="text" ng-model="form.Estreia" placeholder="">
       </label>
       <div id="publicarBanner-button-bar1" class="button-bar">
-        <button id="publicarBanner-button6" class="button button-positive button-block button-outline">Telefone</button>
-        <button id="publicarBanner-button5" class="button button-positive button-block button-outline">Link</button>
+        <button ng-click="mudarTipo(0)" class="button button-positive button-block {{ form.IdTipoAcao != 0 ? 'button-outline' : '' }}">Link</button>
+        <button ng-click="mudarTipo(1)" class="button button-positive button-block {{ form.IdTipoAcao != 1 ? 'button-outline' : '' }}">Telefone</button>
       </div>
-      <label class="item item-input item-stacked-label" id="publicarBanner-input5">
-        <span class="input-label">Ação</span>
-        <input type="text" placeholder="">
+      <label class="item item-input item-stacked-label" ng-if="form.IdTipoAcao==0">
+        <span class="input-label">Link</span>
+        <input type="text"  ng-model="form.Link" placeholder="">
       </label>
+      <label class="item item-input item-stacked-label" ng-if="form.IdTipoAcao==1">
+          <span class="input-label">Telefone</span>
+          <input type="text" ng-model="form.Telefone"  placeholder="">
+        </label>
       <label class="item item-select item-stacked">
         <span class="input-label">Plano</span>
-        <select></select>
+        <select ng-options="x.Id as x.Descricao for x in planos" ng-model="form.IdPlano">
+          <option value="">Selecione um plano...</option>
+        </select>
       </label>
-      <a ui-sref="menu.belezaMaisForte()" id="publicarBanner-button1" class="button button-positive button-block">Publicar</a>
+      <a ng-click="salvar()" class="button button-positive button-block">Publicar</a>
     </div>
   </ion-content>
 </ion-view>
