@@ -31,6 +31,7 @@ namespace Api.Models
         public string Telefone { get; set; }
         public string Situacao { get; set; }
         public string SituacaoFormatada { get; set; }
+        public string SituacaoPagamentoFormatada { get; set; }
         public int Contador { get; set; }
         public SimpleClienteViewModel Cliente { get; set; }
         public List<PagamentoViewModel> Pagamentos { get; set; }
@@ -52,6 +53,7 @@ namespace Api.Models
             Telefone = obj.Telefone;
             Link = obj.Link;
             Contador = Convert.ToInt32(obj.Contador);
+            SituacaoPagamentoFormatada = "N/A";
 
             switch (obj.Situacao)
             {
@@ -63,9 +65,10 @@ namespace Api.Models
             Cliente = new SimpleClienteViewModel(obj.Cliente);
 
             Pagamentos = new List<PagamentoViewModel>();
-            obj.Pagamento.OrderByDescending(ass => ass.DataCriacao).ToList().ForEach(ass =>
+            obj.Pagamento.OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
-                Pagamentos.Add(new PagamentoViewModel(ass));
+                SituacaoPagamentoFormatada = PagamentoViewModel.GetSituacao(pag.Situacao);
+                Pagamentos.Add(new PagamentoViewModel(pag));
             });
         }
     }

@@ -4,8 +4,8 @@
     <div class="show-list-numbers-and-dots">
       <p>Selecione uma imagem para o banner</p>
     </div>
-    <div class="banner-img-holder">
-      <input type="file" file-change="uploadPhoto">
+    <div class="banner-img-holder" hide-input>
+      <input type="file" file-change="uploadPhoto" accept="image/jpeg"/>
       <img src="{{getPhoto()}}">
     </div>
     <div class="list">

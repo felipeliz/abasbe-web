@@ -16,18 +16,43 @@ namespace Api.Controllers
         public PagedList Lista([FromBody] dynamic param)
         {
             string titulo = param.Titulo;
+            string situacaoPagamento = param.SituacaoPagamento;
+            string situacao = param.Situacao;
+            string estreia = param.Estreia;
+            string expiracao = param.Expiracao;
 
             Entities context = new Entities();
-            List<BannerViewModel> lista = new List<BannerViewModel>();
 
-            var query = context.Banner.Where(ban => ban.Titulo.Contains(titulo)).ToList();
+            var query = context.Banner.Where(ban => ban.Titulo.Contains(titulo));
 
-            query.ToList().ForEach(obj =>
+            if (!string.IsNullOrEmpty(situacao))
             {
-                lista.Add(new BannerViewModel(obj));
-            });
+                query = query.Where(ban => ban.Situacao == situacao);
+            }
 
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            if (!string.IsNullOrEmpty(situacaoPagamento))
+            {
+                int situPag = Convert.ToInt32(situacaoPagamento);
+                query = query.Where(ban => ban.Pagamento.Any(pag => pag.Situacao == situPag));
+            }
+
+            if (!string.IsNullOrEmpty(estreia))
+            {
+                DateTime dtEstreia = AppExtension.ToDateTime(param.Estreia);
+
+                query = query.Where(ban => ban.Estreia >= dtEstreia );
+            }
+
+            if (!string.IsNullOrEmpty(expiracao))
+            {
+                DateTime dtExpiracao = AppExtension.ToDateTime(param.Expiracao);
+                query = query.Where(ban => ban.Expiracao <= dtExpiracao);
+            }
+
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderByDescending(ban => ban.Cadastro));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new BannerViewModel(obj as Banner)));
+
+            return paged;
         }
 
         [HttpGet]
@@ -227,6 +252,11 @@ namespace Api.Controllers
             {
                 throw new Exception("Registro não identificado.");
             }
+
+            banner.Pagamento.Where(pag => pag.Situacao == 0).ToList().ForEach(pag =>
+            {
+                pag.Situacao = 2;
+            });
 
             banner.Situacao = "I";
             context.SaveChanges();

@@ -9,7 +9,7 @@
         <p>Não existem pagamentos vinculados a sua conta de usuário.</p>
       </div>
     </div>
-    <div ng-hide="loading || (pagamentos.Pago.length == 0 && pagamentos.Pendente.length == 0)">
+    <div ng-hide="loading">
       <ion-list ng-hide="pagamentos.Pendente.length == 0">
           <ion-item class="item-divider">Pagamentos Pendentes</ion-item>
           <ion-item ng-repeat="pagamento in pagamentos.Pendente">

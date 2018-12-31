@@ -18,14 +18,11 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<CertificadoViewModel> lista = new List<CertificadoViewModel>();
 
-            var query = context.Certificado.Where(cer => cer.Descricao.Contains(descricao)).ToList();
+            var query = context.Certificado.Where(cer => cer.Descricao.Contains(descricao));
             
-            query.ToList().ForEach(obj =>
-            {
-                lista.Add(new CertificadoViewModel(obj));
-            });
-
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Descricao));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new CertificadoViewModel(obj as Certificado)));
+            return paged;
         }
 
         [HttpGet]

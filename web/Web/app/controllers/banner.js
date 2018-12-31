@@ -5,6 +5,10 @@
     $scope.tipoAcao = [{ Id: 0, Descricao: "Link" }, { Id: 1, Descricao: "Telefone" }];
     $scope.filter = {
         Titulo: "",
+        SituacaoPagamento: "",
+        Situacao: "",
+        Estreia: "",
+        Expiracao: "",
     };
     $scope.clientes = [];
     $scope.edicao = false;

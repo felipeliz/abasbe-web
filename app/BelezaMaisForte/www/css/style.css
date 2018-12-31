@@ -249,6 +249,10 @@ ion-view {
     font-weight: lighter;
 }
 
+.item + p.subtitle {
+    margin-top: 12px;
+}
+
 .text-muted {
     font-size: 14px;
     color: #666;
@@ -266,15 +270,6 @@ ion-view {
     max-width: 100%;
 }
 
-.banner-img-holder input[type="file"] {
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    opacity:0.0;
-    filter: alpha(opacity=0); 
-}
-
 a.anchor-theme-center {
     color: #7F2359; 
     width: 100%;
@@ -285,5 +280,5 @@ a.anchor-theme-center {
 }
   
 hr {
-    border-top: 1px solid #f5f5f5;
+    border-top: 1px solid rgba(221, 221, 221, 0.80);
 }

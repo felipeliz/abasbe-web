@@ -49,12 +49,9 @@ namespace Api.Controllers
                 query = query.Where(pro => pro.Situacao == s);
             }
 
-            query.ToList().ForEach(obj =>
-            {
-                lista.Add(new ClienteViewModel(obj, false));
-            });
-
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Nome));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new ClienteViewModel(obj as Cliente, false)));
+            return paged;
         }
 
         [HttpGet]

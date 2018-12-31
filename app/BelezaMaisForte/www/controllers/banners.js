@@ -20,6 +20,7 @@ var controller = function ($scope, $http, Auth, $location, $state) {
         }).then(function(response) {
             $scope.loading = false;
             $scope.group = response.data;
+            console.log(response.data);
         }, function(response) {
             $scope.loading = false;
             console.error(response.data.ExceptionMessage);

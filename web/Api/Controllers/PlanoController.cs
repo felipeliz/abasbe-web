@@ -19,18 +19,15 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<PlanoViewModel> lista = new List<PlanoViewModel>();
 
-            var query = context.Plano.Where(pla => pla.Descricao.Contains(descricao)).ToList();
+            var query = context.Plano.Where(pla => pla.Descricao.Contains(descricao));
             if (tipoPlano != "")
             {
-                query = query.Where(obj => obj.TipoPlano == tipoPlano).ToList();
+                query = query.Where(obj => obj.TipoPlano == tipoPlano);
             }
-
-            query.ToList().ForEach(obj =>
-            {
-                lista.Add(new PlanoViewModel(obj));
-            });
-
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Descricao));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new PlanoViewModel(obj as Plano)));
+            return paged;
         }
 
         [HttpGet]

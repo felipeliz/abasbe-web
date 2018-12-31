@@ -1,0 +1,9 @@
+<div ng-include="'templates/card-banner.html'"></div>
+<ion-item class="item-divider">Detalhes</ion-item>
+<p class="subtitle">Estreia em {{banner.Estreia}}</p>
+<p class="subtitle">Expira em {{banner.Expiracao}}</p>
+<p class="subtitle">Visualizações: {{banner.Contador}}</p>
+<p class="subtitle">Situação: {{banner.SituacaoFormatada}}</p>
+<p class="subtitle">Pagamento: {{banner.SituacaoPagamentoFormatada}}</p>
+<hr />
+<a ng-confirm-click="desabilitar(banner)" class="anchor-theme-center">Excluir Banner</a>

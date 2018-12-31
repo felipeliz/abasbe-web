@@ -18,14 +18,11 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<DisponibilidadeViewModel> lista = new List<DisponibilidadeViewModel>();
 
-            var query = context.Disponibilidade.Where(dis => dis.Descricao.Contains(descricao)).ToList();
+            var query = context.Disponibilidade.Where(dis => dis.Descricao.Contains(descricao));
 
-            query.ToList().ForEach(obj =>
-            {
-                lista.Add(new DisponibilidadeViewModel(obj));
-            });
-
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Descricao));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new DisponibilidadeViewModel(obj as Disponibilidade)));
+            return paged;
         }
 
         [HttpGet]

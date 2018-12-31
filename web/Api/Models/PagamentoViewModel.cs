@@ -52,7 +52,7 @@ namespace Api.Models
             Situacao = GetSituacao(obj.Situacao);
         }
 
-        public string GetSituacao(int s)
+        public static string GetSituacao(int s)
         {
             switch (s)
             {

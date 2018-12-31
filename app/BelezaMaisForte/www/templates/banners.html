@@ -12,60 +12,16 @@
     <div ng-hide="loading">
       <ion-list>
         <div class="card" ng-repeat="banner in group.EmExibicao">
-          <ion-item class="item-divider" id="meusBanners-list-item-divider2">Em Exibicao</ion-item>
-          <ion-item class="item-avatar">
-            <img ng-src="{{getPhotoLista(banner.Cliente)}}">
-            <h2>{{banner.Cliente.Nome}}</h2>
-            <p class="text-muted">{{banner.Cliente.Email}}</p>
-          </ion-item>
-          <div class="banner-img">
-            <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
-          </div>
-          <h2 class="title">{{banner.Titulo}}</h2>
-          <p class="subtitle">{{banner.Descricao}}</p>
-          <hr />
-          <p class="subtitle">Situação: {{banner.SituacaoFormatada}}</p>
-          <p class="subtitle">Estreia em {{banner.Estreia}}</p>
-          <p class="subtitle">Expira em {{banner.Expiracao}}</p>
-          <a ng-confirm-click="desabilitar(banner)" class="anchor-theme-center">Excluir Banner</a>
+            <ion-item class="item-divider">Em Exibicao</ion-item>
+            <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
-
         <div class="card" ng-repeat="banner in group.EmEspera">
-          <ion-item class="item-divider" id="meusBanners-list-item-divider2">Em espera</ion-item>
-          <ion-item class="item-avatar">
-            <img ng-src="{{getPhotoLista(banner.Cliente)}}">
-            <h2>{{banner.Cliente.Nome}}</h2>
-            <p class="text-muted">{{banner.Cliente.Email}}</p>
-          </ion-item>
-          <div class="banner-img">
-            <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
-          </div>
-          <h2 class="title">{{banner.Titulo}}</h2>
-          <p class="subtitle">{{banner.Descricao}}</p>
-          <hr />
-          <p class="subtitle">Situação: {{banner.SituacaoFormatada}}</p>
-          <p class="subtitle">Estreia em {{banner.Estreia}}</p>
-          <p class="subtitle">Expira em {{banner.Expiracao}}</p>
-          <a ng-confirm-click="desabilitar(banner)" class="anchor-theme-center">Excluir Banner</a>
+          <ion-item class="item-divider">Em espera</ion-item>
+          <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
-
         <div class="card" ng-repeat="banner in group.Expirados">
-          <ion-item class="item-divider" id="meusBanners-list-item-divider2">Expirados</ion-item>
-          <ion-item class="item-avatar">
-            <img ng-src="{{getPhotoLista(banner.Cliente)}}">
-            <h2>{{banner.Cliente.Nome}}</h2>
-            <p class="text-muted">{{banner.Cliente.Email}}</p>
-          </ion-item>
-          <div class="banner-img">
-            <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
-          </div>
-          <h2 class="title">{{banner.Titulo}}</h2>
-          <p class="subtitle">{{banner.Descricao}}</p>
-          <hr />
-          <p class="subtitle">Situação: {{banner.SituacaoFormatada}}</p>
-          <p class="subtitle">Estreia em {{banner.Estreia}}</p>
-          <p class="subtitle">Expira em {{banner.Expiracao}}</p>
-          <a ng-confirm-click="desabilitar(banner)" class="anchor-theme-center">Excluir Banner</a>
+          <ion-item class="item-divider">Expirados</ion-item>
+          <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
       </ion-list>
       <a ui-sref="menu.publicar()" id="meusBanners-button9" class="button button-positive button-block">Publicar Banner</a>

@@ -8,9 +8,35 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-2-3">
                         <label>Título</label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Titulo" md-input />
+                    </div>
+                    <div class="uk-width-1-3">
+                        <label>Situação</label>
+                        <select class="md-input label-fixed" ng-model="filter.Situacao" md-input>
+                            <option value="">Selecione...</option>
+                            <option value="A">Ativo</option>
+                            <option value="E">Em moderação</option>
+                            <option value="I">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Situação Pagamento</label>
+                        <select class="md-input label-fixed" ng-model="filter.SituacaoPagamento" md-input>
+                            <option value="">Selecione...</option>
+                            <option value="0">Pendente</option>
+                            <option value="1">Pago</option>
+                            <option value="2">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Estreia a partir de</label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="filter.Estreia" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Expiração até</label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="filter.Expiracao" md-input />
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
@@ -30,10 +56,10 @@
                                 <th></th>
                                 <th>Cliente</th>
                                 <th>Título</th>
-                                <th>Estreia</th>
-                                <th>Expiração</th>
+                                <th>Exibição</th>
                                 <th>Situação</th>
-                                <th>Visualizações</th>
+                                <th>Pagamento</th>
+                                <th>Views</th>
                                 <th class="acoes-2">Ações</th>
                             </tr>
                         </thead>
@@ -45,9 +71,9 @@
                                     <p class="uk-margin-remove"><span class="uk-text-muted">{{banner.Cliente.CPF}}</span></p>
                                 </td>
                                 <td>{{banner.Titulo}}</td>
-                                <td>{{banner.Estreia}}</td>
-                                <td>{{banner.Expiracao}}</td>
+                                <td>{{banner.Estreia}} - {{banner.Expiracao}}</td>
                                 <td>{{banner.SituacaoFormatada}}</td>
+                                <td>{{banner.SituacaoPagamentoFormatada}}</td>
                                 <td>{{banner.Contador}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>

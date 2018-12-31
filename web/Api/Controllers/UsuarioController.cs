@@ -75,14 +75,11 @@ namespace Api.Controllers
             Entities context = new Entities();
             List<UsuarioViewModel> lista = new List<UsuarioViewModel>();
 
-            var query = context.Usuario.Where(obj => obj.Nome.Contains(nome)).ToList();
+            var query = context.Usuario.Where(obj => obj.Nome.Contains(nome));
 
-            query.ToList().ForEach(obj =>
-            {
-                lista.Add(new UsuarioViewModel(obj));
-            });
-
-            return PagedList.Create(param.page?.ToString(), 10, lista);
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Nome));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new UsuarioViewModel(obj as Usuario)));
+            return paged;
         }
 
         [HttpGet]
