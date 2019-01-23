@@ -30,6 +30,7 @@ namespace Api
         public string ObservacaoFilhos { get; set; }
         public string Observacoes { get; set; }
         public string Sexo { get; set; }
+        public string Habilidades { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Disponibilidade Disponibilidade { get; set; }

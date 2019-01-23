@@ -9,6 +9,7 @@ namespace Api.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string EstadoSigla { get; set; }
         public bool Capital { get; set; }
 
         public CidadeViewModel(Cidade obj)
@@ -20,6 +21,7 @@ namespace Api.Models
 
             Id = obj.Id;
             Nome = obj.Nome;
+            EstadoSigla = obj.Estado.Sigla;
             Capital = obj.Capital;
         }
     }

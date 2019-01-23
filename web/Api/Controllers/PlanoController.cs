@@ -157,6 +157,7 @@ namespace Api.Controllers
             var obj = context.Plano.FirstOrDefault(pla => pla.Id == id) ?? new Plano();
             obj.Descricao = param.Descricao.ToString();
             obj.Dias = Convert.ToInt32(param.Dias);
+            obj.Vezes = Convert.ToInt32(param.Vezes);
             obj.Valor = Convert.ToDecimal(param.Valor);
             obj.TipoPlano = param.TipoPlano.ToString();
 

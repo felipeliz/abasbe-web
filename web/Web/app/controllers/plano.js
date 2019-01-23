@@ -59,8 +59,9 @@
     $scope.salvar = function () {
         Validation.required("Descrição", $scope.form.Descricao);
         Validation.required("Valor", $scope.form.Valor);
+        Validation.required("Vezes", $scope.form.Vezes);
         Validation.required("Dias", $scope.form.Dias);
-        if ($scope.form.TipoPlano != 'A' && $scope.form.TipoPlano != 'B') {
+        if ($scope.form.TipoPlano != 'A' && $scope.form.TipoPlano != 'B' && $scope.form.TipoPlano != 'P') {
             toastr.error('O campo Tipo de Plano é obrigatório.');
             return;
         }
@@ -103,13 +104,12 @@
     }
 
     $scope.retornarTipoPlano = function (tipoPlano) {
-        if (String(tipoPlano) === 'B') {
-            return 'Banner';
+        switch (tipoPlano) {
+            case 'B': return 'Banner';
+            case 'A': return 'Associado';
+            case 'P': return 'Profissional';
+            default: return 'Desconhecido';
         }
-        else {
-            return 'Associado';
-        }
-
     }
 }
 angular.module('app').controller('plano', controller);

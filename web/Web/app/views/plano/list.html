@@ -16,8 +16,9 @@
                         <label>Tipo de Plano</label>
                         <select class="md-input label-fixed" ng-model="filter.TipoPlano" md-input>
                             <option value="">Selecione...</option>
-                            <option value="False">Associado</option>
-                            <option value="True">Banner</option>
+                            <option value="A">Associado</option>
+                            <option value="B">Banner</option>
+                            <option value="P">Profissional</option>
                         </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
@@ -37,6 +38,7 @@
                             <tr>
                                 <th>Descrição</th>
                                 <th>Valor</th>
+                                <th>Vezes</th>
                                 <th>Qtd. Dias</th>
                                 <th>Tipo de Plano</th>
                                 <th class="acoes-2">Ações</th>
@@ -46,6 +48,7 @@
                             <tr ng-repeat="certificado in lista.list">
                                 <td>{{certificado.Descricao}}</td>
                                 <td>{{certificado.Valor | currency : 'R$' : 2}}</td>
+                                <td>{{certificado.Vezes}}</td>
                                 <td>{{certificado.Dias}}</td>
                                 <td>{{retornarTipoPlano(certificado.TipoPlano)}}</td>
                                 <td>

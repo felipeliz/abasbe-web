@@ -17,15 +17,14 @@ namespace Api
         public string Id { get; set; }
         public int IdCliente { get; set; }
         public int IdProfissao { get; set; }
-        public int IdDisponibilidade { get; set; }
-        public string Descricao { get; set; }
+        public string MotivoAfastamento { get; set; }
         public System.DateTime DataInicial { get; set; }
         public Nullable<System.DateTime> DataFinal { get; set; }
         public Nullable<System.DateTime> DataCadastro { get; set; }
         public string Telefone { get; set; }
+        public string Empresa { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
     }
 }

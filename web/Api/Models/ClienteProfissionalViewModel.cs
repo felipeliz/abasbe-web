@@ -27,6 +27,8 @@ namespace Api.Models
         public string CidadeFormatada { get; set; }
         public string ProfissaoFormatada { get; set; }
         public string DisponibilidadeFormatada { get; set; }
+        public string Habilidades { get; set; }
+
 
         public ClienteProfissionalViewModel(ClienteProfissional obj)
         {
@@ -50,6 +52,7 @@ namespace Api.Models
             PretensaoSalarial = obj.PretensaoSalarial;
             ObservacaoFilhos = obj.ObservacaoFilhos;
             Observacoes = obj.Observacoes;
+            Habilidades = obj.Habilidades;
 
             ProfissaoFormatada = obj.Profissao.Descricao;
             DisponibilidadeFormatada = obj.Disponibilidade.Descricao;

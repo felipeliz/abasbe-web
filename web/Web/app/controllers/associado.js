@@ -8,6 +8,8 @@
         Nome: "",
         NomeEmpresa: "",
         Cnpj: "",
+        Cpf: "",
+        Cidade: "",
         Situacao: "True"
     };
     $scope.edicao = false;

@@ -44,7 +44,8 @@ namespace Api.Utils
 
             int lastcount = 0;
             pagedList.pages.Add(pagedList.current);
-            while (pagedList.pages.Count != lastcount && pagedList.pages.Count < 5)
+
+            while (pagedList.pages.Count != lastcount && pagedList.pages.Count < 5 && pagedList.pages.Count > 0)
             {
                 lastcount = pagedList.pages.Count;
                 pagedList.pages.Insert(0, pagedList.pages.First() - 1);

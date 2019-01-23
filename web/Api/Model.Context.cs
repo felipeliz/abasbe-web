@@ -30,8 +30,6 @@ namespace Api
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<ClienteCertificado> ClienteCertificado { get; set; }
         public virtual DbSet<ClienteEquipamentos> ClienteEquipamentos { get; set; }
-        public virtual DbSet<ClienteExperiencia> ClienteExperiencia { get; set; }
-        public virtual DbSet<ClienteProfissional> ClienteProfissional { get; set; }
         public virtual DbSet<Disponibilidade> Disponibilidade { get; set; }
         public virtual DbSet<Equipamento> Equipamento { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
@@ -39,6 +37,8 @@ namespace Api
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
+        public virtual DbSet<ClienteExperiencia> ClienteExperiencia { get; set; }
+        public virtual DbSet<ClienteProfissional> ClienteProfissional { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
     }
 }

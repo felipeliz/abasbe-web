@@ -85,6 +85,10 @@
                         </select>
                     </div>
                     <div class="uk-width-1-1 uk-grid-margin">
+                        <label>Tecnicas e Habilidades <red>*</red></label>
+                        <input type="text" class="md-input label-fixed" ng-model="form.Curriculo.Habilidades" md-input />
+                    </div>
+                    <div class="uk-width-1-1 uk-grid-margin">
                         <label>Observações</label>
                         <input type="text" maxlength="500" class="md-input label-fixed" ng-model="form.Curriculo.Observacoes" md-input />
                     </div>
@@ -301,8 +305,8 @@
                     <table class="uk-table uk-table-striped">
                         <thead>
                             <tr>
+                                <th>Empresa</th>
                                 <th>Profissão</th>
-                                <th>Disponibilidade</th>
                                 <th>Telefone</th>
                                 <th>Inicio</th>
                                 <th>Final</th>
@@ -312,10 +316,10 @@
                         <tbody>
                             <tr ng-repeat="element in form.Experiencias">
                                 <td>
-                                    {{element.Profissao.Descricao}}
+                                    {{element.Empresa}}
                                 </td>
                                 <td>
-                                    {{element.Disponibilidade.Descricao}}
+                                    {{element.Profissao.Descricao}}
                                 </td>
                                 <td>
                                     {{mascaraTelefone(element.Telefone)}}
@@ -464,16 +468,18 @@
         </div>
         <div class="uk-grid">
             <div class="uk-width-1-1">
+                <label>Empresa <red>*</red></label>
+                <input type="text" class="md-input label-fixed" ng-model="experiencia.Empresa" md-input />
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
                 <label>Profissão <red>*</red></label>
                 <select class="md-input label-fixed" ng-model="experiencia.Profissao" ng-options="item as item.Descricao for item in profissoes" md-input>
                     <option value="">Selecione...</option>
                 </select>
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
-                <label>Disponibilidade <red>*</red></label>
-                <select class="md-input label-fixed" ng-model="experiencia.Disponibilidade" ng-options="item as item.Descricao for item in disponibilidades" md-input>
-                    <option value="">Selecione...</option>
-                </select>
+                <label>Motivo do Afastamento <red>*</red></label>
+                <input type="text" class="md-input label-fixed" ng-model="experiencia.MotivoAfastamento" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Telefone <red>*</red></label>
@@ -486,10 +492,6 @@
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Data Final</label>
                 <input type="text" ui-mask="99/99/9999" model-view-value="true" datepicker class="md-input uk-input" ng-model="experiencia.DataFinal" md-input />
-            </div>
-            <div class="uk-width-1-1 uk-grid-margin">
-                <label>Descrição</label>
-                <input type="text" class="md-input uk-input" ng-model="experiencia.Descricao" md-input />
             </div>
             <div class="uk-width-1 uk-grid-margin">
                 <div class="uk-align-right">
@@ -512,12 +514,16 @@
         </div>
         <div class="uk-grid">
             <div class="uk-width-1-1">
+                <label>Empresa</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Empresa" md-input />
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
                 <label>Profissão</label>
                 <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Profissao.Descricao" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
-                <label>Disponibilidade</label>
-                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Disponibilidade.Descricao" md-input />
+                <label>Motivo Afastamento</label>
+                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.MotivoAfastamento" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Telefone</label>
@@ -530,10 +536,6 @@
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Data Final</label>
                 <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.DataFinal" md-input />
-            </div>
-            <div class="uk-width-1-1 uk-grid-margin">
-                <label>Descrição</label>
-                <input type="text" ng-disabled="true" class="md-input uk-input" ng-model="experiencia.Descricao" md-input />
             </div>
         </div>
     </div>

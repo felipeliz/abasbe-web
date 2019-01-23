@@ -118,6 +118,7 @@ namespace Api.Controllers
                 curr.FlagDiarista = param.Curriculo.FlagDiarista;
                 curr.PretensaoSalarial = param.Curriculo.PretensaoSalarial;
                 curr.ObservacaoFilhos = param.Curriculo.ObservacaoFilhos;
+                curr.Habilidades = param.Curriculo.Habilidades;
                 curr.Observacoes = param.Curriculo.Observacoes;
 
                 if (obj.ClienteProfissional.Count() == 0)
@@ -166,11 +167,11 @@ namespace Api.Controllers
                     {
                         ClienteExperiencia relation = new ClienteExperiencia();
                         relation.Id = Guid.NewGuid().ToString();
-                        relation.IdDisponibilidade = Convert.ToInt32(element.Disponibilidade.Id);
                         relation.IdProfissao = Convert.ToInt32(element.Profissao.Id);
                         relation.DataInicial = AppExtension.ToDateTime(element.DataInicial);
                         relation.DataFinal = AppExtension.ToDateTime(element.DataFinal);
-                        relation.Descricao = element.Descricao?.ToString();
+                        relation.MotivoAfastamento = element.MotivoAfastamento?.ToString();
+                        relation.Empresa = element.Empresa?.ToString();
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
                         relation.Telefone = element.Telefone;
                         obj.ClienteExperiencia.Add(relation);
@@ -179,6 +180,7 @@ namespace Api.Controllers
 
                 if (id <= 0)
                 {
+                    obj.Cadastro = DateTime.Now;
                     obj.FlagCliente = "P";
                     context.Cliente.Add(obj);
                 }
@@ -187,8 +189,12 @@ namespace Api.Controllers
                 {
                     context.SaveChanges();
                 }
-                catch (DbEntityValidationException ex)
+                catch (Exception ex)
                 {
+                    if(ex.InnerException?.InnerException?.Message.Contains("CLI_EMAIL_UNIQUE") ?? false)
+                    {
+                        throw new Exception("Este e-mail já está sendo utilizado.");
+                    }
                     throw ex;
                 }
 

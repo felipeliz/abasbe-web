@@ -194,6 +194,7 @@
         Validation.required("Tempo de experiência", $scope.form.Curriculo.TempoExperiencia);
         Validation.required("Pretensão salarial", $scope.form.Curriculo.PretensaoSalarial);
         Validation.required("Data Expiração", $scope.form.DataExpiracao);
+        Validation.required("Técnicas e Habilidades", $scope.form.Curriculo.Habilidades);
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Senha", $scope.form.Senha);
         Validation.required("Telefone Celular", $scope.form.TelefoneCelular);
@@ -301,8 +302,9 @@
     }
 
     $scope.addExperiencia = function () {
+        Validation.required("Empresa", $scope.experiencia.Empresa);
+        Validation.required("MotivoAfastamento", $scope.experiencia.MotivoAfastamento);
         Validation.requiredChild("Profissão", $scope.experiencia.Profissao, "Id");
-        Validation.requiredChild("Disponibilidade", $scope.experiencia.Disponibilidade, "Id");
         Validation.required("Telefone", $scope.experiencia.Telefone);
         Validation.required("Data Inicial", $scope.experiencia.DataInicial);
 

@@ -13,11 +13,8 @@
                         <input type="text" class="md-input label-fixed" ng-model="filter.Nome" md-input />
                     </div>
                     <div class="uk-width-1-3">
-                        <label>Situação</label>
-                        <select class="md-input label-fixed" ng-model="filter.Situacao" md-input>
-                            <option value="True">Ativo</option>
-                            <option value="False">Inativo</option>
-                        </select>
+                        <label>CPF</label>
+                        <input type="text" class="md-input label-fixed" ui-mask="999.999.999-99" ng-model="filter.Cpf" md-input />
                     </div>
                     <div class="uk-width-2-3 uk-grid-margin">
                         <label>Razão Social</label>
@@ -26,6 +23,17 @@
                     <div class="uk-width-1-3 uk-grid-margin">
                         <label>CNPJ</label>
                         <input type="text" class="md-input label-fixed" cnpj ng-model="filter.Cnpj" md-input />
+                    </div>
+                    <div class="uk-width-2-3 uk-grid-margin">
+                        <label>Cidade</label>
+                        <input type="text" class="md-input label-fixed" ng-model="filter.Cidade" md-input />
+                    </div>
+                    <div class="uk-width-1-3 uk-grid-margin">
+                        <label>Situação</label>
+                        <select class="md-input label-fixed" ng-model="filter.Situacao" md-input>
+                            <option value="True">Ativo</option>
+                            <option value="False">Inativo</option>
+                        </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
@@ -45,6 +53,7 @@
                                 <th></th>
                                 <th>Nome / Responsável</th>
                                 <th>Empresa</th>
+                                <th>Cidade</th>
                                 <th>E-mail</th>
                                 <th>Celular</th>
                                 <th>Situação</th>
@@ -62,6 +71,7 @@
                                     <p class="uk-margin-remove">{{ associado.FlagCliente=='E' ? associado.NomeEmpresa : 'Pessoa física'}}</p>
                                     <p class="uk-margin-remove"><span class="uk-text-muted">{{associado.Cnpj}}</span></p>
                                 </td>
+                                <td>{{associado.Cidade.Nome}} - {{associado.Cidade.EstadoSigla}}</td>
                                 <td>{{associado.Email}}</td>
                                 <td>{{associado.TelefoneCelular || '-'}}</td>
                                 <td>{{associado.Situacao == "True" ? "Ativo" : "Inativo"}}</td>

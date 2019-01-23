@@ -19,7 +19,9 @@ namespace Api.Controllers
         {
             string nome = param.Nome?.ToString();
             string nomeEmpresa = param.NomeEmpresa?.ToString();
+            string cidade = param.Cidade?.ToString();
             string cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
+            string cpf = Regex.Replace(param.Cpf?.ToString(), "[^0-9]", "");
             string situacao = param.Situacao?.ToString();
 
             Entities context = new Entities();
@@ -34,9 +36,17 @@ namespace Api.Controllers
             {
                 query = query.Where(obj => obj.Cnpj.ToLower().Contains(cnpj.ToLower()));
             }
+            if (!String.IsNullOrEmpty(cpf))
+            {
+                query = query.Where(obj => obj.CPF.ToLower().Contains(cpf.ToLower()));
+            }
             if (!String.IsNullOrEmpty(nome))
             {
                 query = query.Where(obj => obj.Nome.ToLower().Contains(nome.ToLower()));
+            }
+            if (!String.IsNullOrEmpty(cidade))
+            {
+                query = query.Where(obj => obj.Cidade.Nome.ToLower().Contains(cidade.ToLower()));
             }
 
             if (situacao != "Todas")
@@ -99,6 +109,11 @@ namespace Api.Controllers
                 obj.Cnpj = Regex.Replace(param.Cnpj?.ToString(), "[^0-9]", "");
             }
 
+            if (managed.Contains(obj.FlagCliente) == false)
+            {
+                throw new Exception("Tipo de associado não identificado");
+            }
+
             if (obj.Senha.Count() < 4)
             {
                 throw new Exception("A senha precisa ter mais do que 4 caracteres.");
@@ -106,10 +121,22 @@ namespace Api.Controllers
 
             if (id <= 0)
             {
+                obj.Cadastro = DateTime.Now;
                 context.Cliente.Add(obj);
             }
 
-            return context.SaveChanges() > 0;
+            try
+            {
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException?.InnerException?.Message.Contains("CLI_EMAIL_UNIQUE") ?? false)
+                {
+                    throw new Exception("Este e-mail já está sendo utilizado.");
+                }
+                throw ex;
+            }
         }
 
         [HttpGet]

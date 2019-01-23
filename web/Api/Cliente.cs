@@ -20,9 +20,9 @@ namespace Api
             this.Pagamento = new HashSet<Pagamento>();
             this.ClienteCertificado = new HashSet<ClienteCertificado>();
             this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
+            this.Banner = new HashSet<Banner>();
             this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
             this.ClienteProfissional = new HashSet<ClienteProfissional>();
-            this.Banner = new HashSet<Banner>();
         }
     
         public int Id { get; set; }
@@ -43,6 +43,7 @@ namespace Api
         public string Cnpj { get; set; }
         public string FlagCliente { get; set; }
         public Nullable<int> IdPlano { get; set; }
+        public Nullable<System.DateTime> Cadastro { get; set; }
     
         public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,11 +53,11 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteEquipamentos> ClienteEquipamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banner { get; set; }
+        public virtual Plano Plano { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Banner> Banner { get; set; }
-        public virtual Plano Plano { get; set; }
     }
 }
