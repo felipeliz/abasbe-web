@@ -80,7 +80,29 @@
         });
     }
 
-    $scope.carregarCidades = function (idEstado) {
+    $scope.checkCep = function () {
+        if ($scope.form.CEP != null && $scope.form.CEP.length == 8) {
+            $http({
+                method: "GET",
+                url: "https://viacep.com.br/ws/" + $scope.form.CEP + "/json",
+                token: false
+            }).then(function mySuccess(response) {
+                if (response.data.erro == null) {
+                    $scope.form.Bairro = response.data.bairro;
+                    $scope.form.Logradouro = response.data.logradouro;
+                    for (var i in $scope.estados) {
+                        var estado = $scope.estados[i];
+                        if (estado.Sigla.toLowerCase() == response.data.uf.toLowerCase()) {
+                            $scope.form.IdEstado = estado.Id;
+                            $scope.carregarCidades(estado.Id, response.data.localidade);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    $scope.carregarCidades = function (idEstado, c) {
         if (idEstado != null) {
             $loading.show();
             $http({
@@ -89,6 +111,16 @@
             }).then(function mySuccess(response) {
                 $loading.hide();
                 $scope.cidades = response.data;
+
+                if (c != null) {
+                    for (var i in $scope.cidades) {
+                        var cidade = $scope.cidades[i];
+                        if (cidade.Nome.toLowerCase() == c.toLowerCase()) {
+                            $scope.form.IdCidade = cidade.Id;
+                        }
+                    }
+                }
+
             }, function myError(response) {
                 $loading.hide();
                 toastr.error(response.data.ExceptionMessage);

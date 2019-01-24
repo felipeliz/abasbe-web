@@ -297,7 +297,9 @@ app.factory('httpRequestInterceptor', function ($q, Auth, $location) {
     return {
         request: function (config) {
             if (Auth.isLoggedIn()) {
-                config.headers['Token'] = Auth.get().Token;
+                if (config.token != false) {
+                    config.headers['Token'] = Auth.get().Token;
+                }
             }
             return config;
         },

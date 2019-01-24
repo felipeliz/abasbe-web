@@ -10,7 +10,7 @@
                         </div>
                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                         <div class="user_avatar_controls">
-                            <span class="btn-file">
+                            <span ng-if="IsAdmin" class="btn-file">
                                 <span class="fileinput-new"><i class="material-icons"></i></span>
                                 <span class="fileinput-exists"><i class="material-icons"></i></span>
                                 <input type="file" file-change="uploadPhoto" name="user_edit_avatar_control" id="user_edit_avatar_control">
@@ -204,7 +204,7 @@
                 <div class="uk-grid">
                     <div class="uk-width-1-3">
                         <label>CEP</label>
-                        <input type="text" ui-mask="99999-999" class="md-input label-fixed" ng-model="form.CEP" md-input />
+                        <input type="text" ui-mask="99999-999" ng-change="checkCep()" class="md-input label-fixed" ng-model="form.CEP" md-input />
                     </div>
                     <div class="uk-width-1-3">
                         <label>Estado <red>*</red></label>
@@ -457,7 +457,7 @@
             </div>
             <div class="uk-width-1-1 uk-grid-margin">
                 <label>Descrição <red>*</red></label>
-                <input type="text" class="md-input label-fixed" ng-model="certificado.Descricao" md-input />
+                <input type="text" maxlength="150" class="md-input label-fixed" ng-model="certificado.Descricao" md-input />
             </div>
             <div class="uk-width-1 uk-grid-margin">
                 <div class="uk-align-right">
