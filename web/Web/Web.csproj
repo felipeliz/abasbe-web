@@ -158,8 +158,6 @@
     <Content Include="app\views\disponibilidade\list.html" />
     <Content Include="app\views\equipamento\form.html" />
     <Content Include="app\views\equipamento\list.html" />
-    <Content Include="app\views\parceiro\form.html" />
-    <Content Include="app\views\parceiro\list.html" />
     <Content Include="app\views\plano\form.html" />
     <Content Include="app\views\plano\list.html" />
     <Content Include="app\views\profissional\form.html" />

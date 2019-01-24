@@ -69,6 +69,7 @@
           <Property Name="Id" Type="varchar" MaxLength="36" Nullable="false" />
           <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="IdCertificado" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="150" />
           <Property Name="DataCadastro" Type="datetime" />
         </EntityType>
         <EntityType Name="ClienteEquipamentos">
@@ -180,6 +181,7 @@
           <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="FlagAdministrador" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <Association Name="FK_AssociadoPagamento_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
@@ -600,6 +602,7 @@
           <Property Name="DataCadastro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Certificado" Relationship="AbasbeModel.FK_ClienteCertificado_Certificado" FromRole="ClienteCertificado" ToRole="Certificado" />
           <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_ClienteCertificado_Cliente" FromRole="ClienteCertificado" ToRole="Cliente" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ClienteEquipamentos">
           <Key>
@@ -672,6 +675,7 @@
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Senha" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="FlagAdministrador" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ClienteCertificado_Certificado">
           <End Type="AbasbeModel.Certificado" Role="Certificado" Multiplicity="1" />
@@ -991,6 +995,7 @@
           <EntitySetMapping Name="ClienteCertificado">
             <EntityTypeMapping TypeName="AbasbeModel.ClienteCertificado">
               <MappingFragment StoreEntitySet="ClienteCertificado">
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
                 <ScalarProperty Name="IdCertificado" ColumnName="IdCertificado" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
@@ -1060,6 +1065,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="AbasbeModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="FlagAdministrador" ColumnName="FlagAdministrador" />
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />

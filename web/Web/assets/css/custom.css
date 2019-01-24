@@ -245,36 +245,62 @@ input.ui-select-search {
     background-image: none;
 }
 
-    .uk-modal-dialog .md-card-toolbar {
-        height: 33px;
-        margin: -24px;
-        padding: 0px 16px;
-        padding-bottom: 12px;
-        margin-bottom: 16px;
-        border-bottom: 1px solid rgba(0,0,0,.12);
-        background: #fff;
-    }
+.uk-modal-dialog .md-card-toolbar {
+    height: 33px;
+    margin: -24px;
+    padding: 0px 16px;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+}
 
-    .uk-modal-dialog .md-card-toolbar-heading-text {
-        font: 500 14px/50px Roboto,sans-serif;
+.uk-modal-dialog .md-card-toolbar-heading-text {
+    font: 500 14px/50px Roboto,sans-serif;
+    color: #212121;
+    margin: 0;
+    float: left;
+    overflow: hidden;
+    height: 48px;
+}
+
+.uk-modal-dialog .md-card-toolbar .md-icon {
+    color: #727272;
+    background: none;
+}
+
+    .uk-modal-dialog .md-card-toolbar .md-icon:hover {
         color: #212121;
-        margin: 0;
-        float: left;
-        overflow: hidden;
-        height: 48px;
+        background: rgba(0,0,0,.08);
     }
 
-    .uk-modal-dialog .md-card-toolbar .md-icon {
-        color: #727272;
-        background: none;
-    }
+.uk-modal-dialog .md-card-toolbar-actions {
+    float: right;
+    margin-top: 8px;
+}
 
-        .uk-modal-dialog .md-card-toolbar .md-icon:hover {
-            color: #212121;
-            background: rgba(0,0,0,.08);
-        }
+.md-input-suffix .suffix {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+}
 
-    .uk-modal-dialog .md-card-toolbar-actions {
-        float: right;
-        margin-top: 8px;
-    }
+.md-input-wrapper + .suffix {
+    display: none;
+}
+
+.md-input-wrapper + .suffix {
+    display: none;
+}
+
+.md-input-wrapper.md-input-filled + .suffix, .md-input-wrapper.md-input-focus + .suffix {
+    display: block;
+}
+
+.md-input-suffix input[type=text].md-input {
+    padding-right: 30% !important;
+}
+
+.md-input-suffix {
+    position: relative;
+}

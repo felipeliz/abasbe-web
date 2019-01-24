@@ -14,7 +14,7 @@
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
-                            <a class="md-btn md-btn-primary" ng-click="novo()" href="javascript:void(0)">Novo</a>
+                            <a class="md-btn md-btn-primary" ng-if="IsAdmin" ng-click="novo()" href="javascript:void(0)">Novo</a>
                             <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <td>{{disponibilidade.Descricao}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(disponibilidade.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(disponibilidade.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                    <a class="md-btn md-btn md-btn-small" ng-if="IsAdmin" title="Excluir" ng-confirm-click="excluir(disponibilidade.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
                         </tbody>

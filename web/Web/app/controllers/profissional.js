@@ -1,5 +1,7 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
+    $scope.IsAdmin = (Auth.isLoggedIn() ? Auth.get().FlagAdministrador : false);
+
     $scope.form = {
         Id: 0, Nome: "", CPF: "", CEP: "", Situacao: "True",
         Curriculo: {
@@ -275,13 +277,17 @@
     }
 
     $scope.addCertificado = function () {
-        Validation.requiredChild("Certificado", $scope.certificado, "Id");
         if ($scope.certificado != null) {
+            Validation.requiredChild("Certificado", $scope.certificado.Certificado, "Id");
+            Validation.requiredChild("Descricao", $scope.certificado, "Descricao");
             if ($scope.form.Certificados == null) {
                 $scope.form.Certificados = [];
             }
-            $scope.form.Certificados.push({ Id: -1, Certificado: JSON.parse(JSON.stringify($scope.certificado)) });
+            $scope.form.Certificados.push({ Id: -1, Descricao: $scope.certificado.Descricao, Certificado: JSON.parse(JSON.stringify($scope.certificado.Certificado)) });
             UIkit.modal("#certificado").hide();
+        }
+        else {
+            toastr.error("Preencha os dados corretamente");
         }
     }
 

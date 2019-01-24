@@ -1,5 +1,7 @@
 ﻿var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $stateParams, $loading) {
 
+    $scope.IsAdmin = (Auth.isLoggedIn() ? Auth.get().FlagAdministrador : false);
+
     $scope.form = { Id: 0, Nome: "", Email: "", Senha: "", Telefone: "", DataExpiracao: "", Situacao: "True" };
     $scope.lista = {};
     $scope.filter = {

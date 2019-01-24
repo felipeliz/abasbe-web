@@ -1,5 +1,7 @@
 var controller = function ($scope, $http, $location, Validation, Auth) {
 
+    $scope.IsAdmin = (Auth.isLoggedIn() ? Auth.get().FlagAdministrador : false);
+
     $scope.form = {};
 
     $scope.salvar = function () {

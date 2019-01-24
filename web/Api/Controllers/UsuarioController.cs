@@ -109,6 +109,7 @@ namespace Api.Controllers
             obj.Nome = param.Nome?.ToString();
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
+            obj.FlagAdministrador = Convert.ToBoolean(param.FlagAdministrador) ? "S" : "N";
 
             if (obj.Senha.Count() < 4)
             {

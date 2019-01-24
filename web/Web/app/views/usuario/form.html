@@ -20,10 +20,18 @@
                         <label>Senha <red>*</red></label>
                         <input type="password" autocomplete='new-password' class="md-input label-fixed" ng-model="form.Senha" md-input />
                     </div>
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.FlagAdministrador" icheck />
+                            </span>
+                            <label>É administrador do sistema?</label>
+                        </div>
+                    </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
                             <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
-                            <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
+                            <a class="md-btn md-btn-primary" ng-if="IsAdmin" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
                         </div>
                     </div>
                 </div>

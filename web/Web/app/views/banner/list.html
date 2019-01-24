@@ -40,7 +40,7 @@
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
-                            <a class="md-btn md-btn-primary" ng-click="novo()" href="javascript:void(0)">Novo</a>
+                            <a class="md-btn md-btn-primary" ng-click="novo()" ng-if="IsAdmin" href="javascript:void(0)">Novo</a>
                             <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                 <td>{{banner.Contador}}</td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-if="IsAdmin" ng-confirm-click="excluir(banner.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
                         </tbody>

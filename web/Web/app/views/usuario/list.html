@@ -14,7 +14,7 @@
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
-                            <a class="md-btn md-btn-primary" ng-click="novo()" href="javascript:void(0)">Novo</a>
+                            <a class="md-btn md-btn-primary" ng-if="IsAdmin" ng-click="novo()" href="javascript:void(0)">Novo</a>
                             <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
                         </div>
                     </div>
@@ -29,16 +29,18 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>E-mail</th>
-                                <th class="acoes-2">Ações</th>
+                                <th>Administrador</th>
+                                <th class="acoes-2" ng-if="IsAdmin">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="usuario in lista.list">
                                 <td>{{usuario.Nome}}</td>
                                 <td>{{usuario.Email}}</td>
+                                <td>{{usuario.FlagAdministrador ? "Sim" : "Não"}}</td>
                                 <td>
-                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(usuario.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="excluir(usuario.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                    <a class="md-btn md-btn md-btn-small" ng-if="IsAdmin" title="Editar" ng-click="editar(usuario.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
+                                    <a class="md-btn md-btn md-btn-small" ng-if="IsAdmin" title="Excluir" ng-confirm-click="excluir(usuario.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
                         </tbody>

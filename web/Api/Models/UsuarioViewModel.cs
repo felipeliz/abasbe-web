@@ -13,6 +13,7 @@ namespace Api.Models
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Token { get; set; }
+        public bool FlagAdministrador { get; set; }
 
         public UsuarioViewModel(Usuario obj)
         {
@@ -25,6 +26,7 @@ namespace Api.Models
             Nome = obj.Nome;
             Email = obj.Email;
             Senha = obj.Senha;
+            FlagAdministrador = obj.FlagAdministrador == "S" ? true : false;
             Token = EncryptionHelper.Encrypt(Id.ToString());
         }
     }

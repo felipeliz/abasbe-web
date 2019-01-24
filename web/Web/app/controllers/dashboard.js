@@ -1,4 +1,7 @@
 var controller = function ($scope, $rootScope, utils, $http, $location, Auth, Validation, $loading) {
+
+    $scope.IsAdmin = (Auth.isLoggedIn() ? Auth.get().FlagAdministrador : false);
+
     $scope.QtdAssociados = "";
     $scope.QtdBanners = "";
     $scope.QtdProfissionais = "";

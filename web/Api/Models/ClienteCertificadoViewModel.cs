@@ -11,6 +11,7 @@ namespace Api.Models
         public int IdCliente { get; set; }
         public int IdCertificado { get; set; }
         public string DataCadastro { get; set; }
+        public string Descricao { get; set; }
         public CertificadoViewModel Certificado { get; set; }
 
         public ClienteCertificadoViewModel(ClienteCertificado obj)
@@ -20,6 +21,7 @@ namespace Api.Models
             IdCertificado = obj.IdCertificado;
 
             DataCadastro = obj.DataCadastro?.ToString("dd/MM/yyyy HH:mm:ss");
+            Descricao = obj.Descricao;
 
             Certificado = new CertificadoViewModel(obj.Certificado);
         }

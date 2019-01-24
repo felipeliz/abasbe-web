@@ -65,9 +65,10 @@
                         <label>Data de nascimento</label>
                         <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="form.Nascimento" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-1-3 uk-grid-margin md-input-suffix">
                         <label>Tempo de experiência <red>*</red></label>
                         <input type="text" integer class="md-input label-fixed" ng-model="form.Curriculo.TempoExperiencia" md-input />
+                        <span class="suffix">anos</span>
                     </div>
                     <div class="uk-width-1-3 uk-grid-margin">
                         <label>Pretensão salarial <red>*</red></label>
@@ -152,9 +153,9 @@
                             <label>Tem filhos?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
+                    <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagDelivery">
                         <label>Qual a disponibilidade do delivery?</label>
-                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Curriculo.DisponibilidadeDelivery" md-input />
+                        <input type="text" maxlength="150" class="md-input label-fixed" ng-model="form.Curriculo.DisponibilidadeDelivery" md-input />
                     </div>
                     <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
                         <label>Os filhos ficam com quem?</label>
@@ -244,7 +245,7 @@
                         <thead>
                             <tr>
                                 <th>Equipamento</th>
-                                <th class="acoes-1">Ações</th>
+                                <th class="acoes-1" ng-if="IsAdmin">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -252,7 +253,7 @@
                                 <td>
                                     {{element.Equipamento.Descricao}}
                                 </td>
-                                <td>
+                                <td ng-if="IsAdmin">
                                     <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeEquipamento($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
@@ -277,7 +278,8 @@
                         <thead>
                             <tr>
                                 <th>Certificado</th>
-                                <th class="acoes-1">Ações</th>
+                                <th>Descrição</th>
+                                <th class="acoes-1" ng-if="IsAdmin">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -286,6 +288,9 @@
                                     {{element.Certificado.Descricao}}
                                 </td>
                                 <td>
+                                    {{element.Descricao}}
+                                </td>
+                                <td ng-if="IsAdmin">
                                     <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeCertificado($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
@@ -336,7 +341,7 @@
                                 </td>
                                 <td>
                                     <a class="md-btn md-btn md-btn-small" title="Visualizar" ng-click="viewExperiencia($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">remove_red_eye</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-confirm-click="removeExperiencia($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                    <a class="md-btn md-btn md-btn-small" ng-if="IsAdmin" title="Excluir" ng-confirm-click="removeExperiencia($index)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -395,7 +400,7 @@
                     <div class="uk-width-1">
                         <div class="uk-align-right">
                             <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
-                            <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
+                            <a class="md-btn md-btn-primary" ng-if="IsAdmin" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
                         </div>
                     </div>
                 </div>
@@ -446,9 +451,13 @@
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <label>Certificado <red>*</red></label>
-                <select class="md-input label-fixed" ng-model="certificado" ng-options="item as item.Descricao for item in certificados" md-input>
+                <select class="md-input label-fixed" ng-model="certificado.Certificado" ng-options="item as item.Descricao for item in certificados" md-input>
                     <option value="">Selecione...</option>
                 </select>
+            </div>
+            <div class="uk-width-1-1 uk-grid-margin">
+                <label>Descrição <red>*</red></label>
+                <input type="text" class="md-input label-fixed" ng-model="certificado.Descricao" md-input />
             </div>
             <div class="uk-width-1 uk-grid-margin">
                 <div class="uk-align-right">

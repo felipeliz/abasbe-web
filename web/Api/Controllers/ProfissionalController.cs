@@ -108,14 +108,14 @@ namespace Api.Controllers
                 curr.IdProfissao = param.Curriculo.IdProfissao;
                 curr.IdDisponibilidade = param.Curriculo.IdDisponibilidade;
                 curr.Sexo = param.Curriculo.Sexo;
-                curr.TelefoneComercial = Regex.Replace(param.Curriculo.TelefoneComercial?.ToString(), "[^0-9]", "");
+                curr.TelefoneComercial = Regex.Replace(param.Curriculo.TelefoneComercial?.ToString() ?? "", "[^0-9]", "");
                 curr.TempoExperiencia = param.Curriculo.TempoExperiencia;
                 curr.FlagLeiSalaoParceiro = param.Curriculo.FlagLeiSalaoParceiro;
                 curr.FlagBiosseguranca = param.Curriculo.FlagBiosseguranca;
                 curr.FlagEpi = param.Curriculo.FlagEpi;
                 curr.FlagFilhos = param.Curriculo.FlagFilhos;
                 curr.FlagMei = param.Curriculo.FlagMei;
-                curr.FlagDelivery = param.Curriculo.FlagDiarista;
+                curr.FlagDelivery = param.Curriculo.FlagDelivery;
                 curr.DisponibilidadeDelivery = param.Curriculo.DisponibilidadeDelivery;
                 curr.PretensaoSalarial = param.Curriculo.PretensaoSalarial;
                 curr.ObservacaoFilhos = param.Curriculo.ObservacaoFilhos;
@@ -156,6 +156,7 @@ namespace Api.Controllers
                         relation.Id = Guid.NewGuid().ToString();
                         relation.IdCertificado = Convert.ToInt32(element.Certificado.Id);
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
+                        relation.Descricao = element.Descricao?.ToString() ?? "";
                         obj.ClienteCertificado.Add(relation);
                     }
                 }
