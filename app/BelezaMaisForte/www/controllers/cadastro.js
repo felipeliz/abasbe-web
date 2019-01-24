@@ -1,6 +1,6 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $rootScope) {
     
-    $scope.form = { IdTipoAcao: 0 };
+    $rootScope.cadastro = $rootScope.cadastro == null ? { IdTipoAcao: 0 } : $rootScope.cadastro;
     $scope.estados = [];
     $scope.cidades = [];
     $scope.profissoes = [];
@@ -41,15 +41,6 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
 
         $http({
             method: "GET",
-            url: "api/equipamento/todos"
-        }).then(function mySuccess(response) {
-            $scope.equipamentos = response.data;
-        }, function myError(response) {
-            toastr.error(response.data.ExceptionMessage);
-        });
-
-        $http({
-            method: "GET",
             url: "api/certificado/todos"
         }).then(function mySuccess(response) {
             $scope.certificados = response.data;
@@ -73,10 +64,10 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     }
 
     $scope.getPhoto = function () {
-        if ($scope.form.Imagem == null || $scope.form.Imagem == "") {
+        if ($rootScope.cadastro.Imagem == null || $rootScope.cadastro.Imagem == "") {
             return "imgs/banner-prototype.png";
         }
-        return api.resolve($scope.form.Imagem);
+        return api.resolve($rootScope.cadastro.Imagem);
     }
 
     $scope.uploadPhoto = function (file) {
@@ -87,7 +78,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             url: api.resolve("api/file/upload"),
             data: file
         }).then(function mySuccess(response) {
-            $scope.form.Imagem = response.data;
+            $rootScope.cadastro.Imagem = response.data;
             toastr.success("Imagem enviada com sucesso.");
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
@@ -95,27 +86,27 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     };
     
     $scope.mudarTipo = function (tipo) {
-        $scope.form.IdTipoAcao = tipo;
+        $rootScope.cadastro.IdTipoAcao = tipo;
     }
 
     $scope.salvar = function () {
-        Validation.required("Título", $scope.form.Titulo);
-        Validation.required("Data de Estreia", $scope.form.Estreia);
-        Validation.required("Descrição", $scope.form.Descricao);
-        Validation.required("Situacao", $scope.form.Situacao);
-        if ($scope.form.IdTipoAcao == 0) {
-            Validation.required("Link", $scope.form.Link);
+        Validation.required("Título", $rootScope.cadastro.Titulo);
+        Validation.required("Data de Estreia", $rootScope.cadastro.Estreia);
+        Validation.required("Descrição", $rootScope.cadastro.Descricao);
+        Validation.required("Situacao", $rootScope.cadastro.Situacao);
+        if ($rootScope.cadastro.IdTipoAcao == 0) {
+            Validation.required("Link", $rootScope.cadastro.Link);
         }
         else {
-            Validation.required("Telefone", $scope.form.Telefone);
+            Validation.required("Telefone", $rootScope.cadastro.Telefone);
         }
-        Validation.required("Imagem", $scope.form.Imagem);
-        Validation.required("Plano", $scope.form.IdPlano);
+        Validation.required("Imagem", $rootScope.cadastro.Imagem);
+        Validation.required("Plano", $rootScope.cadastro.IdPlano);
 
         $http({
             method: "POST",
             url: api.resolve("api/banner/salvar"),
-            data: $scope.form
+            data: $rootScope.cadastro
         }).then(function mySuccess(response) {
             toastr.success("Perfil cadastrado com sucesso!");
             $scope.paraOndeEuVou();
@@ -128,5 +119,26 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         $state.go("menu.pagamentos");
     }
 
+    $scope.openEquipamento = function () {
+        $state.go("menu.equipamentos");
+    }
+
+    $scope.openCertificado = function () {
+        $state.go("menu.certificados");
+    }
+
+    $scope.openExperiencias = function () {
+        $state.go("menu.experiencias");
+    }
+
+    $scope.removeEquipamento = function (index) {
+        $rootScope.cadastro.Equipamentos.splice(index, 1);
+    }
+
+    $scope.removeCertificado = function (index) {
+        $rootScope.cadastro.Certificados.splice(index, 1);
+    }
+
+    
 }
 angular.module('app.controllers', []).controller('cadastro', controller)

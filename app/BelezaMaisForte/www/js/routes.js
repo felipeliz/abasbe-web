@@ -145,8 +145,13 @@ angular.module('app.routes', ['oc.lazyLoad'])
         views: {
           'side-menu21': {
             templateUrl: 'templates/equipamentos.html',
-            controller: 'equipamentosCtrl'
+            controller: 'equipamentos'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/equipamentos.js');
+          }]
         }
       })
 
@@ -156,19 +161,29 @@ angular.module('app.routes', ['oc.lazyLoad'])
         views: {
           'side-menu21': {
             templateUrl: 'templates/certificados.html',
-            controller: 'certificadosCtrl'
+            controller: 'certificados'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/certificados.js');
+          }]
         }
       })
 
-      .state('menu.experiNcias', {
+      .state('menu.experiencias', {
         url: '/page12',
         cache: false,
         views: {
           'side-menu21': {
-            templateUrl: 'templates/experiNcias.html',
-            controller: 'experiNciasCtrl'
+            templateUrl: 'templates/experiencias.html',
+            controller: 'experiencias'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/experiencias.js');
+          }]
         }
       })
 
