@@ -38,7 +38,7 @@ namespace Api
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Banner> Banner { get; set; }
         public virtual DbSet<ClienteExperiencia> ClienteExperiencia { get; set; }
-        public virtual DbSet<ClienteProfissional> ClienteProfissional { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
+        public virtual DbSet<ClienteProfissional> ClienteProfissional { get; set; }
     }
 }

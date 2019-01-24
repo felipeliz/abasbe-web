@@ -7,7 +7,7 @@
             FlagBiosseguranca: false,
             FlagEpi: false,
             FlagMei: false,
-            FlagDiarista: false,
+            FlagDelivery: false,
             FlagFilhos: false,
         }
     };

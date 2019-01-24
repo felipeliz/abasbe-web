@@ -115,7 +115,8 @@ namespace Api.Controllers
                 curr.FlagEpi = param.Curriculo.FlagEpi;
                 curr.FlagFilhos = param.Curriculo.FlagFilhos;
                 curr.FlagMei = param.Curriculo.FlagMei;
-                curr.FlagDiarista = param.Curriculo.FlagDiarista;
+                curr.FlagDelivery = param.Curriculo.FlagDiarista;
+                curr.DisponibilidadeDelivery = param.Curriculo.DisponibilidadeDelivery;
                 curr.PretensaoSalarial = param.Curriculo.PretensaoSalarial;
                 curr.ObservacaoFilhos = param.Curriculo.ObservacaoFilhos;
                 curr.Habilidades = param.Curriculo.Habilidades;

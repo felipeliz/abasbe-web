@@ -19,7 +19,7 @@ namespace Api.Models
         public bool FlagEpi { get; set; }
         public bool FlagFilhos { get; set; }
         public bool FlagMei { get; set; }
-        public bool FlagDiarista { get; set; }
+        public bool FlagDelivery { get; set; }
         public decimal PretensaoSalarial { get; set; }
         public string PretensaoSalarialFormatada { get; set; }
         public string ObservacaoFilhos { get; set; }
@@ -28,7 +28,7 @@ namespace Api.Models
         public string ProfissaoFormatada { get; set; }
         public string DisponibilidadeFormatada { get; set; }
         public string Habilidades { get; set; }
-
+        public string DisponibilidadeDelivery { get; set; }
 
         public ClienteProfissionalViewModel(ClienteProfissional obj)
         {
@@ -48,7 +48,8 @@ namespace Api.Models
             FlagEpi = obj.FlagEpi;
             FlagFilhos = obj.FlagFilhos;
             FlagMei = obj.FlagMei;
-            FlagDiarista = obj.FlagDiarista;
+            FlagDelivery = obj.FlagDelivery;
+            DisponibilidadeDelivery = obj.DisponibilidadeDelivery;
             PretensaoSalarial = obj.PretensaoSalarial;
             ObservacaoFilhos = obj.ObservacaoFilhos;
             Observacoes = obj.Observacoes;

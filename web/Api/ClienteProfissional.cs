@@ -25,7 +25,8 @@ namespace Api
         public bool FlagEpi { get; set; }
         public bool FlagFilhos { get; set; }
         public bool FlagMei { get; set; }
-        public bool FlagDiarista { get; set; }
+        public bool FlagDelivery { get; set; }
+        public string DisponibilidadeDelivery { get; set; }
         public decimal PretensaoSalarial { get; set; }
         public string ObservacaoFilhos { get; set; }
         public string Observacoes { get; set; }

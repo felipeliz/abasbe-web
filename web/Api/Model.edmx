@@ -109,7 +109,8 @@
           <Property Name="FlagEpi" Type="bit" Nullable="false" />
           <Property Name="FlagFilhos" Type="bit" Nullable="false" />
           <Property Name="FlagMei" Type="bit" Nullable="false" />
-          <Property Name="FlagDiarista" Type="bit" Nullable="false" />
+          <Property Name="FlagDelivery" Type="bit" Nullable="false" />
+          <Property Name="DisponibilidadeDelivery" Type="varchar" MaxLength="150" />
           <Property Name="PretensaoSalarial" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ObservacaoFilhos" Type="varchar" MaxLength="250" />
           <Property Name="Observacoes" Type="varchar" MaxLength="500" />
@@ -507,7 +508,6 @@
             <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
           <EntitySet Name="ClienteExperiencia" EntityType="AbasbeModel.ClienteExperiencia" />
-          <EntitySet Name="ClienteProfissional" EntityType="AbasbeModel.ClienteProfissional" />
           <EntitySet Name="Plano" EntityType="AbasbeModel.Plano" />
           <AssociationSet Name="FK_Cliente_Plano" Association="AbasbeModel.FK_Cliente_Plano">
             <End Role="Plano" EntitySet="Plano" />
@@ -517,13 +517,18 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ClienteExperiencia" EntitySet="ClienteExperiencia" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClienteProfissional_Cliente" Association="AbasbeModel.FK_ClienteProfissional_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClienteExperiencia_Profissao" Association="AbasbeModel.FK_ClienteExperiencia_Profissao">
             <End Role="Profissao" EntitySet="Profissao" />
             <End Role="ClienteExperiencia" EntitySet="ClienteExperiencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="AbasbeModel.FK_AssociadoPagamento_Plano">
+            <End Role="Plano" EntitySet="Plano" />
+            <End Role="Pagamento" EntitySet="Pagamento" />
+          </AssociationSet>
+          <EntitySet Name="ClienteProfissional" EntityType="AbasbeModel.ClienteProfissional" />
+          <AssociationSet Name="FK_ClienteProfissional_Cliente" Association="AbasbeModel.FK_ClienteProfissional_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteProfissional_Disponibilidade" Association="AbasbeModel.FK_ClienteProfissional_Disponibilidade">
             <End Role="Disponibilidade" EntitySet="Disponibilidade" />
@@ -532,10 +537,6 @@
           <AssociationSet Name="FK_ClienteProfissional_Profissao" Association="AbasbeModel.FK_ClienteProfissional_Profissao">
             <End Role="Profissao" EntitySet="Profissao" />
             <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="AbasbeModel.FK_AssociadoPagamento_Plano">
-            <End Role="Plano" EntitySet="Plano" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Certificado">
@@ -586,8 +587,8 @@
           <Property Name="IdPlano" Type="Int32" />
           <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_Cliente_Plano" FromRole="Cliente" ToRole="Plano" />
           <NavigationProperty Name="ClienteExperiencia" Relationship="AbasbeModel.FK_ClienteExperiencia_Cliente" FromRole="Cliente" ToRole="ClienteExperiencia" />
-          <NavigationProperty Name="ClienteProfissional" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="Cliente" ToRole="ClienteProfissional" />
           <Property Name="Cadastro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClienteProfissional" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="Cliente" ToRole="ClienteProfissional" />
         </EntityType>
         <EntityType Name="ClienteCertificado">
           <Key>
@@ -815,31 +816,6 @@
           <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_ClienteExperiencia_Cliente" FromRole="ClienteExperiencia" ToRole="Cliente" />
           <NavigationProperty Name="Profissao" Relationship="AbasbeModel.FK_ClienteExperiencia_Profissao" FromRole="ClienteExperiencia" ToRole="Profissao" />
         </EntityType>
-        <EntityType Name="ClienteProfissional">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
-          <Property Name="IdProfissao" Type="Int32" Nullable="false" />
-          <Property Name="IdDisponibilidade" Type="Int32" Nullable="false" />
-          <Property Name="TelefoneComercial" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="TempoExperiencia" Type="Int32" Nullable="false" />
-          <Property Name="FlagLeiSalaoParceiro" Type="Boolean" Nullable="false" />
-          <Property Name="FlagBiosseguranca" Type="Boolean" Nullable="false" />
-          <Property Name="FlagEpi" Type="Boolean" Nullable="false" />
-          <Property Name="FlagFilhos" Type="Boolean" Nullable="false" />
-          <Property Name="FlagMei" Type="Boolean" Nullable="false" />
-          <Property Name="FlagDiarista" Type="Boolean" Nullable="false" />
-          <Property Name="PretensaoSalarial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ObservacaoFilhos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Observacoes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Habilidades" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="ClienteProfissional" ToRole="Cliente" />
-          <NavigationProperty Name="Disponibilidade" Relationship="AbasbeModel.FK_ClienteProfissional_Disponibilidade" FromRole="ClienteProfissional" ToRole="Disponibilidade" />
-          <NavigationProperty Name="Profissao" Relationship="AbasbeModel.FK_ClienteProfissional_Profissao" FromRole="ClienteProfissional" ToRole="Profissao" />
-        </EntityType>
         <EntityType Name="Plano">
           <Key>
             <PropertyRef Name="Id" />
@@ -877,18 +853,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClienteProfissional_Cliente">
-          <End Type="AbasbeModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="AbasbeModel.ClienteProfissional" Role="ClienteProfissional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClienteProfissional">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClienteExperiencia_Profissao">
           <End Type="AbasbeModel.Profissao" Role="Profissao" Multiplicity="1" />
           <End Type="AbasbeModel.ClienteExperiencia" Role="ClienteExperiencia" Multiplicity="*" />
@@ -898,6 +862,56 @@
             </Principal>
             <Dependent Role="ClienteExperiencia">
               <PropertyRef Name="IdProfissao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssociadoPagamento_Plano">
+          <End Type="AbasbeModel.Plano" Role="Plano" Multiplicity="1" />
+          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plano">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagamento">
+              <PropertyRef Name="IdPlano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClienteProfissional">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdProfissao" Type="Int32" Nullable="false" />
+          <Property Name="IdDisponibilidade" Type="Int32" Nullable="false" />
+          <Property Name="TelefoneComercial" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="TempoExperiencia" Type="Int32" Nullable="false" />
+          <Property Name="FlagLeiSalaoParceiro" Type="Boolean" Nullable="false" />
+          <Property Name="FlagBiosseguranca" Type="Boolean" Nullable="false" />
+          <Property Name="FlagEpi" Type="Boolean" Nullable="false" />
+          <Property Name="FlagFilhos" Type="Boolean" Nullable="false" />
+          <Property Name="FlagMei" Type="Boolean" Nullable="false" />
+          <Property Name="FlagDelivery" Type="Boolean" Nullable="false" />
+          <Property Name="DisponibilidadeDelivery" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PretensaoSalarial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ObservacaoFilhos" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Observacoes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Habilidades" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="ClienteProfissional" ToRole="Cliente" />
+          <NavigationProperty Name="Disponibilidade" Relationship="AbasbeModel.FK_ClienteProfissional_Disponibilidade" FromRole="ClienteProfissional" ToRole="Disponibilidade" />
+          <NavigationProperty Name="Profissao" Relationship="AbasbeModel.FK_ClienteProfissional_Profissao" FromRole="ClienteProfissional" ToRole="Profissao" />
+        </EntityType>
+        <Association Name="FK_ClienteProfissional_Cliente">
+          <End Type="AbasbeModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="AbasbeModel.ClienteProfissional" Role="ClienteProfissional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClienteProfissional">
+              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -922,18 +936,6 @@
             </Principal>
             <Dependent Role="ClienteProfissional">
               <PropertyRef Name="IdProfissao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AssociadoPagamento_Plano">
-          <End Type="AbasbeModel.Plano" Role="Plano" Multiplicity="1" />
-          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Plano">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="IdPlano" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1098,6 +1100,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Plano">
+            <EntityTypeMapping TypeName="AbasbeModel.Plano">
+              <MappingFragment StoreEntitySet="Plano">
+                <ScalarProperty Name="Vezes" ColumnName="Vezes" />
+                <ScalarProperty Name="TipoPlano" ColumnName="TipoPlano" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ClienteProfissional">
             <EntityTypeMapping TypeName="AbasbeModel.ClienteProfissional">
               <MappingFragment StoreEntitySet="ClienteProfissional">
@@ -1106,7 +1120,8 @@
                 <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
                 <ScalarProperty Name="ObservacaoFilhos" ColumnName="ObservacaoFilhos" />
                 <ScalarProperty Name="PretensaoSalarial" ColumnName="PretensaoSalarial" />
-                <ScalarProperty Name="FlagDiarista" ColumnName="FlagDiarista" />
+                <ScalarProperty Name="DisponibilidadeDelivery" ColumnName="DisponibilidadeDelivery" />
+                <ScalarProperty Name="FlagDelivery" ColumnName="FlagDelivery" />
                 <ScalarProperty Name="FlagMei" ColumnName="FlagMei" />
                 <ScalarProperty Name="FlagFilhos" ColumnName="FlagFilhos" />
                 <ScalarProperty Name="FlagEpi" ColumnName="FlagEpi" />
@@ -1117,18 +1132,6 @@
                 <ScalarProperty Name="IdDisponibilidade" ColumnName="IdDisponibilidade" />
                 <ScalarProperty Name="IdProfissao" ColumnName="IdProfissao" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Plano">
-            <EntityTypeMapping TypeName="AbasbeModel.Plano">
-              <MappingFragment StoreEntitySet="Plano">
-                <ScalarProperty Name="Vezes" ColumnName="Vezes" />
-                <ScalarProperty Name="TipoPlano" ColumnName="TipoPlano" />
-                <ScalarProperty Name="Dias" ColumnName="Dias" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

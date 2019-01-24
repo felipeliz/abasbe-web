@@ -139,9 +139,9 @@
                     <div class="uk-width-1-3 uk-grid-margin">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
-                                <input type="checkbox" ng-model="form.Curriculo.FlagDiarista" icheck />
+                                <input type="checkbox" ng-model="form.Curriculo.FlagDelivery" icheck />
                             </span>
-                            <label>Interesse em ser diarista?</label>
+                            <label>Trabalha Delivery?</label>
                         </div>
                     </div>
                     <div class="uk-width-1-3 uk-grid-margin">
@@ -151,6 +151,10 @@
                             </span>
                             <label>Tem filhos?</label>
                         </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
+                        <label>Qual a disponibilidade do delivery?</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Curriculo.DisponibilidadeDelivery" md-input />
                     </div>
                     <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
                         <label>Os filhos ficam com quem?</label>
