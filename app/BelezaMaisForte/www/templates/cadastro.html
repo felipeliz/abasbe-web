@@ -127,9 +127,13 @@
         <ion-item class="item-icon-left" ng-if="cadastro.IdTipoAcao==1" ng-click="openExperiencias()">
           <i class="icon ion-android-add"></i>Experiência</ion-item>
       </ion-list>
-      <ion-item class="item-icon-left item-icon-right" ng-if="cadastro.IdTipoAcao==1">
-        <i class="icon No Icon"></i>testeteste
-        <i class="icon ion-android-delete"></i>
+      <ion-item class="item-icon-left item-icon-right" ng-repeat="experiencia in cadastro.Experiencias" ng-if="cadastro.IdTipoAcao==1">
+        <i class="icon No Icon"></i>{{experiencia.Empresa}}
+        <i class="icon No Icon"></i>{{experiencia.Descricao}}
+        <i class="icon No Icon"></i>{{experiencia.Telefone}}
+        <i class="icon No Icon"></i>{{experiencia.DataInicial}}
+        <i class="icon No Icon"></i>{{experiencia.DataFinal}}
+        <i class="icon ion-android-delete" ng-click="removeExperiencia()"></i>
       </ion-item>
       <button id="perfil-button16" class="button button-positive button-block">Registrar</button>
     </form>

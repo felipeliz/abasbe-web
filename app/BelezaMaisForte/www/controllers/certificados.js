@@ -22,7 +22,6 @@ var controller = function ($http, $scope, $rootScope, $state) {
         $rootScope.cadastro.Certificados = $rootScope.cadastro.Certificados == null ? [] : $rootScope.cadastro.Certificados;
         var certificado = JSON.parse(JSON.stringify($scope.form.Certificado));
         $rootScope.cadastro.Certificados.push(certificado);
-        console.log(certificado);
         $state.go("menu.cadastro");
     }
 

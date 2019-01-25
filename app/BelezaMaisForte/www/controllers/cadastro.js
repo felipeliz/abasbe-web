@@ -139,6 +139,9 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         $rootScope.cadastro.Certificados.splice(index, 1);
     }
 
+    $scope.removeExperiencia = function (index) {
+        $rootScope.cadastro.Experiencias.splice(index, 1);
+    }
     
 }
 angular.module('app.controllers', []).controller('cadastro', controller)
