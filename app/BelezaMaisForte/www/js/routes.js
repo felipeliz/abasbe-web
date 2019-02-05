@@ -118,8 +118,13 @@ angular.module('app.routes', ['oc.lazyLoad'])
         views: {
           'side-menu21': {
             templateUrl: 'templates/perfil.html',
-            controller: 'perfilCtrl'
+            controller: 'perfil'
           }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/perfil.js');
+          }]
         }
       })
 

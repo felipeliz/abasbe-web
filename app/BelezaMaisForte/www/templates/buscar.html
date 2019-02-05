@@ -1,14 +1,14 @@
 <ion-view title="Buscar Profissionais" id="page3" ng-init="init();">
   <ion-content padding="true" class="has-header">
-    <h3 id="buscarProfissionais-heading2" style="color:#000000;">Buscar profissionais</h3>
-    <div id="buscarProfissionais-markdown9" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Utilize os filtros para encontrar profissionais</p>
+    <h3>Buscar profissionais</h3>
+    <div class="show-list-numbers-and-dots">
+      <p>Utilize os filtros para encontrar profissionais</p>
     </div>
     <div class="list">
-      <ion-item class="item-divider"> Busque por</ion-item>
+      <ion-item class="item-divider">Busque por</ion-item>
       <label class="item item-select item-stacked">
         <span class="input-label">Profissão</span>
-        <select ng-options="x.Id as x.Descricao for x in profissoes" ng-model="filtro.profissao">
+        <select ng-options="x.Id as x.Descricao for x in profissoes" ng-model="$root.busca.profissao">
           <option value="">Selecione a profissão...</option>
         </select>
       </label>
@@ -16,31 +16,31 @@
         <span class="input-label">Disponibilidade
           <link href="lib/ionic/css/ionic.css" rel="stylesheet">
         </span>
-        <select ng-options="x.Id as x.Descricao for x in disponibilidades" ng-model="filtro.disponibilidade">
+        <select ng-options="x.Id as x.Descricao for x in disponibilidades" ng-model="$root.busca.disponibilidade">
           <option value="">Selecione a disponibilidade...</option>
         </select>
       </label>
       <label class="item item-select item-stacked">
         <span class="input-label">Sexo</span>
-        <select ng-model="filtro.sexo">
+        <select ng-model="$root.busca.sexo">
           <option value="">Selecione o sexo...</option>
           <option value="M">Masculino</option>
           <option value="F">Feminino</option>
         </select>
       </label>
       <ion-item class="range range-positive">Experiência
-        <input type="range" min="0" max="10" step="1" ng-model="filtro.experiencia">
+        <input type="range" min="0" max="10" step="1" ng-model="$root.busca.experiencia">
       </ion-item>
-      <ion-item class="item-divider" id="buscarProfissionais-list-item-divider15"> Região</ion-item>
+      <ion-item class="item-divider" id="buscarProfissionais-list-item-divider15">Região</ion-item>
       <label class="item item-select item-stacked">
         <span class="input-label">Cidade</span>
-        <select ng-options="x.Id as x.Nome for x in cidades" ng-model="filtro.cidade">
+        <select ng-options="x.Id as x.Nome for x in cidades" ng-model="$root.busca.cidade">
           <option value="">Selecione a cidade...</option>
         </select>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Bairro</span>
-        <input type="text" ng-model="filtro.bairro">
+        <input type="text" ng-model="$root.busca.bairro">
       </label>
       <a ng-click="buscar()" id="buscarProfissionais-button7" class="button button-positive button-block">Encontrar
         Profissionais</a>

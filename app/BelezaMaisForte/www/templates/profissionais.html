@@ -19,23 +19,31 @@
       <div class="list">
         <div class="card profissional" ng-repeat="profissional in profissionais">
           <div class="item-profissional">
-            <div class="img-holder">
-              <div class="img-floater">
-                <img ng-src="{{getPhotoLista(profissional)}}">
+            <div class="profile-heading">
+              <img class="profile-bg" src="imgs/profile-bg.jpg" />
+              <div class="item-content">
+                <img ng-src="imgs/user.png" ng-src="{{getPhotoLista(profissional)}}">
+                <h2 class="ng-binding">{{profissional.Nome}}</h2>
+                <p class="ng-binding">{{profissional.Curriculo.ProfissaoFormatada}}</p>
               </div>
-              <h4>{{profissional.Nome}}</h4>
-              <p class="text-muted">{{profissional.Curriculo.ProfissaoFormatada}}</p>
             </div>
-            <p>
-              <span class="tag" ng-hide="profissional.Curriculo.Sexo==''">{{profissional.Curriculo.SexoFormatado}}</span>
-              <span class="tag" ng-hide="profissional.Curriculo.PretensaoSalarial==''">{{profissional.Curriculo.PretensaoSalarialFormatada}}</span>
-            </p>
-            <ul>
-              <li>{{profissional.Curriculo.TempoExperiencia}} anos de experiência</li>
-              <li>{{profissional.Curriculo.DisponibilidadeFormatada}}</li>
-              <li>{{profissional.EnderecoFormatado}}</li>
-            </ul>
-            <a ui-sref="menu.buscar()" id="meusBanners-button9" class="button button-positive button-block">Ver Perfil</a>
+            <ion-item class="item-icon-right">
+              <span>Segunda a sexta</span>
+              <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+            </ion-item>
+            <ion-item class="item-icon-right">
+                <span>Salvador, BA</span>
+                <i class="icon ion-ios-location-outline icon-accessory"></i>
+              </ion-item>
+            <ion-item class="item">
+              <span>Experiencia</span>
+              <span class="item-note">4 anos</span>
+            </ion-item>
+            <ion-item class="item">
+              <span>Pretensão</span>
+              <span class="item-note">R$ 400,00</span>
+            </ion-item>
+            <a href="javascript:void(0)" ng-click="perfil(profissional)" class="button button-positive button-block">VER PERFIL</a>
           </div>
         </div>
       </div>

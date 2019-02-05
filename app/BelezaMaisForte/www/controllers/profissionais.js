@@ -5,6 +5,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
     $scope.loading = false;
 
     $scope.init = function () {
+        $rootScope.busca.page = 0;
         $scope.filtrar();
     }
 
@@ -34,6 +35,10 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
             $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
+    }
+
+    $scope.perfil = function(){
+        $state.go("menu.perfil");
     }
 
     $scope.checkScroll = function() {

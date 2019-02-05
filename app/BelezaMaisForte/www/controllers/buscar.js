@@ -4,14 +4,15 @@ var controller = function ($scope, $http, $state, $rootScope) {
     $scope.disponibilidades = [];
     $scope.cidades = [];
 
-    $scope.filtro = {
-        profissao: "",
-        disponibilidade: "",
-        sexo: "",
-        cidade: "",
-        experiencia: 0,
-        bairro: "",
-        page: 0
+    if ($rootScope.busca == null) {
+        $rootScope.busca = {
+            profissao: "",
+            disponibilidade: "",
+            sexo: "",
+            cidade: "",
+            experiencia: 0,
+            bairro: ""
+        }
     }
 
     $scope.init = function () {
@@ -48,7 +49,6 @@ var controller = function ($scope, $http, $state, $rootScope) {
     }
 
     $scope.buscar = function () {
-        $rootScope.busca = $scope.filtro;
         $state.go("menu.profissionais")
     }
 

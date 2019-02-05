@@ -1,13 +1,11 @@
 /* Empty. Add your own CSS if you like */
 
-
 .card-image {
     width: 100%;
 }
 
-
-
 /* preloader */
+
 /* ================================================== */
 
 #preloader {
@@ -21,10 +19,10 @@
     padding: 0px;
     border-radius: 100%;
     border: 2px solid;
-    border-top-color: rgba(255,255,255, 0.65);
-    border-bottom-color: rgba(255,255,255, 0.15);
-    border-left-color: rgba(255,255,255, 0.15);
-    border-right-color: rgba(255,255,255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.65);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    border-left-color: rgba(255, 255, 255, 0.15);
+    border-right-color: rgba(255, 255, 255, 0.15);
     -webkit-animation: preloader 0.8s ease-in infinite;
     animation: preloader 0.8s ease-in infinite;
 }
@@ -37,7 +35,6 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -47,19 +44,17 @@
     from {
         -webkit-transform: rotate(0deg);
     }
-
     to {
         -webkit-transform: rotate(360deg);
     }
 }
-  
+
 .item-stacked.item-select select {
-  position: relative !important;
+    position: relative !important;
 }
-  
-  
+
 .item-stacked.item-select:after {
-  top: 60% !important;
+    top: 60% !important;
 }
 
 .item-stacked.item-select select {
@@ -137,7 +132,7 @@ ion-content {
     background-color: #7f2358 !important;
 }
 
-ion-list + ion-list .list {
+ion-list+ion-list .list {
     margin-top: 8px;
 }
 
@@ -147,83 +142,6 @@ ion-view {
 
 .item-profissional {
     position: relative;
-
-}
-
-.item-profissional .img-holder {
-    width: 100%;
-    padding: 0 8px;
-    height: 61px;
-    background: #7F2359;
-    background: -webkit-linear-gradient(bottom right, #7F2359, #B02374);
-    background: -moz-linear-gradient(bottom right, #7F2359, #B02374);
-    background: linear-gradient(bottom right, #7F2359, #B02374);
-}
-
-.item-profissional .img-holder .img-floater {
-    position: absolute;
-    top: 8px;
-}
-
-.item-profissional .img-holder img {
-    width: 90px;
-    height: 90px;
-    border-radius: 90px;
-    border: 3px solid white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.item-profissional .img-holder h4 {
-    margin: 0;
-    color: white;
-    margin-left: 100px;
-    margin-right: 16px;
-    padding-top: 18px;
-}
-
-.item-profissional .img-holder p {
-    margin: 0;
-    color: white;
-    margin-left: 100px;
-    margin-right: 16px;
-    font-weight: lighter;
-    text-align: left;
-}
-
-.item-profissional p {
-    margin-left: 108px;
-    text-align: left;
-    margin-right: 16px;
-    margin-top: 4px;
-    font-weight: lighter;
-    margin-bottom: 0px;
-    height: 21px;
-    max-height: 21px;
-}
-
-.item-profissional p .tag {
-    padding: 3px 8px;
-    color: #7F2359;
-    font-size: 11px;
-    border-radius: 15px;
-    border: 1px solid #7F2359;
-}
-
-.item-profissional ul p {
-    text-align: center;
-    margin-bottom: 4px;
-}
-
-.item-profissional ul{
-    text-align: center;
-}
-
-.item-profissional ul li {
-    line-height: 16px;
-    border-bottom: 1px solid #ddd;
-    background-color: white;
-    padding: 12px;
-    font-weight: lighter;
 }
 
 .card .button {
@@ -249,7 +167,7 @@ ion-view {
     font-weight: lighter;
 }
 
-.item + p.subtitle {
+.item+p.subtitle {
     margin-top: 12px;
 }
 
@@ -271,14 +189,60 @@ ion-view {
 }
 
 a.anchor-theme-center {
-    color: #7F2359; 
+    color: #7F2359;
     width: 100%;
     text-align: center;
     display: block;
     line-height: 25px;
     height: 35px;
 }
-  
+
 hr {
     border-top: 1px solid rgba(221, 221, 221, 0.80);
+}
+
+.perfil {
+    padding: 8px;
+}
+
+.profile-bg {
+    width: 100%;
+}
+
+.profile-heading .item-content {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.item-profissional .profile-heading {
+    max-height: 145px;
+    overflow: hidden;
+}
+
+.item-profissional .profile-heading .item-content h2 {
+    font-size: 16px;
+}
+
+.profile-heading .item-content img {
+    background: white;
+    border-radius: 100%;
+    border: 3px solid rgba(10, 10, 10, 0.1);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    margin: 16px auto 0px auto;
+    display: block;
+}
+
+.profile-heading .item-content h2 {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    color: #ffffff;
+}
+
+.profile-heading .item-content p {
+    text-align: center;
+    color: white;
+    margin: 0px;
 }
