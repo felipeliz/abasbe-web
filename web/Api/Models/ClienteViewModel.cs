@@ -92,7 +92,12 @@ namespace Api.Models
             Cnpj = string.IsNullOrEmpty(obj.Cnpj) ? obj.Cnpj : Convert.ToUInt64(obj.Cnpj).ToString(@"00\.000\.000/0000-00");
 
             Token = EncryptionHelper.Encrypt(Id.ToString());
-            Curriculo = new ClienteProfissionalViewModel(obj.ClienteProfissional.LastOrDefault());
+
+            var curr = obj.ClienteProfissional.LastOrDefault();
+            if (curr != null)
+            {
+                Curriculo = new ClienteProfissionalViewModel(curr);
+            }
 
             if (complete)
             {

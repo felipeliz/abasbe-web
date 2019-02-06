@@ -14,7 +14,7 @@
     </ion-header-bar>
     <ion-content padding="false" class="side-menu-left has-header ">
       <ion-list>
-        <ion-item class="item-avatar my-profile-menu" ng-if="loggedIn" ui-sref="menu.perfil()" menu-close="">
+        <ion-item class="item-avatar my-profile-menu" ng-if="loggedIn" ui-sref="menu.me" menu-close="">
           <img ng-src="{{getPhotoLista()}}">
           <h2>{{user.Nome}}</h2>
           <p>{{user.Email}}</p>

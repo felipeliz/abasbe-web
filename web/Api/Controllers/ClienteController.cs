@@ -29,6 +29,21 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        public ClienteViewModel Perfil(int id)
+        {
+            Entities context = new Entities();
+
+            var obj = context.Cliente.FirstOrDefault(pro => pro.Id == id);
+
+            if (obj == null)
+            {
+                throw new Exception("Registro não identificado.");
+            }
+
+            return new ClienteViewModel(obj, true);
+        }
+
+        [HttpGet]
         public bool Assinante()
         {
             int id = AppExtension.IdUsuarioLogado();

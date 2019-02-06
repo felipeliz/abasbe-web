@@ -224,13 +224,17 @@ hr {
     font-size: 16px;
 }
 
+.item-profissional .profile-heading .item-content img {
+    margin: 12px auto 0px auto;
+}
+
 .profile-heading .item-content img {
     background: white;
     border-radius: 100%;
     border: 3px solid rgba(10, 10, 10, 0.1);
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    margin: 16px auto 0px auto;
+    margin: 20px auto 0px auto;
     display: block;
 }
 

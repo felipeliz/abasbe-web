@@ -4,17 +4,6 @@ var controller = function ($scope, $http, $state, $rootScope) {
     $scope.disponibilidades = [];
     $scope.cidades = [];
 
-    if ($rootScope.busca == null) {
-        $rootScope.busca = {
-            profissao: "",
-            disponibilidade: "",
-            sexo: "",
-            cidade: "",
-            experiencia: 0,
-            bairro: ""
-        }
-    }
-
     $scope.init = function () {
         $scope.carregar();
     }
