@@ -112,8 +112,24 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.perfil', {
+      .state('menu.me', {
         url: '/perfil',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/perfil.html',
+            controller: 'perfil'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/perfil.js');
+          }]
+        }
+      })
+
+      .state('menu.perfil', {
+        url: '/perfil/:id',
         cache: false,
         views: {
           'side-menu21': {
@@ -225,7 +241,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('menu.pagamentos', {
-        url: '/pagamentos',    
+        url: '/pagamentos',
         cache: false,
         views: {
           'side-menu21': {

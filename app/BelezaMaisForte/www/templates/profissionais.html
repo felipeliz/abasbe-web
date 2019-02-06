@@ -28,20 +28,20 @@
               </div>
             </div>
             <ion-item class="item-icon-right">
-              <span>Segunda a sexta</span>
+              <span>{{profissional.Curriculo.DisponibilidadeFormatada}}</span>
               <i class="icon ion-android-checkmark-circle icon-accessory"></i>
             </ion-item>
             <ion-item class="item-icon-right">
-                <span>Salvador, BA</span>
+                <span>{{profissional.Cidade.Nome}}, {{profissional.Cidade.EstadoSigla}}</span>
                 <i class="icon ion-ios-location-outline icon-accessory"></i>
               </ion-item>
             <ion-item class="item">
               <span>Experiencia</span>
-              <span class="item-note">4 anos</span>
+              <span class="item-note">{{profissional.Curriculo.TempoExperiencia}} anos</span>
             </ion-item>
             <ion-item class="item">
               <span>Pretensão</span>
-              <span class="item-note">R$ 400,00</span>
+              <span class="item-note">{{profissional.Curriculo.PretensaoSalarialFormatada}}</span>
             </ion-item>
             <a href="javascript:void(0)" ng-click="perfil(profissional)" class="button button-positive button-block">VER PERFIL</a>
           </div>

@@ -4,110 +4,101 @@
             <img class="profile-bg" src="imgs/profile-bg.jpg" />
             <div class="item-content">
                 <img ng-src="imgs/user.png" src="imgs/user.png">
-                <h2 class="ng-binding">Alyson Freitas</h2>
-                <p class="ng-binding">Manicure</p>
+                <h2 class="ng-binding">{{user.Nome}}</h2>
+                <p class="ng-binding">{{user.Curriculo.ProfissaoFormatada}}</p>
             </div>
         </div>
         <div class="perfil">
             <ion-list id="perfil-list4">
                 <ion-item class="item-divider"> Contato</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.TelefoneCelular!=null">
                     <span>Celular</span>
-                    <p>(71) 99287-0597</p>
+                    <p>{{user.TelefoneCelular}}</p>
                     <i class="icon ion-ios-telephone-outline icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Email!=null">
                     <span>E-mail</span>
-                    <p>alys.freitas@gmail.com</p>
+                    <p>{{user.Email}}</p>
                     <i class="icon ion-ios-email-outline icon-accessory"></i>
                 </ion-item>
                 <ion-item class="item-divider"> Currículo</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.ProfissaoFormatada!=null">
                     <span>Profissão</span>
-                    <p>Manicure</p>
+                    <p>{{user.Curriculo.ProfissaoFormatada}}</p>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.DisponibilidadeFormatada!=null">
                     <span>Disponibilidade</span>
-                    <p>Segunda a sexta</p>
+                    <p>{{user.Curriculo.DisponibilidadeFormatada}}</p>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Curriculo.SexoFormatado!=null">
                     <span>Sexo</span>
-                    <span class="item-note">Masculino</span>
+                    <span class="item-note">{{user.Curriculo.SexoFormatado}}</span>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Nascimento!=null">
                     <span>Nascimento</span>
-                    <span class="item-note">26/09/1990</span>
+                    <span class="item-note">{{user.Nascimento}}</span>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Curriculo.TempoExperiencia!=null">
                     <span>Experiencia</span>
-                    <span class="item-note">4 anos</span>
+                    <span class="item-note">{{user.Curriculo.TempoExperiencia}} anos</span>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Curriculo.PretensaoSalarialFormatada!=null">
                     <span>Pretensão</span>
-                    <span class="item-note">R$ 400,00</span>
+                    <span class="item-note">{{user.Curriculo.PretensaoSalarialFormatada}}</span>
                 </ion-item>
                 <ion-item class="item-divider"> Informações adicionais</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagLeiSalaoParceiro">
                     <span>Conhece a lei do salão parceiro?</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagBiosseguranca">
                     <span>Sabe o que é biossegurança?</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagEpi">
                     <span>Sabe o que é EPI?</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagMei">
                     <span>Possui MEI</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagDelivery">
                     <span>Faz Delivery</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagFilhos">
                     <span>Tem Filhos?</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
                 <ion-item class="item-divider"> Endereço</ion-item>
-                <ion-item class="item">
-                    <span>Estado</span>
-                    <span class="item-note">Bahia</span>
-                </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Cidade!=null">
                     <span>Cidade</span>
-                    <span class="item-note">Salvador</span>
+                    <span class="item-note">{{user.Cidade.Nome}}, {{user.Cidade.EstadoSigla}}</span>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Bairro!=null">
                     <span>Bairro</span>
-                    <span class="item-note">Imbui</span>
+                    <span class="item-note">{{user.Bairro}}</span>
                 </ion-item>
-                <ion-item class="item">
+                <ion-item class="item" ng-if="user.Logradouro!=null">
                     <span>Logradouro</span>
-                    <span class="item-note">Rua das gaivotas</span>
+                    <span class="item-note">{{user.Logradouro}}</span>
                 </ion-item>
-                <ion-item class="item-divider"> Equipamentos</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-divider" ng-if="user.Equipamentos.length>0"> Equipamentos</ion-item>
+                <ion-item class="item-icon-right" ng-repeat="equipamento in user.Equipamentos">
                     <span>Tesoura</span>
                     <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-divider"> Certificados</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-divider" ng-if="user.Certificados.length>0"> Certificados</ion-item>
+                <ion-item class="item-icon-right" ng-repeat="certificado in user.Certificados">
                     <span>Formação</span>
                     <p>Designer de sombrancelhas</p>
                     <i class="icon ion-ios-compose-outline icon-accessory"></i>
                 </ion-item>
-                <ion-item class="item-icon-right">
-                    <span>Especialização</span>
-                    <p>Designer de sombrancelhas</p>
-                    <i class="icon ion-ios-compose-outline icon-accessory"></i>
-                </ion-item>
-                <ion-item class="item-divider"> Experiências profissionais</ion-item>
-                <ion-item class="item-icon-right">
+                <ion-item class="item-divider" ng-if="user.Experiencias.length>0"> Experiências profissionais</ion-item>
+                <ion-item class="item-icon-right" ng-repeat="experiencia in user.Experiencias">
                     <span>BIBI TELES DESIGN & STILO</span>
                     <p>Manicure</p>
                     <p>(71) 00000-0000</p>

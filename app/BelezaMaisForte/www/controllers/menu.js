@@ -1,6 +1,17 @@
-var controller = function ($scope, Auth, $state, $ionicHistory, $http) {
+var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScope) {
     $scope.user = {}
     $scope.loggedIn = Auth.isLoggedIn();
+
+    if ($rootScope.busca == null) {
+        $rootScope.busca = {
+            profissao: "",
+            disponibilidade: "",
+            sexo: "",
+            cidade: "",
+            experiencia: 0,
+            bairro: ""
+        }
+    }
 
     $scope.$watch(function () { return Auth.isLoggedIn(); }, function () {
         $scope.loggedIn = Auth.isLoggedIn();

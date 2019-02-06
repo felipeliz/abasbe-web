@@ -14,7 +14,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
             $state.go("menu.buscar");
             return;
         }
-        
+
         console.log('searching page: ' + $rootScope.busca.page);
         $scope.lastUpdate = (new Date()).getTime();
         $scope.loading = true;
@@ -24,7 +24,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
             data: $rootScope.busca
         }).then(function (response) {
             $scope.lastUpdate = (new Date()).getTime();
-            if( $rootScope.busca.page > 0) {
+            if ($rootScope.busca.page > 0) {
                 $scope.profissionais = $scope.profissionais.concat(response.data);
             }
             else {
@@ -37,11 +37,11 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
         });
     }
 
-    $scope.perfil = function(){
-        $state.go("menu.perfil");
+    $scope.perfil = function (profissional) {
+        $state.go("menu.perfil", { id: profissional.Id });
     }
 
-    $scope.checkScroll = function() {
+    $scope.checkScroll = function () {
         var canUpdate = $scope.lastUpdate + 500 < (new Date()).getTime();
         var scrollTopCurrent = $ionicScrollDelegate.getScrollPosition().top;
         var scrollTopMax = $ionicScrollDelegate.getScrollView().__maxScrollTop;
@@ -52,11 +52,11 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
         if (!scrollBottom) {
             if ($scope.loading == false && canUpdate) {
                 $scope.lastUpdate = (new Date()).getTime();
-                $rootScope.busca.page += 1; 
+                $rootScope.busca.page += 1;
                 $scope.filtrar();
             }
-       }
-   }
+        }
+    }
 
     $scope.getPhotoLista = function (obj) {
         if (obj.Foto == null || obj.Foto == "") {
