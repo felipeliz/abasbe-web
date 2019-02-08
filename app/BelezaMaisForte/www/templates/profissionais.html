@@ -22,7 +22,7 @@
             <div class="profile-heading">
               <img class="profile-bg" src="imgs/profile-bg.jpg" />
               <div class="item-content">
-                <img ng-src="imgs/user.png" ng-src="{{getPhotoLista(profissional)}}">
+                <img ng-src="{{getPhotoLista(profissional)}}">
                 <h2 class="ng-binding">{{profissional.Nome}}</h2>
                 <p class="ng-binding">{{profissional.Curriculo.ProfissaoFormatada}}</p>
               </div>
@@ -32,9 +32,13 @@
               <i class="icon ion-android-checkmark-circle icon-accessory"></i>
             </ion-item>
             <ion-item class="item-icon-right">
-                <span>{{profissional.Cidade.Nome}}, {{profissional.Cidade.EstadoSigla}}</span>
-                <i class="icon ion-ios-location-outline icon-accessory"></i>
-              </ion-item>
+              <span>{{profissional.Cidade.Nome}}, {{profissional.Cidade.EstadoSigla}}</span>
+              <i class="icon ion-ios-location-outline icon-accessory"></i>
+            </ion-item>
+            <ion-item ng-if="profissional.Curriculo.FlagDelivery" class="item-icon-right">
+              <span>Faz Delivery</span>
+              <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+            </ion-item>
             <ion-item class="item">
               <span>Experiencia</span>
               <span class="item-note">{{profissional.Curriculo.TempoExperiencia}} anos</span>
@@ -43,7 +47,8 @@
               <span>Pretensão</span>
               <span class="item-note">{{profissional.Curriculo.PretensaoSalarialFormatada}}</span>
             </ion-item>
-            <a href="javascript:void(0)" ng-click="perfil(profissional)" class="button button-positive button-block">VER PERFIL</a>
+            <a href="javascript:void(0)" ng-click="perfil(profissional)" class="button button-positive button-block">VER
+              PERFIL</a>
           </div>
         </div>
       </div>

@@ -251,3 +251,16 @@ hr {
     color: white;
     margin: 0px;
 }
+
+.pull-right {
+    float: right;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.toggle.toggle-theme input:checked + .track {
+    border-color: #7f2358;
+    background-color: #7f2358;
+}

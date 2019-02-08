@@ -29,6 +29,17 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        public int Total()
+        {
+            Entities context = new Entities();
+            List<SimpleClienteViewModel> lista = new List<SimpleClienteViewModel>();
+
+            var query = context.Cliente.Where(cli => cli.Situacao == true);
+
+            return query.Count();
+        }
+
+        [HttpGet]
         public ClienteViewModel Perfil(int id)
         {
             Entities context = new Entities();

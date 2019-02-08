@@ -193,7 +193,7 @@ namespace Api.Controllers
                 }
                 catch (Exception ex)
                 {
-                    if(ex.InnerException?.InnerException?.Message.Contains("CLI_EMAIL_UNIQUE") ?? false)
+                    if (ex.InnerException?.InnerException?.Message.Contains("CLI_EMAIL_UNIQUE") ?? false)
                     {
                         throw new Exception("Este e-mail já está sendo utilizado.");
                     }
@@ -231,6 +231,7 @@ namespace Api.Controllers
             string cidade = param.cidade?.ToString();
             string experiencia = param.experiencia?.ToString();
             string bairro = param.bairro?.ToString();
+            bool delivery = Convert.ToBoolean(param.delivery);
             int page = Convert.ToInt32(param.page);
 
             Entities context = new Entities();
@@ -241,9 +242,13 @@ namespace Api.Controllers
             {
                 query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Profissao.Id.ToString() == profissao));
             }
-            if (!String.IsNullOrEmpty(disponibilidade))
+            if (delivery == false && !String.IsNullOrEmpty(disponibilidade))
             {
                 query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.Disponibilidade.Id.ToString() == disponibilidade));
+            }
+            if (delivery)
+            {
+                query = query.Where(pro => pro.ClienteProfissional.Any(cp => cp.FlagDelivery == true));
             }
             if (!String.IsNullOrEmpty(sexo))
             {

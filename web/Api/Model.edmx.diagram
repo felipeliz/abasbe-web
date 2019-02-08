@@ -27,15 +27,15 @@
         <AssociationConnector Association="AbasbeModel.FK_Banner_Cliente" />
         <AssociationConnector Association="AbasbeModel.FK_Pagamento_Banner" />
         <EntityTypeShape EntityType="AbasbeModel.ClienteExperiencia" Width="1.5" PointX="7.5" PointY="7.875" />
-        <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="3" PointY="13.625" />
-        <AssociationConnector Association="AbasbeModel.FK_Cliente_Plano" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteExperiencia_Cliente" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteExperiencia_Profissao" />
-        <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
         <EntityTypeShape EntityType="AbasbeModel.ClienteProfissional" Width="1.5" PointX="10.5" PointY="1.25" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Cliente" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Disponibilidade" />
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Profissao" />
+        <EntityTypeShape EntityType="AbasbeModel.Plano" Width="1.5" PointX="3" PointY="13.75" />
+        <AssociationConnector Association="AbasbeModel.FK_Cliente_Plano" />
+        <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

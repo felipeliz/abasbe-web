@@ -13,6 +13,7 @@ namespace Api.Models
         public int Vezes { get; set; }
         public decimal Valor { get; set; }
         public string ValorFormatado { get; set; }
+        public string ValorDivididoFormatado { get; set; }
         public string TipoPlano { get; set; }
 
         public PlanoViewModel(Plano obj)
@@ -25,10 +26,11 @@ namespace Api.Models
             Id = obj.Id;
             Descricao = obj.Descricao;
             Dias = obj.Dias;
-            Vezes = obj.Vezes ?? 1;
+            Vezes = obj.Vezes;
             Valor = obj.Valor;
             TipoPlano = obj.TipoPlano;
             ValorFormatado = String.Format("{0:C}", Valor);
+            ValorDivididoFormatado = String.Format("{0:C}", Valor/Vezes);
         }
     }
 }

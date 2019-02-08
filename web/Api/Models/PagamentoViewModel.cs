@@ -31,6 +31,9 @@ namespace Api.Models
         public string CheckoutIdentifier { get; set; }
         public string TipoPlanoFormatado { get; set; }
         public string Situacao { get; set; }
+        public int Vezes { get; set; }
+        public string ValorDivididoFormatado { get; set; }
+
 
         public PagamentoViewModel(Pagamento obj)
         {
@@ -50,6 +53,8 @@ namespace Api.Models
             CheckoutIdentifier = obj.CheckoutIdentifier;
             TipoPlanoFormatado = obj.Plano.TipoPlano == "A" ? "Pagamento de assinatura" : "Pagamento de banner";
             Situacao = GetSituacao(obj.Situacao);
+            Vezes = obj.Vezes;
+            ValorDivididoFormatado = String.Format("{0:C}", obj.Valor / Vezes);
         }
 
         public static string GetSituacao(int s)

@@ -4,9 +4,19 @@ var controller = function ($scope, $http, $ionicScrollDelegate) {
     $scope.loading = false;
     $scope.lastUpdate = (new Date()).getTime();
     $scope.filter = { page: 0 }
+    $scope.total = "-";
 
     $scope.init = function(){
         $scope.filtrar();
+
+        $http({
+            method: "GET",
+            url: api.resolve("api/cliente/total")
+        }).then(function(response) {
+           $scope.total = response.data;
+        }, function(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
     }
 
     $scope.filtrar = function () {

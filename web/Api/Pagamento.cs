@@ -25,6 +25,7 @@ namespace Api
         public string CheckoutIdentifier { get; set; }
         public Nullable<System.DateTime> DataConfirmacao { get; set; }
         public Nullable<int> IdBanner { get; set; }
+        public int Vezes { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Banner Banner { get; set; }

@@ -74,6 +74,7 @@ namespace Api.Controllers
             pagamento.DataCriacao = DateTime.Now;
             pagamento.Dias = plano.Dias;
             pagamento.Descricao = plano.Descricao;
+            pagamento.Vezes = plano.Vezes;
 
             context.Pagamento.Add(pagamento);
 
@@ -121,7 +122,9 @@ namespace Api.Controllers
                 throw new Exception("has_plan");
             }
 
-            var query = context.Plano.Where(pla => pla.TipoPlano == "A");
+            string tipo = cliente.FlagCliente == "P" ? "P" : "A";
+
+            var query = context.Plano.Where(pla => pla.TipoPlano == tipo);
             List<PlanoViewModel> lista = new List<PlanoViewModel>();
 
             query.ToList().ForEach(obj =>

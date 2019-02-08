@@ -11,22 +11,26 @@
     </div>
     <div ng-hide="loading">
       <ion-list ng-hide="pagamentos.Pendente.length == 0">
-          <ion-item class="item-divider">Pagamentos Pendentes</ion-item>
-          <ion-item ng-repeat="pagamento in pagamentos.Pendente">
-            <h2>{{pagamento.Descricao}}</h2>
-            <span class="item-note">{{pagamento.Valor}}</span>
-            <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
-            <span class="text-muted">{{pagamento.DataCriacao}}</span>
-          </ion-item>
+        <ion-item class="item-divider">Pagamentos Pendentes</ion-item>
+        <ion-item ng-repeat="pagamento in pagamentos.Pendente">
+          <h2>{{pagamento.Descricao}}</h2>
+          <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
+            {{pagamento.ValorDivididoFormatado}}</p>
+          <p class="ng-binding" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
+          <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
+          <span class="text-muted">{{pagamento.DataCriacao}}</span>
+        </ion-item>
       </ion-list>
       <ion-list ng-hide="pagamentos.Pago.length == 0">
-          <ion-item class="item-divider">Pagamentos Confirmados</ion-item>
-          <ion-item ng-repeat="pagamento in pagamentos.Pago">
-            <h2>{{pagamento.Descricao}}</h2>
-            <span class="item-note">{{pagamento.Valor}}</span>
-            <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
-            <span class="text-muted">{{pagamento.DataConfirmacao}}</span>
-          </ion-item>
+        <ion-item class="item-divider">Pagamentos Confirmados</ion-item>
+        <ion-item ng-repeat="pagamento in pagamentos.Pago">
+          <h2>{{pagamento.Descricao}}</h2>
+          <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
+            {{pagamento.ValorDivididoFormatado}}</p>
+          <p class="ng-binding" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
+          <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
+          <span class="text-muted">{{pagamento.DataConfirmacao}}</span>
+        </ion-item>
       </ion-list>
     </div>
   </ion-content>

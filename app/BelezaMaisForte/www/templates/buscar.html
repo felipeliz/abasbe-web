@@ -12,7 +12,16 @@
           <option value="">Selecione a profissão...</option>
         </select>
       </label>
-      <label class="item item-select item-stacked">
+      <div class="item item-toggle">
+        Delivery
+        <label class="toggle toggle-theme">
+          <input type="checkbox" ng-model="$root.busca.delivery">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+      <label class="item item-select item-stacked" ng-hide="$root.busca.delivery">
         <span class="input-label">Disponibilidade
           <link href="lib/ionic/css/ionic.css" rel="stylesheet">
         </span>

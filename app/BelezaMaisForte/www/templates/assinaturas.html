@@ -5,10 +5,12 @@
     </div>
     <ion-list ng-hide="loading">
       <ion-item class="item-divider">Assine Já</ion-item>
-      <ion-item class="item-icon-left dark" ng-click="select(plano)" ng-repeat="plano in planos">
+      <ion-item class="item-icon-left" ng-click="select(plano)" ng-repeat="plano in planos">
         <i class="icon {{plano.selecionado ? 'ion-android-radio-button-on' : 'ion-android-radio-button-off'}}"></i>
-        {{plano.Descricao}}
-        <span class="item-note">{{plano.ValorFormatado}}</span>
+        <span class="ng-binding">{{plano.Descricao}}</span>
+        <p class="ng-binding" ng-if="plano.Vezes > 1">{{plano.Vezes}}x de {{plano.ValorDivididoFormatado}}</p>
+        <p class="ng-binding" ng-if="plano.Vezes == 1">{{plano.ValorFormatado}}</p>
+        <p class="ng-binding">Renova a assinatura por {{plano.Dias}} dias</p>
       </ion-item>
       <a ng-click="assinar()" class="button button-positive button-block">Assine Agora</a>
     </ion-list>
