@@ -1,6 +1,5 @@
 var controller = function ($http, $scope, $rootScope, $state) {
 
-    $scope.estados = [];
     $scope.form = {};
 
     $scope.init = function () {
@@ -20,7 +19,7 @@ var controller = function ($http, $scope, $rootScope, $state) {
 
     $scope.adicionarCertificados = function () {
         $rootScope.cadastro.Certificados = $rootScope.cadastro.Certificados == null ? [] : $rootScope.cadastro.Certificados;
-        var certificado = JSON.parse(JSON.stringify($scope.form.Certificado));
+        var certificado = JSON.parse(JSON.stringify($scope.form));
         $rootScope.cadastro.Certificados.push(certificado);
         $state.go("menu.cadastro");
     }

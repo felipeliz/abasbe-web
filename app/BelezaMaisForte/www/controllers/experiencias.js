@@ -19,6 +19,12 @@ var controller = function ($http, $scope, $rootScope, $state) {
         });
     }
     $scope.adicionarExperiencia = function () {
+        Validation.required("Nome do Estabelecimento", $scope.form.Empresa);
+        Validation.required("Profissão", $scope.form.Empresa);
+        Validation.required("Telefone", $scope.form.Profissao.Descricao);
+        Validation.required("Data Inicial", $scope.form.DataInicial);
+
+
         $rootScope.cadastro.Experiencias = $rootScope.cadastro.Experiencias == null ? [] : $rootScope.cadastro.Experiencias;
         var experiencia = JSON.parse(JSON.stringify($scope.form));
         $rootScope.cadastro.Experiencias.push(experiencia);

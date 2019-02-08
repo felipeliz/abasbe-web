@@ -1,6 +1,5 @@
 var controller = function ($http, $scope, $rootScope, $state) {
 
-    $scope.estados = [];
     $scope.form = {};
 
     $scope.init = function () {

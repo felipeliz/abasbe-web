@@ -133,8 +133,8 @@ select {
 }
 
 .sidebar_logo a img {
-    margin-top: 20px;
-    margin-left: 15px;
+    margin-top: 5px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .selectize-input {

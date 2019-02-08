@@ -3,9 +3,14 @@
     <ion-list id="certificados-list8">
       <ion-item class="item-divider" id="certificados-list-item-divider20"> Selecione o certificado:</ion-item>
       <label class="item item-select item-stacked">
+          <span class="input-label">Tipo de Certificado</span>
         <select ng-options="x as x.Descricao for x in certificados" ng-model="form.Certificado">
           <option value="">Selecione...</option>
         </select>
+      </label>
+      <label class="item item-input item-stacked-label" id="perfil-input11">
+        <span class="input-label">Descrição</span>
+        <input type="text" ng-model="form.Descricao" placeholder="">
       </label>
     </ion-list>
     <a ng-click="adicionarCertificados()" id="certificados-button14" class="button button-positive button-block">Adicionar</a>
