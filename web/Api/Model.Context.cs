@@ -41,5 +41,6 @@ namespace Api
         public virtual DbSet<Profissao> Profissao { get; set; }
         public virtual DbSet<ProfissionalFotos> ProfissionalFotos { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Parametro> Parametro { get; set; }
     }
 }

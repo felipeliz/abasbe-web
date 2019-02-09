@@ -38,6 +38,7 @@
         <AssociationConnector Association="AbasbeModel.FK_ClienteProfissional_Profissao" />
         <AssociationConnector Association="AbasbeModel.FK_ProfissionalFotos_ClienteProfissional" />
         <AssociationConnector Association="AbasbeModel.FK_AssociadoPagamento_Plano" />
+        <EntityTypeShape EntityType="AbasbeModel.Parametro" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

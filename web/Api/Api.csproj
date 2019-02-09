@@ -157,6 +157,7 @@
     <Compile Include="ClienteProfissional.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
     <Compile Include="Controllers\CidadeController.cs" />
@@ -211,6 +212,9 @@
     <Compile Include="Models\ClienteViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Pagamento.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parametro.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Plano.cs">
