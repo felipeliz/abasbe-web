@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $rootScope) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $rootScope, Validation) {
 
     $rootScope.cadastro = $rootScope.cadastro == null ? { IdTipoAcao: 0 } : $rootScope.cadastro;
     $scope.estados = [];
@@ -93,6 +93,8 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         Validation.required("Cidade", $rootScope.cadastro.IdCidade);
         Validation.required("Bairro", $rootScope.cadastro.Bairro);
         Validation.required("Logradouro", $rootScope.cadastro.Logradouro);
+        Validation.required("Data da Expiração", $rootScope.cadastro.DataExpiracao);
+
 
         if ($rootScope.cadastro.IdTipoAcao == 0) {
             $scope.salvarAssociado();
@@ -107,7 +109,6 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         if ($rootScope.cadastro.Empresa == true) {
             Validation.required("CNPJ", $rootScope.cadastro.Cnpj);
             Validation.required("Razão Social", $rootScope.cadastro.NomeEmpresa);
-
         }
 
         $http({
@@ -131,6 +132,8 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         Validation.required("Data da Nascimento", $rootScope.cadastro.Nascimento);
         Validation.required("Tempo de experiência", $rootScope.cadastro.TempoExperiencia);
         Validation.required("Pretensão salarial", $rootScope.cadastro.PretensaoSalarial);
+        Validation.required("Técnicas e Habilidades", $rootScope.cadastro.Tecnicas);
+
 
         if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length >= 1)) {
             toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");

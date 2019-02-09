@@ -22,6 +22,14 @@
           <span class="input-label">CPF</span>
           <input type="text" ui-mask="999.999.999-99" ng-model="cadastro.CPF" placeholder="">
         </label>
+        <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
+          <span class="input-label">Data de nascimento</span>
+          <input type="text" ui-mask="99/99/9999" ng-model="cadastro.Nascimento" placeholder="">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Data de Expiração</span>
+          <input type="text" ui-mask="99/99/9999" ng-model="cadastro.DataExpiracao" placeholder="">
+        </label>
         <ion-toggle toggle-class="toggle-positive" ng-if="cadastro.IdTipoAcao==0" ng-model="cadastro.Empresa">Inserir dados de empresa?</ion-toggle>
         <label class="item item-input item-stacked-label" ng-if="cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">CNPJ</span>
@@ -66,16 +74,20 @@
           </select>
         </label>
         <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
-          <span class="input-label">Data de nascimento</span>
-          <input type="text" ui-mask="99/99/9999" ng-model="cadastro.Nascimento" placeholder="">
-        </label>
-        <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
           <span class="input-label">Tempo de experiência</span>
           <input type="text" ng-model="cadastro.TempoExperiencia" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
           <span class="input-label">Pretensão salarial</span>
           <input type="text" ng-model="cadastro.PretensaoSalarial" placeholder="">
+        </label>
+        <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
+          <span class="input-label">Tecnicas e Habilidades</span>
+          <input type="text" ng-model="cadastro.Tecnicas" placeholder="">
+        </label>
+        <label class="item item-input item-stacked-label" ng-if="cadastro.IdTipoAcao==1">
+          <span class="input-label">Observações</span>
+          <input type="text" ng-model="cadastro.Observacao" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="cadastro.IdTipoAcao==1"> Informações adicionais</ion-item>
         <ion-toggle toggle-class="toggle-positive" ng-model="cadastro.FlagLeiSalaoParceiro" ng-if="cadastro.IdTipoAcao==1">Conhece a lei do salão parceiro?</ion-toggle>

@@ -1,8 +1,14 @@
-var controller = function ($http, $scope, $rootScope, $state) {
+var controller = function ($http, $scope, $rootScope, $state, Validation, $ionicHistory) {
 
     $scope.form = {};
 
     $scope.init = function () {
+        if($rootScope.cadastro == null){
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go("menu.cadastro");
+        }
         $scope.carregarCertificados();
     }
 
@@ -18,6 +24,9 @@ var controller = function ($http, $scope, $rootScope, $state) {
     }
 
     $scope.adicionarCertificados = function () {
+        Validation.required("Tipo de Certificado", $scope.form.Certificado);
+        Validation.required("Descrição", $scope.form.Descricao);
+
         $rootScope.cadastro.Certificados = $rootScope.cadastro.Certificados == null ? [] : $rootScope.cadastro.Certificados;
         var certificado = JSON.parse(JSON.stringify($scope.form));
         $rootScope.cadastro.Certificados.push(certificado);

@@ -1,8 +1,14 @@
-var controller = function ($http, $scope, $rootScope, $state) {
+var controller = function ($http, $scope, $rootScope, $state, Validation, $ionicHistory) {
 
     $scope.form = {};
 
     $scope.init = function () {
+        if($rootScope.cadastro == null){
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go("menu.cadastro");
+        }
         $scope.carregarEquipamentos();
     }
 
@@ -18,6 +24,8 @@ var controller = function ($http, $scope, $rootScope, $state) {
     }
 
     $scope.adicionarEquipamentos = function () {
+        Validation.required("Equipamentos", $scope.form.Equipamento);
+
         $rootScope.cadastro.Equipamentos = $rootScope.cadastro.Equipamentos == null ? [] : $rootScope.cadastro.Equipamentos;
         var equipamento = JSON.parse(JSON.stringify($scope.form.Equipamento));
         $rootScope.cadastro.Equipamentos.push(equipamento);

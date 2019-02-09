@@ -1,10 +1,16 @@
-var controller = function ($http, $scope, $rootScope, $state) {
+var controller = function ($http, $scope, $rootScope, $state, Validation, $ionicHistory) {
 
     $scope.profissoes = [];
     $scope.disponibilidades = [];
     $scope.form = {};
 
     $scope.init = function () {
+        if($rootScope.cadastro == null){
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go("menu.cadastro");
+        }
         $scope.carregarListas();
     }
     
@@ -20,10 +26,9 @@ var controller = function ($http, $scope, $rootScope, $state) {
     }
     $scope.adicionarExperiencia = function () {
         Validation.required("Nome do Estabelecimento", $scope.form.Empresa);
-        Validation.required("Profissão", $scope.form.Empresa);
-        Validation.required("Telefone", $scope.form.Profissao.Descricao);
+        Validation.required("Profissão", $scope.form.Profissao);
+        Validation.required("Telefone", $scope.form.Telefone);
         Validation.required("Data Inicial", $scope.form.DataInicial);
-
 
         $rootScope.cadastro.Experiencias = $rootScope.cadastro.Experiencias == null ? [] : $rootScope.cadastro.Experiencias;
         var experiencia = JSON.parse(JSON.stringify($scope.form));
