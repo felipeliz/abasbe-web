@@ -520,5 +520,103 @@
             pageTitle: 'Editar Profissional'
         }
     });
+
+    $stateProvider.state("restricted.layout.estado-lista", {
+        url: "/estado",
+        templateUrl: 'app/views/estado/list.html',
+        controller: 'estado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/estado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Estados'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.estado-novo", {
+        url: "/estado/form",
+        templateUrl: 'app/views/estado/form.html',
+        controller: 'estado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/estado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Estado'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.estado-editar", {
+        url: "/estado/form/:id",
+        templateUrl: 'app/views/estado/form.html',
+        controller: 'estado',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/estado.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Estado'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.cidade-lista", {
+        url: "/cidade",
+        templateUrl: 'app/views/cidade/list.html',
+        controller: 'cidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/cidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Cidades'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.cidade-novo", {
+        url: "/cidade/form",
+        templateUrl: 'app/views/cidade/form.html',
+        controller: 'cidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/cidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Criar Cidade'
+        }
+    });
+
+    $stateProvider.state("restricted.layout.cidade-editar", {
+        url: "/cidade/form/:id",
+        templateUrl: 'app/views/cidade/form.html',
+        controller: 'cidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/cidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Editar Cidade'
+        }
+    });
+
+
 }
 ]);

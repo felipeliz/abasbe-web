@@ -61,7 +61,10 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
                 { title: 'Disponibilidades', link: 'restricted.layout.disponibilidade-lista' },
                 { title: 'Equipamentos', link: 'restricted.layout.equipamento-lista' },
                 { title: 'Planos', link: 'restricted.layout.plano-lista' },
-                { title: 'Profissões', link: 'restricted.layout.profissao-lista' }]
+                { title: 'Profissões', link: 'restricted.layout.profissao-lista' },
+                { title: 'Estados', link: 'restricted.layout.estado-lista' },
+                { title: 'Cidades', link: 'restricted.layout.cidade-lista' }]
+
         });
     })();
 

@@ -17,10 +17,10 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
+            this.Banner = new HashSet<Banner>();
             this.Pagamento = new HashSet<Pagamento>();
             this.ClienteCertificado = new HashSet<ClienteCertificado>();
             this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
-            this.Banner = new HashSet<Banner>();
             this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
             this.ClienteProfissional = new HashSet<ClienteProfissional>();
         }
@@ -45,19 +45,19 @@ namespace Api
         public Nullable<int> IdPlano { get; set; }
         public Nullable<System.DateTime> Cadastro { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banner> Banner { get; set; }
         public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagamento> Pagamento { get; set; }
+        public virtual Plano Plano { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteCertificado> ClienteCertificado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteEquipamentos> ClienteEquipamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Banner> Banner { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
-        public virtual Plano Plano { get; set; }
     }
 }

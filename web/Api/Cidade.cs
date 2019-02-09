@@ -24,6 +24,7 @@ namespace Api
         public string Nome { get; set; }
         public int IdEstado { get; set; }
         public bool Capital { get; set; }
+        public bool Situacao { get; set; }
     
         public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

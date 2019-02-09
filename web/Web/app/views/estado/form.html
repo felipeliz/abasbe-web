@@ -1,0 +1,25 @@
+﻿<div id="page_content" ng-init="init()">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <h3 class="heading_a">Cadastro Estado</h3>
+                <div class="uk-grid">
+                    <div class="uk-width-1-2">
+                        <label>Nome <red>*</red></label>
+                        <input type="text" maxlength="100" class="md-input label-fixed" ng-model="form.Nome" md-input />
+                    </div>
+                    <div class="uk-width-1-2">
+                        <label>Sigla <red>*</red></label>
+                        <input type="text" maxlength="2" class="md-input label-fixed" ng-model="form.Sigla" md-input />
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
+                        <div class="uk-align-right">
+                            <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
+                            <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

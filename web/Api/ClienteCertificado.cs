@@ -17,8 +17,8 @@ namespace Api
         public string Id { get; set; }
         public int IdCliente { get; set; }
         public int IdCertificado { get; set; }
-        public Nullable<System.DateTime> DataCadastro { get; set; }
         public string Descricao { get; set; }
+        public Nullable<System.DateTime> DataCadastro { get; set; }
     
         public virtual Certificado Certificado { get; set; }
         public virtual Cliente Cliente { get; set; }
