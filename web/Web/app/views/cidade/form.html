@@ -1,0 +1,35 @@
+﻿<div id="page_content" ng-init="init()">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <h3 class="heading_a">Cadastro Cidade</h3>
+                <div class="uk-grid">
+                    <div class="uk-width-1-2">
+                        <label>Nome <red>*</red></label>
+                        <input type="text" maxlength="100" class="md-input label-fixed" ng-model="form.Nome" md-input />
+                    </div>
+                    <div class="uk-width-1-2">
+                        <label>Estado <red>*</red></label>
+                        <select class="md-input label-fixed" ng-model="form.IdEstado" ng-options="item.Id as item.Nome for item in estados" ng-change="carregarCidades(form.IdEstado)" md-input>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1-1 uk-grid-margin">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <input type="checkbox" ng-model="form.Capital" icheck />
+                            </span>
+                            <label>É capital de algum estado?</label>
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
+                        <div class="uk-align-right">
+                            <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
+                            <a class="md-btn md-btn-primary" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

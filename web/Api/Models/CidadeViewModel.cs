@@ -10,9 +10,12 @@ namespace Api.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public string EstadoSigla { get; set; }
-        public bool Capital { get; set; }
+        public string Capital { get; set; }
         public string Situacao { get; set; }
+        public string EstadoNome { get; set; }
 
+
+        public int IdEstado { get; set; }
         public CidadeViewModel(Cidade obj)
         {
             if (obj == null)
@@ -22,9 +25,10 @@ namespace Api.Models
 
             Id = obj.Id;
             Nome = obj.Nome;
-            EstadoSigla = obj.Estado.Sigla;
-            Capital = obj.Capital;
+            EstadoNome = obj.Estado.Nome;
+            Capital = obj.Capital.ToString();
             Situacao = obj.Situacao.ToString();
+            IdEstado = obj.IdEstado;
         }
     }
 }

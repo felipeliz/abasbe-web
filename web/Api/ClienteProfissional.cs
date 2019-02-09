@@ -36,5 +36,6 @@ namespace Api
         public virtual Cliente Cliente { get; set; }
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
+        public virtual ProfissionalFotos ProfissionalFotos { get; set; }
     }
 }

@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
+    <Compile Include="Controllers\CidadeController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
@@ -216,6 +217,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Profissao.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfissionalFotos.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -137,6 +137,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\cidade.js" />
     <Content Include="app\controllers\estado.js" />
     <Content Include="app\controllers\banner.js" />
     <Content Include="app\controllers\certificado.js" />
@@ -159,6 +160,8 @@
     <Content Include="app\views\disponibilidade\list.html" />
     <Content Include="app\views\equipamento\form.html" />
     <Content Include="app\views\equipamento\list.html" />
+    <Content Include="app\views\cidade\form.html" />
+    <Content Include="app\views\cidade\list.html" />
     <Content Include="app\views\estado\form.html" />
     <Content Include="app\views\estado\list.html" />
     <Content Include="app\views\plano\form.html" />
