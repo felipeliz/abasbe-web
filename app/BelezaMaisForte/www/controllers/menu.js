@@ -8,7 +8,7 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
             disponibilidade: "",
             sexo: "",
             cidade: "",
-            experiencia: 0,
+            experiencia: 1,
             bairro: "",
             delivery: false
         }
@@ -45,7 +45,8 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
     $scope.assinaturaGo = function () {
         $http({
             method: "GET",
-            url: api.resolve("api/cliente/assinante")
+            url: api.resolve("api/cliente/assinante"),
+            loading: true
         }).then(function (response) {
             $ionicHistory.nextViewOptions({
                 disableBack: true

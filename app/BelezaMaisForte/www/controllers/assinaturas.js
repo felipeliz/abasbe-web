@@ -46,7 +46,8 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         $http({
             method: "POST",
             url: api.resolve("api/plano/assinar"),
-            data: plano
+            data: plano,
+            loading: true
         }).then(function (response) {
             $scope.loading = false;
             toastr.success("Você iniciou uma assinatura!")

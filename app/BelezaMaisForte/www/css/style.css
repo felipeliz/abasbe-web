@@ -201,7 +201,7 @@ hr {
     border-top: 1px solid rgba(221, 221, 221, 0.80);
 }
 
-.perfil {
+.perfil-holder {
     padding: 8px;
 }
 
@@ -260,7 +260,101 @@ hr {
     margin-top: 0;
 }
 
-.toggle.toggle-theme input:checked + .track {
+.toggle.toggle-theme input:checked+.track {
     border-color: #7f2358;
     background-color: #7f2358;
+}
+
+.tab-nav.white {
+    border: 1px solid #ddd;
+    background: white !important;
+}
+
+.tab-nav.white button.button {
+    background-color: transparent;
+}
+
+.tab-nav.button-bar button.button {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-bottom: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.tab-nav.button-bar button.button.bt-nav-active {
+    border-bottom: 3px solid #7f2358;
+}
+
+.tab-nav.button-bar .button.active, .tab-nav.button-bar .button.activated {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.width-1-3 {
+    width: 33.333333332%;
+}
+
+.width-1-2 {
+    width: 50%;
+}
+
+.width-1-1 {
+    width: 100%;
+}
+
+.box-aspect-ratio {
+    position: relative;
+    float: left;
+    /* desired width */
+}
+
+.box-aspect-ratio:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+    /* initial ratio of 1:1*/
+}
+
+.box-aspect-ratio .box-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.box-aspect-ratio .box-content img {
+    width: 100%;
+}
+
+div.img-trabalhos {
+    display: flex;
+}
+
+.cr-slider-wrap {
+    display: none;
+}
+
+.item p.allow-linebreak {
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+}
+
+#preloader.full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#preloader.full .preloader {
+    margin: 0 auto;
 }

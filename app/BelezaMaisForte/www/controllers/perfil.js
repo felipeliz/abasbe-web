@@ -1,8 +1,10 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $stateParams) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $stateParams,  $rootScope) {
 
     $scope.user = null;
     $scope.id = $stateParams.id == null ? Auth.get().Id : $stateParams.id;
     $scope.loading = false;
+    $scope.tab = 0;
+    $scope.habilidades = [];
 
     $scope.init = function () {
         $scope.loading = true;
@@ -12,6 +14,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         }).then(function (response) {
             $scope.loading = false;
             $scope.user = response.data;
+            $scope.habilidades = $scope.getHabilidades();
         }, function (response) {
             $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
@@ -23,6 +26,18 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             return "imgs/user.png";
         }
         return api.resolve(obj.Foto);
+    }
+
+    $scope.getHabilidades = function () {
+        if ($scope.user == null || $scope.user.Curriculo == null || $scope.user.Curriculo.Habilidades == null) {
+            return [];
+        }
+        return $scope.user.Curriculo.Habilidades.split(',');
+    }
+
+    $scope.setTab = function (idx) {
+        $scope.tab = idx;
+        $rootScope.updateScroll();
     }
 
 }

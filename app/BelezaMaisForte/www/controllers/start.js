@@ -1,7 +1,6 @@
 var controller = function ($scope, $http, $ionicScrollDelegate) {
 
     $scope.banners = [];
-    $scope.loading = false;
     $scope.lastUpdate = (new Date()).getTime();
     $scope.filter = { page: 0 }
     $scope.total = "-";
@@ -11,7 +10,8 @@ var controller = function ($scope, $http, $ionicScrollDelegate) {
 
         $http({
             method: "GET",
-            url: api.resolve("api/cliente/total")
+            url: api.resolve("api/cliente/total"),
+            loading: true
         }).then(function(response) {
            $scope.total = response.data;
         }, function(response) {
@@ -23,11 +23,11 @@ var controller = function ($scope, $http, $ionicScrollDelegate) {
         console.log('searching page: ' + $scope.filter.page);
 
         $scope.lastUpdate = (new Date()).getTime();
-        $scope.loading = true;
         $http({
             method: "POST",
             url: api.resolve("api/banner/EmExibicao"),
-            data: $scope.filter
+            data: $scope.filter,
+            loading: true
         }).then(function(response) {
             $scope.lastUpdate = (new Date()).getTime();
             if($scope.filter.page > 0) {
@@ -36,9 +36,7 @@ var controller = function ($scope, $http, $ionicScrollDelegate) {
             else {
                 $scope.banners = response.data;
             }
-            $scope.loading = false;
         }, function(response) {
-            $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }

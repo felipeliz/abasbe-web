@@ -1,5 +1,5 @@
 <ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content>
+  <ion-side-menu-content drag-content="false">
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button></ion-nav-back-button>
       <ion-nav-buttons side="left">
@@ -28,6 +28,7 @@
         <ion-item ng-click="go('menu.contato')" menu-close="">Fale Conosco</ion-item>
         <ion-item ng-click="go('menu.login')" ng-if="!loggedIn" menu-close="">Entrar</ion-item>
         <ion-item ng-click="go('menu.cadastro')" ng-if="!loggedIn" menu-close="">Registre-se</ion-item>
+        <ion-item ng-click="go('menu.senha')" ng-if="loggedIn" menu-close="">Altrar Senha</ion-item>
         <ion-item class="assertive" ng-if="loggedIn" ng-click="logout()" menu-close="">Sair</ion-item>
       </ion-list>
     </ion-content>

@@ -37,10 +37,11 @@
           <option value="F">Feminino</option>
         </select>
       </label>
-      <ion-item class="range range-positive">Experiência
-        <input type="range" min="0" max="10" step="1" ng-model="$root.busca.experiencia">
+      <ion-item class="item-divider">Experiência - {{$root.busca.experiencia>1?$root.busca.experiencia + ' anos': $root.busca.experiencia + ' ano'}}</ion-item>
+      <ion-item class="range">
+          <input type="range" min="1" max="10" step="1" ng-model="$root.busca.experiencia">
       </ion-item>
-      <ion-item class="item-divider" id="buscarProfissionais-list-item-divider15">Região</ion-item>
+      <ion-item class="item-divider">Região</ion-item>
       <label class="item item-select item-stacked">
         <span class="input-label">Cidade</span>
         <select ng-options="x.Id as x.Nome for x in cidades" ng-model="$root.busca.cidade">

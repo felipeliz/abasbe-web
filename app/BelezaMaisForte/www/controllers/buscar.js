@@ -11,7 +11,8 @@ var controller = function ($scope, $http, $state, $rootScope) {
     $scope.carregar = function (image) {
         $http({
             method: "GET",
-            url: api.resolve("api/profissao/usados")
+            url: api.resolve("api/profissao/usados"),
+            loading: true
         }).then(function (response) {
             $scope.profissoes = response.data;
         }, function (response) {
@@ -20,7 +21,8 @@ var controller = function ($scope, $http, $state, $rootScope) {
 
         $http({
             method: "GET",
-            url: api.resolve("api/disponibilidade/usados")
+            url: api.resolve("api/disponibilidade/usados"),
+            loading: true
         }).then(function (response) {
             $scope.disponibilidades = response.data;
         }, function (response) {
@@ -29,7 +31,8 @@ var controller = function ($scope, $http, $state, $rootScope) {
 
         $http({
             method: "GET",
-            url: api.resolve("api/estado/cidadesUsados")
+            url: api.resolve("api/estado/cidadesUsados"),
+            loading: true
         }).then(function (response) {
             $scope.cidades = response.data;
         }, function (response) {

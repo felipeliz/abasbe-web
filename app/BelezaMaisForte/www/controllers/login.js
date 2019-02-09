@@ -15,7 +15,8 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
         $http({
             method: "POST",
             url: api.resolve("api/cliente/login"),
-            data: $scope.form
+            data: $scope.form,
+            loading: true
         }).then(function mySuccess(response) {
             Auth.set(response.data);
             $scope.start();

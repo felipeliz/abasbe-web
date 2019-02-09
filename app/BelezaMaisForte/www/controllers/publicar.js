@@ -25,43 +25,33 @@ var controller = function ($scope, $http, $state, Validation) {
         return api.resolve($scope.form.Imagem);
     }
 
-    $scope.uploadPhoto = function (file) {
-        file.filter = "ImageSquared";
-        file.size = 1024;
-        $http({
-            method: "POST",
-            url: api.resolve("api/file/upload"),
-            data: file
-        }).then(function mySuccess(response) {
-            $scope.form.Imagem = response.data;
-            toastr.success("Imagem enviada com sucesso.");
-        }, function myError(response) {
-            toastr.error(response.data.ExceptionMessage);
-        });
-    };
-
     $scope.mudarTipo = function (tipo) {
         $scope.form.IdTipoAcao = tipo;
     }
 
     $scope.salvar = function () {
-        Validation.required("Título", $scope.form.Titulo);
-        Validation.required("Data de Estreia", $scope.form.Estreia);
-        Validation.required("Descrição", $scope.form.Descricao);
-        Validation.required("Situacao", $scope.form.Situacao);
-        if ($scope.form.IdTipoAcao == 0) {
-            Validation.required("Link", $scope.form.Link);
-        }
-        else {
-            Validation.required("Telefone", $scope.form.Telefone);
-        }
-        Validation.required("Imagem", $scope.form.Imagem);
-        Validation.required("Plano", $scope.form.IdPlano);
+        $scope.croppie.result().then(function (base64) {
+            $scope.form.Imagem = base64;
+            Validation.required("Imagem", $scope.form.Imagem);
+            Validation.required("Título", $scope.form.Titulo);
+            Validation.required("Data da estreia", $scope.form.Estreia);
+            Validation.required("Horário da estreia", $scope.form.EstreiaHorario);
+            Validation.required("Descrição", $scope.form.Descricao);
+            Validation.required("Situacao", $scope.form.Situacao);
+            if ($scope.form.IdTipoAcao == 0) {
+                Validation.required("Link", $scope.form.Link);
+            }
+            else {
+                Validation.required("Telefone", $scope.form.Telefone);
+            }
+            Validation.required("Plano", $scope.form.IdPlano);
+        });
 
         $http({
             method: "POST",
             url: api.resolve("api/banner/publicar"),
-            data: $scope.form
+            data: $scope.form,
+            loading: true
         }).then(function mySuccess(response) {
             toastr.success("Banner cadastrado com sucesso!");
             $scope.pagamentos();
@@ -71,7 +61,62 @@ var controller = function ($scope, $http, $state, Validation) {
     }
 
     $scope.pagamentos = function () {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
         $state.go("menu.pagamentos");
+    }
+
+    $scope.selectPlano = function (plano) {
+        for (var i in $scope.planos) {
+            $scope.planos[i].selecionado = false;
+        }
+        $scope.form.IdPlano = plano.Id;
+        plano.selecionado = true;
+    }
+
+    $scope.croppie = {
+        instance: null,
+        file: null,
+        destroy: function () {
+            if ($scope.croppie.instance != null) {
+                $scope.croppie.file = null;
+                $scope.croppie.instance.croppie('destroy');
+            }
+        },
+        callback: function (file) {
+            if (file.hasFile) {
+                $scope.croppie.destroy();
+                $scope.croppie.file = file;
+                $scope.$apply();
+
+                $scope.croppie.instance = $('.post-image-upload').croppie({
+                    viewport: {
+                        width: $('.post-image-upload').width() - 10,
+                        height: $('.post-image-upload').width() - 10
+                    },
+                    boundary: {
+                        width: $('.post-image-upload').width(),
+                        height: $('.post-image-upload').width()
+                    },
+                    showZoomer: false
+                });
+                $scope.croppie.instance.croppie('bind', {
+                    url: file.base64
+                });
+            }
+        },
+        result: function () {
+            if ($scope.croppie.instance != null) {
+                var options = {
+                    type: 'base64',
+                    size: { width: 600, height: 600 },
+                    format: 'jpeg'
+                };
+                return $scope.croppie.instance.croppie('result', options);
+            }
+            return new Promise((then) => { then(null); });
+        }
     }
 }
 

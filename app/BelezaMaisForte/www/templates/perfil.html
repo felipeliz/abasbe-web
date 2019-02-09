@@ -8,50 +8,83 @@
             <div class="item-content">
                 <img ng-src="{{getPhotoLista(user)}}">
                 <h2 class="ng-binding">{{user.Nome}}</h2>
-                <p class="ng-binding">{{user.Curriculo.ProfissaoFormatada}}</p>
+                <p ng-if="user.FlagCliente=='P'" class="ng-binding">{{user.Curriculo.ProfissaoFormatada}}</p>
+                <p ng-if="user.FlagCliente!='P'" class="ng-binding">{{user.FlagCliente=='E' ? user.NomeEmpresa : 'Pessoa física'}}</p>
             </div>
         </div>
-        <div class="perfil" ng-if="!loading">
-            <ion-list id="perfil-list4">
-                <ion-item class="item-divider"> Contato</ion-item>
-                <ion-item class="item-icon-right" ng-if="user.TelefoneCelular!=null">
-                    <span>Celular</span>
-                    <p>{{user.TelefoneCelular}}</p>
-                    <i class="icon ion-ios-telephone-outline icon-accessory"></i>
-                </ion-item>
-                <ion-item class="item-icon-right" ng-if="user.Email!=null">
-                    <span>E-mail</span>
-                    <p>{{user.Email}}</p>
-                    <i class="icon ion-ios-email-outline icon-accessory"></i>
-                </ion-item>
-                <div ng-if="user.Curriculo!=null">
-                    <ion-item class="item-divider"> Currículo</ion-item>
-                    <ion-item class="item-icon-right" ng-if="user.Curriculo.ProfissaoFormatada!=null">
-                        <span>Profissão</span>
-                        <p>{{user.Curriculo.ProfissaoFormatada}}</p>
-                        <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+        <div class="perfil-holder" ng-if="!loading">
+            <div ng-if="user.Curriculo!=null" class="tab-nav button-bar">
+                <button ng-click="setTab(0)" class="button button-block {{ tab == 0 ? 'bt-nav-active' : '' }}">Geral</button>
+                <button ng-click="setTab(1)" class="button button-block {{ tab == 1 ? 'bt-nav-active' : '' }}">Trabalhos</button>
+            </div>
+            <div class="perfil" ng-show="tab==0">
+                <ion-list>
+                    <div ng-if="user.Curriculo!=null">
+                        <ion-item class="item-divider"> Currículo</ion-item>
+                        <ion-item class="item-icon-right" ng-if="user.Curriculo.ProfissaoFormatada.length>0">
+                            <span>Profissão</span>
+                            <p>{{user.Curriculo.ProfissaoFormatada}}</p>
+                            <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-icon-right" ng-if="user.Curriculo.DisponibilidadeFormatada.length>0">
+                            <span>Disponibilidade</span>
+                            <p>{{user.Curriculo.DisponibilidadeFormatada}}</p>
+                            <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item" ng-if="user.Curriculo.SexoFormatado.length>0">
+                            <span>Sexo</span>
+                            <span class="item-note">{{user.Curriculo.SexoFormatado}}</span>
+                        </ion-item>
+                        <ion-item class="item" ng-if="user.Nascimento.length>0">
+                            <span>Nascimento</span>
+                            <span class="item-note">{{user.Nascimento}}</span>
+                        </ion-item>
+                        <ion-item class="item" ng-if="user.Curriculo.TempoExperiencia.length>0">
+                            <span>Experiencia</span>
+                            <span class="item-note">{{user.Curriculo.TempoExperiencia}} anos</span>
+                        </ion-item>
+                        <ion-item class="item" ng-if="user.Curriculo.PretensaoSalarialFormatada.length>0">
+                            <span>Pretensão</span>
+                            <span class="item-note">{{user.Curriculo.PretensaoSalarialFormatada}}</span>
+                        </ion-item>
+                    </div>
+                    <ion-item class="item-divider"> Contato</ion-item>
+                    <ion-item class="item-icon-right" ng-if="user.TelefoneCelular.length>0">
+                        <span>Celular</span>
+                        <p>{{user.TelefoneCelular}}</p>
+                        <i class="icon ion-ios-telephone-outline icon-accessory"></i>
                     </ion-item>
-                    <ion-item class="item-icon-right" ng-if="user.Curriculo.DisponibilidadeFormatada!=null">
-                        <span>Disponibilidade</span>
-                        <p>{{user.Curriculo.DisponibilidadeFormatada}}</p>
-                        <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+                    <ion-item class="item-icon-right" ng-if="user.Email.length>0">
+                        <span>E-mail</span>
+                        <p>{{user.Email}}</p>
+                        <i class="icon ion-ios-email-outline icon-accessory"></i>
                     </ion-item>
-                    <ion-item class="item" ng-if="user.Curriculo.SexoFormatado!=null">
-                        <span>Sexo</span>
-                        <span class="item-note">{{user.Curriculo.SexoFormatado}}</span>
+                    <ion-item class="item-divider"> Endereço</ion-item>
+                    <ion-item class="item" ng-if="user.Cidade.Nome.length>0">
+                        <span>Cidade</span>
+                        <span class="item-note">{{user.Cidade.Nome}}, {{user.Cidade.EstadoSigla}}</span>
                     </ion-item>
-                    <ion-item class="item" ng-if="user.Nascimento!=null">
-                        <span>Nascimento</span>
-                        <span class="item-note">{{user.Nascimento}}</span>
+                    <ion-item class="item" ng-if="user.Bairro.length>0">
+                        <span>Bairro</span>
+                        <span class="item-note">{{user.Bairro}}</span>
                     </ion-item>
-                    <ion-item class="item" ng-if="user.Curriculo.TempoExperiencia!=null">
-                        <span>Experiencia</span>
-                        <span class="item-note">{{user.Curriculo.TempoExperiencia}} anos</span>
+                    <ion-item class="item-icon-right" ng-if="user.Logradouro.length>0">
+                        <span>Logradouro</span>
+                        <p>{{user.Logradouro}}</p>
+                        <i class="icon ion-ios-location-outline icon-accessory"></i>
                     </ion-item>
-                    <ion-item class="item" ng-if="user.Curriculo.PretensaoSalarialFormatada!=null">
-                        <span>Pretensão</span>
-                        <span class="item-note">{{user.Curriculo.PretensaoSalarialFormatada}}</span>
-                    </ion-item>
+                </ion-list>
+            </div>
+            <div class="perfil" ng-show="tab==1">
+                <ion-list>
+                    <ion-item class="item-divider"> Fotos dos trabalhos</ion-item>
+                    <div class="img-trabalhos clearfix">
+                        <div class='box-aspect-ratio width-1-3'>
+                            <div class="box-content">
+                                <img src="imgs/placeholder.png" />
+                            </div>
+                        </div>
+                    </div>
                     <ion-item class="item-divider"> Informações adicionais</ion-item>
                     <ion-item class="item-icon-right" ng-if="user.Curriculo.FlagLeiSalaoParceiro">
                         <span>Conhece a lei do salão parceiro?</span>
@@ -77,20 +110,6 @@
                         <span>Tem Filhos?</span>
                         <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                     </ion-item>
-                    <ion-item class="item-divider"> Endereço</ion-item>
-                    <ion-item class="item" ng-if="user.Cidade!=null">
-                        <span>Cidade</span>
-                        <span class="item-note">{{user.Cidade.Nome}}, {{user.Cidade.EstadoSigla}}</span>
-                    </ion-item>
-                    <ion-item class="item" ng-if="user.Bairro!=null">
-                        <span>Bairro</span>
-                        <span class="item-note">{{user.Bairro}}</span>
-                    </ion-item>
-                    <ion-item class="item-icon-right" ng-if="user.Logradouro!=null">
-                        <span>Logradouro</span>
-                        <p>{{user.Logradouro}}</p>
-                        <i class="icon ion-ios-location-outline icon-accessory"></i>
-                    </ion-item>
                     <ion-item class="item-divider" ng-if="user.Equipamentos.length>0"> Equipamentos</ion-item>
                     <ion-item class="item-icon-right" ng-repeat="equipamento in user.Equipamentos">
                         <span>{{equipamento.Equipamento.Descricao}}</span>
@@ -110,9 +129,16 @@
                         <p>{{experiencia.DatasFormatadas}}</p>
                         <i class="icon ion-android-checkmark-circle icon-accessory"></i>
                     </ion-item>
-                </div>
-            </ion-list>
-            <a ng-if="user.Curriculo!=null" href="tel://{{user.TelefoneCelular}}" class="button button-positive button-block">ENTRAR EM CONTATO</a>
+                    <ion-item class="item-divider" ng-if="habilidades.length>0"> Técnicas de habilidades</ion-item>
+                    <ion-item class="item-icon-right" ng-repeat="habilidade in habilidades">
+                        <span>{{habilidade}}</span>
+                        <i class="icon ion-android-checkmark-circle icon-accessory"></i>
+                    </ion-item>
+                </ion-list>
+            </div>
+            <a ng-if="user.Curriculo!=null" href="tel://{{user.TelefoneCelular}}" class="button button-positive button-block">
+                ENTRAR EM CONTATO
+            </a>
         </div>
     </ion-content>
 </ion-view>

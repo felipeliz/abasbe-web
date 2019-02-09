@@ -15,13 +15,21 @@ var controller = function ($scope, $http, Auth, $location, $state) {
         $http({
             method: "POST",
             url: api.resolve("api/cliente/contato"),
-            data: $scope.form
+            data: $scope.form,
+            loading: true
         }).then(function(response) {
-            console.success(response.data);
-            $state.go("menu.start");
+            toastr.success(response.data);
+            $scope.start();
         }, function(response) {
-            console.error(response.data.ExceptionMessage);
+            toastr.error(response.data.ExceptionMessage);
         });
+    }
+
+    $scope.start = function(){
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go('menu.start');
     }
 }
 

@@ -45,8 +45,8 @@ namespace Api.Models
            
             Id = obj.Id;
             Descricao = obj.Descricao;
-            Expiracao = obj.Expiracao.ToString("dd/MM/yyyy");
-            Estreia = obj.Estreia.ToString("dd/MM/yyyy");
+            Expiracao = obj.Expiracao.ToString("dd/MM/yyyy hh:mm");
+            Estreia = obj.Estreia.ToString("dd/MM/yyyy hh:mm");
             Situacao = obj.Situacao;
             Titulo = obj.Titulo;
             Imagem = obj.Imagem;

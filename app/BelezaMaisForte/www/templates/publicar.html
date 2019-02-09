@@ -1,14 +1,16 @@
-<ion-view title="Publicar Banner" id="page2" ng-init="init()">
+<ion-view title="Publicar Banner" id="page2" ng-init="init()" can-swipe-back=“false”>
   <ion-content padding="true" class="has-header">
     <h3>Publicar banner</h3>
     <div class="show-list-numbers-and-dots">
       <p>Selecione uma imagem para o banner</p>
     </div>
-    <div class="banner-img-holder" hide-input>
-      <input type="file" file-change="uploadPhoto" accept="image/jpeg"/>
-      <img src="{{getPhoto()}}">
-    </div>
+    <div class="post-image-upload"></div>
     <div class="list">
+      <ion-item class="item-icon-right" hide-input>
+        <input type="file" file-change="croppie.callback" accept="image/jpeg" />
+        <span class="input-label">Escolher Imagem</span>
+        <i class="icon ion-android-image icon-accessory"></i>
+      </ion-item>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Titulo</span>
         <input type="text" ng-model="form.Titulo" placeholder="">
@@ -18,27 +20,33 @@
         <input type="text" ng-model="form.Descricao" placeholder="">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Data de estreia</span>
-        <input type="text" ng-model="form.Estreia" placeholder="">
+        <span class="input-label">Data da publicação</span>
+        <input type="text" ng-model="form.Estreia" ui-mask="99/99/9999" model-view-value="true">
       </label>
-      <div id="publicarBanner-button-bar1" class="button-bar">
-        <button ng-click="mudarTipo(0)" class="button button-positive button-block {{ form.IdTipoAcao != 0 ? 'button-outline' : '' }}">Link</button>
-        <button ng-click="mudarTipo(1)" class="button button-positive button-block {{ form.IdTipoAcao != 1 ? 'button-outline' : '' }}">Telefone</button>
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Horário da publicação</span>
+          <input type="text" ng-model="form.EstreiaHorario" ui-mask="99:99" model-view-value="true">
+        </label>
+      <div class="tab-nav button-bar white">
+        <button ng-click="mudarTipo(0)" class="button button-block {{ form.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Link</button>
+        <button ng-click="mudarTipo(1)" class="button button-block {{ form.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Telefone</button>
       </div>
       <label class="item item-input item-stacked-label" ng-if="form.IdTipoAcao==0">
         <span class="input-label">Link</span>
-        <input type="text"  ng-model="form.Link" placeholder="">
+        <input type="text" ng-model="form.Link" placeholder="">
       </label>
       <label class="item item-input item-stacked-label" ng-if="form.IdTipoAcao==1">
-          <span class="input-label">Telefone</span>
-          <input type="text" ng-model="form.Telefone"  placeholder="">
-        </label>
-      <label class="item item-select item-stacked">
-        <span class="input-label">Plano</span>
-        <select ng-options="x.Id as x.Descricao for x in planos" ng-model="form.IdPlano">
-          <option value="">Selecione um plano...</option>
-        </select>
+        <span class="input-label">Telefone</span>
+        <input type="text" ng-model="form.Telefone" placeholder="">
       </label>
+      <ion-item class="item-divider">Selecione um plano</ion-item>
+      <ion-item class="item-icon-left" ng-click="selectPlano(plano)" ng-repeat="plano in planos">
+        <i class="icon {{plano.selecionado ? 'ion-android-radio-button-on' : 'ion-android-radio-button-off'}}"></i>
+        <span>{{plano.Descricao}}</span>
+        <p ng-if="plano.Vezes > 1">{{plano.Vezes}}x de {{plano.ValorDivididoFormatado}}</p>
+        <p ng-if="plano.Vezes == 1">{{plano.ValorFormatado}}</p>
+        <p class="allow-linebreak">Seu banner ficará publicado por {{plano.Dias}} dias</p>
+      </ion-item>
       <a ng-click="salvar()" class="button button-positive button-block">Publicar</a>
     </div>
   </ion-content>

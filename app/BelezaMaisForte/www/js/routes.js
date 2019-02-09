@@ -127,6 +127,22 @@ angular.module('app.routes', ['oc.lazyLoad'])
           }]
         }
       })
+      
+      .state('menu.senha', {
+        url: '/senha',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/senha.html',
+            controller: 'senha'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/senha.js');
+          }]
+        }
+      })
 
       .state('menu.perfil', {
         url: '/perfil/:id',

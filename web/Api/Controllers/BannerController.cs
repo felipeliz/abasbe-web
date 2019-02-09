@@ -131,11 +131,12 @@ namespace Api.Controllers
             obj.IdCliente = cliente.Id;
             obj.Descricao = param.Descricao.ToString();
             obj.Titulo = param.Titulo.ToString();
-            obj.Estreia = AppExtension.ToDateTime(param.Estreia);
+            obj.Estreia = Convert.ToDateTime(param.Estreia?.ToString() + " " + param.EstreiaHorario?.ToString());
             obj.Expiracao = obj.Estreia.AddDays(plano.Dias);
             obj.Situacao = param.Situacao.ToString();
-            obj.Imagem = FileController.ConfirmUpload(param.Imagem?.ToString());
+
             obj.Cadastro = DateTime.Now;
+            obj.Imagem = FileController.SaveFile(param.Imagem?.ToString(), ".jpg");
 
             Pagamento pagamento = new Pagamento();
             pagamento.Cliente = cliente;
@@ -146,6 +147,7 @@ namespace Api.Controllers
             pagamento.DataCriacao = DateTime.Now;
             pagamento.Dias = plano.Dias;
             pagamento.Descricao = plano.Descricao;
+            pagamento.Vezes = plano.Vezes;
 
             obj.Pagamento.Add(pagamento);
 

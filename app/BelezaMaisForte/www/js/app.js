@@ -7,14 +7,14 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app',
     ['ionic',
-    'app.controllers',
-    'app.routes',
-    'app.directives',
-    'app.services',
-    'oc.lazyLoad',
-    'cpf-cnpj',
-    'cnpj',
-    'ui.mask'])
+        'app.controllers',
+        'app.routes',
+        'app.directives',
+        'app.services',
+        'oc.lazyLoad',
+        'cpf-cnpj',
+        'cnpj',
+        'ui.mask'])
 
     .config(function ($ionicConfigProvider, $sceDelegateProvider) {
 
@@ -24,7 +24,11 @@ angular.module('app',
 
     })
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $ionicScrollDelegate, $rootScope) {
+
+        $rootScope.updateScroll = function () {
+            $ionicScrollDelegate.resize()
+        }
 
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -90,15 +94,40 @@ angular.module('app',
     })
 
 
-    .factory('httpRequestInterceptor', function ($q, Auth, $location) {
+    .factory('httpRequestInterceptor', function ($q, Auth, $location, $rootScope) {
         return {
             request: function (config) {
+                if (config.loading != null && config.loading) {
+                    if ($rootScope.loading == null) { $rootScope.loading = 0; }
+                    $rootScope.loading++;
+                }
                 if (Auth.isLoggedIn()) {
                     config.headers['Token'] = Auth.get().Token;
                 }
                 return config;
             },
+            requestError: function (rejection) {
+                var config = rejection.config;
+                if (config.loading != null && config.loading) {
+                    if ($rootScope.loading == null) { $rootScope.loading = 0; }
+                    $rootScope.loading--;
+                }
+                return $q.reject(rejection);
+            },
+            response: function (response) {
+                var config = response.config;
+                if (config.loading != null && config.loading) {
+                    if ($rootScope.loading == null) { $rootScope.loading = 0; }
+                    $rootScope.loading--;
+                }
+                return response;
+            },
             responseError: function (response) {
+                var config = response.config;
+                if (config.loading != null && config.loading) {
+                    if ($rootScope.loading == null) { $rootScope.loading = 0; }
+                    $rootScope.loading--;
+                }
                 if (typeof (response.data) != "undefined") {
                     if (typeof (response.data.ExceptionMessage) == "string") {
                         if (response.data.ExceptionMessage == "NotLoggedIn") {

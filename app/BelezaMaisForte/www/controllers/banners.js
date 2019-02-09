@@ -35,7 +35,8 @@ var controller = function ($scope, $http, Auth, $location, $state) {
     $scope.desabilitar = function(banner){
         $http({
             method: "GET",
-            url: api.resolve("api/banner/desabilitar/" + banner.Id)
+            url: api.resolve("api/banner/desabilitar/" + banner.Id),
+            loading: true
         }).then(function(response) {
             $scope.group = response.data;
         }, function(response) {

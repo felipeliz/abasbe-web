@@ -142,10 +142,16 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        public string Contato([FromBody] dynamic param)
+        {
+            return "Seu contato foi direcionado, responderemos em 24h";
+        }
+
+        [HttpPost]
         public bool Esqueceu([FromBody] dynamic param)
         {
             string email = param.email;
-          
+
             Entities context = new Entities();
             var obj = context.Cliente.FirstOrDefault(op => op.Email == email);
 
@@ -157,6 +163,36 @@ namespace Api.Controllers
             // enviar e-mail com a senha do cliente
 
             return true;
+        }
+
+        [HttpPost]
+        public bool Senha([FromBody] dynamic param)
+        {
+            string anterior = param.anterior?.ToString();
+            string nova = param.nova?.ToString();
+            string confirmar = param.confirmar?.ToString();
+
+            Entities context = new Entities();
+            var obj = context.Cliente.Find(AppExtension.IdUsuarioLogado());
+
+            if (anterior != obj.Senha)
+            {
+                throw new Exception("A senha atual está errada");
+            }
+
+            if (nova != confirmar)
+            {
+                throw new Exception("A nova senha está diferente da confirmação");
+            }
+
+            if (nova == null || nova.Length < 4)
+            {
+                throw new Exception("Sua senha precisa ter pelo menos 4 digitos");
+            }
+
+            obj.Senha = nova;
+
+            return context.SaveChanges() > 0;
         }
 
     }

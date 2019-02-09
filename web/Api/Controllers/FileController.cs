@@ -43,12 +43,23 @@ namespace Api.Controllers
                 }
 
                 File.WriteAllBytes(uploadFolder + "/" + fileName, Convert.FromBase64String(base64));
-
-                Thread.Sleep(1500);
-
                 return folder + "/" + fileName;
             }
             throw new Exception("Não foi possivel adicionar o arquivo.");
+        }
+
+        public static string SaveFile(string base64, string ext)
+        {
+            base64 = base64.ToString().Split(',')[1];
+            string folder = "uploads";
+            string uploadFolder = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + folder;
+            string fileName = Guid.NewGuid() + ext;
+            if (!Directory.Exists(uploadFolder))
+            {
+                Directory.CreateDirectory(uploadFolder);
+            }
+            File.WriteAllBytes(uploadFolder + "/" + fileName, Convert.FromBase64String(base64));
+            return folder + "/" + fileName;
         }
 
         public static string ConfirmUpload(string temp)
