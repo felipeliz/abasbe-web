@@ -71,7 +71,6 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
                 $scope.banners = response.data;
             }
         }, function (response) {
-            $scope.$broadcast('scroll.infiniteScrollComplete');
             toastr.error(response.data.ExceptionMessage);
         });
     }

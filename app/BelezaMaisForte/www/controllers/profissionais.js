@@ -36,7 +36,6 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
                 $scope.profissionais = response.data;
             }
         }, function (response) {
-            $scope.$broadcast('scroll.infiniteScrollComplete');
             toastr.error(response.data.ExceptionMessage);
         });
     }
