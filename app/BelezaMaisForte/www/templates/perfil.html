@@ -78,10 +78,10 @@
             <div class="perfil" ng-show="tab==1">
                 <ion-list>
                     <ion-item class="item-divider"> Fotos dos trabalhos</ion-item>
-                    <div class="img-trabalhos clearfix">
-                        <div class='box-aspect-ratio width-1-3'>
+                    <div class="img-trabalhos clearfix" ng-if="user.Curriculo.Fotos.length>0">
+                        <div class='box-aspect-ratio width-1-3' ng-repeat="foto in user.Curriculo.Fotos">
                             <div class="box-content">
-                                <img src="imgs/placeholder.png" />
+                                <img ng-src="{{getImagem(foto.Imagem)}}" />
                             </div>
                         </div>
                     </div>

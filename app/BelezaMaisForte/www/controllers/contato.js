@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, Auth, $location, $state) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory) {
 
     $scope.form = { nome: "", email: "", telefone: "" };
 

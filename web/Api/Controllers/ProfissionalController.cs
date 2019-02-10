@@ -225,6 +225,7 @@ namespace Api.Controllers
         [HttpPost]
         public List<ClienteViewModel> Buscar([FromBody] dynamic param)
         {
+            int pageSize = 3;
             string profissao = param.profissao?.ToString();
             string disponibilidade = param.disponibilidade?.ToString();
             string sexo = param.sexo?.ToString();
@@ -270,7 +271,7 @@ namespace Api.Controllers
 
             query = query.Where(pro => pro.Situacao == true);
             query = query.OrderBy(pro => pro.Nome);
-            query = query.Skip(page * 20).Take(20);
+            query = query.Skip(page * pageSize).Take(pageSize);
 
             query.ToList().ForEach(obj =>
             {

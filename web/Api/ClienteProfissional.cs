@@ -14,6 +14,12 @@ namespace Api
     
     public partial class ClienteProfissional
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ClienteProfissional()
+        {
+            this.ProfissionalFotos = new HashSet<ProfissionalFotos>();
+        }
+    
         public int Id { get; set; }
         public int IdCliente { get; set; }
         public int IdProfissao { get; set; }
@@ -36,6 +42,7 @@ namespace Api
         public virtual Cliente Cliente { get; set; }
         public virtual Disponibilidade Disponibilidade { get; set; }
         public virtual Profissao Profissao { get; set; }
-        public virtual ProfissionalFotos ProfissionalFotos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProfissionalFotos> ProfissionalFotos { get; set; }
     }
 }

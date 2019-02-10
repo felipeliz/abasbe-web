@@ -192,6 +192,8 @@ namespace Api.Controllers
         [HttpPost]
         public List<BannerViewModel> EmExibicao([FromBody] dynamic param)
         {
+            int pagesize = 3;
+
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
             DateTime now = DateTime.Now;
@@ -200,7 +202,7 @@ namespace Api.Controllers
 
             var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A");
             query = query.OrderBy(ban => ban.Cadastro);
-            query = query.Skip(page * 20).Take(20);
+            query = query.Skip(page * pagesize).Take(pagesize);
 
             query.ToList().ForEach(obj =>
             {

@@ -358,3 +358,20 @@ div.img-trabalhos {
 #preloader.full .preloader {
     margin: 0 auto;
 }
+
+.rodape {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: white;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.bar-footer span {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

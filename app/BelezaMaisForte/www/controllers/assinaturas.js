@@ -42,21 +42,18 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             return;
         }
 
-        $scope.loading = true;
         $http({
             method: "POST",
             url: api.resolve("api/plano/assinar"),
             data: plano,
             loading: true
         }).then(function (response) {
-            $scope.loading = false;
             toastr.success("Você iniciou uma assinatura!")
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
             $state.go("menu.pagamentos");
         }, function (response) {
-            $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }

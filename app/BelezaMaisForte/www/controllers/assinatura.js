@@ -23,20 +23,17 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     }
 
     $scope.cancelar = function(){
-        $scope.loading = true;
         $http({
             method: "GET",
             url: api.resolve("api/plano/CancelarAssinatura"),
             loading: true
         }).then(function (response) {
-            $scope.loading = false;
             toastr.success("Você cancelou sua assinatura!")
             $ionicHistory.nextViewOptions({
                 disableBack: true
             });
             $state.go("menu.assinaturas")
         }, function (response) {
-            $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }

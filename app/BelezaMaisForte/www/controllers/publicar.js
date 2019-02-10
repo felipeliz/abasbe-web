@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, $state, Validation) {
+var controller = function ($scope, $http, $state, Validation, $ionicHistory) {
 
     $scope.form = { Id: 0, Titulo: "", Descricao: "", IdTipoAcao: 0, IdPlano: -1, Situacao: "E" };
     $scope.planos = [];
@@ -45,18 +45,18 @@ var controller = function ($scope, $http, $state, Validation) {
                 Validation.required("Telefone", $scope.form.Telefone);
             }
             Validation.required("Plano", $scope.form.IdPlano);
-        });
 
-        $http({
-            method: "POST",
-            url: api.resolve("api/banner/publicar"),
-            data: $scope.form,
-            loading: true
-        }).then(function mySuccess(response) {
-            toastr.success("Banner cadastrado com sucesso!");
-            $scope.pagamentos();
-        }, function myError(response) {
-            toastr.error(response.data.ExceptionMessage);
+            $http({
+                method: "POST",
+                url: api.resolve("api/banner/publicar"),
+                data: $scope.form,
+                loading: true
+            }).then(function mySuccess(response) {
+                toastr.success("Banner cadastrado com sucesso!");
+                $scope.pagamentos();
+            }, function myError(response) {
+                toastr.error(response.data.ExceptionMessage);
+            });
         });
     }
 

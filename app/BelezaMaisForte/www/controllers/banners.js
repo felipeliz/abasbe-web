@@ -3,8 +3,8 @@ var controller = function ($scope, $http, Auth, $location, $state) {
     $scope.group = {};
     $scope.loading = false;
 
-    $scope.init = function(){
-        if(Auth.isLoggedIn()) {
+    $scope.init = function () {
+        if (Auth.isLoggedIn()) {
             $scope.filtrar();
         }
         else {
@@ -17,29 +17,31 @@ var controller = function ($scope, $http, Auth, $location, $state) {
         $http({
             method: "GET",
             url: api.resolve("api/banner/MeusBanners")
-        }).then(function(response) {
+        }).then(function (response) {
             $scope.loading = false;
             $scope.group = response.data;
             console.log(response.data);
-        }, function(response) {
+        }, function (response) {
             $scope.loading = false;
             console.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.getImage = function(image){
-        console.log(image);
-        return api.resolve(image);
+    $scope.getImage = function (image) {
+        if (obj == null || obj == "") {
+            return "imgs/placeholder.png";
+        }
+        return api.resolve(obj);
     }
 
-    $scope.desabilitar = function(banner){
+    $scope.desabilitar = function (banner) {
         $http({
             method: "GET",
             url: api.resolve("api/banner/desabilitar/" + banner.Id),
             loading: true
-        }).then(function(response) {
+        }).then(function (response) {
             $scope.group = response.data;
-        }, function(response) {
+        }, function (response) {
             console.error(response.data.ExceptionMessage);
         });
     }

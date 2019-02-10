@@ -196,6 +196,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AssinaturaViewModel.cs" />
+    <Compile Include="Models\ProfissionalFotosProfissionalViewModel.cs" />
     <Compile Include="Models\PagamentoViewModel.cs" />
     <Compile Include="Models\BannerViewModel.cs" />
     <Compile Include="Models\CidadeViewModel.cs" />

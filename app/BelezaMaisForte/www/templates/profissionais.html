@@ -1,8 +1,5 @@
 <ion-view title="Profissionais" ng-init="init()">
   <ion-content padding="true" class="has-header" on-scroll="checkScroll()">
-    <div id="preloader" ng-if="loading && profissionais.length == 0">
-      <div class="preloader" style="background-size: cover;"></div>
-    </div>
     <div ng-hide="loading" ng-if="profissionais.length == 0">
       <h3>Desculpe, não achamos :(</h3>
       <div class="show-list-numbers-and-dots">
@@ -53,5 +50,6 @@
         </div>
       </div>
     </div>
+    <ion-infinite-scroll on-infinite="onInfinite()" ng-hide="true" distance="10%"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

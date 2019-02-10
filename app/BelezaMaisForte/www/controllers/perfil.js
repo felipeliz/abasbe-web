@@ -21,6 +21,13 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         });
     }
 
+    $scope.getImagem = function (obj) {
+        if (obj == null || obj == "") {
+            return "imgs/placeholder.png";
+        }
+        return api.resolve(obj);
+    }
+
     $scope.getPhotoLista = function (obj) {
         if (obj == null || obj.Foto == null || obj.Foto == "") {
             return "imgs/user.png";
