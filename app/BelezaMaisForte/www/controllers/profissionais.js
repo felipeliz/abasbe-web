@@ -37,6 +37,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);
+            $state.go("menu.buscar");
         });
     }
 

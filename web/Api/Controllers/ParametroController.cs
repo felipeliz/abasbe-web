@@ -15,10 +15,13 @@ namespace Api.Controllers
         [HttpGet]
         public string Obter(string id)
         {
-            Entities context = new Entities();
-
             string chave = id;
+            return ObterParam(chave);
+        }
 
+        public static string ObterParam(string chave)
+        {
+            Entities context = new Entities();
             var obj = context.Parametro.FirstOrDefault(par => par.Chave == chave);
             if (obj == null)
             {

@@ -60,8 +60,17 @@ namespace Api.Controllers
 
             var idPlano = Convert.ToInt32(param.Id);
 
-
             Plano plano = context.Plano.Find(idPlano);
+
+            if(plano.TipoPlano != "A" && plano.TipoPlano != "P")
+            {
+                throw new Exception("Tipo de plano não reconhecido");
+            }
+
+            cliente.Pagamento.Where(pag => pag.Plano.TipoPlano == plano.TipoPlano && pag.Situacao == 0).ToList().ForEach(obj =>
+            {
+                obj.Situacao = 2;
+            });
 
             cliente.Plano = plano;
 
@@ -82,29 +91,6 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public bool CancelarAssinatura()
-        {
-            int id = AppExtension.IdUsuarioLogado();
-
-            Entities context = new Entities();
-
-            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
-            if (cliente == null)
-            {
-                throw new Exception("Objeto não encontrado");
-            }
-
-            cliente.Pagamento.Where(pag => pag.Plano.TipoPlano == "A" && pag.Situacao == 0).ToList().ForEach(obj =>
-            {
-                obj.Situacao = 2;
-            });
-
-            cliente.IdPlano = null;
-
-            return context.SaveChanges() > 0;
-        }
-
-        [HttpGet]
         public List<PlanoViewModel> PlanosAssinatura()
         {
             int id = AppExtension.IdUsuarioLogado();
@@ -116,12 +102,7 @@ namespace Api.Controllers
             {
                 throw new Exception("Objeto não encontrado");
             }
-
-            if(cliente.Plano != null)
-            {
-                throw new Exception("has_plan");
-            }
-
+          
             string tipo = cliente.FlagCliente == "P" ? "P" : "A";
 
             var query = context.Plano.Where(pla => pla.TipoPlano == tipo);

@@ -96,8 +96,10 @@ namespace Api.Controllers
                 obj.Senha = param.Senha;
                 obj.Nascimento = AppExtension.ToDateTime(param.Nascimento);
                 obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", "");
-                obj.DataExpiracao = param.DataExpiracao == null ? DateTime.Now : AppExtension.ToDateTime(param.DataExpiracao);
 
+                int degustacao = Convert.ToInt32(ParametroController.ObterParam("ProfissionalDiasDegustacao"));
+                obj.DataExpiracao = param.DataExpiracao == null ? DateTime.Now.AddDays(degustacao) : AppExtension.ToDateTime(param.DataExpiracao);
+              
                 obj.IdCidade = param.IdCidade;
                 obj.Bairro = param.Bairro;
                 obj.Cep = param.CEP;
@@ -157,9 +159,9 @@ namespace Api.Controllers
                         ProfissionalFotos relation = new ProfissionalFotos();
                         relation.Id = Guid.NewGuid().ToString();
                         relation.Imagem = element.Imagem ?? "imgs/placeholder.png";
-                        if(element.Imagem.ToString() != "imgs/placeholder.png")
+                        if (element.Imagem.ToString() != "imgs/placeholder.png")
                         {
-                            if(relation.Imagem.StartsWith("temp/"))
+                            if (relation.Imagem.StartsWith("temp/"))
                             {
                                 relation.Imagem = FileController.ConfirmUpload(element.Imagem?.ToString());
                             }
@@ -248,6 +250,19 @@ namespace Api.Controllers
         [HttpPost]
         public List<ClienteViewModel> Buscar([FromBody] dynamic param)
         {
+            Entities context = new Entities();
+            var cliente = context.Cliente.Find(AppExtension.IdUsuarioLogado());
+
+            if (cliente.FlagCliente != "A")
+            {
+                throw new Exception("Somente associados podem buscar profissionais.");
+            }
+
+            if (cliente.DataExpiracao < DateTime.Now)
+            {
+                throw new Exception("Somente assinantes podem buscar profissionais, Assine já!");
+            }
+
             int pageSize = 3;
             string profissao = param.profissao?.ToString();
             string disponibilidade = param.disponibilidade?.ToString();
@@ -258,7 +273,6 @@ namespace Api.Controllers
             bool delivery = Convert.ToBoolean(param.delivery);
             int page = Convert.ToInt32(param.page);
 
-            Entities context = new Entities();
             List<ClienteViewModel> lista = new List<ClienteViewModel>();
 
             var query = context.Cliente.Where(pro => pro.FlagCliente == "P");
@@ -293,7 +307,13 @@ namespace Api.Controllers
             }
 
             query = query.Where(pro => pro.Situacao == true);
-            query = query.OrderBy(pro => pro.Nome);
+
+            if (ParametroController.ObterParam("LimitarProfissionalPorExpiracao") == "S")
+            {
+                query = query.Where(pro => pro.DataExpiracao > DateTime.Now);
+            }
+
+            query = query.OrderByDescending(pro => pro.ClienteProfissional.FirstOrDefault().TempoExperiencia);
             query = query.Skip(page * pageSize).Take(pageSize);
 
             query.ToList().ForEach(obj =>

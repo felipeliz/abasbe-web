@@ -55,7 +55,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public bool Assinante()
+        public int DiasParaExpirar()
         {
             int id = AppExtension.IdUsuarioLogado();
 
@@ -67,7 +67,7 @@ namespace Api.Controllers
                 throw new Exception("Objeto não encontrado");
             }
 
-            return (cliente.Plano != null);
+            return Convert.ToInt32(((DateTime)cliente.DataExpiracao).Subtract(DateTime.Now).TotalDays);
         }
 
         [HttpGet]

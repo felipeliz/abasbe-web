@@ -1,6 +1,7 @@
-var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScope) {
+var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScope, $ionicSideMenuDelegate) {
     $scope.user = {}
     $scope.loggedIn = Auth.isLoggedIn();
+    $scope.expiry = "";
 
     if ($rootScope.busca == null) {
         $rootScope.busca = {
@@ -42,24 +43,33 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
         $state.go(page);
     }
 
-    $scope.assinaturaGo = function () {
-        $http({
-            method: "GET",
-            url: api.resolve("api/cliente/assinante"),
-            loading: true
-        }).then(function (response) {
-            $ionicHistory.nextViewOptions({
-                disableBack: true
+    $scope.$watch(function () {
+        return $ionicSideMenuDelegate.getOpenRatio();
+    }, function (ratio) {
+        if (ratio == 1) {
+            $scope.getExpiry();
+        }
+    });
+
+    $scope.getExpiry = function () {
+        if ($scope.user != null) {
+            $http({
+                method: "GET",
+                url: api.resolve("api/cliente/DiasParaExpirar")
+            }).then(function (response) {
+                if (response.data > 1) {
+                    $scope.expiry = "Sua assinatura expira em " + response.data + " dias";
+                }
+                else if (response.data == 1) {
+                    $scope.expiry = "Sua assinatura expira hoje";
+                }
+                else {
+                    $scope.expiry = "Sua assinatura expirou";
+                }
+            }, function (response) {
+                toastr.error(response.data.ExceptionMessage);
             });
-            if (response.data) {
-                $state.go("menu.assinatura");
-            }
-            else {
-                $state.go("menu.assinaturas");
-            }
-        }, function (response) {
-            toastr.error(response.data.ExceptionMessage);
-        });
+        }
     }
 }
 

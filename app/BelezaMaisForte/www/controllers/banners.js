@@ -28,10 +28,10 @@ var controller = function ($scope, $http, Auth, $location, $state) {
     }
 
     $scope.getImage = function (image) {
-        if (obj == null || obj == "") {
+        if (image == null || image == "") {
             return "imgs/placeholder.png";
         }
-        return api.resolve(obj);
+        return api.resolve(image);
     }
 
     $scope.desabilitar = function (banner) {

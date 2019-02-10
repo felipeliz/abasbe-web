@@ -113,6 +113,12 @@ angular.module('app',
                     if ($rootScope.loading == null) { $rootScope.loading = 0; }
                     $rootScope.loading--;
                 }
+                if(rejection.data == null || rejection.data.ExceptionMessage == null) {
+                    rejection.data = {
+                        ExceptionMessage: "Verifique sua conexão com a internet."
+                    }
+                }
+
                 return $q.reject(rejection);
             },
             response: function (response) {
@@ -128,6 +134,11 @@ angular.module('app',
                 if (config.loading != null && config.loading) {
                     if ($rootScope.loading == null) { $rootScope.loading = 0; }
                     $rootScope.loading--;
+                }
+                if(response.data == null || response.data.ExceptionMessage == null) {
+                    response.data = {
+                        ExceptionMessage: "Verifique sua conexão com a internet."
+                    }
                 }
                 if (typeof (response.data) != "undefined") {
                     if (typeof (response.data.ExceptionMessage) == "string") {

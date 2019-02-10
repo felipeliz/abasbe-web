@@ -88,13 +88,15 @@ namespace Api.Controllers
             obj.Senha = param.Senha?.ToString();
             obj.Email = param.Email?.ToString();
             obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", "");
-            obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
+
+            int degustacao = Convert.ToInt32(ParametroController.ObterParam("AssociadoDiasDegustacao"));
+            obj.DataExpiracao = param.DataExpiracao == null ? DateTime.Now.AddDays(degustacao) : AppExtension.ToDateTime(param.DataExpiracao);
+
             obj.Situacao = Convert.ToBoolean(param.Situacao);
             obj.CPF = Regex.Replace(param.CPF?.ToString(), "[^0-9]", "");
             obj.FlagCliente = param.FlagCliente;
 
             obj.Foto = FileController.ConfirmUpload(param.Foto?.ToString());
-
 
             obj.IdCidade = param.IdCidade;
             obj.Bairro = param.Bairro;

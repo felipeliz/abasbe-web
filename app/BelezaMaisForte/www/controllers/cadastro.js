@@ -1,7 +1,5 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $rootScope, Validation, $stateParams) {
+var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScope, $ionicScrollDelegate, Validation, $stateParams) {
 
-    $rootScope.cadastro = $rootScope.cadastro == null ? { IdTipoAcao: 0, Situacao: 1, Curriculo: {} } : $rootScope.cadastro;
-    $rootScope.cadastro.Curriculo.Fotos = [{ Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }];
     $scope.estados = [];
     $scope.cidades = [];
     $scope.profissoes = [];
@@ -9,9 +7,15 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     $scope.editing = false;
 
     $scope.init = function () {
+        if ($rootScope.cadastro != null && $rootScope.cadastro.keepContext == true) {
+            $rootScope.cadastro.keepContext = false;
+        }
+        else {
+            $rootScope.cadastro = { IdTipoAcao: 0, Situacao: 1, Curriculo: {} };
+            $rootScope.cadastro.Curriculo.Fotos = [{ Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }];
+        }
+
         if ($stateParams.id != null) {
-            console.log($stateParams.id);
-            console.log(Auth.get().Id);
             if ($stateParams.id != Auth.get().Id) {
                 $scope.start();
                 return;
@@ -90,7 +94,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     }
 
     $scope.getPhoto = function () {
-        if ($rootScope.cadastro.Foto == null || $rootScope.cadastro.Foto == "") {
+        if ($rootScope.cadastro == null || $rootScope.cadastro.Foto == null || $rootScope.cadastro.Foto == "") {
             return "imgs/banner-prototype.png";
         }
         return api.resolve($rootScope.cadastro.Foto);
@@ -128,6 +132,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
 
     $scope.mudarTipo = function (tipo) {
         $rootScope.cadastro.IdTipoAcao = tipo;
+        $rootScope.updateScroll();
     }
 
     $scope.salvar = function () {
@@ -160,7 +165,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             data: $rootScope.cadastro,
             loading: true
         }).then(function mySuccess(response) {
-            if (editing) {
+            if ($scope.editing) {
                 toastr.success("Seu perfil foi atualizado com sucesso!");
             }
             else {
@@ -223,15 +228,28 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         $state.go('menu.start');
     }
 
+    $scope.$on('$ionicView.afterEnter', function () {
+        if ($rootScope.cadastro != null && $rootScope.cadastro.scroll == "bottom") {
+            $rootScope.cadastro.scroll = null;
+            $ionicScrollDelegate.scrollBottom();
+        }
+    });
+
     $scope.openEquipamento = function () {
+        $rootScope.cadastro.keepContext = true;
+        $rootScope.cadastro.scroll = "bottom";
         $state.go("menu.equipamentos");
     }
 
     $scope.openCertificado = function () {
+        $rootScope.cadastro.keepContext = true;
+        $rootScope.cadastro.scroll = "bottom";
         $state.go("menu.certificados");
     }
 
     $scope.openExperiencias = function () {
+        $rootScope.cadastro.keepContext = true;
+        $rootScope.cadastro.scroll = "bottom";
         $state.go("menu.experiencias");
     }
 
