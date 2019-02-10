@@ -105,8 +105,10 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
     }
 
     $scope.salvarAssociado = function () {
+        $rootScope.cadastro.FlagCliente = "A";
 
         if ($rootScope.cadastro.Empresa == true) {
+            $rootScope.cadastro.FlagCliente = "E";
             Validation.required("CNPJ", $rootScope.cadastro.Cnpj);
             Validation.required("Razão Social", $rootScope.cadastro.NomeEmpresa);
         }
@@ -117,7 +119,7 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             data: $rootScope.cadastro
         }).then(function mySuccess(response) {
             toastr.success("Perfil cadastrado com sucesso!");
-            $scope.paraOndeEuVou();
+            $scope.login();
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
@@ -128,14 +130,13 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         Validation.required("Profissão", $rootScope.cadastro.IdProfissao);
         Validation.required("Disponibilidade", $rootScope.cadastro.IdDisponibilidade);
         Validation.required("Sexo", $rootScope.cadastro.Sexo);
-        Validation.required("Telefone", $rootScope.cadastro.Telefone);
         Validation.required("Data da Nascimento", $rootScope.cadastro.Nascimento);
         Validation.required("Tempo de experiência", $rootScope.cadastro.TempoExperiencia);
         Validation.required("Pretensão salarial", $rootScope.cadastro.PretensaoSalarial);
         Validation.required("Técnicas e Habilidades", $rootScope.cadastro.Tecnicas);
 
 
-        if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length >= 1)) {
+        if (!($rootScope.cadastro.Experiencias != null && $rootScope.cadastro.Experiencias.length >= 1)) {
             toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");
             return;
         }
@@ -146,14 +147,34 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             data: $rootScope.cadastro
         }).then(function mySuccess(response) {
             toastr.success("Perfil cadastrado com sucesso!");
-            $scope.paraOndeEuVou();
+            $scope.login();
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.paraOndeEuVou = function () {
-        $state.go("menu.start");
+    $scope.login = function () {        
+        var param = { email: $rootScope.cadastro.Email, senha: $rootScope.cadastro.Senha};
+
+        $http({
+            method: "POST",
+            url: api.resolve("api/cliente/login"),
+            data: param,
+            loading: true
+        }).then(function mySuccess(response) {
+            Auth.set(response.data);
+            $scope.start();
+        }, function myError(response) {
+            console.log(response.data);
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
+
+    $scope.start = function(){
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
+        $state.go('menu.start');
     }
 
     $scope.openEquipamento = function () {

@@ -14,6 +14,7 @@ angular.module('app',
         'oc.lazyLoad',
         'cpf-cnpj',
         'cnpj',
+        'rw.moneymask',
         'ui.mask'])
 
     .config(function ($ionicConfigProvider, $sceDelegateProvider) {
