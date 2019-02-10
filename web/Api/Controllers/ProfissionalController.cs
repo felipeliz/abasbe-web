@@ -96,7 +96,7 @@ namespace Api.Controllers
                 obj.Senha = param.Senha;
                 obj.Nascimento = AppExtension.ToDateTime(param.Nascimento);
                 obj.TelefoneCelular = Regex.Replace(param.TelefoneCelular?.ToString(), "[^0-9]", "");
-                obj.DataExpiracao = AppExtension.ToDateTime(param.DataExpiracao);
+                obj.DataExpiracao = param.DataExpiracao == null ? DateTime.Now : AppExtension.ToDateTime(param.DataExpiracao);
 
                 obj.IdCidade = param.IdCidade;
                 obj.Bairro = param.Bairro;
@@ -110,12 +110,12 @@ namespace Api.Controllers
                 curr.Sexo = param.Curriculo.Sexo;
                 curr.TelefoneComercial = Regex.Replace(param.Curriculo.TelefoneComercial?.ToString() ?? "", "[^0-9]", "");
                 curr.TempoExperiencia = param.Curriculo.TempoExperiencia;
-                curr.FlagLeiSalaoParceiro = param.Curriculo.FlagLeiSalaoParceiro;
-                curr.FlagBiosseguranca = param.Curriculo.FlagBiosseguranca;
-                curr.FlagEpi = param.Curriculo.FlagEpi;
-                curr.FlagFilhos = param.Curriculo.FlagFilhos;
-                curr.FlagMei = param.Curriculo.FlagMei;
-                curr.FlagDelivery = param.Curriculo.FlagDelivery;
+                curr.FlagLeiSalaoParceiro = param.Curriculo.FlagLeiSalaoParceiro ?? false;
+                curr.FlagBiosseguranca = param.Curriculo.FlagBiosseguranca ?? false;
+                curr.FlagEpi = param.Curriculo.FlagEpi ?? false;
+                curr.FlagFilhos = param.Curriculo.FlagFilhos ?? false;
+                curr.FlagMei = param.Curriculo.FlagMei ?? false;
+                curr.FlagDelivery = param.Curriculo.FlagDelivery ?? false;
                 curr.DisponibilidadeDelivery = param.Curriculo.DisponibilidadeDelivery;
                 curr.PretensaoSalarial = param.Curriculo.PretensaoSalarial;
                 curr.ObservacaoFilhos = param.Curriculo.ObservacaoFilhos;
@@ -144,6 +144,29 @@ namespace Api.Controllers
                         relation.IdEquipamento = Convert.ToInt32(element.Equipamento.Id);
                         relation.DataCadastro = AppExtension.ToDateTime(element.DataCadastro) ?? DateTime.Now;
                         obj.ClienteEquipamentos.Add(relation);
+                    }
+                }
+
+                // Equipamentos
+                context.ProfissionalFotos.RemoveRange(curr.ProfissionalFotos);
+                if (param.Curriculo.Fotos != null)
+                {
+                    int ordem = 1;
+                    foreach (var element in param.Curriculo.Fotos)
+                    {
+                        ProfissionalFotos relation = new ProfissionalFotos();
+                        relation.Id = Guid.NewGuid().ToString();
+                        relation.Imagem = element.Imagem ?? "imgs/placeholder.png";
+                        if(element.Imagem.ToString() != "imgs/placeholder.png")
+                        {
+                            if(relation.Imagem.StartsWith("temp/"))
+                            {
+                                relation.Imagem = FileController.ConfirmUpload(element.Imagem?.ToString());
+                            }
+                        }
+                        relation.Ordem = ordem;
+                        curr.ProfissionalFotos.Add(relation);
+                        ordem++;
                     }
                 }
 

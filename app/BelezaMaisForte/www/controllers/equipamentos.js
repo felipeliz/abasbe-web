@@ -27,7 +27,7 @@ var controller = function ($http, $scope, $rootScope, $state, Validation, $ionic
         Validation.required("Equipamentos", $scope.form.Equipamento);
 
         $rootScope.cadastro.Equipamentos = $rootScope.cadastro.Equipamentos == null ? [] : $rootScope.cadastro.Equipamentos;
-        var equipamento = JSON.parse(JSON.stringify($scope.form.Equipamento));
+        var equipamento = JSON.parse(JSON.stringify($scope.form));
         $rootScope.cadastro.Equipamentos.push(equipamento);
         console.log(equipamento);
         $state.go("menu.cadastro");

@@ -146,9 +146,10 @@ angular.module('app.directives', [])
             restrict: 'A',
             link: function (scope, element, attrs) {
                 var onChangeHandler = scope.$eval(attrs.fileChange);
+                var index = scope.$eval(attrs.modelIndex);
                 element.on('change', function (event) {
                     if (event.target.files.length == 0) {
-                        onChangeHandler({ hasFile: false, base64: null });
+                        onChangeHandler({ hasFile: false, base64: null }, index);
                         return;
                     }
                     var reader = new FileReader();
@@ -156,7 +157,7 @@ angular.module('app.directives', [])
                     reader.onload = function () {
                         var name = event.target.files[0].name;
                         var ext = "." + event.target.files[0].name.split('.').pop();
-                        onChangeHandler({ hasFile: true, base64: reader.result, ext: ext, name: name });
+                        onChangeHandler({ hasFile: true, base64: reader.result, ext: ext, name: name }, index);
                         element.val(null);
                     };
                     reader.onerror = function (error) {

@@ -14,9 +14,9 @@ namespace Api
     
     public partial class ProfissionalFotos
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Imagem { get; set; }
-        public System.DateTime Cadastro { get; set; }
+        public int Ordem { get; set; }
         public int IdProfissional { get; set; }
     
         public virtual ClienteProfissional ClienteProfissional { get; set; }

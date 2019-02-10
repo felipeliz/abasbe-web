@@ -601,6 +601,7 @@
     <Content Include="bower_components\uikit\js\uikit.js" />
     <Content Include="bower_components\uikit\js\uikit.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="imgs\placeholder.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

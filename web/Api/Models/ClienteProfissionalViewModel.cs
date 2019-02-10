@@ -30,6 +30,8 @@ namespace Api.Models
         public string Habilidades { get; set; }
         public string DisponibilidadeDelivery { get; set; }
 
+        public List<ProfissionalFotosProfissionalViewModel> Fotos { get; set; }
+
         public ClienteProfissionalViewModel(ClienteProfissional obj)
         {
             if (obj == null)
@@ -59,6 +61,12 @@ namespace Api.Models
             DisponibilidadeFormatada = obj.Disponibilidade.Descricao;
 
             PretensaoSalarialFormatada = String.Format("{0:C}", PretensaoSalarial);
+
+            Fotos = obj.ProfissionalFotos.OrderBy(ft => ft.Ordem).ToList().ConvertAll(ft => new ProfissionalFotosProfissionalViewModel(ft));
+            for(int i= Fotos.Count; i<3; i++)
+            {
+                Fotos.Add(new ProfissionalFotosProfissionalViewModel());
+            }
 
             switch (Sexo)
             {

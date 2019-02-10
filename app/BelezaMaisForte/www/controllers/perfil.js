@@ -1,10 +1,11 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $stateParams,  $rootScope) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, $stateParams, $rootScope) {
 
     $scope.user = null;
     $scope.id = $stateParams.id == null ? Auth.get().Id : $stateParams.id;
     $scope.loading = false;
     $scope.tab = 0;
     $scope.habilidades = [];
+    $scope.isMe = Auth.get().Id == $scope.id;
 
     $scope.init = function () {
         $scope.loading = true;
@@ -26,6 +27,10 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
             return "imgs/placeholder.png";
         }
         return api.resolve(obj);
+    }
+
+    $scope.editar = function () {
+        $state.go("menu.editar", { id: $scope.id })
     }
 
     $scope.getPhotoLista = function (obj) {

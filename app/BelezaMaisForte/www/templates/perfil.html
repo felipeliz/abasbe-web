@@ -7,9 +7,10 @@
             <img class="profile-bg" src="imgs/profile-bg.jpg" />
             <div class="item-content">
                 <img ng-src="{{getPhotoLista(user)}}">
-                <h2 class="ng-binding">{{user.Nome}}</h2>
-                <p ng-if="user.FlagCliente=='P'" class="ng-binding">{{user.Curriculo.ProfissaoFormatada}}</p>
-                <p ng-if="user.FlagCliente!='P'" class="ng-binding">{{user.FlagCliente=='E' ? user.NomeEmpresa : 'Pessoa física'}}</p>
+                <h2>{{user.Nome}}</h2>
+                <p ng-if="user.FlagCliente=='P'">{{user.Curriculo.ProfissaoFormatada}}</p>
+                <p ng-if="user.FlagCliente!='P'">{{user.FlagCliente=='E' ? user.NomeEmpresa : 'Pessoa física'}}</p>
+                <p ng-if="isMe" ng-click="editar()">Editar Perfil</p>
             </div>
         </div>
         <div class="perfil-holder" ng-if="!loading">
@@ -77,8 +78,8 @@
             </div>
             <div class="perfil" ng-show="tab==1">
                 <ion-list>
-                    <ion-item class="item-divider"> Fotos dos trabalhos</ion-item>
-                    <div class="img-trabalhos clearfix" ng-if="user.Curriculo.Fotos.length>0">
+                    <ion-item class="item-divider" ng-if="user.Curriculo.Fotos.length>0"> Fotos dos trabalhos</ion-item>
+                    <div class="img-trabalhos clearfix">
                         <div class='box-aspect-ratio width-1-3' ng-repeat="foto in user.Curriculo.Fotos">
                             <div class="box-content">
                                 <img ng-src="{{getImagem(foto.Imagem)}}" />

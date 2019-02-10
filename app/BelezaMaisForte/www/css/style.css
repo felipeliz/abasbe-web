@@ -202,7 +202,7 @@ hr {
 }
 
 .perfil-holder {
-    padding: 8px;
+    padding: 0px 8px;
 }
 
 .profile-bg {
@@ -229,6 +229,7 @@ hr {
 }
 
 .profile-heading .item-content img {
+    width: 70px;
     background: white;
     border-radius: 100%;
     border: 3px solid rgba(10, 10, 10, 0.1);
@@ -374,4 +375,8 @@ div.img-trabalhos {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+red {
+    color: red;
 }

@@ -160,6 +160,22 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
+      .state('menu.editar', {
+        url: '/editar/:id',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/cadastro.html',
+            controller: 'cadastro'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/cadastro.js');
+          }]
+        }
+      })
+
       .state('menu.login', {
         url: '/login',
         cache: false,

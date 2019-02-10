@@ -109,6 +109,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="imgs\placeholder.png" />
     <Content Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
@@ -196,7 +197,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AssinaturaViewModel.cs" />
-    <Compile Include="Models\ProfissionalFotosProfissionalViewModel.cs" />
     <Compile Include="Models\PagamentoViewModel.cs" />
     <Compile Include="Models\BannerViewModel.cs" />
     <Compile Include="Models\CidadeViewModel.cs" />
@@ -211,6 +211,7 @@
     <Compile Include="Models\ClienteEquipamentoViewModel.cs" />
     <Compile Include="Models\ClienteProfissionalViewModel.cs" />
     <Compile Include="Models\ClienteViewModel.cs" />
+    <Compile Include="Models\ProfissionalFotosProfissionalViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Pagamento.cs">
       <DependentUpon>Model.tt</DependentUpon>
