@@ -10,11 +10,13 @@ namespace Api.Models
     {
         public List<PagamentoViewModel> Pendente { get; set; }
         public List<PagamentoViewModel> Pago { get; set; }
+        public List<PagamentoViewModel> Alternativo { get; set; }
 
         public PagamentoGroupViewModel()
         {
             Pendente = new List<PagamentoViewModel>();
             Pago = new List<PagamentoViewModel>();
+            Alternativo = new List<PagamentoViewModel>();
         }
     }
 
@@ -66,9 +68,14 @@ namespace Api.Models
         {
             switch (s)
             {
-                case 0: return "Pendente";
-                case 1: return "Pago";
-                case 2: return "Cancelado";
+                case 0: return "Novo";
+                case 1: return "Esperando pagamento";
+                case 2: return "Em analise";
+                case 3: return "Pago";
+                case 4: return "Disponivel";
+                case 5: return "Em disputa";
+                case 6: return "Reembolsado";
+                case 7: return "Cancelado";
                 default: return "Indefinido";
             }
         }

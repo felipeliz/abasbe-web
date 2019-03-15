@@ -86,14 +86,29 @@ namespace Api.Controllers
 
             PagamentoGroupViewModel obj = new PagamentoGroupViewModel();
 
-            cliente.Pagamento.Where(pag => pag.Situacao == 1).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            List<int> pagos = new List<int>();
+            pagos.Add(2);
+            pagos.Add(3);
+            cliente.Pagamento.Where(pag => pagos.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
                 obj.Pago.Add(new PagamentoViewModel(pag));
             });
 
-            cliente.Pagamento.Where(pag => pag.Situacao == 0).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            List<int> pendentes = new List<int>();
+            pendentes.Add(0);
+            pendentes.Add(1);
+            cliente.Pagamento.Where(pag => pendentes.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
                 obj.Pendente.Add(new PagamentoViewModel(pag));
+            });
+
+            List<int> alternativos = new List<int>();
+            alternativos.Add(4);
+            alternativos.Add(5);
+            alternativos.Add(6);
+            cliente.Pagamento.Where(pag => alternativos.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            {
+                obj.Alternativo.Add(new PagamentoViewModel(pag));
             });
 
             return obj;

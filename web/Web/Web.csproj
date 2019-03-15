@@ -152,6 +152,7 @@
     <Content Include="app\controllers\profissao.js" />
     <Content Include="app\controllers\senha.js" />
     <Content Include="app\shared\mail-templates\basic.html" />
+    <Content Include="app\shared\messages\pagamento.html" />
     <Content Include="app\views\associado\form.html" />
     <Content Include="app\views\associado\list.html" />
     <Content Include="app\views\banner\form.html" />
@@ -1077,6 +1078,7 @@
     <Content Include="assets\js\uikit_custom.js" />
     <Content Include="assets\js\uikit_custom.min.js" />
     <Content Include="index.html" />
+    <Content Include="PagSeguroConfig.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

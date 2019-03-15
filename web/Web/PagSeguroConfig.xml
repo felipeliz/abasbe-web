@@ -95,21 +95,21 @@
   <!-- user's credential -->
   <Credential>
     <!-- your email here -->
-    <Email>backoffice@lojamodelo.com.br</Email>
+    <Email>alys.freitas@gmail.com</Email>
     <!-- your token here -->
-    <Token>256422BF9E66458CA3FE41189AD1C94A</Token>
+    <Token>392550106A1E44DBB4756279EF723353</Token>
     <!-- your sandbox email here -->
-    <SandboxEmail>backoffice@lojamodelo.com.br</SandboxEmail>
+    <SandboxEmail>alys.freitas@gmail.com</SandboxEmail>
     <!-- your sandbox token here -->
-    <SandboxToken>256422BF9E66458CA3FE41189AD1C94A</SandboxToken>
+    <SandboxToken>8AA2AD9730564BB7A693BFC5865E5F91</SandboxToken>
     <!-- your appId here -->
-    <AppId>app8888888888</AppId>
+    <AppId>app9135729173</AppId>
     <!-- your appKey here -->
-    <AppKey>82EBFA59F1F1469FF47B3FBB8D2526BC</AppKey>
+    <AppKey>2E976F32D8D8DA40047FDF83EB1F80C2</AppKey>
     <!-- your sandbox appId here -->
-    <SandboxAppId>app8888888888</SandboxAppId>
+    <SandboxAppId>app9135729173</SandboxAppId>
     <!-- your sandbox appKey here -->
-    <SandboxAppKey>82EBFA59F1F1469FF47B3FBB8D2526BC</SandboxAppKey>
+    <SandboxAppKey>2E976F32D8D8DA40047FDF83EB1F80C2</SandboxAppKey>
   </Credential>
   <!-- configuration default for PagSeguro API-->
   <Configuration>
@@ -120,6 +120,6 @@
     <!-- encoding of the outcoming/incoming communication to/from PagSeguro API -->
     <Encoding>ISO-8859-1</Encoding>
     <!-- default request timeout for call service -->
-    <RequestTimeout>10000</RequestTimeout>
+    <RequestTimeout>60000</RequestTimeout>
   </Configuration>
 </PagSeguroConfiguration>

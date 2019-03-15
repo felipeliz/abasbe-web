@@ -67,11 +67,6 @@ namespace Api.Controllers
                 throw new Exception("Tipo de plano não reconhecido");
             }
 
-            cliente.Pagamento.Where(pag => pag.Plano.TipoPlano == plano.TipoPlano && pag.Situacao == 0).ToList().ForEach(obj =>
-            {
-                obj.Situacao = 2;
-            });
-
             cliente.Plano = plano;
 
             Pagamento pagamento = new Pagamento();

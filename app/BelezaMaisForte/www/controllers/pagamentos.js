@@ -27,10 +27,13 @@ var controller = function ($scope, $http) {
             url: api.resolve("api/pagamento/Pagar/" + id),
             loading: true
         }).then(function (response) {
-            $scope.loading = false;
-            $scope.pagamentos = response.data;
+            if(response.data != null) {
+                window.open(response.data, '_system', 'location=yes');
+            }
+            else {
+                toastr.error("Tivemos um problema ao gerar seu link de pagamento, tente novamente");
+            }
         }, function (response) {
-            $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }
