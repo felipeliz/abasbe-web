@@ -384,3 +384,10 @@ red {
 .main-list {
     padding-bottom: 50px;
 }
+
+.counter{
+    float: right;
+    color: #aaa;
+    font-size: 14px;
+    padding-right: 7px;
+}

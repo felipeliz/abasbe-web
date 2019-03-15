@@ -17,7 +17,8 @@
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Descrição</span>
-        <input type="text" ng-model="form.Descricao" placeholder="">
+        <textarea ng-model="form.Descricao" maxlength="250" placeholder=""></textarea>
+        <span class="counter"> {{form.Descricao.length}}/250 </span>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Data da publicação</span>
