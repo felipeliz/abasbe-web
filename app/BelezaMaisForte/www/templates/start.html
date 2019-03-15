@@ -7,7 +7,7 @@
           <strong class="pull-right">{{total}}</strong>
         </div>
       </div>
-      <div class="list" ng-hide="loading && banners.length==0">
+      <div class="list main-list" ng-hide="loading && banners.length==0">
         <div class="card" ng-repeat="banner in banners">
           <div ng-include="'templates/card-banner.html'"></div>
         </div>

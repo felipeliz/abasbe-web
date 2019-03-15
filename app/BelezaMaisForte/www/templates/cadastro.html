@@ -1,9 +1,15 @@
 <ion-view title="Perfil" id="page7" ng-init="init()">
-  <ion-content padding="true" class="has-header" delegate-handle="cadastro-handle">
-    <h3>Seu Cadastro</h3>
-    <div class="banner-img-holder" hide-input>
+  <ion-content class="has-header" delegate-handle="cadastro-handle">
+
+    <div class="profile-heading" ng-if="!loading" hide-input>
       <input type="file" file-change="uploadPhoto" accept="image/jpeg" />
-      <img src="{{getPhoto()}}">
+      <img class="profile-bg" src="imgs/profile-bg.jpg" />
+      <div class="item-content">
+        <img ng-src="{{getPhoto()}}">
+        <h2>Cadastro</h2>
+        <p ng-if="$root.cadastro.IdTipoAcao==0">Associado</p>
+        <p ng-if="$root.cadastro.IdTipoAcao==1">Profissional</p>
+      </div>
     </div>
     <div ng-if="!editing" class="tab-nav button-bar">
       <button ng-click="mudarTipo(0)" class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Associado</button>

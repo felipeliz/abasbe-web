@@ -20,6 +20,20 @@ var controller = function ($scope, $http) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
+
+    $scope.pagar = function (id) {
+        $http({
+            method: "GET",
+            url: api.resolve("api/pagamento/Pagar/" + id),
+            loading: true
+        }).then(function (response) {
+            $scope.loading = false;
+            $scope.pagamentos = response.data;
+        }, function (response) {
+            $scope.loading = false;
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
 }
 
 angular.module('app.controllers', []).controller('pagamentos', controller)

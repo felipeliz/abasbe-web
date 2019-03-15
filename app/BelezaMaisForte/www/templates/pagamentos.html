@@ -12,7 +12,7 @@
     <div ng-hide="loading">
       <ion-list ng-hide="pagamentos.Pendente.length == 0">
         <ion-item class="item-divider">Pagamentos Pendentes</ion-item>
-        <ion-item ng-repeat="pagamento in pagamentos.Pendente">
+        <ion-item ng-repeat="pagamento in pagamentos.Pendente" ng-click="pagar(pagamento.Id)">
           <h2>{{pagamento.Descricao}}</h2>
           <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
             {{pagamento.ValorDivididoFormatado}}</p>

@@ -35,6 +35,11 @@ namespace Api.Models
         public string ValorDivididoFormatado { get; set; }
 
 
+        public PagamentoViewModel()
+        {
+
+        }
+
         public PagamentoViewModel(Pagamento obj)
         {
             if (obj == null)

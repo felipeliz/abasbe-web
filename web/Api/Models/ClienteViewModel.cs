@@ -35,7 +35,7 @@ namespace Api.Models
             Nome = obj.Nome;
             Foto = obj.Foto;
             DataExpiracao = obj.DataExpiracao?.ToString("dd/MM/yyyy");
-            DiasExpiracao = Convert.ToInt32(((DateTime)obj.DataExpiracao).Subtract(DateTime.Now).TotalDays);
+            DiasExpiracao = Convert.ToInt32(((obj.DataExpiracao ?? DateTime.MinValue)).Subtract(DateTime.Now).TotalDays);
             Cadastro = obj.Cadastro?.ToString("dd/MM/yyyy");
             CPF = string.IsNullOrEmpty(obj.CPF) ? obj.CPF : Convert.ToUInt64(obj.CPF).ToString(@"000\.000\.000-00");
             Email = obj.Email;

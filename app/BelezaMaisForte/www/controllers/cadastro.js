@@ -95,7 +95,7 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
 
     $scope.getPhoto = function () {
         if ($rootScope.cadastro == null || $rootScope.cadastro.Foto == null || $rootScope.cadastro.Foto == "") {
-            return "imgs/banner-prototype.png";
+            return "imgs/add-picture.jpg";
         }
         return api.resolve($rootScope.cadastro.Foto);
     }
@@ -106,7 +106,8 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
         $http({
             method: "POST",
             url: api.resolve("api/file/upload"),
-            data: file
+            data: file,
+            loading: true
         }).then(function mySuccess(response) {
             $rootScope.cadastro.Foto = response.data;
             toastr.success("Imagem enviada com sucesso.");

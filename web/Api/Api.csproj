@@ -92,6 +92,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Uol.PagSeguro, Version=2.7.0.0, Culture=neutral, PublicKeyToken=f3c2cf8865d9ba24, processorArchitecture=MSIL">
+      <HintPath>..\packages\Uol.PagSeguro.2.7.1\lib\Uol.PagSeguro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Formatting">
@@ -158,6 +162,7 @@
     <Compile Include="ClienteProfissional.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\AssociadoController.cs" />
