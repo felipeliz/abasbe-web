@@ -137,6 +137,11 @@ namespace Api.Controllers
                 throw new Exception("E-mail ou senha inválidos");
             }
 
+            if (obj.Situacao == false)
+            {
+                throw new Exception("Seu cadastro está inativo, entre em contato para mais informações!");
+            }
+
             ClienteViewModel res = new ClienteViewModel(obj, true);
             return res;
         }

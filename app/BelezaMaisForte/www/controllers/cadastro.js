@@ -187,11 +187,6 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
         Validation.required("Técnicas e Habilidades", $rootScope.cadastro.Curriculo.Habilidades);
         Validation.required("Telefone Celular", $rootScope.cadastro.TelefoneCelular);
 
-        if (!($rootScope.cadastro.Experiencias != null && $rootScope.cadastro.Experiencias.length >= 1)) {
-            toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");
-            return;
-        }
-
         $http({
             method: "POST",
             url: api.resolve("api/profissional/salvar"),
