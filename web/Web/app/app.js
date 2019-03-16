@@ -16,7 +16,8 @@ var app = angular.module('app', [
     'tooltips',
     'rw.moneymask',
     'filterPhone',
-    'autocomplete'
+    'autocomplete',
+    'ui.utils.masks'
 ]);
 
 app.constant('variables', {
