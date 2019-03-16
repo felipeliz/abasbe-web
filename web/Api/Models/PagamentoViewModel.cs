@@ -24,6 +24,10 @@ namespace Api.Models
         public int SituacaoValue { get; set; }
         public int Vezes { get; set; }
         public string ValorDivididoFormatado { get; set; }
+        public string NomeCliente { get; set; }
+        public string CPFCliente { get; set; }
+        public string NomeEstado { get; set; }
+        public string TipoPlanoFormatadoCompleto { get; set; }
 
 
         public PagamentoViewModel()
@@ -52,8 +56,25 @@ namespace Api.Models
             SituacaoValue = obj.Situacao;
             Vezes = obj.Vezes;
             ValorDivididoFormatado = String.Format("{0:C}", obj.Valor / Vezes);
+            NomeCliente = obj.Cliente.Nome;
+            CPFCliente =  string.IsNullOrEmpty(obj.Cliente.CPF) ? obj.Cliente.CPF : Convert.ToUInt64(obj.Cliente.CPF).ToString(@"000\.000\.000-00");
+            NomeEstado = obj.Cliente.Cidade.Estado.Nome;
 
-            if(obj.Banner != null)
+            if (obj.Plano.TipoPlano == "A")
+            {
+                TipoPlanoFormatadoCompleto = "Associado";
+            }
+            else if (obj.Plano.TipoPlano == "P")
+            {
+                TipoPlanoFormatadoCompleto = "Profissional";
+            }
+            else
+            {
+                TipoPlanoFormatadoCompleto = "Banner";
+            }
+
+
+            if (obj.Banner != null)
             {
                 Referencia = obj.Banner.Titulo;
             }

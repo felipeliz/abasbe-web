@@ -11,12 +11,29 @@ using Uol.PagSeguro.Domain;
 using Uol.PagSeguro.Exception;
 using Uol.PagSeguro.Resources;
 using Uol.PagSeguro.Service;
+using Api.Utils;
+
 
 namespace Api.Controllers
 {
     public class PagamentoController : ApiController
     {
         bool isSandbox = ParametroController.ObterParam("PagSeguroSandBox") == "S" ? true : false;
+
+
+        [HttpPost]
+        public PagedList Lista([FromBody] dynamic param)
+        {
+            Entities context = new Entities();
+
+            var query = context.Pagamento.AsQueryable();
+
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao));
+            paged.ReplaceList(paged.list.ConvertAll<object>(obj => new PagamentoViewModel(obj as Pagamento)));
+
+            return paged;
+
+        }
 
 
         [HttpPost]

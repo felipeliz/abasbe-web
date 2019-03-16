@@ -617,6 +617,22 @@
         }
     });
 
+    $stateProvider.state("restricted.layout.pagamento-lista", {
+        url: "/pagamento",
+        templateUrl: 'app/views/pagamento/list.html',
+        controller: 'pagamento',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/pagamento.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Pagamentos'
+        }
+    });
+
 
 }
 ]);

@@ -137,6 +137,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\pagamento.js" />
     <Content Include="app\controllers\cidade.js" />
     <Content Include="app\controllers\estado.js" />
     <Content Include="app\controllers\banner.js" />
@@ -155,6 +156,7 @@
     <Content Include="app\shared\messages\pagamento.html" />
     <Content Include="app\views\associado\form.html" />
     <Content Include="app\views\associado\list.html" />
+    <Content Include="app\views\pagamento\list.html" />
     <Content Include="app\views\banner\form.html" />
     <Content Include="app\views\banner\list.html" />
     <Content Include="app\views\disponibilidade\form.html" />
