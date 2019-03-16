@@ -1,0 +1,12 @@
+Conta pagseguro - Produção (Account Credentials)
+
+Login: sarahpires1@hotmail.com
+
+Senha: Beleza01
+Token: B62792E9D4A84B09A981ADA2CFE0F17C
+
+Conta pagseguro - SandBox
+ (Account Credentials)
+Seu email é: sarahpires1@hotmail.com
+
+Seu token é: 4541345913F44EF8A40B163128BDA086

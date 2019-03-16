@@ -18,11 +18,11 @@ namespace Api
         public Cliente()
         {
             this.Banner = new HashSet<Banner>();
-            this.Pagamento = new HashSet<Pagamento>();
             this.ClienteCertificado = new HashSet<ClienteCertificado>();
             this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
             this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
             this.ClienteProfissional = new HashSet<ClienteProfissional>();
+            this.Pagamento = new HashSet<Pagamento>();
         }
     
         public int Id { get; set; }
@@ -48,8 +48,6 @@ namespace Api
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banner> Banner { get; set; }
         public virtual Cidade Cidade { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pagamento> Pagamento { get; set; }
         public virtual Plano Plano { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteCertificado> ClienteCertificado { get; set; }
@@ -59,5 +57,7 @@ namespace Api
         public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pagamento> Pagamento { get; set; }
     }
 }

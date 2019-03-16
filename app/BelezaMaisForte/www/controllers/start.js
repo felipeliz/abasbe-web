@@ -3,7 +3,10 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
     $scope.banners = [];
     $scope.lastUpdate = (new Date()).getTime();
     $scope.canUpdate = true;
-    $scope.filter = { page: 0 }
+    $scope.filter = {
+        page: 0,
+        Excludes: []
+    }
     $scope.total = "-";
 
     $scope.rodape = {
@@ -52,13 +55,19 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
     $scope.filtrar = function () {
         console.log('searching page: ' + $scope.filter.page);
         $scope.lastUpdate = (new Date()).getTime();
+
+        $scope.filter.Excludes = [];
+        for (var i in $scope.banners) {
+            $scope.filter.Excludes.push($scope.banners[i].Id);
+        }
+
         $http({
             method: "POST",
             url: api.resolve("api/banner/EmExibicao"),
             data: $scope.filter,
             loading: true
         }).then(function (response) {
-            if(response.data.length == 0){
+            if (response.data.length == 0) {
                 $scope.canUpdate = false;
             }
 

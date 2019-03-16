@@ -4,112 +4,118 @@
   <Urls>
     <!-- url for payment service -->
     <Payment>
-      <Link>https://ws.pagseguro.uol.com.br/v2/checkout</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/checkout</Link>
     </Payment>
     <!-- url for paymentRedirect service -->
     <PaymentRedirect>
-      <Link>https://pagseguro.uol.com.br/v2/checkout/payment.html</Link>
+      <Link>https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html</Link>
     </PaymentRedirect>
     <!-- url for notifications service -->
     <Notification>
-      <Link>https://ws.pagseguro.uol.com.br/v3/transactions/notifications</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications</Link>
     </Notification>
     <!-- url for transactions service -->
     <Search>
-      <Link>https://ws.pagseguro.uol.com.br/v3/transactions</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v3/transactions</Link>
     </Search>
     <SearchAbandoned>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions</Link>
     </SearchAbandoned>
     <!-- url for cancel transactions service -->
     <Cancel>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/cancels</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/cancels</Link>
     </Cancel>
     <!-- url for refund transactions service -->
     <Refund>
-      <Link>https://ws.pagseguro.uol.com.br/v2/transactions/refunds</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/refunds</Link>
     </Refund>
     <!-- urls for preApproval -->
     <PreApproval>
       <!-- urls for preApproval request service -->
-      <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
+      <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
       <PreApprovalRequest>
-        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/request</Link>
       </PreApprovalRequest>
       <!-- url for preApproval redirect service -->
       <PreApprovalRedirect>
-        <Link>https://pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
+        <Link>https://sandbox.pagseguro.uol.com.br/v2/pre-approvals/request.html</Link>
       </PreApprovalRedirect>
       <!-- url for preApproval notifications service -->
       <PreApprovalNotification>
-        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications</Link>
       </PreApprovalNotification>
       <!-- url for preApproval search transactions service -->
       <PreApprovalSearch>
-        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals</Link>
       </PreApprovalSearch>
       <!-- url for preApproval cancel transaction service -->
       <PreApprovalCancel>
-        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/cancel</Link>
       </PreApprovalCancel>
       <!-- url for preApproval charge payment service -->
       <PreApprovalPayment>
-        <Link>https://ws.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/payment</Link>
       </PreApprovalPayment>
     </PreApproval>
     <!-- url for direct payment -->
     <DirectPayment>
       <!-- url for get session -->
       <Session>
-        <Link>https://ws.pagseguro.uol.com.br/v2/sessions</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/sessions</Link>
       </Session>
       <!-- url for get installments -->
       <Installment>
-        <Link>https://ws.pagseguro.uol.com.br/v2/installments</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/installments</Link>
       </Installment>
       <!-- url for transactions -->
       <Transactions>
-        <Link>https://ws.pagseguro.uol.com.br/v2/transactions</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/transactions</Link>
       </Transactions>
     </DirectPayment>
     <!-- url for authorization -->
     <Authorization>
       <!-- url for authorization request service -->
       <AuthorizationRequest>
-        <Link>https://ws.pagseguro.uol.com.br/v2/authorizations/request</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/authorizations/request</Link>
       </AuthorizationRequest>
       <!-- url for authorization request transaction service -->
       <AuthorizationURL>
-        <Link>https://pagseguro.uol.com.br/v2/authorization/request.jhtml</Link>
+        <Link>https://sandbox.pagseguro.uol.com.br/v2/authorization/request.jhtml</Link>
       </AuthorizationURL>
       <!-- url for authorization search service -->
       <AuthorizationSearch>
-        <Link>https://ws.pagseguro.uol.com.br/v2/authorizations/</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/authorizations/</Link>
       </AuthorizationSearch>
       <!-- url for authorization nofitication service -->
       <AuthorizationNotification>
-        <Link>https://ws.pagseguro.uol.com.br/v2/authorizations/notifications/</Link>
+        <Link>https://ws.sandbox.pagseguro.uol.com.br/v2/authorizations/notifications/</Link>
       </AuthorizationNotification>
     </Authorization>
   </Urls>
   <!-- user's credential -->
   <Credential>
     <!-- your email here -->
-    <Email>alys.freitas@gmail.com</Email>
+    <Email>sarahpires1@hotmail.com</Email>
     <!-- your token here -->
-    <Token>392550106A1E44DBB4756279EF723353</Token>
+    <Token>B62792E9D4A84B09A981ADA2CFE0F17C</Token>
     <!-- your sandbox email here -->
-    <SandboxEmail>alys.freitas@gmail.com</SandboxEmail>
+    <SandboxEmail>sarahpires1@hotmail.com</SandboxEmail>
     <!-- your sandbox token here -->
-    <SandboxToken>8AA2AD9730564BB7A693BFC5865E5F91</SandboxToken>
+    <SandboxToken>4541345913F44EF8A40B163128BDA086</SandboxToken>
     <!-- your appId here -->
-    <AppId>app9135729173</AppId>
+    <!--<AppId>beleza-mais-forte</AppId>
+    -->
     <!-- your appKey here -->
-    <AppKey>2E976F32D8D8DA40047FDF83EB1F80C2</AppKey>
+    <!--
+    <AppKey>11326E23353541D2246E4FB89CF69A93</AppKey>
+    -->
     <!-- your sandbox appId here -->
-    <SandboxAppId>app9135729173</SandboxAppId>
+    <!--
+    <SandboxAppId>app0416938494</SandboxAppId>
+    -->
     <!-- your sandbox appKey here -->
-    <SandboxAppKey>2E976F32D8D8DA40047FDF83EB1F80C2</SandboxAppKey>
+    <!--
+    <SandboxAppKey>6186A5076161FBBBB4FC7F938CF025D5</SandboxAppKey>-->
   </Credential>
   <!-- configuration default for PagSeguro API-->
   <Configuration>

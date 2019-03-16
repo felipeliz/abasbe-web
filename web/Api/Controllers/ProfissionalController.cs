@@ -273,6 +273,13 @@ namespace Api.Controllers
             bool delivery = Convert.ToBoolean(param.delivery);
             int page = Convert.ToInt32(param.page);
 
+            List<int> excludes = new List<int>();
+
+            foreach (int exc in param.Excludes)
+            {
+                excludes.Add(exc);
+            }
+
             List<ClienteViewModel> lista = new List<ClienteViewModel>();
 
             var query = context.Cliente.Where(pro => pro.FlagCliente == "P");
@@ -313,8 +320,9 @@ namespace Api.Controllers
                 query = query.Where(pro => pro.DataExpiracao > DateTime.Now);
             }
 
-            query = query.OrderByDescending(pro => pro.ClienteProfissional.FirstOrDefault().TempoExperiencia);
-            query = query.Skip(page * pageSize).Take(pageSize);
+            query = query.Where(pro => excludes.Contains(pro.Id) == false);
+            query = query.OrderBy(r => Guid.NewGuid());
+            query = query.Take(pageSize);
 
             query.ToList().ForEach(obj =>
             {

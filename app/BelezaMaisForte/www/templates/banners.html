@@ -12,15 +12,24 @@
     <div ng-hide="loading">
       <ion-list>
         <div class="card" ng-repeat="banner in group.EmExibicao">
-            <ion-item class="item-divider">Em Exibicao</ion-item>
-            <div ng-include="'templates/card-banner-details.html'"></div>
+          <ion-item class="item-divider item-icon-right">
+            <i class="icon ion-more" ng-click="showAction(banner)"></i>
+            Em Exibicao
+          </ion-item>
+          <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
         <div class="card" ng-repeat="banner in group.EmEspera">
-          <ion-item class="item-divider">Em espera</ion-item>
+          <ion-item class="item-divider item-icon-right">
+            <i class="icon ion-more" ng-click="showAction(banner)"></i>
+            Em Espera
+          </ion-item>
           <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
         <div class="card" ng-repeat="banner in group.Expirados">
-          <ion-item class="item-divider">Expirados</ion-item>
+          <ion-item class="item-divider item-icon-right">
+            <i class="icon ion-more" ng-click="showAction(banner)"></i>
+            Expirados
+          </ion-item>
           <div ng-include="'templates/card-banner-details.html'"></div>
         </div>
       </ion-list>

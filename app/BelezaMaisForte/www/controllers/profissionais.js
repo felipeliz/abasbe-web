@@ -6,6 +6,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
 
     $scope.init = function () {
         $rootScope.busca.page = 0;
+        $rootScope.busca.Excludes = [];
         $scope.filtrar();
     }
 
@@ -17,6 +18,12 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
 
         console.log('searching page: ' + $rootScope.busca.page);
         $scope.lastUpdate = (new Date()).getTime();
+
+        $rootScope.busca.Excludes = [];
+        for (var i in $scope.profissionais) {
+            $rootScope.busca.Excludes.push($scope.profissionais[i].Id);
+        }
+
         $http({
             method: "POST",
             url: api.resolve("api/profissional/buscar"),

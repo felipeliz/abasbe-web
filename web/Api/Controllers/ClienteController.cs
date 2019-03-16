@@ -71,7 +71,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public PagamentoGroupViewModel MeusPagamentos()
+        public List<PagamentoViewModel> MeusPagamentos()
         {
             int id = AppExtension.IdUsuarioLogado();
 
@@ -84,31 +84,11 @@ namespace Api.Controllers
                 throw new Exception("Objeto não encontrado");
             }
 
-            PagamentoGroupViewModel obj = new PagamentoGroupViewModel();
-
-            List<int> pagos = new List<int>();
-            pagos.Add(2);
-            pagos.Add(3);
-            cliente.Pagamento.Where(pag => pagos.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
+            List<PagamentoViewModel> obj = new List<PagamentoViewModel>();
+          
+            cliente.Pagamento.Where(pag => pag.Situacao != 7).Where(pag => pag.Banner == null || pag.Banner.Situacao != "I").OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
-                obj.Pago.Add(new PagamentoViewModel(pag));
-            });
-
-            List<int> pendentes = new List<int>();
-            pendentes.Add(0);
-            pendentes.Add(1);
-            cliente.Pagamento.Where(pag => pendentes.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
-            {
-                obj.Pendente.Add(new PagamentoViewModel(pag));
-            });
-
-            List<int> alternativos = new List<int>();
-            alternativos.Add(4);
-            alternativos.Add(5);
-            alternativos.Add(6);
-            cliente.Pagamento.Where(pag => alternativos.Contains(pag.Situacao)).OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
-            {
-                obj.Alternativo.Add(new PagamentoViewModel(pag));
+                obj.Add(new PagamentoViewModel(pag));
             });
 
             return obj;

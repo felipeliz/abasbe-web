@@ -1,0 +1,14 @@
+<ion-item class="item-divider item-icon-right">
+    <i class="icon ion-more" ng-click="showAction(pagamento)"></i>
+    {{pagamento.TipoPlanoFormatado}}
+</ion-item>
+<ion-item ng-click="pagar(pagamento)">
+    <h2>Plano - {{pagamento.Descricao}}</h2>
+    <p class="text-muted">{{pagamento.Observacao}}</p>
+    <p class="text-muted" ng-if="pagamento.Referencia != null">Ref: {{pagamento.Referencia}}</p>
+    <p class="text-muted" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
+        {{pagamento.ValorDivididoFormatado}}</p>
+        <p class="text-muted" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
+        <span class="text-muted">{{pagamento.DataCriacao}}</span>
+        <span class="text-muted item-note reset-badge"><span class="badge {{getBadgeClass(pagamento)}}">{{pagamento.Situacao}}</span></span>
+</ion-item>

@@ -1,51 +1,18 @@
-<ion-view title="Pagamentos" id="page14" ng-init="init()">
+<ion-view title="Meus Pagamentos" id="page14" ng-init="init()">
   <ion-content padding="true" class="has-header">
     <div id="preloader" ng-if="loading">
       <div class="preloader" style="background-size: cover;"></div>
     </div>
-    <div ng-hide="loading || (pagamentos.Pago.length > 0 || pagamentos.Pendente.length > 0)">
+    <div ng-hide="loading || pagamentos.length > 0">
       <h3>Não há registros</h3>
       <div class="show-list-numbers-and-dots">
         <p>Não existem pagamentos vinculados a sua conta de usuário.</p>
       </div>
     </div>
     <div ng-hide="loading">
-      <ion-list ng-hide="pagamentos.Pendente.length == 0">
-        <ion-item class="item-divider">Pagamentos Pendentes</ion-item>
-        <ion-item ng-repeat="pagamento in pagamentos.Pendente" ng-click="pagar(pagamento.Id)">
-          <h2>{{pagamento.Descricao}}</h2>
-          <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
-            {{pagamento.ValorDivididoFormatado}}</p>
-          <p class="ng-binding" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
-          <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
-          <span class="text-muted">{{pagamento.DataCriacao}}</span>
-          <span class="item-note">{{pagamento.Situacao}}</span>
-        </ion-item>
+      <ion-list>
+        <div ng-include="'templates/card-pagamento.html'" class="card" ng-repeat="pagamento in pagamentos"></div>
       </ion-list>
-      <ion-list ng-hide="pagamentos.Pago.length == 0">
-        <ion-item class="item-divider">Pagamentos Confirmados</ion-item>
-        <ion-item ng-repeat="pagamento in pagamentos.Pago">
-          <h2>{{pagamento.Descricao}}</h2>
-          <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
-            {{pagamento.ValorDivididoFormatado}}</p>
-          <p class="ng-binding" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
-          <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
-          <span class="text-muted">{{pagamento.DataConfirmacao}}</span>
-          <span class="item-note">{{pagamento.Situacao}}</span>
-        </ion-item>
-      </ion-list>
-      <ion-list ng-hide="pagamentos.Alternativo.length == 0">
-          <ion-item class="item-divider">Outros</ion-item>
-          <ion-item ng-repeat="pagamento in pagamentos.Alternativo">
-            <h2>{{pagamento.Descricao}}</h2>
-            <p class="ng-binding" ng-if="pagamento.Vezes > 1">{{pagamento.Vezes}}x de
-              {{pagamento.ValorDivididoFormatado}}</p>
-            <p class="ng-binding" ng-if="pagamento.Vezes == 1">{{pagamento.Valor}}</p>
-            <p class="text-muted">{{pagamento.TipoPlanoFormatado}}</p>
-            <span class="text-muted">{{pagamento.DataConfirmacao}}</span>
-            <span class="item-note">{{pagamento.Situacao}}</span>
-          </ion-item>
-        </ion-list>
     </div>
   </ion-content>
 </ion-view>

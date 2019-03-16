@@ -1,7 +1,7 @@
-var controller = function ($scope, $http) {
+var controller = function ($scope, $http, $ionicActionSheet) {
 
     $scope.loading = false;
-    $scope.pagamentos = {};
+    $scope.pagamentos = [];
 
     $scope.init = function () {
         $scope.carregar();
@@ -21,14 +21,19 @@ var controller = function ($scope, $http) {
         });
     }
 
-    $scope.pagar = function (id) {
+    $scope.pagar = function (pagamento) {
+        if (pagamento.SituacaoValue > 1) {
+            toastr.warning('Pagamento com status diferente de novo');
+            return;
+        }
         $http({
             method: "GET",
-            url: api.resolve("api/pagamento/Pagar/" + id),
+            url: api.resolve("api/pagamento/Pagar/" + pagamento.Id),
             loading: true
         }).then(function (response) {
-            if(response.data != null) {
-                window.open(response.data, '_system', 'location=yes');
+            if (response.data != null) {
+                cordova.InAppBrowser.open(response.data, '_blank', 'location=no');
+                //window.open(response.data, '_system', 'location=yes');
             }
             else {
                 toastr.error("Tivemos um problema ao gerar seu link de pagamento, tente novamente");
@@ -36,6 +41,80 @@ var controller = function ($scope, $http) {
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);
         });
+    }
+
+    $scope.showAction = function (pagamento) {
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Efetuar Pagamento' },
+                { text: 'Atualizar Status' }
+            ],
+            destructiveText: 'Excluir',
+            titleText: 'Selecione uma opção...',
+            cancelText: 'Cancelar',
+            cancel: function () {
+                hideSheet();
+            },
+            destructiveButtonClicked: function () {
+                $scope.excluir(pagamento);
+                hideSheet();
+            },
+            buttonClicked: function (index) {
+                switch (index) {
+                    case 0: {
+                        $scope.pagar(pagamento);
+                        hideSheet();
+                        break;
+                    }
+                    case 1: {
+                        $scope.atualizar(pagamento);
+                        hideSheet();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+    }
+
+    $scope.atualizar = function (pagamento) {
+        $http({
+            method: "GET",
+            url: api.resolve("api/pagamento/Atualizar/" + pagamento.Id),
+            loading: true
+        }).then(function (response) {
+            if (response.data) {
+                $scope.carregar();
+            }
+        }, function (response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
+
+    $scope.excluir = function (pagamento) {
+        $http({
+            method: "GET",
+            url: api.resolve("api/pagamento/Excluir/" + pagamento.Id),
+            loading: true
+        }).then(function (response) {
+            if (response.data) {
+                $scope.carregar();
+            }
+        }, function (response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
+    }
+
+    $scope.getBadgeClass = function (pagamento) {
+        switch (pagamento.SituacaoValue) {
+            case 0: return 'badge-stable';
+            case 1: return 'badge-energized';
+            case 2: return 'badge-energized';
+            case 3: return 'badge-balanced';
+            case 4: return 'badge-balanced';
+            case 5: return 'badge-assertive';
+            case 6: return 'badge-calm';
+        }
     }
 }
 

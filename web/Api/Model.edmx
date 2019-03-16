@@ -513,7 +513,6 @@
           <EntitySet Name="Disponibilidade" EntityType="AbasbeModel.Disponibilidade" />
           <EntitySet Name="Equipamento" EntityType="AbasbeModel.Equipamento" />
           <EntitySet Name="Estado" EntityType="AbasbeModel.Estado" />
-          <EntitySet Name="Pagamento" EntityType="AbasbeModel.Pagamento" />
           <EntitySet Name="Parametro" EntityType="AbasbeModel.Parametro" />
           <EntitySet Name="Plano" EntityType="AbasbeModel.Plano" />
           <EntitySet Name="Profissao" EntityType="AbasbeModel.Profissao" />
@@ -521,10 +520,6 @@
           <AssociationSet Name="FK_Banner_Cliente" Association="AbasbeModel.FK_Banner_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Banner" EntitySet="Banner" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pagamento_Banner" Association="AbasbeModel.FK_Pagamento_Banner">
-            <End Role="Banner" EntitySet="Banner" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
           <AssociationSet Name="FK_ClienteCertificado_Certificado" Association="AbasbeModel.FK_ClienteCertificado_Certificado">
             <End Role="Certificado" EntitySet="Certificado" />
@@ -537,10 +532,6 @@
           <AssociationSet Name="FK_Cliente_Cidade" Association="AbasbeModel.FK_Cliente_Cidade">
             <End Role="Cidade" EntitySet="Cidade" />
             <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AssociadoPagamento_Cliente" Association="AbasbeModel.FK_AssociadoPagamento_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Plano" Association="AbasbeModel.FK_Cliente_Plano">
             <End Role="Plano" EntitySet="Plano" />
@@ -578,14 +569,23 @@
             <End Role="Profissao" EntitySet="Profissao" />
             <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
           </AssociationSet>
-          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="AbasbeModel.FK_AssociadoPagamento_Plano">
-            <End Role="Plano" EntitySet="Plano" />
-            <End Role="Pagamento" EntitySet="Pagamento" />
-          </AssociationSet>
           <EntitySet Name="ProfissionalFotos" EntityType="AbasbeModel.ProfissionalFotos" />
           <AssociationSet Name="FK_ProfissionalFotos_ClienteProfissional" Association="AbasbeModel.FK_ProfissionalFotos_ClienteProfissional">
             <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
             <End Role="ProfissionalFotos" EntitySet="ProfissionalFotos" />
+          </AssociationSet>
+          <EntitySet Name="Pagamento" EntityType="AbasbeModel.Pagamento" />
+          <AssociationSet Name="FK_Pagamento_Banner" Association="AbasbeModel.FK_Pagamento_Banner">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="Pagamento" EntitySet="Pagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssociadoPagamento_Cliente" Association="AbasbeModel.FK_AssociadoPagamento_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Pagamento" EntitySet="Pagamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="AbasbeModel.FK_AssociadoPagamento_Plano">
+            <End Role="Plano" EntitySet="Plano" />
+            <End Role="Pagamento" EntitySet="Pagamento" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Banner">
@@ -652,12 +652,12 @@
           <Property Name="Cadastro" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Banner_Cliente" FromRole="Cliente" ToRole="Banner" />
           <NavigationProperty Name="Cidade" Relationship="AbasbeModel.FK_Cliente_Cidade" FromRole="Cliente" ToRole="Cidade" />
-          <NavigationProperty Name="Pagamento" Relationship="AbasbeModel.FK_AssociadoPagamento_Cliente" FromRole="Cliente" ToRole="Pagamento" />
           <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_Cliente_Plano" FromRole="Cliente" ToRole="Plano" />
           <NavigationProperty Name="ClienteCertificado" Relationship="AbasbeModel.FK_ClienteCertificado_Cliente" FromRole="Cliente" ToRole="ClienteCertificado" />
           <NavigationProperty Name="ClienteEquipamentos" Relationship="AbasbeModel.FK_ClienteEquipamentos_Cliente" FromRole="Cliente" ToRole="ClienteEquipamentos" />
           <NavigationProperty Name="ClienteExperiencia" Relationship="AbasbeModel.FK_ClienteExperiencia_Cliente" FromRole="Cliente" ToRole="ClienteExperiencia" />
           <NavigationProperty Name="ClienteProfissional" Relationship="AbasbeModel.FK_ClienteProfissional_Cliente" FromRole="Cliente" ToRole="ClienteProfissional" />
+          <NavigationProperty Name="Pagamento" Relationship="AbasbeModel.FK_AssociadoPagamento_Cliente" FromRole="Cliente" ToRole="Pagamento" />
         </EntityType>
         <EntityType Name="ClienteCertificado">
           <Key>
@@ -751,27 +751,6 @@
           <Property Name="Situacao" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Cidade" Relationship="AbasbeModel.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
         </EntityType>
-        <EntityType Name="Pagamento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
-          <Property Name="IdPlano" Type="Int32" Nullable="false" />
-          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Dias" Type="Int32" Nullable="false" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Situacao" Type="Int32" Nullable="false" />
-          <Property Name="CheckoutIdentifier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DataConfirmacao" Type="DateTime" Precision="3" />
-          <Property Name="IdBanner" Type="Int32" />
-          <Property Name="Vezes" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Pagamento" ToRole="Banner" />
-          <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_AssociadoPagamento_Cliente" FromRole="Pagamento" ToRole="Cliente" />
-          <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="Pagamento" ToRole="Plano" />
-          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Parametro">
           <Key>
             <PropertyRef Name="Id" />
@@ -825,18 +804,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pagamento_Banner">
-          <End Type="AbasbeModel.Banner" Role="Banner" Multiplicity="0..1" />
-          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Banner">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="IdBanner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClienteCertificado_Certificado">
           <End Type="AbasbeModel.Certificado" Role="Certificado" Multiplicity="1" />
           <End Type="AbasbeModel.ClienteCertificado" Role="ClienteCertificado" Multiplicity="*" />
@@ -870,18 +837,6 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="IdCidade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AssociadoPagamento_Cliente">
-          <End Type="AbasbeModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -993,18 +948,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AssociadoPagamento_Plano">
-          <End Type="AbasbeModel.Plano" Role="Plano" Multiplicity="1" />
-          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Plano">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Pagamento">
-              <PropertyRef Name="IdPlano" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ProfissionalFotos">
           <Key>
             <PropertyRef Name="Id" />
@@ -1024,6 +967,63 @@
             </Principal>
             <Dependent Role="ProfissionalFotos">
               <PropertyRef Name="IdProfissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pagamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdPlano" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Situacao" Type="Int32" Nullable="false" />
+          <Property Name="CheckoutIdentifier" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataConfirmacao" Type="DateTime" Precision="3" />
+          <Property Name="IdBanner" Type="Int32" />
+          <Property Name="Vezes" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Banner" Relationship="AbasbeModel.FK_Pagamento_Banner" FromRole="Pagamento" ToRole="Banner" />
+          <NavigationProperty Name="Cliente" Relationship="AbasbeModel.FK_AssociadoPagamento_Cliente" FromRole="Pagamento" ToRole="Cliente" />
+          <NavigationProperty Name="Plano" Relationship="AbasbeModel.FK_AssociadoPagamento_Plano" FromRole="Pagamento" ToRole="Plano" />
+        </EntityType>
+        <Association Name="FK_Pagamento_Banner">
+          <End Type="AbasbeModel.Banner" Role="Banner" Multiplicity="0..1" />
+          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagamento">
+              <PropertyRef Name="IdBanner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssociadoPagamento_Cliente">
+          <End Type="AbasbeModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagamento">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssociadoPagamento_Plano">
+          <End Type="AbasbeModel.Plano" Role="Plano" Multiplicity="1" />
+          <End Type="AbasbeModel.Pagamento" Role="Pagamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plano">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pagamento">
+              <PropertyRef Name="IdPlano" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1181,25 +1181,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Pagamento">
-            <EntityTypeMapping TypeName="AbasbeModel.Pagamento">
-              <MappingFragment StoreEntitySet="Pagamento">
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Vezes" ColumnName="Vezes" />
-                <ScalarProperty Name="IdBanner" ColumnName="IdBanner" />
-                <ScalarProperty Name="DataConfirmacao" ColumnName="DataConfirmacao" />
-                <ScalarProperty Name="CheckoutIdentifier" ColumnName="CheckoutIdentifier" />
-                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
-                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Dias" ColumnName="Dias" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="IdPlano" ColumnName="IdPlano" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Parametro">
             <EntityTypeMapping TypeName="AbasbeModel.Parametro">
               <MappingFragment StoreEntitySet="Parametro">
@@ -1247,6 +1228,25 @@
                 <ScalarProperty Name="IdProfissional" ColumnName="IdProfissional" />
                 <ScalarProperty Name="Ordem" ColumnName="Ordem" />
                 <ScalarProperty Name="Imagem" ColumnName="Imagem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagamento">
+            <EntityTypeMapping TypeName="AbasbeModel.Pagamento">
+              <MappingFragment StoreEntitySet="Pagamento">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Vezes" ColumnName="Vezes" />
+                <ScalarProperty Name="IdBanner" ColumnName="IdBanner" />
+                <ScalarProperty Name="DataConfirmacao" ColumnName="DataConfirmacao" />
+                <ScalarProperty Name="CheckoutIdentifier" ColumnName="CheckoutIdentifier" />
+                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdPlano" ColumnName="IdPlano" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

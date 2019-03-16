@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, Auth, $location, $state) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicActionSheet) {
 
     $scope.group = {};
     $scope.loading = false;
@@ -32,6 +32,21 @@ var controller = function ($scope, $http, Auth, $location, $state) {
             return "imgs/placeholder.png";
         }
         return api.resolve(image);
+    }
+
+    $scope.showAction = function (banner) {
+        var hideSheet = $ionicActionSheet.show({
+            destructiveText: 'Excluir',
+            titleText: 'Selecione uma opção...',
+            cancelText: 'Cancelar',
+            cancel: function () {
+                hideSheet();
+            },
+            destructiveButtonClicked: function () {
+                $scope.desabilitar(banner);
+                hideSheet();
+            }
+        });
     }
 
     $scope.desabilitar = function (banner) {

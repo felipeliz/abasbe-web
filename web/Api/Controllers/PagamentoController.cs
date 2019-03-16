@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
 using Uol.PagSeguro;
@@ -15,7 +16,7 @@ namespace Api.Controllers
 {
     public class PagamentoController : ApiController
     {
-        bool isSandbox = false;
+        bool isSandbox = ParametroController.ObterParam("PagSeguroSandBox") == "S" ? true : false;
 
 
         [HttpPost]
@@ -27,7 +28,9 @@ namespace Api.Controllers
 
             if (notificationType == "transaction")
             {
+                PagSeguroConfiguration.UrlXmlConfiguration = System.Web.Hosting.HostingEnvironment.MapPath("~/PagSeguroConfig.xml");
                 EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 try
                 {
                     AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
@@ -47,23 +50,25 @@ namespace Api.Controllers
                             pagamento.Situacao = 2;
                             break;
                         case Uol.PagSeguro.Enums.TransactionStatus.Paid:
-                            pagamento.Situacao = 3;
-                            pagamento.DataConfirmacao = DateTime.Now;
-
-                            if (pagamento.Plano.TipoPlano == "P" || pagamento.Plano.TipoPlano == "A")
+                            if (pagamento.Situacao != 3)
                             {
-                                DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
-                                if(expiracao > DateTime.Now)
-                                {
-                                    expiracao = expiracao.AddDays(pagamento.Dias);
-                                }
-                                else
-                                {
-                                    expiracao = DateTime.Now.AddDays(pagamento.Dias);
-                                }
-                                pagamento.Cliente.DataExpiracao = expiracao;
-                            }
+                                pagamento.Situacao = 3;
+                                pagamento.DataConfirmacao = transaction.LastEventDate;
 
+                                if (pagamento.Plano.TipoPlano == "P" || pagamento.Plano.TipoPlano == "A")
+                                {
+                                    DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
+                                    if (expiracao > DateTime.Now)
+                                    {
+                                        expiracao = expiracao.AddDays(pagamento.Dias);
+                                    }
+                                    else
+                                    {
+                                        expiracao = DateTime.Now.AddDays(pagamento.Dias);
+                                    }
+                                    pagamento.Cliente.DataExpiracao = expiracao;
+                                }
+                            }
                             break;
                         case Uol.PagSeguro.Enums.TransactionStatus.Available:
                             pagamento.Situacao = 4;
@@ -100,19 +105,169 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public string Pagar(int id)
+        public bool Atualizar(int id)
         {
             Entities context = new Entities();
             Pagamento pagamento = context.Pagamento.Find(id);
 
-            if (pagamento.Url != null)
+            PagSeguroConfiguration.UrlXmlConfiguration = System.Web.Hosting.HostingEnvironment.MapPath("~/PagSeguroConfig.xml");
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            try
             {
-                return pagamento.Url;
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
+                // Realizando a consulta
+                TransactionSearchResult result = TransactionSearchService.SearchByReference(credentials, pagamento.CheckoutIdentifier);
+
+                if (result.Transactions.Count <= 0)
+                {
+                    // pagamento não integrado com pagseguro ainda
+                    return false;
+                }
+                foreach (TransactionSummary transaction in result.Transactions)
+                {
+                    switch (transaction.TransactionStatus)
+                    {
+                        case Uol.PagSeguro.Enums.TransactionStatus.Initiated:
+                            pagamento.Situacao = 0;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.WaitingPayment:
+                            pagamento.Situacao = 1;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.InAnalysis:
+                            pagamento.Situacao = 2;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.Paid:
+                            if (pagamento.Situacao != 3)
+                            {
+                                pagamento.Situacao = 3;
+                                pagamento.DataConfirmacao = transaction.LastEventDate;
+
+                                if (pagamento.Plano.TipoPlano == "P" || pagamento.Plano.TipoPlano == "A")
+                                {
+                                    DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
+                                    if (expiracao > DateTime.Now)
+                                    {
+                                        expiracao = expiracao.AddDays(pagamento.Dias);
+                                    }
+                                    else
+                                    {
+                                        expiracao = DateTime.Now.AddDays(pagamento.Dias);
+                                    }
+                                    pagamento.Cliente.DataExpiracao = expiracao;
+                                }
+                            }
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.Available:
+                            pagamento.Situacao = 4;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.InDispute:
+                            pagamento.Situacao = 5;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.Refunded:
+                            pagamento.Situacao = 6;
+                            break;
+                        case Uol.PagSeguro.Enums.TransactionStatus.Cancelled:
+                            pagamento.Situacao = 7;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                context.SaveChanges();
+
+                return true;
+            }
+            catch (PagSeguroServiceException exception)
+            {
+                Console.WriteLine(exception.Message + "\n");
+                foreach (ServiceError element in exception.Errors)
+                {
+                    throw new Exception(element.Message);
+                }
+
+                return false;
+            }
+        }
+
+
+        [HttpGet]
+        public bool Excluir(int id)
+        {
+            Entities context = new Entities();
+            Pagamento pagamento = context.Pagamento.Find(id);
+
+            if (pagamento.Banner != null)
+            {
+                throw new Exception("Não é possível excluir um pagamento de banner");
+            }
+
+            if(pagamento.Situacao != 0)
+            {
+                throw new Exception("Não é possível excluir um pagamento processado ou em processamento");
             }
 
             PagSeguroConfiguration.UrlXmlConfiguration = System.Web.Hosting.HostingEnvironment.MapPath("~/PagSeguroConfig.xml");
 
             EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            try
+            {
+                AccountCredentials credentials = PagSeguroConfiguration.Credentials(isSandbox);
+
+                // Realizando a consulta
+                TransactionSearchResult result = TransactionSearchService.SearchByReference(credentials, pagamento.CheckoutIdentifier);
+
+                if (result.Transactions.Count <= 0)
+                {
+                    pagamento.Situacao = 7;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Não é possível excluir um pagamento sincronizado com o PagSeguro");
+                }
+
+                return true;
+            }
+            catch (PagSeguroServiceException exception)
+            {
+                Console.WriteLine(exception.Message + "\n");
+                foreach (ServiceError element in exception.Errors)
+                {
+                    throw new Exception(element.Message);
+                }
+
+                return false;
+            }
+        }
+
+
+        [HttpGet]
+        public string Pagar(int id)
+        {
+            Entities context = new Entities();
+            Pagamento pagamento = context.Pagamento.Find(id);
+
+            if (pagamento.Situacao != 0)
+            {
+                if(pagamento.Situacao == 1 && pagamento.Url != null)
+                {
+                    return pagamento.Url;
+                }
+
+                throw new Exception("Pagamento com status diferente de novo");
+            }
+
+            PagSeguroConfiguration.UrlXmlConfiguration = System.Web.Hosting.HostingEnvironment.MapPath("~/PagSeguroConfig.xml");
+
+            EnvironmentConfiguration.ChangeEnvironment(isSandbox);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             // Instantiate a new payment request
             PaymentRequest payment = new PaymentRequest();

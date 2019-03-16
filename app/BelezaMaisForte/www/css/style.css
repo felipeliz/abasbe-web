@@ -391,3 +391,16 @@ red {
     font-size: 14px;
     padding-right: 7px;
 }
+
+.reset-badge .badge {
+    display: unset;
+    position: unset;
+    top: unset;
+    right: unset;
+    line-height: 14px;
+    font-size: 11px;
+}
+
+.tabs .tab-item .badge.badge-energized, .badge.badge-energized {
+    background-color: #FF9800;
+}

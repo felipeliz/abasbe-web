@@ -6,20 +6,6 @@ using System.Web;
 
 namespace Api.Models
 {
-    public class PagamentoGroupViewModel
-    {
-        public List<PagamentoViewModel> Pendente { get; set; }
-        public List<PagamentoViewModel> Pago { get; set; }
-        public List<PagamentoViewModel> Alternativo { get; set; }
-
-        public PagamentoGroupViewModel()
-        {
-            Pendente = new List<PagamentoViewModel>();
-            Pago = new List<PagamentoViewModel>();
-            Alternativo = new List<PagamentoViewModel>();
-        }
-    }
-
     public class PagamentoViewModel
     {
         public int Id { get; set; }
@@ -28,11 +14,14 @@ namespace Api.Models
         public string Valor { get; set; }
         public int Dias { get; set; }
         public string Descricao { get; set; }
+        public string Observacao { get; set; }
         public string DataCriacao { get; set; }
         public string DataConfirmacao { get; set; }
         public string CheckoutIdentifier { get; set; }
         public string TipoPlanoFormatado { get; set; }
+        public string Referencia { get; set; }
         public string Situacao { get; set; }
+        public int SituacaoValue { get; set; }
         public int Vezes { get; set; }
         public string ValorDivididoFormatado { get; set; }
 
@@ -60,8 +49,17 @@ namespace Api.Models
             CheckoutIdentifier = obj.CheckoutIdentifier;
             TipoPlanoFormatado = obj.Plano.TipoPlano == "A" ? "Pagamento de assinatura" : "Pagamento de banner";
             Situacao = GetSituacao(obj.Situacao);
+            SituacaoValue = obj.Situacao;
             Vezes = obj.Vezes;
             ValorDivididoFormatado = String.Format("{0:C}", obj.Valor / Vezes);
+
+            if(obj.Banner != null)
+            {
+                Referencia = obj.Banner.Titulo;
+            }
+
+            Observacao = obj.Plano.TipoPlano == "A" ? "Renovação da assinatura por " + obj.Dias + " dias" : "Publicação de banner por " + obj.Dias + " dias";
+
         }
 
         public static string GetSituacao(int s)

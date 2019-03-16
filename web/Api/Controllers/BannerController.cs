@@ -198,11 +198,19 @@ namespace Api.Controllers
             List<BannerViewModel> lista = new List<BannerViewModel>();
             DateTime now = DateTime.Now;
 
+            List<int> excludes = new List<int>();
+
+            foreach(int exc in param.Excludes)
+            {
+                excludes.Add(exc);
+            }
+
             int page = Convert.ToInt32(param.page);
 
             var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A");
-            query = query.OrderBy(ban => ban.Cadastro);
-            query = query.Skip(page * pagesize).Take(pagesize);
+            query = query.Where(ban => excludes.Contains(ban.Id) == false);
+            query = query.OrderBy(r => Guid.NewGuid());
+            query = query.Take(pagesize);
 
             query.ToList().ForEach(obj =>
             {
@@ -260,11 +268,6 @@ namespace Api.Controllers
             {
                 throw new Exception("Registro não identificado.");
             }
-
-            banner.Pagamento.Where(pag => pag.Situacao == 0).ToList().ForEach(pag =>
-            {
-                pag.Situacao = 2;
-            });
 
             banner.Situacao = "I";
             context.SaveChanges();
