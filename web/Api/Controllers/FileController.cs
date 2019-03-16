@@ -19,7 +19,12 @@ namespace Api.Controllers
             if (Convert.ToBoolean(param.hasFile))
             {
                 string folder = "temp";
-                string ext = param.ext.ToString();
+                string ext = param.ext.ToString().ToLower();
+                if(ext != ".jpeg" && ext != ".png" && ext != ".jpg")
+                {
+                    throw new Exception("Formato de imagem inválido.");
+                }
+
                 string base64 = param.base64.ToString().Split(',')[1];
                 string uploadFolder = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + folder;
                 string fileName = Guid.NewGuid() + ext;

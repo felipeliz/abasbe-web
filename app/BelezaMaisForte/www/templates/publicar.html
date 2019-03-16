@@ -13,7 +13,8 @@
       </ion-item>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Titulo</span>
-        <input type="text" ng-model="form.Titulo" placeholder="">
+        <input type="text" ng-model="form.Titulo" maxlength="80" placeholder="">
+        <span class="counter"> {{form.Titulo.length}}/80 </span>
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Descrição</span>
@@ -25,9 +26,9 @@
         <input type="text" ng-model="form.Estreia" ui-mask="99/99/9999" model-view-value="true">
       </label>
       <label class="item item-input item-stacked-label">
-          <span class="input-label">Horário da publicação</span>
-          <input type="text" ng-model="form.EstreiaHorario" ui-mask="99:99" model-view-value="true">
-        </label>
+        <span class="input-label">Horário da publicação</span>
+        <input type="text" ng-model="form.EstreiaHorario" ui-mask="99:99" model-view-value="true">
+      </label>
       <div class="tab-nav button-bar white">
         <button ng-click="mudarTipo(0)" class="button button-block {{ form.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Link</button>
         <button ng-click="mudarTipo(1)" class="button button-block {{ form.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Telefone</button>
@@ -38,7 +39,7 @@
       </label>
       <label class="item item-input item-stacked-label" ng-if="form.IdTipoAcao==1">
         <span class="input-label">Telefone</span>
-        <input type="text" ng-model="form.Telefone" placeholder="">
+        <input type="tel" ng-model="form.Telefone" ui-br-phone-number-mask="areaCode" placeholder="">
       </label>
       <ion-item class="item-divider">Selecione um plano</ion-item>
       <ion-item class="item-icon-left" ng-click="selectPlano(plano)" ng-repeat="plano in planos">

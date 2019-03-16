@@ -183,6 +183,7 @@
     <Content Include="assets\img\logo.png" />
     <Content Include="bower_components\angular-autocomplete\autocomplete.css" />
     <Content Include="bower_components\angular-autocomplete\autocomplete.js" />
+    <Content Include="bower_components\angular-input-masks\angular-input-masks-standalone.min.js" />
     <Content Include="bower_components\angular-pt-br\angular-locale_pt-br.js" />
     <Content Include="bower_components\angular-ui-select\select2.css" />
     <Content Include="bower_components\cnpj\cnpj.directive.js" />

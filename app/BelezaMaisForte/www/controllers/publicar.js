@@ -32,6 +32,7 @@ var controller = function ($scope, $http, $state, Validation, $ionicHistory) {
     $scope.salvar = function () {
         $scope.croppie.result().then(function (base64) {
             $scope.form.Imagem = base64;
+            console.log($scope.form);
             Validation.required("Imagem", $scope.form.Imagem);
             Validation.required("Título", $scope.form.Titulo);
             Validation.required("Data da estreia", $scope.form.Estreia);
@@ -40,9 +41,16 @@ var controller = function ($scope, $http, $state, Validation, $ionicHistory) {
             Validation.required("Situacao", $scope.form.Situacao);
             if ($scope.form.IdTipoAcao == 0) {
                 Validation.required("Link", $scope.form.Link);
+                var reg = /http(s?):\/\/..*/;
+                if (!reg.test($scope.form.Link)) {
+                    toastr.error('Sua url deve começar com "http://" ou "https://"');
+                }
             }
             else {
                 Validation.required("Telefone", $scope.form.Telefone);
+                if ($scope.form.Telefone.length != 11 && $scope.form.Telefone.length != 10) {
+                    toastr.error('Digite um número de telefone válido');
+                }
             }
             Validation.required("Plano", $scope.form.IdPlano);
 
@@ -101,6 +109,9 @@ var controller = function ($scope, $http, $state, Validation, $ionicHistory) {
                     },
                     showZoomer: false
                 });
+
+                $('.post-image-upload').css('max-height', $('.post-image-upload').width() + 'px');
+
                 $scope.croppie.instance.croppie('bind', {
                     url: file.base64
                 });

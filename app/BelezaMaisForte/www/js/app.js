@@ -15,7 +15,8 @@ angular.module('app',
         'cpf-cnpj',
         'cnpj',
         'rw.moneymask',
-        'ui.mask'])
+        'ui.mask',
+        'ui.utils.masks'])
 
     .config(function ($ionicConfigProvider, $sceDelegateProvider) {
 
