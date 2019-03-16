@@ -81,11 +81,11 @@ namespace Api.Controllers
             if (Convert.ToInt32(param.IdTipoAcao) == 0)
             {
                 obj.Link = param.Link.ToString();
-                obj.Telefone = "";
+                obj.Telefone = null;
             }
             else
             {
-                obj.Link = "";
+                obj.Link = null;
                 obj.Telefone = param.Telefone.ToString();
             }
             obj.IdCliente = Convert.ToInt32(param.Cliente.Id);
@@ -121,11 +121,11 @@ namespace Api.Controllers
             if (Convert.ToInt32(param.IdTipoAcao) == 0)
             {
                 obj.Link = param.Link.ToString();
-                obj.Telefone = "";
+                obj.Telefone = null;
             }
             else
             {
-                obj.Link = "";
+                obj.Link = null;
                 obj.Telefone = param.Telefone.ToString();
             }
             obj.IdCliente = cliente.Id;

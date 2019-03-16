@@ -18,6 +18,15 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
         window.open(link, '_system', 'location=yes');
     }
 
+    $scope.openBanner = function (banner) {
+        if (banner.Link != null) {
+            cordova.InAppBrowser.open(banner.Link, '_blank', 'location=no,footer=yes,closebuttoncaption=Fechar,closebuttoncolor=#333333');
+        }
+        else {
+            window.location.href = "tel:" + banner.Telefone;
+        }
+    }
+
     $scope.init = function () {
         $scope.filtrar();
 

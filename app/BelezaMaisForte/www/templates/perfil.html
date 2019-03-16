@@ -137,7 +137,7 @@
                     </ion-item>
                 </ion-list>
             </div>
-            <a ng-if="user.Curriculo!=null" href="tel://{{user.TelefoneCelular}}" class="button button-positive button-block">
+            <a ng-if="user.Curriculo!=null" ng-click="ligar()" class="button button-positive button-block">
                 ENTRAR EM CONTATO
             </a>
         </div>

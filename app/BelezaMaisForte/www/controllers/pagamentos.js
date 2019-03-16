@@ -32,8 +32,8 @@ var controller = function ($scope, $http, $ionicActionSheet) {
             loading: true
         }).then(function (response) {
             if (response.data != null) {
-                cordova.InAppBrowser.open(response.data, '_blank', 'location=no');
-                //window.open(response.data, '_system', 'location=yes');
+                iabRef = cordova.InAppBrowser.open(response.data, '_blank', 'location=no,footer=yes,closebuttoncaption=Fechar,closebuttoncolor=#333333');
+                iabRef.addEventListener('exit', function () { $scope.carregar(); });
             }
             else {
                 toastr.error("Tivemos um problema ao gerar seu link de pagamento, tente novamente");

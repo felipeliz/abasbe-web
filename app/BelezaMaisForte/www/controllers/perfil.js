@@ -47,6 +47,10 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         return $scope.user.Curriculo.Habilidades.split(',');
     }
 
+    $scope.ligar = function () {
+        window.location.href = "tel:" + $scope.user.TelefoneCelular;
+    }
+
     $scope.setTab = function (idx) {
         $scope.tab = idx;
         $rootScope.updateScroll();
