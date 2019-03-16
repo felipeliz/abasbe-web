@@ -1,0 +1,66 @@
+﻿<div id="page_content" ng-init="init()">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-toolbar">
+                <h3 class="md-card-toolbar-heading-text">
+                    Banners
+                </h3>
+            </div>
+            <div class="md-card-content">
+                <div class="uk-grid">
+                    <div class="uk-width-2-3">
+                        <label>Teste</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Teste" md-input />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md-card uk-margin-medium-bottom" ng-hide="lista.list == undefined || lista.list.length == 0">
+            <div class="md-card-content">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Tipo Plano</th>
+                                <th>Plano</th>
+                                <th>Valor</th>
+                                <th>Registro</th>
+                                <th>Confirmação</th>
+                                <th>Referência</th> 
+                                <th>Situação</th>
+                                <th class="acoes-2">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="pagamento in lista.list">
+                                <td>
+                                    <p class="uk-margin-remove">{{pagamento.NomeCliente}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.CPFCliente}}</span></p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.NomeEstado}}</span></p>
+                                </td>
+                                <td>{{pagamento.TipoPlanoFormatadoCompleto}}</td>
+                                <td>
+                                    <p class="uk-margin-remove">{{pagamento.Descricao}}</p>
+                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.Dias}} Dias</span></p>
+                                </td>
+                                <td>{{pagamento.Valor}}</td>
+                                <td>{{pagamento.DataCriacao}}</td>
+                                <td>{{pagamento.DataConfirmacao}}</td>
+                                <td>{{pagamento.CheckoutIdentifier}}</td>
+                                <td>{{pagamento.Situacao}}</td>
+                                <td>
+                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
+                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-if="IsAdmin" ng-confirm-click="excluir(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-top">
+                        <li ng-repeat="p in lista.pages" ng-class="p == lista.current ? 'uk-active' : ''"><a ng-click="filtrar(p)" href="javascript:void(0)">{{p}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
