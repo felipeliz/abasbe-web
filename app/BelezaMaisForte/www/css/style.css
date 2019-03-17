@@ -68,7 +68,8 @@
 .login-logo {
     text-align: center;
     margin: -10px -10px 16px -10px;
-    background: white
+    background: white;
+    border-bottom: 1px solid #ddd;
 }
 
 .login-logo img {
@@ -163,7 +164,7 @@ ion-view {
     font-size: 14px;
     padding: 0px 16px;
     margin-top: 0px;
-    color: #666;
+    color: #444;
     font-weight: lighter;
 }
 
@@ -396,6 +397,10 @@ red {
     right: unset;
     line-height: 14px;
     font-size: 11px;
+}
+
+.text-muted {
+    color: #444 !important;
 }
 
 .tabs .tab-item .badge.badge-energized, .badge.badge-energized {

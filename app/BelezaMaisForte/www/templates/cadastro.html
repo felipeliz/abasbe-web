@@ -11,7 +11,7 @@
         <p ng-if="$root.cadastro.IdTipoAcao==1">Profissional</p>
       </div>
     </div>
-    <div class="padding">
+    <div class="padding p-t-0">
       <div ng-if="!editing" class="tab-nav button-bar">
         <button ng-click="mudarTipo(0)" class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Cliente</button>
         <button ng-click="mudarTipo(1)" class="button button-block {{ $root.cadastro.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Profissional</button>
