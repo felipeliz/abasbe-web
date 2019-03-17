@@ -24,9 +24,17 @@ namespace Api.Controllers
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
+            string status = param.Situacao?.ToString();
+
             Entities context = new Entities();
 
             var query = context.Pagamento.AsQueryable();
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                int s = Convert.ToInt32(status);
+                query = query.Where(ms => ms.Situacao == s);
+            }
 
             PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao));
             paged.ReplaceList(paged.list.ConvertAll<object>(obj => new PagamentoViewModel(obj as Pagamento)));

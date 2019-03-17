@@ -7,13 +7,33 @@
         Data: "",
         Cliente: "",
         TipoPlano: "",
+        Situacao: 0,
     };
     $scope.edicao = false;
 
     $scope.init = function () {
-            $scope.filtrar(0, true);
-            $scope.carregarListas();
-        
+        $scope.filtrar(0, true);
+        $scope.carregarListas();
+
+    }
+
+    $scope.getStatus = function (sts) {
+        $scope.filter.Situacao = sts;
+        $scope.filtrar(0, false);
+    }
+
+    $scope.atualizarStatus = function (id) {
+        $loading.show();
+        $http({
+            method: "GET",
+            url: "api/pagamento/atualizar/" + id
+        }).then(function mySuccess(response) {
+            $loading.hide();
+            $scope.filtrar($scope.filter.page, false);
+        }, function myError(response) {
+            $loading.hide();
+            toastr.error(response.data.ExceptionMessage);
+        });
     }
 
     $scope.filtrar = function (page, silent) {

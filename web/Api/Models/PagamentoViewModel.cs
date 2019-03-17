@@ -27,6 +27,7 @@ namespace Api.Models
         public string NomeCliente { get; set; }
         public string CPFCliente { get; set; }
         public string NomeEstado { get; set; }
+        public string NomeCidade { get; set; }
         public string TipoPlanoFormatadoCompleto { get; set; }
 
 
@@ -59,6 +60,8 @@ namespace Api.Models
             NomeCliente = obj.Cliente.Nome;
             CPFCliente =  string.IsNullOrEmpty(obj.Cliente.CPF) ? obj.Cliente.CPF : Convert.ToUInt64(obj.Cliente.CPF).ToString(@"000\.000\.000-00");
             NomeEstado = obj.Cliente.Cidade.Estado.Nome;
+            NomeCidade = obj.Cliente.Cidade.Nome;
+
 
             if (obj.Plano.TipoPlano == "A")
             {
@@ -89,9 +92,9 @@ namespace Api.Models
             {
                 case 0: return "Novo";
                 case 1: return "Esperando pagamento";
-                case 2: return "Em analise";
+                case 2: return "Em análise";
                 case 3: return "Pago";
-                case 4: return "Disponivel";
+                case 4: return "Disponível";
                 case 5: return "Em disputa";
                 case 6: return "Reembolsado";
                 case 7: return "Cancelado";

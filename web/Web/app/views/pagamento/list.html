@@ -3,7 +3,7 @@
         <div class="md-card">
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
-                    Banners
+                    Pagamentos
                 </h3>
             </div>
             <div class="md-card-content">
@@ -15,51 +15,65 @@
                 </div>
             </div>
         </div>
-        <div class="md-card uk-margin-medium-bottom" ng-hide="lista.list == undefined || lista.list.length == 0">
+        <div class="md-card">
             <div class="md-card-content">
-                <div class="uk-overflow-container">
-                    <table class="uk-table uk-table-striped">
-                        <thead>
-                            <tr>
-                                <th>Cliente</th>
-                                <th>Tipo Plano</th>
-                                <th>Plano</th>
-                                <th>Valor</th>
-                                <th>Registro</th>
-                                <th>Confirmação</th>
-                                <th>Referência</th> 
-                                <th>Situação</th>
-                                <th class="acoes-2">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="pagamento in lista.list">
-                                <td>
-                                    <p class="uk-margin-remove">{{pagamento.NomeCliente}}</p>
-                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.CPFCliente}}</span></p>
-                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.NomeEstado}}</span></p>
-                                </td>
-                                <td>{{pagamento.TipoPlanoFormatadoCompleto}}</td>
-                                <td>
-                                    <p class="uk-margin-remove">{{pagamento.Descricao}}</p>
-                                    <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.Dias}} Dias</span></p>
-                                </td>
-                                <td>{{pagamento.Valor}}</td>
-                                <td>{{pagamento.DataCriacao}}</td>
-                                <td>{{pagamento.DataConfirmacao}}</td>
-                                <td>{{pagamento.CheckoutIdentifier}}</td>
-                                <td>{{pagamento.Situacao}}</td>
-                                <td>
-                                    <a class="md-btn md-btn md-btn-small" title="Editar" ng-click="editar(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">edit</i></a>
-                                    <a class="md-btn md-btn md-btn-small" title="Excluir" ng-if="IsAdmin" ng-confirm-click="excluir(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-top">
-                        <li ng-repeat="p in lista.pages" ng-class="p == lista.current ? 'uk-active' : ''"><a ng-click="filtrar(p)" href="javascript:void(0)">{{p}}</a></li>
-                    </ul>
-                </div>
+                <ul class="uk-tab uk-tab-grid">
+                    <li class="uk-width-1-4 {{filter.Situacao==0 ? 'uk-active' : ''}}" ng-click="getStatus(0)"><a href="#">Novo</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==1 ? 'uk-active' : ''}}" ng-click="getStatus(1)"><a href="#">Esperando pagamento</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==2 ? 'uk-active' : ''}}" ng-click="getStatus(2)"><a href="#">Em análise</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==3 ? 'uk-active' : ''}}" ng-click="getStatus(3)"><a href="#">Pago</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==4 ? 'uk-active' : ''}}" ng-click="getStatus(4)"><a href="#">Disponivel</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==5 ? 'uk-active' : ''}}" ng-click="getStatus(5)"><a href="#">Em disputa</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==6 ? 'uk-active' : ''}}" ng-click="getStatus(6)"><a href="#">Reembolsado</a></li>
+                    <li class="uk-width-1-4 {{filter.Situacao==7 ? 'uk-active' : ''}}" ng-click="getStatus(7)"><a href="#">Cancelado</a></li>
+                </ul>
+                <ul class="uk-switcher uk-margin">
+                    <li aria-hidden="false" class="uk-active">
+                        <div class="uk-overflow-container" ng-if="lista.list.length > 0">
+                            <table class="uk-table uk-table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Tipo Plano</th>
+                                        <th>Plano</th>
+                                        <th>Valor</th>
+                                        <th>Registro</th>
+                                        <th>Confirmação</th>
+                                        <th>Referência</th>
+                                        <th>Situação</th>
+                                        <th class="acoes-2">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="pagamento in lista.list">
+                                        <td>
+                                            <p class="uk-margin-remove">{{pagamento.NomeCliente}}</p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.CPFCliente}}</span></p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.NomeCidade}} - {{pagamento.NomeEstado}} </span></p>
+                                        </td>
+                                        <td>{{pagamento.TipoPlanoFormatadoCompleto}}</td>
+                                        <td>
+                                            <p class="uk-margin-remove">{{pagamento.Descricao}}</p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{pagamento.Dias}} Dias</span></p>
+                                        </td>
+                                        <td>{{pagamento.Valor}}</td>
+                                        <td>{{pagamento.DataCriacao}}</td>
+                                        <td>{{pagamento.DataConfirmacao}}</td>
+                                        <td>{{pagamento.CheckoutIdentifier}}</td>
+                                        <td>{{pagamento.Situacao}}</td>
+                                        <td>
+                                            <a class="md-btn md-btn md-btn-small" title="Atualizar" ng-click="atualizarStatus(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">autorenew</i></a>
+                                            <a class="md-btn md-btn md-btn-small" title="Excluir" ng-if="IsAdmin" ng-confirm-click="excluir(pagamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">delete</i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul ng-hide="lista.pages.length==0" class="uk-pagination uk-margin-top">
+                                <li ng-repeat="p in lista.pages" ng-class="p == lista.current ? 'uk-active' : ''"><a ng-click="filtrar(p)" href="javascript:void(0)">{{p}}</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
