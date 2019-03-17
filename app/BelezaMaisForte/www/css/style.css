@@ -207,6 +207,7 @@ hr {
 
 .profile-bg {
     width: 100%;
+    max-height: 200px;
 }
 
 .profile-heading .item-content {
@@ -405,11 +406,18 @@ red {
     border: none;
     padding-top: 7px;
     font-size: 13px;
+    width: 100%;
 }
 
 .bar.bar-footer .item.item-toggle .toggle.toggle-theme {
     top: 3px;
     right: 0px;
+    float: right;
+}
+
+.bar-footer .item.item-toggle span {
+    text-align: left;
+    justify-content: left;
 }
 
 .p-t-0 {
