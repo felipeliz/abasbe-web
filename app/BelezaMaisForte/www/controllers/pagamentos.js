@@ -64,7 +64,7 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
             loading: true
         }).then(function (response) {
             if (response.data != null) {
-                iabRef = cordova.InAppBrowser.open(response.data, '_blank', 'location=no,footer=yes,closebuttoncaption=Fechar,closebuttoncolor=#333333');
+                iabRef = cordova.InAppBrowser.open(response.data, '_blank', 'location=no,footer=yes,closebuttoncaption=Concluído,closebuttoncolor=#333333');
                 iabRef.addEventListener('exit', function () { 
                     $scope.atualizar(pagamento); 
                 });

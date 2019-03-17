@@ -14,17 +14,17 @@
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input32">
         <span class="input-label">Telefone</span>
-        <input type="text" ui-mask="(99) 99999-9999" ng-model="form.Telefone" placeholder="">
+        <input type="tel" ui-mask="(99) 99999-9999" ng-model="form.Telefone" placeholder="">
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input34">
         <span class="input-label">Data Inicial</span>
-        <input type="text" ui-mask="99/99/9999" ng-model="form.DataInicial" placeholder="">
+        <input type="tel" ui-mask="99/99/9999" ng-model="form.DataInicial" placeholder="">
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input33">
         <span class="input-label">Data Final</span>
-        <input type="text" ui-mask="99/99/9999" ng-model="form.DataFinal" placeholder="">
+        <input type="tel" ui-mask="99/99/9999" ng-model="form.DataFinal" placeholder="">
       </label>
     </ion-list>
-    <a id="experiNcias-button15" ng-click="adicionarExperiencia()" class="button button-positive button-block">Adicionar</a>
+    <a ng-click="adicionarExperiencia()" class="button button-positive button-block">Adicionar</a>
   </ion-content>
 </ion-view>

@@ -209,7 +209,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('menu.equipamentos', {
-        url: '/page10',
+        url: '/equipamentos',
         cache: false,
         views: {
           'side-menu21': {
@@ -225,7 +225,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('menu.certificados', {
-        url: '/page11',
+        url: '/certificados',
         cache: false,
         views: {
           'side-menu21': {
@@ -241,7 +241,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
       })
 
       .state('menu.experiencias', {
-        url: '/page12',
+        url: '/experiencias',
         cache: false,
         views: {
           'side-menu21': {

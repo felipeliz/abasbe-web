@@ -140,6 +140,35 @@ angular.module('app.directives', [])
         }
     })
 
+    .directive('integer', function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModelCtrl) {
+                element.bind('keydown', function () {
+                    var val = element.val();
+                    val = val.replace(/\D/g, '');
+                    element.val(val);
+                    ngModelCtrl.$setViewValue(val);
+                    scope.$apply();
+                });
+                element.bind('keypress', function () {
+                    var val = element.val();
+                    val = val.replace(/\D/g, '');
+                    element.val(val);
+                    ngModelCtrl.$setViewValue(val);
+                    scope.$apply();
+                });
+                element.bind('keyup', function () {
+                    var val = element.val();
+                    val = val.replace(/\D/g, '');
+                    element.val(val);
+                    ngModelCtrl.$setViewValue(val);
+                    scope.$apply();
+                });
+            }
+        };
+    })
 
     .directive('fileChange', function () {
         return {

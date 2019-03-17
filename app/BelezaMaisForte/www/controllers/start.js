@@ -15,6 +15,7 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicHistory) {
     }
 
     $scope.openLink = function (link) {
+        console.log(link);
         window.open(link, '_system', 'location=yes');
     }
 

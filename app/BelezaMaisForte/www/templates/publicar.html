@@ -23,11 +23,11 @@
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Data da publicação</span>
-        <input type="text" ng-model="form.Estreia" ui-mask="99/99/9999" model-view-value="true">
+        <input type="tel" ng-model="form.Estreia" ui-mask="99/99/9999" model-view-value="true">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Horário da publicação</span>
-        <input type="text" ng-model="form.EstreiaHorario" ui-mask="99:99" model-view-value="true">
+        <input type="tel" ng-model="form.EstreiaHorario" ui-mask="99:99" model-view-value="true">
       </label>
       <div class="tab-nav button-bar white">
         <button ng-click="mudarTipo(0)" class="button button-block {{ form.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Link</button>

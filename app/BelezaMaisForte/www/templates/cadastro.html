@@ -7,13 +7,13 @@
       <div class="item-content">
         <img ng-src="{{getPhoto()}}">
         <h2>Cadastro</h2>
-        <p ng-if="$root.cadastro.IdTipoAcao==0">Associado</p>
+        <p ng-if="$root.cadastro.IdTipoAcao==0">Cliente</p>
         <p ng-if="$root.cadastro.IdTipoAcao==1">Profissional</p>
       </div>
     </div>
     <div class="padding">
       <div ng-if="!editing" class="tab-nav button-bar">
-        <button ng-click="mudarTipo(0)" class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Associado</button>
+        <button ng-click="mudarTipo(0)" class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Cliente</button>
         <button ng-click="mudarTipo(1)" class="button button-block {{ $root.cadastro.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Profissional</button>
       </div>
       <ion-list id="perfil-list4">
@@ -24,17 +24,17 @@
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input14">
           <span class="input-label">CPF <red>*</red></span>
-          <input type="text" ui-mask="999.999.999-99" ng-model="$root.cadastro.CPF" placeholder="">
+          <input type="tel" ui-mask="999.999.999-99" ng-model="$root.cadastro.CPF" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Data de nascimento</span>
-          <input type="text" ui-mask="99/99/9999" ng-model="$root.cadastro.Nascimento" placeholder="">
+          <input type="tel" ui-mask="99/99/9999" ng-model="$root.cadastro.Nascimento" placeholder="">
         </label>
         <ion-toggle toggle-class="toggle-positive" ng-if="$root.cadastro.IdTipoAcao==0" ng-model="$root.cadastro.Empresa">Inserir
           dados de empresa?</ion-toggle>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">CNPJ <red>*</red></span>
-          <input type="text" cnpj ng-model="$root.cadastro.Cnpj" placeholder="">
+          <input type="tel" cnpj ng-model="$root.cadastro.Cnpj" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">Razão social <red>*</red></span>
@@ -43,11 +43,11 @@
         <ion-item class="item-divider" id="perfil-list-item-divider6"> Contato</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input17">
           <span class="input-label">Celular <red>*</red></span>
-          <input type="text" ui-mask="(99) 99999-9999" ng-model="$root.cadastro.TelefoneCelular" placeholder="">
+          <input type="tel" ui-mask="(99) 99999-9999" ng-model="$root.cadastro.TelefoneCelular" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input17">
           <span class="input-label">Telefone Comercial</span>
-          <input type="text" ui-mask="(99) 9999-9999" ng-model="$root.cadastro.Curriculo.TelefoneComercial" placeholder="">
+          <input type="tel" ui-mask="(99) 9999-9999" ng-model="$root.cadastro.Curriculo.TelefoneComercial" placeholder="">
         </label>
         <ion-item class="item-divider" id="perfil-list-item-divider6"> Acesso</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input16">
@@ -81,11 +81,11 @@
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Tempo de experiência <red>*</red></span>
-          <input type="text" ng-model="$root.cadastro.Curriculo.TempoExperiencia" placeholder="">
+          <input type="tel" integer ng-model="$root.cadastro.Curriculo.TempoExperiencia" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Pretensão salarial <red>*</red></span>
-          <input type="text" money-mask ng-model="$root.cadastro.Curriculo.PretensaoSalarial" placeholder="">
+          <input type="tel" money-mask ng-model="$root.cadastro.Curriculo.PretensaoSalarial" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Tecnicas e Habilidades <red>*</red></span>
@@ -119,7 +119,7 @@
         <ion-item class="item-divider" id="perfil-list-item-divider10"> Endereço</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input21">
           <span class="input-label">CEP</span>
-          <input type="text" ui-mask="99999-999" ng-model="$root.cadastro.CEP" placeholder="">
+          <input type="tel" ui-mask="99999-999" ng-model="$root.cadastro.CEP" placeholder="">
         </label>
         <label class="item item-select item-stacked">
           <span class="input-label">Estado <red>*</red></span>
