@@ -20,7 +20,7 @@
         <ion-item class="item-divider" id="perfil-list-item-divider5"> Cadastro básico</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input11">
           <span class="input-label">Nome <red>*</red></span>
-          <input type="text" ng-model="$root.cadastro.Nome" placeholder="">
+          <input type="text" maxlength="250" ng-model="$root.cadastro.Nome" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input14">
           <span class="input-label">CPF <red>*</red></span>
@@ -38,7 +38,7 @@
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">Razão social <red>*</red></span>
-          <input type="text" ng-model="$root.cadastro.NomeEmpresa" placeholder="">
+          <input type="text" maxlength="250" ng-model="$root.cadastro.NomeEmpresa" placeholder="">
         </label>
         <ion-item class="item-divider" id="perfil-list-item-divider6"> Contato</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input17">
@@ -52,11 +52,11 @@
         <ion-item class="item-divider" id="perfil-list-item-divider6"> Acesso</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input16">
           <span class="input-label">E-mail <red>*</red></span>
-          <input type="email" ng-model="$root.cadastro.Email" placeholder="">
+          <input type="email" maxlength="50" ng-model="$root.cadastro.Email" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input13">
           <span class="input-label">Senha <red>*</red></span>
-          <input type="text" ng-model="$root.cadastro.Senha" placeholder="">
+          <input type="text" maxlength="50" ng-model="$root.cadastro.Senha" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Currículo</ion-item>
         <label class="item item-select item-stacked" ng-if="$root.cadastro.IdTipoAcao==1">
@@ -89,11 +89,11 @@
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Tecnicas e Habilidades <red>*</red></span>
-          <input type="text" ng-model="$root.cadastro.Curriculo.Habilidades" placeholder="">
+          <input type="text" maxlength="400"ng-model="$root.cadastro.Curriculo.Habilidades" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Observações</span>
-          <input type="text" ng-model="$root.cadastro.Curriculo.Observacoes" placeholder="">
+          <input type="text" maxlength="250" ng-model="$root.cadastro.Curriculo.Observacoes" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Informações adicionais</ion-item>
         <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagLeiSalaoParceiro" ng-if="$root.cadastro.IdTipoAcao==1">Conhece
@@ -110,11 +110,11 @@
           filhos?</ion-toggle>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagDelivery">
           <span class="input-label">Qual a disponibilidade do delivery?</span>
-          <input type="text" ng-model="$root.cadastro.Curriculo.DisponibilidadeDelivery" placeholder="">
+          <input type="text"  maxlength="100" ng-model="$root.cadastro.Curriculo.DisponibilidadeDelivery" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagFilhos">
           <span class="input-label">Os filhos ficam com quem?</span>
-          <input type="text" ng-model="$root.cadastro.Curriculo.ObservacaoFilhos" placeholder="">
+          <input type="text" maxlength="50" ng-model="$root.cadastro.Curriculo.ObservacaoFilhos" placeholder="">
         </label>
         <ion-item class="item-divider" id="perfil-list-item-divider10"> Endereço</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input21">
@@ -137,11 +137,11 @@
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input24">
           <span class="input-label">Bairro</span>
-          <input type="text" ng-model="$root.cadastro.Bairro" placeholder="">
+          <input type="text" maxlength="50" ng-model="$root.cadastro.Bairro" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input25">
           <span class="input-label">Logradouro</span>
-          <input type="text" ng-model="$root.cadastro.Logradouro" placeholder="">
+          <input type="text" maxlength="150" ng-model="$root.cadastro.Logradouro" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Equipamentos</ion-item>
         <ion-item id="add-equip" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1" ng-click="openEquipamento()">
