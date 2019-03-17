@@ -4,11 +4,11 @@
 
     $scope.lista = {};
     $scope.filter = {
-        Data: "",
-        Cliente: "",
+        Nome: "",
         TipoPlano: "",
-        Situacao: 0,
+        Situacao: 0
     };
+    $scope.estados = [];
     $scope.edicao = false;
 
     $scope.init = function () {
@@ -58,12 +58,13 @@
     $scope.carregarListas = function () {
         $http({
             method: "GET",
-            url: "api/cliente/todos"
+            url: "api/estado/todos"
         }).then(function mySuccess(response) {
-            $scope.clientes = response.data;
+            $scope.estados = response.data;
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
+
     }
 
     $scope.excluir = function (id) {

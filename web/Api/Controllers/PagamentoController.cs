@@ -25,6 +25,13 @@ namespace Api.Controllers
         public PagedList Lista([FromBody] dynamic param)
         {
             string status = param.Situacao?.ToString();
+            string cliente = param.Cliente?.ToString();
+            string tipoplano = param.TipoPlano?.ToString();
+            string de = param.De?.ToString();
+            string ate = param.Ate?.ToString();
+            string estado = param.Estado?.Id?.ToString();
+            string deconfirmacao = param.DeConfirmacao?.ToString();
+            string ateconfirmacao = param.AteConfirmacao?.ToString();
 
             Entities context = new Entities();
 
@@ -34,6 +41,54 @@ namespace Api.Controllers
             {
                 int s = Convert.ToInt32(status);
                 query = query.Where(ms => ms.Situacao == s);
+            }
+
+            if (!string.IsNullOrEmpty(cliente))
+            {
+                query = query.Where(pag => pag.Cliente.Nome.Contains(cliente) || pag.Cliente.CPF.Contains(cliente));
+            }
+
+            if (!string.IsNullOrEmpty(de))
+            {
+                DateTime datacriacao = AppExtension.ToDateTime(param.De);
+
+                query = query.Where(pag => pag.DataCriacao >= datacriacao);
+            }
+
+            if (!string.IsNullOrEmpty(ate))
+            {
+                DateTime dataconfirmacao = AppExtension.ToDateTime(param.Ate);
+                dataconfirmacao = dataconfirmacao.AddHours(23);
+                dataconfirmacao = dataconfirmacao.AddMinutes(59);
+                dataconfirmacao = dataconfirmacao.AddSeconds(59);
+                query = query.Where(pag => pag.DataCriacao <= dataconfirmacao);
+            }
+
+            if (!string.IsNullOrEmpty(estado))
+            {
+                int idestado = Convert.ToInt32(estado);
+                query = query.Where(obj => obj.Cliente.Cidade.Estado.Id == idestado);
+            }
+
+            if (!string.IsNullOrEmpty(tipoplano))
+            {
+                query = query.Where(obj => obj.Plano.TipoPlano == tipoplano);
+            }
+
+            if (!string.IsNullOrEmpty(deconfirmacao))
+            {
+                DateTime datacriacao = AppExtension.ToDateTime(param.DeConfirmacao);
+
+                query = query.Where(pag => pag.DataConfirmacao >= datacriacao);
+            }
+
+            if (!string.IsNullOrEmpty(ateconfirmacao))
+            {
+                DateTime dataconfirmacao = AppExtension.ToDateTime(param.AteConfirmacao);
+                dataconfirmacao = dataconfirmacao.AddHours(23);
+                dataconfirmacao = dataconfirmacao.AddMinutes(59);
+                dataconfirmacao = dataconfirmacao.AddSeconds(59);
+                query = query.Where(pag => pag.DataConfirmacao <= dataconfirmacao);
             }
 
             PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao));

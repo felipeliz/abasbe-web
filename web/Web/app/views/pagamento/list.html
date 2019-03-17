@@ -8,9 +8,45 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-2-3">
-                        <label>Teste</label>
-                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Teste" md-input />
+                    <div class="uk-width-1-1">
+                        <label> Nome / CPF</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Cliente" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>De (Data de Registro) </label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.De" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Até (Data de Registro)</label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.Ate" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>De (Data de Confirmação) </label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.DeConfirmacao" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Até (Data de Confirmação)</label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.AteConfirmacao" md-input />
+                    </div>
+                    <div class="uk-width-1-2 uk-grid-margin">
+                        <label>Tipo de Plano</label>
+                        <select class="md-input label-fixed" ng-model="filter.TipoPlano" md-input>
+                            <option value="">Selecione...</option>
+                            <option value="A">Associado</option>
+                            <option value="B">Banner</option>
+                            <option value="P">Profissional</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-small-1-1 uk-width-medium-1-2 uk-grid-margin">
+                        <label>Estado</label>
+                        <select class="md-input label-fixed" ng-model="filter.Estado.Id" ng-options="x.Id as x.Nome for x in estados"  md-input>
+                            <option value="">Selecione...</option>
+                        </select>
+                    </div>
+                    <div class="uk-width-1 uk-grid-margin">
+                        <div class="uk-align-right">
+                            <a class="md-btn md-btn-primary" ng-click="filtrar()" href="javascript:void(0)">Filtrar</a>
+                        </div>
                     </div>
                 </div>
             </div>
