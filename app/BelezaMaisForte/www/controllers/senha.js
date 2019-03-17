@@ -13,6 +13,7 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
             data: $scope.form,
             loading: true
         }).then(function mySuccess(response) {
+            toastr.success("Sua senha foi alterada com sucesso");
             $scope.start();
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);

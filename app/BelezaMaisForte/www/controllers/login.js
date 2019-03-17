@@ -32,9 +32,10 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
         $http({
             method: "POST",
             url: api.resolve("api/cliente/esqueceu"),
-            data: $scope.form
+            data: $scope.form,
+            loading: true
         }).then(function mySuccess(response) {
-            toastr.success("Enviaremos sua senha ao seu e-mail!");
+            toastr.success(response.data);
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });

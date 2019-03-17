@@ -69,7 +69,7 @@ namespace Api.Controllers
 
             return Convert.ToInt32(((DateTime)cliente.DataExpiracao).Subtract(DateTime.Now).TotalDays);
         }
-       
+
         [HttpPost]
         public ClienteViewModel Login([FromBody] dynamic param)
         {
@@ -96,11 +96,21 @@ namespace Api.Controllers
         [HttpPost]
         public string Contato([FromBody] dynamic param)
         {
-            return "Seu contato foi direcionado, responderemos em 24h";
+            string destinatario = ParametroController.ObterParam("EmailContato");
+            string line = "<p><strong>{0}: </strong><span>{1}</span></p>";
+
+            string body = "";
+            body += string.Format(line, "Nome", param.nome?.ToString());
+            body += string.Format(line, "Email", param.email?.ToString());
+            body += string.Format(line, "Telefone", param.telefone?.ToString());
+            body += string.Format(line, "Mensagem", param.mensagem?.ToString());
+
+            AppExtension.EnviarEmailGmail(destinatario, "Beleza Mais Forte - Contato App", body);
+            return "Seu contato foi direcionado, responderemos o mais rapidamente possível";
         }
 
         [HttpPost]
-        public bool Esqueceu([FromBody] dynamic param)
+        public string Esqueceu([FromBody] dynamic param)
         {
             string email = param.email;
 
@@ -112,9 +122,14 @@ namespace Api.Controllers
                 throw new Exception("E-mail inválido");
             }
 
-            // enviar e-mail com a senha do cliente
+            string line = "<p><strong>{0}: </strong><span>{1}</span></p>";
 
-            return true;
+            string body = string.Format("<strong>Olá {0},</strong><br/>", obj.Nome);
+            body += string.Format(line, "Sua senha é", obj.Senha);
+
+            AppExtension.EnviarEmailGmail(obj.Email, "Beleza Mais Forte - Recuperar Senha", body);
+
+            return "Sua senha foi enviada para seu e-mail de cadastro.";
         }
 
         [HttpPost]

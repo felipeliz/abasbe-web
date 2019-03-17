@@ -1,6 +1,6 @@
-var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory) {
+var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory, Validation) {
 
-    $scope.form = { nome: "", email: "", telefone: "" };
+    $scope.form = { nome: "", email: "", telefone: "", mensagem: "" };
 
     $scope.init = function(){
         if(Auth.isLoggedIn()){
@@ -11,7 +11,11 @@ var controller = function ($scope, $http, Auth, $location, $state, $ionicHistory
         }
     }
 
-    $scope.contactar = function(banner){
+    $scope.contactar = function(){
+        Validation.required("Nome", $scope.form.nome);
+        Validation.required("E-mail", $scope.form.email);
+        Validation.required("Mensagem", $scope.form.mensagem);
+
         $http({
             method: "POST",
             url: api.resolve("api/cliente/contato"),

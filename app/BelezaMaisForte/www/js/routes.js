@@ -256,22 +256,6 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
-      .state('menu.assinatura', {
-        url: '/assinatura/me',
-        cache: false,
-        views: {
-          'side-menu21': {
-            templateUrl: 'templates/assinatura.html',
-            controller: 'assinatura'
-          }
-        },
-        resolve: {
-          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-            return $ocLazyLoad.load('controllers/assinatura.js');
-          }]
-        }
-      })
-
       .state('menu.assinaturas', {
         url: '/assinaturas',
         cache: false,

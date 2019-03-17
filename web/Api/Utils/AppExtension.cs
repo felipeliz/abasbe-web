@@ -79,6 +79,33 @@ namespace Api.Utils
             return true;
         }
 
+
+        public static bool EnviarEmailGmail(string destinatario, string assunto, string corpo)
+        {
+            MailMessage mail = new MailMessage();
+
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["gmail_remetente"].ToString());
+            mail.To.Add(destinatario); // para
+            mail.Subject = assunto; // assunto
+            mail.Body = corpo; // mensagem
+            mail.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient("smtp.gmail.com"))
+            {
+                smtp.EnableSsl = true; // GMail requer SSL
+                smtp.Port = 587;       // porta para SSL
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network; // modo de envio
+                smtp.UseDefaultCredentials = false; // vamos utilizar credencias especificas
+
+                // seu usuário e senha para autenticação
+                smtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["gmail_remetente"].ToString(), ConfigurationManager.AppSettings["gmail_senha"].ToString());
+
+                // envia o e-mail
+                smtp.Send(mail);
+                return true;
+            }
+        }
+
         public static DateTime? ToDateTime(dynamic data)
         {
             try
