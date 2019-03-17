@@ -5,20 +5,6 @@ using System.Web;
 
 namespace Api.Models
 {
-    public class BannerGroupViewModel
-    {
-        public List<BannerViewModel> EmEspera { get; set; }
-        public List<BannerViewModel> EmExibicao { get; set; }
-        public List<BannerViewModel> Expirados { get; set; }
-
-        public BannerGroupViewModel()
-        {
-            EmEspera = new List<BannerViewModel>();
-            EmExibicao = new List<BannerViewModel>();
-            Expirados = new List<BannerViewModel>();
-        }
-    }
-
     public class BannerViewModel
     {
         public int Id { get; set; }
@@ -42,7 +28,7 @@ namespace Api.Models
             {
                 return;
             }
-           
+
             Id = obj.Id;
             Descricao = obj.Descricao;
             Expiracao = obj.Expiracao.ToString("dd/MM/yyyy hh:mm");

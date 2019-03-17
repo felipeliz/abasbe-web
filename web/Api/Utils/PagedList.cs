@@ -7,6 +7,13 @@ using System.Linq.Expressions;
 
 namespace Api.Utils
 {
+    public class InfinityPagedList<T>
+    {
+        public List<T> list { get; set; }
+        public int current { get; set; }
+        public int pageSize { get; set; }
+    }
+
     public class PagedList
     {
         public int current { get; set; }

@@ -37,6 +37,12 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
     }
 
     $scope.go = function (page) {
+        var flag = localStorage.getItem("flagContrato");
+        if(flag == null && flag != "true" && flag != true) {
+            toastr.warning('É preciso aceitar o contrato para utilizar a aplicação.');
+            return false;
+        }
+
         $ionicHistory.nextViewOptions({
             disableBack: true
         });

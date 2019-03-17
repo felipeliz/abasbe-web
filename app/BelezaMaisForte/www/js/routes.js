@@ -112,6 +112,22 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
+      .state('menu.contrato', {
+        url: '/contrato',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/contrato.html',
+            controller: 'contrato'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/contrato.js');
+          }]
+        }
+      })
+
       .state('menu.me', {
         url: '/perfil',
         cache: false,
@@ -127,7 +143,7 @@ angular.module('app.routes', ['oc.lazyLoad'])
           }]
         }
       })
-      
+
       .state('menu.senha', {
         url: '/senha',
         cache: false,

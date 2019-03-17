@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
+var controller = function ($scope, $http, $state, $rootScope, $ionicHistory) {
 
     $scope.banners = [];
     $scope.lastUpdate = (new Date()).getTime();
@@ -27,9 +27,24 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
         }
     }
 
-    $scope.init = function () {
-        $scope.filtrar();
+    $scope.verificarContrato = function () {
+        var flag = localStorage.getItem("flagContrato");
+        if (flag == null && flag != "true" && flag != true) {
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('menu.contrato');
+            return false;
+        }
+        return true;
+    }
 
+    $scope.init = function () {
+        if (!$scope.verificarContrato()) {
+            return;
+        }
+
+        $scope.filtrar();
         $http({
             method: "GET",
             url: api.resolve("api/cliente/total"),
@@ -76,17 +91,17 @@ var controller = function ($scope, $http, $ionicScrollDelegate, $rootScope) {
             data: $scope.filter,
             loading: true
         }).then(function (response) {
-            if (response.data.length == 0) {
+            if (response.data.pageSize > response.data.list.length) {
                 $scope.canUpdate = false;
             }
 
             $scope.$broadcast('scroll.infiniteScrollComplete');
             $scope.lastUpdate = (new Date()).getTime();
             if ($scope.filter.page > 0) {
-                $scope.banners = $scope.banners.concat(response.data);
+                $scope.banners = $scope.banners.concat(response.data.list);
             }
             else {
-                $scope.banners = response.data;
+                $scope.banners = response.data.list;
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);

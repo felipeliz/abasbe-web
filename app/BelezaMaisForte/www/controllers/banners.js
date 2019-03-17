@@ -57,17 +57,17 @@ var controller = function ($scope, $http, Auth, $rootScope, $state, $ionicAction
             data: $scope.filter,
             loading: true
         }).then(function (response) {
-            if (response.data.length == 0) {
+            if (response.data.pageSize > response.data.list.length) {
                 $scope.canUpdate = false;
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
             $scope.lastUpdate = (new Date()).getTime();
             if ($scope.filter.page > 0) {
-                $scope.banners = $scope.banners.concat(response.data);
+                $scope.banners = $scope.banners.concat(response.data.list);
             }
             else {
-                $scope.banners = response.data;
+                $scope.banners = response.data.list;
             }
         }, function (response) {
             console.error(response.data.ExceptionMessage);

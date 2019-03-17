@@ -248,7 +248,7 @@ namespace Api.Controllers
 
 
         [HttpPost]
-        public List<ClienteViewModel> Buscar([FromBody] dynamic param)
+        public InfinityPagedList<ClienteViewModel> Buscar([FromBody] dynamic param)
         {
             Entities context = new Entities();
             var cliente = context.Cliente.Find(AppExtension.IdUsuarioLogado());
@@ -329,7 +329,13 @@ namespace Api.Controllers
                 lista.Add(new ClienteViewModel(obj, false));
             });
 
-            return lista;
+
+            InfinityPagedList<ClienteViewModel> paged = new InfinityPagedList<ClienteViewModel>();
+            paged.list = lista;
+            paged.pageSize = pageSize;
+            paged.current = page;
+
+            return paged;
         }
     }
 }

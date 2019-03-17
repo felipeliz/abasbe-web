@@ -356,7 +356,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public List<PagamentoViewModel> MeusPagamentos([FromBody] dynamic param)
+        public InfinityPagedList<PagamentoViewModel> MeusPagamentos([FromBody] dynamic param)
         {
             int page = Convert.ToInt32(param.page);
             int pageSize = 5;
@@ -382,7 +382,12 @@ namespace Api.Controllers
                 obj.Add(new PagamentoViewModel(pag));
             });
 
-            return obj;
+            InfinityPagedList<PagamentoViewModel> paged = new InfinityPagedList<PagamentoViewModel>();
+            paged.list = obj;
+            paged.pageSize = pageSize;
+            paged.current = page;
+
+            return paged;
         }
     }
 }

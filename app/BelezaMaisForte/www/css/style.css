@@ -381,11 +381,7 @@ red {
     color: red;
 }
 
-.main-list {
-    padding-bottom: 50px;
-}
-
-.counter{
+.counter {
     float: right;
     color: #aaa;
     font-size: 14px;
@@ -403,4 +399,14 @@ red {
 
 .tabs .tab-item .badge.badge-energized, .badge.badge-energized {
     background-color: #FF9800;
+}
+
+.bar.bar-footer .item.item-toggle {
+    border: none;
+    padding-top: 7px;
+    font-size: 13px;
+}
+
+.bar.bar-footer .item.item-toggle .toggle.toggle-theme {
+    top: 3px;
 }

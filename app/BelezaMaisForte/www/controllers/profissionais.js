@@ -30,17 +30,17 @@ var controller = function ($scope, $http, $state, $rootScope, $ionicScrollDelega
             data: $rootScope.busca,
             loading: true
         }).then(function (response) {
-            if(response.data.length == 0){
+            if (response.data.pageSize > response.data.list.length) {
                 $scope.canUpdate = false;
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
             $scope.lastUpdate = (new Date()).getTime();
             if ($rootScope.busca.page > 0) {
-                $scope.profissionais = $scope.profissionais.concat(response.data);
+                $scope.profissionais = $scope.profissionais.concat(response.data.list);
             }
             else {
-                $scope.profissionais = response.data;
+                $scope.profissionais = response.data.list;
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);

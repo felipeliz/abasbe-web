@@ -190,9 +190,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public List<BannerViewModel> EmExibicao([FromBody] dynamic param)
+        public InfinityPagedList<BannerViewModel> EmExibicao([FromBody] dynamic param)
         {
-            int pagesize = 3;
+            int pageSize = 3;
 
             Entities context = new Entities();
             List<BannerViewModel> lista = new List<BannerViewModel>();
@@ -210,7 +210,7 @@ namespace Api.Controllers
             var query = context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A");
             query = query.Where(ban => excludes.Contains(ban.Id) == false);
             query = query.OrderBy(r => Guid.NewGuid());
-            query = query.Take(pagesize);
+            query = query.Take(pageSize);
 
             query.ToList().ForEach(obj =>
             {
@@ -220,11 +220,16 @@ namespace Api.Controllers
 
             context.SaveChanges();
 
-            return lista;
+            InfinityPagedList<BannerViewModel> paged = new InfinityPagedList<BannerViewModel>();
+            paged.list = lista;
+            paged.pageSize = pageSize;
+            paged.current = page;
+
+            return paged;
         }
 
         [HttpPost]
-        public List<BannerViewModel> MeusBanners([FromBody] dynamic param)
+        public InfinityPagedList<BannerViewModel> MeusBanners([FromBody] dynamic param)
         {
             int page = Convert.ToInt32(param.page);
             int pageSize = 5;
@@ -259,7 +264,12 @@ namespace Api.Controllers
                 list.Add(new BannerViewModel(obj));
             });
 
-            return list;
+            InfinityPagedList<BannerViewModel> paged = new InfinityPagedList<BannerViewModel>();
+            paged.list = list;
+            paged.pageSize = pageSize;
+            paged.current = page;
+
+            return paged;
         }
 
         [HttpGet]

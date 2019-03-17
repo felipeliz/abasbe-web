@@ -22,25 +22,26 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
             data: $scope.filter,
             loading: true
         }).then(function (response) {
-            if (response.data.length == 0) {
+            if (response.data.pageSize > response.data.list.length) {
                 $scope.canUpdate = false;
             }
+
             $scope.$broadcast('scroll.infiniteScrollComplete');
 
             $scope.lastUpdate = (new Date()).getTime();
 
             if ($scope.filter.page > 0) {
-                $scope.pagamentos = $scope.pagamentos.concat(response.data);
+                $scope.pagamentos = $scope.pagamentos.concat(response.data.list);
             }
             else {
-                $scope.pagamentos = response.data;
+                $scope.pagamentos = response.data.list;
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.onInfinite = function () {
+    $scope.onInfinite = function (path) {
         if ($scope.lastUpdate + 1500 < (new Date()).getTime() && $rootScope.loading == false && $scope.canUpdate) {
             $scope.filter.page++;
             $scope.filtrar();
