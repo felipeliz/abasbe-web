@@ -64,60 +64,12 @@ namespace Api.Controllers
             var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
             if (cliente == null)
             {
-                throw new Exception("Objeto não encontrado");
+                throw new Exception("CLIENT_NOT_FOUND");
             }
 
             return Convert.ToInt32(((DateTime)cliente.DataExpiracao).Subtract(DateTime.Now).TotalDays);
         }
-
-        [HttpGet]
-        public List<PagamentoViewModel> MeusPagamentos()
-        {
-            int id = AppExtension.IdUsuarioLogado();
-
-            Entities context = new Entities();
-
-            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
-
-            if (cliente == null)
-            {
-                throw new Exception("Objeto não encontrado");
-            }
-
-            List<PagamentoViewModel> obj = new List<PagamentoViewModel>();
-          
-            cliente.Pagamento.Where(pag => pag.Situacao != 7).Where(pag => pag.Banner == null || pag.Banner.Situacao != "I").OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
-            {
-                obj.Add(new PagamentoViewModel(pag));
-            });
-
-            return obj;
-        }
-
-        [HttpGet]
-        public AssinaturaViewModel MinhaAssinatura()
-        {
-            int id = AppExtension.IdUsuarioLogado();
-
-            Entities context = new Entities();
-
-            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
-
-            if (cliente == null)
-            {
-                throw new Exception("Objeto não encontrado");
-            }
-
-            if (cliente.Plano != null)
-            {
-                return new AssinaturaViewModel(cliente, cliente.Plano);
-            }
-            else
-            {
-                throw new Exception("no_plan");
-            }
-        }
-
+       
         [HttpPost]
         public ClienteViewModel Login([FromBody] dynamic param)
         {

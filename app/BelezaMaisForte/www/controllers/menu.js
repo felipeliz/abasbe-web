@@ -67,7 +67,12 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
                     $scope.expiry = "Sua assinatura expirou";
                 }
             }, function (response) {
-                toastr.error(response.data.ExceptionMessage);
+                if (response.data.ExceptionMessage == "CLIENT_NOT_FOUND") {
+                    $scope.logout();
+                }
+                else {
+                    toastr.error(response.data.ExceptionMessage);
+                }
             });
         }
     }

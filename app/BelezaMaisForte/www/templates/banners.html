@@ -1,39 +1,29 @@
 <ion-view title="Meus Banners" id="page5" ng-init="init()">
-  <ion-content padding="true" class="has-header">
-    <div id="preloader" ng-if="loading">
-      <div class="preloader" style="background-size: cover;"></div>
+  <ion-content padding="false" class="has-header">
+    <div ng-if="!editing" class="tab-nav button-bar">
+      <button ng-click="mudarTipo(0)" class="button button-block {{ filter.tipo == 0 ? 'bt-nav-active' : '' }}">Espera</button>
+      <button ng-click="mudarTipo(1)" class="button button-block {{ filter.tipo == 1 ? 'bt-nav-active' : '' }}">Exibição</button>
+      <button ng-click="mudarTipo(2)" class="button button-block {{ filter.tipo == 2 ? 'bt-nav-active' : '' }}">Expirados</button>
     </div>
-    <div ng-hide="loading || (group.EmEspera.length > 0 || group.EmExibicao.length > 0  || group.Expirados.length > 0)">
-      <h3>Não há registros</h3>
-      <div class="show-list-numbers-and-dots">
-        <p>Não existem banners vinculados a sua conta de usuário.</p>
+    <div class="padding">
+      <div ng-hide="loading || banners.length > 0">
+        <h3>Não há registros</h3>
+        <div class="show-list-numbers-and-dots">
+          <p>Não existem banners "{{getStatus()}}" vinculados com sua conta de usuário.</p>
+        </div>
       </div>
-    </div>
-    <div ng-hide="loading">
       <ion-list>
-        <div class="card" ng-repeat="banner in group.EmExibicao">
+        <div class="card" ng-repeat="banner in banners">
           <ion-item class="item-divider item-icon-right">
-            <i class="icon ion-more" ng-click="showAction(banner)"></i>
-            Em Exibicao
+            <i class="icon ion-more" ng-click="showAction(banner, $index)"></i>
+            Banner
           </ion-item>
-          <div ng-include="'templates/card-banner-details.html'"></div>
-        </div>
-        <div class="card" ng-repeat="banner in group.EmEspera">
-          <ion-item class="item-divider item-icon-right">
-            <i class="icon ion-more" ng-click="showAction(banner)"></i>
-            Em Espera
-          </ion-item>
-          <div ng-include="'templates/card-banner-details.html'"></div>
-        </div>
-        <div class="card" ng-repeat="banner in group.Expirados">
-          <ion-item class="item-divider item-icon-right">
-            <i class="icon ion-more" ng-click="showAction(banner)"></i>
-            Expirados
-          </ion-item>
-          <div ng-include="'templates/card-banner-details.html'"></div>
+          <div ng-include="'templates/card-banner-details.html'" ng-click="openBanner(banner)"></div>
         </div>
       </ion-list>
-      <a ui-sref="menu.publicar()" id="meusBanners-button9" class="button button-positive button-block">Publicar Banner</a>
+      <a ui-sref="menu.publicar()" id="meusBanners-button9" class="button button-positive button-block">Publicar
+        Banner</a>
     </div>
+    <ion-infinite-scroll on-infinite="onInfinite()" ng-hide="true" distance="50px"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

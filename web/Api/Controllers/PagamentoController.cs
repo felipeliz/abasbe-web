@@ -35,7 +35,6 @@ namespace Api.Controllers
 
         }
 
-
         [HttpPost]
         public bool Notificacao()
         {
@@ -122,7 +121,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public bool Atualizar(int id)
+        public PagamentoViewModel Atualizar(int id)
         {
             Entities context = new Entities();
             Pagamento pagamento = context.Pagamento.Find(id);
@@ -142,7 +141,7 @@ namespace Api.Controllers
                 if (result.Transactions.Count <= 0)
                 {
                     // pagamento não integrado com pagseguro ainda
-                    return false;
+                    return (new PagamentoViewModel(pagamento));
                 }
                 foreach (TransactionSummary transaction in result.Transactions)
                 {
@@ -197,7 +196,7 @@ namespace Api.Controllers
 
                 context.SaveChanges();
 
-                return true;
+                return (new PagamentoViewModel(pagamento));
             }
             catch (PagSeguroServiceException exception)
             {
@@ -207,7 +206,7 @@ namespace Api.Controllers
                     throw new Exception(element.Message);
                 }
 
-                return false;
+                return (new PagamentoViewModel(pagamento));
             }
         }
 
@@ -348,5 +347,34 @@ namespace Api.Controllers
             }
         }
 
+        [HttpPost]
+        public List<PagamentoViewModel> MeusPagamentos([FromBody] dynamic param)
+        {
+            int page = Convert.ToInt32(param.page);
+            int pageSize = 5;
+
+            int id = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var cliente = context.Cliente.FirstOrDefault(cli => cli.Id == id && cli.Situacao == true);
+
+            if (cliente == null)
+            {
+                throw new Exception("Objeto não encontrado");
+            }
+
+            List<PagamentoViewModel> obj = new List<PagamentoViewModel>();
+
+            var query = cliente.Pagamento.Where(pag => pag.Situacao != 7);
+            query = query.Where(pag => pag.Banner == null || pag.Banner.Situacao != "I");
+
+            query.OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao).Skip(page * pageSize).Take(pageSize).ToList().ForEach(pag =>
+            {
+                obj.Add(new PagamentoViewModel(pag));
+            });
+
+            return obj;
+        }
     }
 }

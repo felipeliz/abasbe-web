@@ -1,25 +1,56 @@
-var controller = function ($scope, $http, $ionicActionSheet) {
+var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
 
-    $scope.loading = false;
     $scope.pagamentos = [];
-
-    $scope.init = function () {
-        $scope.carregar();
+    $scope.lastUpdate = (new Date()).getTime();
+    $scope.canUpdate = true;
+    $scope.filter = {
+        page: 0
     }
 
-    $scope.carregar = function () {
-        $scope.loading = true;
+    $scope.init = function () {
+        $scope.filtrar();
+    }
+
+    $scope.filtrar = function () {
+
+        console.log('searching page: ' + $scope.filter.page);
+        $scope.lastUpdate = (new Date()).getTime();
+
         $http({
-            method: "GET",
-            url: api.resolve("api/cliente/MeusPagamentos")
+            method: "POST",
+            url: api.resolve("api/pagamento/MeusPagamentos"),
+            data: $scope.filter,
+            loading: true
         }).then(function (response) {
-            $scope.loading = false;
-            $scope.pagamentos = response.data;
+            if (response.data.length == 0) {
+                $scope.canUpdate = false;
+            }
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+
+            $scope.lastUpdate = (new Date()).getTime();
+
+            if ($scope.filter.page > 0) {
+                $scope.pagamentos = $scope.pagamentos.concat(response.data);
+            }
+            else {
+                $scope.pagamentos = response.data;
+            }
         }, function (response) {
-            $scope.loading = false;
             toastr.error(response.data.ExceptionMessage);
         });
     }
+
+    $scope.onInfinite = function () {
+        if ($scope.lastUpdate + 1500 < (new Date()).getTime() && $rootScope.loading == false && $scope.canUpdate) {
+            $scope.filter.page++;
+            $scope.filtrar();
+        }
+        else {
+            setTimeout(() => {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            }, 500);
+        }
+    };
 
     $scope.pagar = function (pagamento) {
         if (pagamento.SituacaoValue > 1) {
@@ -33,7 +64,9 @@ var controller = function ($scope, $http, $ionicActionSheet) {
         }).then(function (response) {
             if (response.data != null) {
                 iabRef = cordova.InAppBrowser.open(response.data, '_blank', 'location=no,footer=yes,closebuttoncaption=Fechar,closebuttoncolor=#333333');
-                iabRef.addEventListener('exit', function () { $scope.carregar(); });
+                iabRef.addEventListener('exit', function () { 
+                    $scope.atualizar(pagamento); 
+                });
             }
             else {
                 toastr.error("Tivemos um problema ao gerar seu link de pagamento, tente novamente");
@@ -43,7 +76,7 @@ var controller = function ($scope, $http, $ionicActionSheet) {
         });
     }
 
-    $scope.showAction = function (pagamento) {
+    $scope.showAction = function (pagamento, index) {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
                 { text: 'Efetuar Pagamento' },
@@ -56,7 +89,7 @@ var controller = function ($scope, $http, $ionicActionSheet) {
                 hideSheet();
             },
             destructiveButtonClicked: function () {
-                $scope.excluir(pagamento);
+                $scope.excluir(pagamento, index);
                 hideSheet();
             },
             buttonClicked: function (index) {
@@ -83,22 +116,24 @@ var controller = function ($scope, $http, $ionicActionSheet) {
             url: api.resolve("api/pagamento/Atualizar/" + pagamento.Id),
             loading: true
         }).then(function (response) {
-            if (response.data) {
-                $scope.carregar();
+            for(var i in $scope.pagamentos) {
+                if($scope.pagamentos[i].Id == response.data.Id){
+                    $scope.pagamentos[i] = response.data;
+                }
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.excluir = function (pagamento) {
+    $scope.excluir = function (pagamento, $index) {
         $http({
             method: "GET",
             url: api.resolve("api/pagamento/Excluir/" + pagamento.Id),
             loading: true
         }).then(function (response) {
             if (response.data) {
-                $scope.carregar();
+                $scope.pagamentos.splice($index, 1);
             }
         }, function (response) {
             toastr.error(response.data.ExceptionMessage);

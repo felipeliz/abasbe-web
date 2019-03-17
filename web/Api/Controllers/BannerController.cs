@@ -40,7 +40,7 @@ namespace Api.Controllers
             {
                 DateTime dtEstreia = AppExtension.ToDateTime(param.Estreia);
 
-                query = query.Where(ban => ban.Estreia >= dtEstreia );
+                query = query.Where(ban => ban.Estreia >= dtEstreia);
             }
 
             if (!string.IsNullOrEmpty(expiracao))
@@ -200,7 +200,7 @@ namespace Api.Controllers
 
             List<int> excludes = new List<int>();
 
-            foreach(int exc in param.Excludes)
+            foreach (int exc in param.Excludes)
             {
                 excludes.Add(exc);
             }
@@ -223,41 +223,47 @@ namespace Api.Controllers
             return lista;
         }
 
-        [HttpGet]
-        public BannerGroupViewModel MeusBanners()
+        [HttpPost]
+        public List<BannerViewModel> MeusBanners([FromBody] dynamic param)
         {
+            int page = Convert.ToInt32(param.page);
+            int pageSize = 5;
+            string status = param.status.ToString();
+
             int cliente = AppExtension.IdUsuarioLogado();
 
             Entities context = new Entities();
             DateTime now = DateTime.Now;
 
-            BannerGroupViewModel group = new BannerGroupViewModel();
+            List<BannerViewModel> list = new List<BannerViewModel>();
+            var query = context.Banner.AsQueryable();
 
-            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A" && ban.IdCliente == cliente).ToList().ForEach(obj =>
+            if (status == "EXIBICAO")
             {
-                group.EmExibicao.Add(new BannerViewModel(obj));
+                query = query.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "A" && ban.IdCliente == cliente);
+            }
+            else if (status == "ESPERA")
+            {
+                query = query.Where(ban =>
+                ((ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "E") ||
+                (ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I")) &&
+                ban.IdCliente == cliente);
+            }
+            else if (status == "EXPIRADO")
+            {
+                query = query.Where(ban => ban.Expiracao < now && ban.Situacao != "I" && ban.IdCliente == cliente);
+            }
+
+            query.OrderByDescending(ban => ban.Cadastro).Skip(page * pageSize).Take(pageSize).ToList().ForEach(obj =>
+            {
+                list.Add(new BannerViewModel(obj));
             });
 
-            context.Banner.Where(ban => ban.Expiracao > now && now > ban.Estreia && ban.Situacao == "E" && ban.IdCliente == cliente).ToList().ForEach(obj =>
-            {
-                group.EmEspera.Add(new BannerViewModel(obj));
-            });
-
-            context.Banner.Where(ban => ban.Expiracao > now && now < ban.Estreia && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
-            {
-                group.EmEspera.Add(new BannerViewModel(obj));
-            });
-
-            context.Banner.Where(ban => ban.Expiracao < now && ban.Situacao != "I" && ban.IdCliente == cliente).ToList().ForEach(obj =>
-            {
-                group.Expirados.Add(new BannerViewModel(obj));
-            });
-
-            return group;
+            return list;
         }
 
         [HttpGet]
-        public BannerGroupViewModel Desabilitar(int id)
+        public bool Desabilitar(int id)
         {
             int cliente = AppExtension.IdUsuarioLogado();
 
@@ -270,9 +276,7 @@ namespace Api.Controllers
             }
 
             banner.Situacao = "I";
-            context.SaveChanges();
-
-            return MeusBanners();
+            return context.SaveChanges() > 0;
         }
     }
 }
