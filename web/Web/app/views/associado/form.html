@@ -32,38 +32,38 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-2-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-2-3">
                         <label>{{form.FlagCliente=='A' ? 'Nome' : 'Nome do responsável' }} <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Nome" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>CPF <red>*</red></label>
                         <input type="text" ui-mask="999.999.999-99" class="md-input uk-input" ng-model="form.CPF" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>E-mail <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Email" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Celular</label>
                         <input type="text" class="md-input label-fixed" ui-mask="(99) 99999-9999" ng-model="form.TelefoneCelular" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Data Expiração <red>*</red></label>
                         <input type="text" class="md-input label-fixed" datepicker ui-mask="99/99/9999" ng-model="form.DataExpiracao" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Senha <red>*</red></label>
                         <input type="password" maxlength="12" autocomplete='new-password' class="md-input label-fixed" ng-model="form.Senha" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Situação</label>
                         <select class="md-input label-fixed" ng-model="form.Situacao" md-input>
                             <option value="True">Ativo</option>
                             <option value="False">Inativo</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-1 uk-grid-margin">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.FlagCliente" icheck ng-true-value="'E'" ng-false-value="'A'" />
@@ -71,7 +71,7 @@
                             <label>Inserir dados de empresa?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1 uk-grid-margin">
                         <div class="uk-align-right">
                             <a class="md-btn md-btn-primary" ng-click="voltar()" href="javascript:void(0)">Voltar</a>
                             <a class="md-btn md-btn-primary" ng-if="IsAdmin" ng-click="salvar()" href="javascript:void(0)">Salvar</a>
@@ -89,11 +89,11 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-2-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-2-3">
                         <label>Razão Social <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.NomeEmpresa" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>CNPJ <red>*</red></label>
                         <input type="text" cnpj class="md-input uk-input" ng-model="form.Cnpj" md-input />
                     </div>
@@ -109,27 +109,27 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>CEP</label>
                         <input type="text" ui-mask="99999-999" class="md-input label-fixed" ng-model="form.CEP" ng-change="checkCep()" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>Estado <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.IdEstado" ng-options="item.Id as item.Sigla for item in estados" ng-change="carregarCidades(form.IdEstado)" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>Cidade <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.IdCidade" ng-disabled="!(form.IdEstado > 0)" ng-options="item.Id as item.Nome for item in cidades" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Bairro</label>
                         <input type="text" maxlength="50" class="md-input label-fixed" ng-model="form.Bairro" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Logradouro</label>
                         <input type="text" maxlength="100" class="md-input label-fixed" ng-model="form.Logradouro" md-input />
                     </div>

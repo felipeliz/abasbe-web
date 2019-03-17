@@ -33,27 +33,27 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-2-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-2-3">
                         <label>Nome <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Nome" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>CPF <red>*</red></label>
                         <input type="text" ui-mask="999.999.999-99" class="md-input label-fixed" ng-model="form.CPF" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Profisão principal <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.Curriculo.IdProfissao" ng-options="item.Id as item.Descricao for item in profissoes" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Disponibilidade <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.Curriculo.IdDisponibilidade" ng-options="item.Id as item.Descricao for item in disponibilidades" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Sexo</label>
                         <select class="md-input label-fixed" ng-model="form.Curriculo.Sexo" md-input>
                             <option value="">Selecione...</option>
@@ -61,35 +61,35 @@
                             <option value="F">Feminino</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Data de nascimento</label>
                         <input type="text" ui-mask="99/99/9999" datepicker class="md-input uk-input" ng-model="form.Nascimento" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin md-input-suffix">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin md-input-suffix">
                         <label>Tempo de experiência <red>*</red></label>
                         <input type="text" integer class="md-input label-fixed" ng-model="form.Curriculo.TempoExperiencia" md-input />
                         <span class="suffix">anos</span>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Pretensão salarial <red>*</red></label>
                         <input type="text" class="md-input label-fixed" ng-model="form.Curriculo.PretensaoSalarial" money-mask md-input />
                     </div>
-                    <div class="uk-width-2-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-2-3 uk-grid-margin">
                         <label>Data Expiração <red>*</red></label>
                         <input type="text" class="md-input label-fixed" datepicker ui-mask="99/99/9999" ng-model="form.DataExpiracao" md-input />
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <label>Situação <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.Situacao" md-input>
                             <option value="True">Ativo</option>
                             <option value="False">Inativo</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-1 uk-grid-margin">
                         <label>Tecnicas e Habilidades <red>*</red></label>
                         <input type="text" class="md-input label-fixed" ng-model="form.Curriculo.Habilidades" md-input />
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-1 uk-grid-margin">
                         <label>Observações</label>
                         <input type="text" maxlength="500" class="md-input label-fixed" ng-model="form.Curriculo.Observacoes" md-input />
                     </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagLeiSalaoParceiro" icheck />
@@ -113,7 +113,7 @@
                             <label>Conhece a lei do salão parceiro?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagBiosseguranca" icheck />
@@ -121,7 +121,7 @@
                             <label>Sabe o que é biossegurança?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagEpi" icheck />
@@ -129,7 +129,7 @@
                             <label>Sabe o que é EPI?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagMei" icheck />
@@ -137,7 +137,7 @@
                             <label>Possui MEI</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagDelivery" icheck />
@@ -145,7 +145,7 @@
                             <label>Trabalha Delivery?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-3 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3 uk-grid-margin">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon">
                                 <input type="checkbox" ng-model="form.Curriculo.FlagFilhos" icheck />
@@ -153,11 +153,11 @@
                             <label>Tem filhos?</label>
                         </div>
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagDelivery">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagDelivery">
                         <label>Qual a disponibilidade do delivery?</label>
                         <input type="text" maxlength="150" class="md-input label-fixed" ng-model="form.Curriculo.DisponibilidadeDelivery" md-input />
                     </div>
-                    <div class="uk-width-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-1 uk-grid-margin" ng-if="form.Curriculo.FlagFilhos">
                         <label>Os filhos ficam com quem?</label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Curriculo.ObservacaoFilhos" md-input />
                     </div>
@@ -173,19 +173,19 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-2-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-2-3">
                         <label>E-mail <red>*</red></label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="form.Email" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>Senha <red>*</red></label>
                         <input type="password" class="md-input label-fixed" ng-model="form.Senha" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Telefone celular <red>*</red></label>
                         <input type="text" ui-mask="(99) 99999-9999" maxlength="15" class="md-input uk-input" ng-model="form.TelefoneCelular" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Telefone comercial</label>
                         <input type="text" ui-mask="(99) 9999-9999" maxlength="14" class="md-input uk-input" ng-model="form.Curriculo.TelefoneComercial" md-input />
                     </div>
@@ -202,27 +202,27 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>CEP</label>
                         <input type="text" ui-mask="99999-999" ng-change="checkCep()" class="md-input label-fixed" ng-model="form.CEP" md-input />
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>Estado <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.IdEstado" ng-options="item.Id as item.Sigla for item in estados" ng-change="carregarCidades(form.IdEstado)" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-3">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-3">
                         <label>Cidade <red>*</red></label>
                         <select class="md-input label-fixed" ng-model="form.IdCidade" ng-disabled="!(form.IdEstado > 0)" ng-options="item.Id as item.Nome for item in cidades" md-input>
                             <option value="">Selecione...</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Bairro</label>
                         <input type="text" maxlength="50" class="md-input label-fixed" ng-model="form.Bairro" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
                         <label>Logradouro</label>
                         <input type="text" maxlength="100" class="md-input label-fixed" ng-model="form.Logradouro" md-input />
                     </div>
@@ -490,19 +490,19 @@
                     <option value="">Selecione...</option>
                 </select>
             </div>
-            <div class="uk-width-1-2 uk-grid-margin">
+            <div class="uk-width-1-medium-2 uk-grid-margin">
                 <label>Motivo do Afastamento <red>*</red></label>
                 <input type="text" class="md-input label-fixed" ng-model="experiencia.MotivoAfastamento" md-input />
             </div>
-            <div class="uk-width-1-2 uk-grid-margin">
+            <div class="uk-width-1-medium-2 uk-grid-margin">
                 <label>Telefone <red>*</red></label>
                 <input type="text" class="md-input label-fixed" ui-mask="(99) 99999-9999" ng-model="experiencia.Telefone" md-input />
             </div>
-            <div class="uk-width-1-2 uk-grid-margin">
+            <div class="uk-width-1-medium-2 uk-grid-margin">
                 <label>Data Inicial <red>*</red></label>
                 <input type="text" ui-mask="99/99/9999" model-view-value="true" datepicker class="md-input uk-input" ng-model="experiencia.DataInicial" md-input />
             </div>
-            <div class="uk-width-1-2 uk-grid-margin">
+            <div class="uk-width-1-medium-2 uk-grid-margin">
                 <label>Data Final</label>
                 <input type="text" ui-mask="99/99/9999" model-view-value="true" datepicker class="md-input uk-input" ng-model="experiencia.DataFinal" md-input />
             </div>

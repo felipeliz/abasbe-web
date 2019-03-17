@@ -304,3 +304,14 @@ input.ui-select-search {
 .md-input-suffix {
     position: relative;
 }
+
+
+@media (max-width: 768px) {
+    .uk-grid-margin-small {
+        margin-top: 24px !important;
+    }
+
+        .uk-grid-margin-small:first-child {
+            margin-top: 0px !important;
+        }
+}
