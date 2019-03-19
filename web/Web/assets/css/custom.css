@@ -315,3 +315,13 @@ input.ui-select-search {
             margin-top: 0px !important;
         }
 }
+
+.sidebar_main_header {
+    height: unset !important;
+}
+
+.sidebar_logo a img {
+    border-bottom: none;
+}
+
+
