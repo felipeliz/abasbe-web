@@ -84,10 +84,16 @@ namespace Api.Utils
         {
             MailMessage mail = new MailMessage();
 
-            mail.From = new MailAddress(ConfigurationManager.AppSettings["gmail_remetente"].ToString());
+            string template = File.ReadAllText(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + "app/shared/mail-templates/basic.html");
+            template = template.Replace("[TITLE]", assunto);
+            template = template.Replace("[DESCRIPTION]", corpo);
+            template = template.Replace("[ROOTURL]", AppExtension.GetURL());
+            template = template.Replace("[LOGOURL]", AppExtension.GetURL("/assets/img/logo.png"));
+
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["gmail_remetente"].ToString(), ConfigurationManager.AppSettings["gmail_display_name"].ToString());
             mail.To.Add(destinatario); // para
             mail.Subject = assunto; // assunto
-            mail.Body = corpo; // mensagem
+            mail.Body = template; // mensagem
             mail.IsBodyHtml = true;
 
             using (var smtp = new SmtpClient("smtp.gmail.com"))

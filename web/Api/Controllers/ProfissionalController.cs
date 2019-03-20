@@ -99,7 +99,7 @@ namespace Api.Controllers
 
                 int degustacao = Convert.ToInt32(ParametroController.ObterParam("ProfissionalDiasDegustacao"));
                 obj.DataExpiracao = param.DataExpiracao == null ? DateTime.Now.AddDays(degustacao) : AppExtension.ToDateTime(param.DataExpiracao);
-              
+
                 obj.IdCidade = param.IdCidade;
                 obj.Bairro = param.Bairro;
                 obj.Cep = param.CEP;
@@ -226,8 +226,29 @@ namespace Api.Controllers
                 }
 
                 transaction.Commit();
+
+                if(id <= 0)
+                {
+                    EnviarEmailCadastro(obj);
+                }
             }
+
+
             return true;
+        }
+
+        public void EnviarEmailCadastro(Cliente obj)
+        {
+            string line = "<p><span>{0}</span></p>";
+            string googleplay = ParametroController.ObterParam("GooglePlayLink");
+            string appstore = ParametroController.ObterParam("AppStoreLink");
+            string body = "";
+            body += string.Format(line, "Olá, " + obj.Nome + ", recebemos seu cadastro!");
+            body += string.Format(line, "Suas credenciais de acesso são,");
+            body += string.Format(line, "Login: <strong>" + obj.Email + "</strong>");
+            body += string.Format(line, "Senha: <strong>" + obj.Senha + "</strong>");
+            body += string.Format(line, "Encontre o app Beleza Mais Forte no <a href='" + googleplay + "'>Google Play</a> e na <a href='" + appstore + "'>AppStore</a>");
+            AppExtension.EnviarEmailGmail(obj.Email, "Beleza Mais Forte - Cadastro", body);
         }
 
         [HttpGet]
