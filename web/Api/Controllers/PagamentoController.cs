@@ -72,7 +72,7 @@ namespace Api.Controllers
 
             if (!string.IsNullOrEmpty(tipoplano))
             {
-                query = query.Where(obj => obj.Plano.TipoPlano == tipoplano);
+                query = query.Where(obj => obj.TipoPlano == tipoplano);
             }
 
             if (!string.IsNullOrEmpty(deconfirmacao))
@@ -117,53 +117,7 @@ namespace Api.Controllers
 
                     Pagamento pagamento = context.Pagamento.FirstOrDefault(pag => pag.CheckoutIdentifier == transaction.Reference);
 
-                    switch (transaction.TransactionStatus)
-                    {
-                        case Uol.PagSeguro.Enums.TransactionStatus.Initiated:
-                            pagamento.Situacao = 0;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.WaitingPayment:
-                            pagamento.Situacao = 1;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.InAnalysis:
-                            pagamento.Situacao = 2;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Paid:
-                            if (pagamento.Situacao != 3)
-                            {
-                                pagamento.Situacao = 3;
-                                pagamento.DataConfirmacao = transaction.LastEventDate;
-
-                                if (pagamento.Plano.TipoPlano == "P" || pagamento.Plano.TipoPlano == "A")
-                                {
-                                    DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
-                                    if (expiracao > DateTime.Now)
-                                    {
-                                        expiracao = expiracao.AddDays(pagamento.Dias);
-                                    }
-                                    else
-                                    {
-                                        expiracao = DateTime.Now.AddDays(pagamento.Dias);
-                                    }
-                                    pagamento.Cliente.DataExpiracao = expiracao;
-                                }
-                            }
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Available:
-                            pagamento.Situacao = 4;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.InDispute:
-                            pagamento.Situacao = 5;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Refunded:
-                            pagamento.Situacao = 6;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Cancelled:
-                            pagamento.Situacao = 7;
-                            break;
-                        default:
-                            break;
-                    }
+                    pagamento = Sincronizar(transaction.TransactionStatus, transaction.LastEventDate, pagamento);
 
                     context.SaveChanges();
 
@@ -208,53 +162,7 @@ namespace Api.Controllers
                 }
                 foreach (TransactionSummary transaction in result.Transactions)
                 {
-                    switch (transaction.TransactionStatus)
-                    {
-                        case Uol.PagSeguro.Enums.TransactionStatus.Initiated:
-                            pagamento.Situacao = 0;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.WaitingPayment:
-                            pagamento.Situacao = 1;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.InAnalysis:
-                            pagamento.Situacao = 2;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Paid:
-                            if (pagamento.Situacao != 3)
-                            {
-                                pagamento.Situacao = 3;
-                                pagamento.DataConfirmacao = transaction.LastEventDate;
-
-                                if (pagamento.Plano.TipoPlano == "P" || pagamento.Plano.TipoPlano == "A")
-                                {
-                                    DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
-                                    if (expiracao > DateTime.Now)
-                                    {
-                                        expiracao = expiracao.AddDays(pagamento.Dias);
-                                    }
-                                    else
-                                    {
-                                        expiracao = DateTime.Now.AddDays(pagamento.Dias);
-                                    }
-                                    pagamento.Cliente.DataExpiracao = expiracao;
-                                }
-                            }
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Available:
-                            pagamento.Situacao = 4;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.InDispute:
-                            pagamento.Situacao = 5;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Refunded:
-                            pagamento.Situacao = 6;
-                            break;
-                        case Uol.PagSeguro.Enums.TransactionStatus.Cancelled:
-                            pagamento.Situacao = 7;
-                            break;
-                        default:
-                            break;
-                    }
+                    pagamento = Sincronizar(transaction.TransactionStatus, transaction.LastEventDate, pagamento);
                 }
 
                 context.SaveChanges();
@@ -285,7 +193,7 @@ namespace Api.Controllers
                 throw new Exception("Não é possível excluir um pagamento de banner");
             }
 
-            if(pagamento.Situacao != 0)
+            if (pagamento.Situacao != 0)
             {
                 throw new Exception("Não é possível excluir um pagamento processado ou em processamento");
             }
@@ -335,7 +243,7 @@ namespace Api.Controllers
 
             if (pagamento.Situacao != 0)
             {
-                if(pagamento.Situacao == 1 && pagamento.Url != null)
+                if (pagamento.Situacao == 1 && pagamento.Url != null)
                 {
                     return pagamento.Url;
                 }
@@ -362,14 +270,14 @@ namespace Api.Controllers
 
 
             // Sets your customer information.
-            string ddd = pagamento.Cliente.TelefoneCelular.Substring(0, 2);
-            string phone = pagamento.Cliente.TelefoneCelular.Substring(2, 9);
+            //string ddd = pagamento.Cliente.TelefoneCelular.Substring(0, 2);
+            //string phone = pagamento.Cliente.TelefoneCelular.Substring(2, 9);
 
-            payment.Sender = new Sender(
-                pagamento.Cliente.Nome,
-                pagamento.Cliente.Email,
-                new Phone(ddd, phone)
-            );
+            //payment.Sender = new Sender(
+            //    pagamento.Cliente.Nome,
+            //    pagamento.Cliente.Email,
+            //    new Phone(ddd, phone)
+            //);
 
             // Sets the url used by PagSeguro for redirect user after ends checkout process
             payment.RedirectUri = new Uri("http://admin.belezamaisforte.com.br/app/shared/messages/pagamento.html");
@@ -443,6 +351,59 @@ namespace Api.Controllers
             paged.current = page;
 
             return paged;
+        }
+
+
+        public Pagamento Sincronizar(Uol.PagSeguro.Enums.TransactionStatus status, DateTime lastEvent, Pagamento pagamento)
+        {
+            switch (status)
+            {
+                case Uol.PagSeguro.Enums.TransactionStatus.Initiated:
+                    pagamento.Situacao = 0;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.WaitingPayment:
+                    pagamento.Situacao = 1;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.InAnalysis:
+                    pagamento.Situacao = 2;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.Paid:
+                    pagamento.Situacao = 3;
+                    if (pagamento.BeneficioAplicado == "N")
+                    {
+                        pagamento.DataConfirmacao = lastEvent;
+                        pagamento.BeneficioAplicado = "S";
+                        if (pagamento.TipoPlano == "P" || pagamento.TipoPlano == "A")
+                        {
+                            DateTime expiracao = pagamento.Cliente.DataExpiracao ?? DateTime.Now;
+                            if (expiracao > DateTime.Now)
+                            {
+                                expiracao = expiracao.AddDays(pagamento.Dias);
+                            }
+                            else
+                            {
+                                expiracao = DateTime.Now.AddDays(pagamento.Dias);
+                            }
+                            pagamento.Cliente.DataExpiracao = expiracao;
+                        }
+                    }
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.Available:
+                    pagamento.Situacao = 4;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.InDispute:
+                    pagamento.Situacao = 5;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.Refunded:
+                    pagamento.Situacao = 6;
+                    break;
+                case Uol.PagSeguro.Enums.TransactionStatus.Cancelled:
+                    pagamento.Situacao = 7;
+                    break;
+                default:
+                    break;
+            }
+            return pagamento;
         }
     }
 }

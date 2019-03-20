@@ -79,6 +79,8 @@ namespace Api.Controllers
             pagamento.Dias = plano.Dias;
             pagamento.Descricao = plano.Descricao;
             pagamento.Vezes = plano.Vezes;
+            pagamento.TipoPlano = plano.TipoPlano;
+            pagamento.BeneficioAplicado = "N";
 
             context.Pagamento.Add(pagamento);
 
