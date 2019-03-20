@@ -10,6 +10,7 @@ namespace Api.Models
         public int Id { get; set; }
         public string Descricao { get; set; }
         public int Dias { get; set; }
+        public int Ordem { get; set; }
         public int Vezes { get; set; }
         public decimal Valor { get; set; }
         public string ValorFormatado { get; set; }
@@ -26,6 +27,7 @@ namespace Api.Models
             Id = obj.Id;
             Descricao = obj.Descricao;
             Dias = obj.Dias;
+            Ordem = obj.Ordem ?? 0;
             Vezes = obj.Vezes;
             Valor = obj.Valor;
             TipoPlano = obj.TipoPlano;

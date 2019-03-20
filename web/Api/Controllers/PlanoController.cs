@@ -25,7 +25,7 @@ namespace Api.Controllers
                 query = query.Where(obj => obj.TipoPlano == tipoPlano);
             }
 
-            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.TipoPlano));
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Ordem));
             paged.ReplaceList(paged.list.ConvertAll<object>(obj => new PlanoViewModel(obj as Plano)));
             return paged;
         }
@@ -136,6 +136,7 @@ namespace Api.Controllers
             var obj = context.Plano.FirstOrDefault(pla => pla.Id == id) ?? new Plano();
             obj.Descricao = param.Descricao.ToString();
             obj.Dias = Convert.ToInt32(param.Dias);
+            obj.Ordem = Convert.ToInt32(param.Ordem);
             obj.Vezes = Convert.ToInt32(param.Vezes);
             obj.Valor = Convert.ToDecimal(param.Valor);
             obj.TipoPlano = param.TipoPlano.ToString();

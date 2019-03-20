@@ -63,6 +63,7 @@
         Validation.required("Valor", $scope.form.Valor);
         Validation.required("Vezes", $scope.form.Vezes);
         Validation.required("Dias", $scope.form.Dias);
+        Validation.required("Ordem", $scope.form.Ordem);
         if ($scope.form.TipoPlano != 'A' && $scope.form.TipoPlano != 'B' && $scope.form.TipoPlano != 'P') {
             toastr.error('O campo Tipo de Plano é obrigatório.');
             return;
