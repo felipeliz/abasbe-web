@@ -24,8 +24,8 @@ namespace Api.Controllers
             {
                 query = query.Where(obj => obj.TipoPlano == tipoPlano);
             }
-            
-            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.Descricao));
+
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(el => el.TipoPlano));
             paged.ReplaceList(paged.list.ConvertAll<object>(obj => new PlanoViewModel(obj as Plano)));
             return paged;
         }

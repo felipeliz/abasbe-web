@@ -25,7 +25,6 @@ var controller = function ($http, $scope, $rootScope, $state, Validation, $ionic
 
     $scope.adicionarCertificados = function () {
         Validation.required("Tipo de Certificado", $scope.form.Certificado);
-        Validation.required("Descrição", $scope.form.Descricao);
 
         $rootScope.cadastro.Certificados = $rootScope.cadastro.Certificados == null ? [] : $rootScope.cadastro.Certificados;
         var certificado = JSON.parse(JSON.stringify($scope.form));
