@@ -27,6 +27,7 @@ namespace Api
         public int Dias { get; set; }
         public string TipoPlano { get; set; }
         public int Vezes { get; set; }
+        public Nullable<int> Ordem { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }

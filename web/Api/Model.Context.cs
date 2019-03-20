@@ -36,11 +36,11 @@ namespace Api
         public virtual DbSet<Disponibilidade> Disponibilidade { get; set; }
         public virtual DbSet<Equipamento> Equipamento { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<Pagamento> Pagamento { get; set; }
         public virtual DbSet<Parametro> Parametro { get; set; }
         public virtual DbSet<Plano> Plano { get; set; }
         public virtual DbSet<Profissao> Profissao { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<ProfissionalFotos> ProfissionalFotos { get; set; }
-        public virtual DbSet<Pagamento> Pagamento { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

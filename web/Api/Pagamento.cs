@@ -27,6 +27,8 @@ namespace Api
         public Nullable<int> IdBanner { get; set; }
         public int Vezes { get; set; }
         public string Url { get; set; }
+        public string TipoPlano { get; set; }
+        public string BeneficioAplicado { get; set; }
     
         public virtual Banner Banner { get; set; }
         public virtual Cliente Cliente { get; set; }
