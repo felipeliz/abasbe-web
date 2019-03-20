@@ -428,3 +428,11 @@ red {
 .p-t-0 {
     padding-top: 0px;
 }
+
+.no-border {
+    border: none;
+}
+
+.item-stacked-label .input-label + .range {
+    margin-left: -21px !important;    
+}

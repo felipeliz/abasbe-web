@@ -13,7 +13,7 @@ namespace Api.Models
         public string Sexo { get; set; }
         public string SexoFormatado { get; set; }
         public string TelefoneComercial { get; set; }
-        public int TempoExperiencia { get; set; }
+        public string TempoExperiencia { get; set; }
         public bool FlagLeiSalaoParceiro { get; set; }
         public bool FlagBiosseguranca { get; set; }
         public bool FlagEpi { get; set; }
@@ -29,6 +29,7 @@ namespace Api.Models
         public string DisponibilidadeFormatada { get; set; }
         public string Habilidades { get; set; }
         public string DisponibilidadeDelivery { get; set; }
+        public string TempoExperienciaFormatado { get; set; }
 
         public List<ProfissionalFotosProfissionalViewModel> Fotos { get; set; }
 
@@ -44,7 +45,7 @@ namespace Api.Models
             IdDisponibilidade = obj.IdDisponibilidade;
             Sexo = obj.Sexo;
             TelefoneComercial = string.IsNullOrEmpty(obj.TelefoneComercial) ? obj.TelefoneComercial : Convert.ToUInt64(obj.TelefoneComercial).ToString(@"(00) 0000-0000");
-            TempoExperiencia = obj.TempoExperiencia;
+            TempoExperiencia = obj.TempoExperiencia.ToString();
             FlagLeiSalaoParceiro = obj.FlagLeiSalaoParceiro;
             FlagBiosseguranca = obj.FlagBiosseguranca;
             FlagEpi = obj.FlagEpi;
@@ -73,6 +74,15 @@ namespace Api.Models
                 case "M": SexoFormatado = "Homem"; break;
                 case "F": SexoFormatado = "Mulher"; break;
                 default: SexoFormatado = ""; break;
+            }
+
+            switch (TempoExperiencia)
+            {
+                case "1": TempoExperienciaFormatado = "Iniciante"; break;
+                case "2": TempoExperienciaFormatado = "Intermediário"; break;
+                case "3": TempoExperienciaFormatado = "Avançado"; break;
+                case "4": TempoExperienciaFormatado = "Especialista"; break;
+                default: TempoExperienciaFormatado = ""; break;
             }
         }
     }

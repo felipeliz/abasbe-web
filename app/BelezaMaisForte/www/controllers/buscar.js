@@ -3,7 +3,7 @@ var controller = function ($scope, $http, $state, $rootScope) {
     $scope.profissoes = [];
     $scope.disponibilidades = [];
     $scope.cidades = [];
-
+    
     $scope.init = function () {
         $scope.carregar();
     }
@@ -42,6 +42,17 @@ var controller = function ($scope, $http, $state, $rootScope) {
 
     $scope.buscar = function () {
         $state.go("menu.profissionais")
+    }
+
+    $scope.getExperiencia = function (val) {
+        switch (val)
+        {
+            case "1": return "Iniciante";
+            case "2": return  "Intermediário"; 
+            case "3": return  "Avançado"; 
+            case "4": return  "Especialista"; 
+            default: return  ""; 
+        }
     }
 
 }

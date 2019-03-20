@@ -64,7 +64,7 @@
                                     <p class="uk-margin-remove"><span class="uk-text-muted">{{profissional.Curriculo.ProfissaoFormatada}}</span></p>
                                 </td>
                                 <td>{{mascaraTelefone(profissional.TelefoneCelular)}}</td>
-                                <td>{{profissional.Curriculo.TempoExperiencia + " anos"}}</td>
+                                <td>{{profissional.Curriculo.TempoExperienciaFormatado}}</td>
                                 <td>{{profissional.Cidade.Nome}} - {{profissional.Cidade.EstadoSigla}}</td>
                                 <td>{{profissional.Curriculo.DisponibilidadeFormatada}}</td>
                                 <td>{{profissional.Situacao == "True" ? "Ativo" : "Inativo"}}</td>

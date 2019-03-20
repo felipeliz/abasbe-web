@@ -9,7 +9,7 @@ var controller = function ($scope, Auth, $state, $ionicHistory, $http, $rootScop
             disponibilidade: "",
             sexo: "",
             cidade: "",
-            experiencia: 1,
+            experiencia: "1",
             bairro: "",
             delivery: false
         }

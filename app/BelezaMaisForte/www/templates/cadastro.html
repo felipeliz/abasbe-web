@@ -13,8 +13,10 @@
     </div>
     <div class="padding p-t-0">
       <div ng-if="!editing" class="tab-nav button-bar">
-        <button ng-click="mudarTipo(0)" class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Cliente</button>
-        <button ng-click="mudarTipo(1)" class="button button-block {{ $root.cadastro.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Profissional</button>
+        <button ng-click="mudarTipo(0)"
+          class="button button-block {{ $root.cadastro.IdTipoAcao == 0 ? 'bt-nav-active' : '' }}">Cliente</button>
+        <button ng-click="mudarTipo(1)"
+          class="button button-block {{ $root.cadastro.IdTipoAcao == 1 ? 'bt-nav-active' : '' }}">Profissional</button>
       </div>
       <ion-list id="perfil-list4">
         <ion-item class="item-divider" id="perfil-list-item-divider5"> Cadastro básico</ion-item>
@@ -30,13 +32,16 @@
           <span class="input-label">Data de nascimento</span>
           <input type="tel" ui-mask="99/99/9999" ng-model="$root.cadastro.Nascimento" placeholder="">
         </label>
-        <ion-toggle toggle-class="toggle-positive" ng-if="$root.cadastro.IdTipoAcao==0" ng-model="$root.cadastro.Empresa">Inserir
+        <ion-toggle toggle-class="toggle-positive" ng-if="$root.cadastro.IdTipoAcao==0"
+          ng-model="$root.cadastro.Empresa">Inserir
           dados de empresa?</ion-toggle>
-        <label class="item item-input item-stacked-label" ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
+        <label class="item item-input item-stacked-label"
+          ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">CNPJ <red>*</red></span>
           <input type="tel" cnpj ng-model="$root.cadastro.Cnpj" placeholder="">
         </label>
-        <label class="item item-input item-stacked-label" ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
+        <label class="item item-input item-stacked-label"
+          ng-if="$root.cadastro.Empresa==true && cadastro.IdTipoAcao==0">
           <span class="input-label">Razão social <red>*</red></span>
           <input type="text" maxlength="250" ng-model="$root.cadastro.NomeEmpresa" placeholder="">
         </label>
@@ -47,7 +52,8 @@
         </label>
         <label class="item item-input item-stacked-label" id="perfil-input17">
           <span class="input-label">Telefone Comercial</span>
-          <input type="tel" ui-mask="(99) 9999-9999" ng-model="$root.cadastro.Curriculo.TelefoneComercial" placeholder="">
+          <input type="tel" ui-mask="(99) 9999-9999" ng-model="$root.cadastro.Curriculo.TelefoneComercial"
+            placeholder="">
         </label>
         <ion-item class="item-divider" id="perfil-list-item-divider6"> Acesso</ion-item>
         <label class="item item-input item-stacked-label" id="perfil-input16">
@@ -61,13 +67,15 @@
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Currículo</ion-item>
         <label class="item item-select item-stacked" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Profissão <red>*</red></span>
-          <select ng-model="$root.cadastro.Curriculo.IdProfissao" ng-options="item.Id as item.Descricao for item in profissoes">
+          <select ng-model="$root.cadastro.Curriculo.IdProfissao"
+            ng-options="item.Id as item.Descricao for item in profissoes">
             <option value="">Selecione...</option>
           </select>
         </label>
         <label class="item item-select item-stacked" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Disponibilidade <red>*</red></span>
-          <select ng-model="$root.cadastro.Curriculo.IdDisponibilidade" ng-options="item.Id as item.Descricao for item in disponibilidades">
+          <select ng-model="$root.cadastro.Curriculo.IdDisponibilidade"
+            ng-options="item.Id as item.Descricao for item in disponibilidades">
             <option value="">Selecione...</option>
           </select>
         </label>
@@ -80,8 +88,10 @@
           </select>
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
-          <span class="input-label">Tempo de experiência <red>*</red></span>
-          <input type="tel" integer ng-model="$root.cadastro.Curriculo.TempoExperiencia" placeholder="">
+          <span class="input-label">Experiência - {{getExperiencia($root.cadastro.Curriculo.TempoExperiencia)}}</span>
+          <ion-item class="range no-border">
+            <input type="range" min="1" max="4" step="1" ng-model="$root.cadastro.Curriculo.TempoExperiencia">
+          </ion-item>
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Pretensão salarial <red>*</red></span>
@@ -89,30 +99,38 @@
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Tecnicas e Habilidades <red>*</red></span>
-          <input type="text" maxlength="400"ng-model="$root.cadastro.Curriculo.Habilidades" placeholder="">
+          <input type="text" maxlength="400" ng-model="$root.cadastro.Curriculo.Habilidades" placeholder="">
         </label>
         <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1">
           <span class="input-label">Observações</span>
           <input type="text" maxlength="250" ng-model="$root.cadastro.Curriculo.Observacoes" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Informações adicionais</ion-item>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagLeiSalaoParceiro" ng-if="$root.cadastro.IdTipoAcao==1">Conhece
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagLeiSalaoParceiro"
+          ng-if="$root.cadastro.IdTipoAcao==1">Conhece
           a lei do salão parceiro?</ion-toggle>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagBiosseguranca" ng-if="$root.cadastro.IdTipoAcao==1">Sabe
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagBiosseguranca"
+          ng-if="$root.cadastro.IdTipoAcao==1">Sabe
           o que é biossegurança?</ion-toggle>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagEpi" ng-if="$root.cadastro.IdTipoAcao==1">Sabe
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagEpi"
+          ng-if="$root.cadastro.IdTipoAcao==1">Sabe
           o que é EPI?</ion-toggle>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagMei" ng-if="$root.cadastro.IdTipoAcao==1">Possui
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagMei"
+          ng-if="$root.cadastro.IdTipoAcao==1">Possui
           MEI</ion-toggle>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagDelivery" ng-if="$root.cadastro.IdTipoAcao==1">Interesse
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagDelivery"
+          ng-if="$root.cadastro.IdTipoAcao==1">Interesse
           em ser diarista?</ion-toggle>
-        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagFilhos" ng-if="$root.cadastro.IdTipoAcao==1">Tem
+        <ion-toggle toggle-class="toggle-positive" ng-model="$root.cadastro.Curriculo.FlagFilhos"
+          ng-if="$root.cadastro.IdTipoAcao==1">Tem
           filhos?</ion-toggle>
-        <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagDelivery">
+        <label class="item item-input item-stacked-label"
+          ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagDelivery">
           <span class="input-label">Qual a disponibilidade do delivery?</span>
-          <input type="text"  maxlength="100" ng-model="$root.cadastro.Curriculo.DisponibilidadeDelivery" placeholder="">
+          <input type="text" maxlength="100" ng-model="$root.cadastro.Curriculo.DisponibilidadeDelivery" placeholder="">
         </label>
-        <label class="item item-input item-stacked-label" ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagFilhos">
+        <label class="item item-input item-stacked-label"
+          ng-if="$root.cadastro.IdTipoAcao==1 && $root.cadastro.Curriculo.FlagFilhos">
           <span class="input-label">Os filhos ficam com quem?</span>
           <input type="text" maxlength="50" ng-model="$root.cadastro.Curriculo.ObservacaoFilhos" placeholder="">
         </label>
@@ -123,15 +141,15 @@
         </label>
         <label class="item item-select item-stacked">
           <span class="input-label">Estado <red>*</red></span>
-          <select ng-options="x.Id as x.Sigla for x in estados" ng-model="$root.cadastro.IdEstado" ng-options="item.Id as item.Sigla for item in estados"
-            ng-change="carregarCidades(cadastro.IdEstado)">
+          <select ng-options="x.Id as x.Sigla for x in estados" ng-model="$root.cadastro.IdEstado"
+            ng-options="item.Id as item.Sigla for item in estados" ng-change="carregarCidades(cadastro.IdEstado)">
             <option value="">Selecione um estado...</option>
           </select>
         </label>
         <label class="item item-select item-stacked">
           <span class="input-label">Cidade <red>*</red></span>
-          <select ng-options="x.Id as x.Nome for x in cidades" ng-model="$root.cadastro.IdCidade" ng-disabled="!(cadastro.IdEstado > 0)"
-            ng-options="item.Id as item.Nome for item in cidades">
+          <select ng-options="x.Id as x.Nome for x in cidades" ng-model="$root.cadastro.IdCidade"
+            ng-disabled="!(cadastro.IdEstado > 0)" ng-options="item.Id as item.Nome for item in cidades">
             <option value="">Selecione uma Cidade...</option>
           </select>
         </label>
@@ -144,23 +162,28 @@
           <input type="text" maxlength="150" ng-model="$root.cadastro.Logradouro" placeholder="">
         </label>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Equipamentos</ion-item>
-        <ion-item id="add-equip" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1" ng-click="openEquipamento()">
+        <ion-item id="add-equip" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1"
+          ng-click="openEquipamento()">
           <i class="icon ion-android-add"></i>Equipamento</ion-item>
-        <ion-item class="item-icon-left item-icon-right" ng-repeat="element in $root.cadastro.Equipamentos" ng-if="$root.cadastro.IdTipoAcao==1">
+        <ion-item class="item-icon-left item-icon-right" ng-repeat="element in $root.cadastro.Equipamentos"
+          ng-if="$root.cadastro.IdTipoAcao==1">
           <i class="icon No Icon"></i>{{element.Equipamento.Descricao}}
           <i class="icon ion-android-delete" ng-click="removeEquipamento($index)"></i>
         </ion-item>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Certificados</ion-item>
-        <ion-item id="add-cert" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1" ng-click="openCertificado()">
+        <ion-item id="add-cert" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1"
+          ng-click="openCertificado()">
           <i class="icon ion-android-add"></i>Certificado</ion-item>
-        <ion-item class="item-icon-right" ng-repeat="certificado in $root.cadastro.Certificados" ng-if="$root.cadastro.IdTipoAcao==1">
+        <ion-item class="item-icon-right" ng-repeat="certificado in $root.cadastro.Certificados"
+          ng-if="$root.cadastro.IdTipoAcao==1">
           <span>{{certificado.Certificado.Descricao}}</span>
           <p>{{certificado.Descricao}}</p>
           <i class="icon ion-android-delete" ng-click="removeCertificado($index)"></i>
         </ion-item>
         <ion-item class="item-divider" ng-if="$root.cadastro.IdTipoAcao==1"> Experiências profissionais
         </ion-item>
-        <ion-item id="add-exp" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1" ng-click="openExperiencias()">
+        <ion-item id="add-exp" class="item-icon-left" ng-if="$root.cadastro.IdTipoAcao==1"
+          ng-click="openExperiencias()">
           <i class="icon ion-android-add"></i>Experiência</ion-item>
       </ion-list>
       <ion-item class="item-icon-right" ng-repeat="experiencia in $root.cadastro.Experiencias">
@@ -180,7 +203,8 @@
           </div>
         </div>
       </div>
-      <button ng-click="salvar()" class="button button-positive button-block">{{editing?'Salvar':'Cadastre-se'}}</button>
+      <button ng-click="salvar()"
+        class="button button-positive button-block">{{editing?'Salvar':'Cadastre-se'}}</button>
     </div>
   </ion-content>
 </ion-view>

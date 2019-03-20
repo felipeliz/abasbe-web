@@ -11,7 +11,7 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
             $rootScope.cadastro.keepContext = false;
         }
         else {
-            $rootScope.cadastro = { IdTipoAcao: 0, Situacao: 1, Curriculo: {} };
+            $rootScope.cadastro = { IdTipoAcao: 0, Situacao: 1, Curriculo: { TempoExperiencia: "1" } };
             $rootScope.cadastro.Curriculo.Fotos = [{ Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }, { Imagem: "imgs/placeholder.png" }];
         }
 
@@ -259,6 +259,17 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
 
     $scope.removeExperiencia = function (index) {
         $rootScope.cadastro.Experiencias.splice(index, 1);
+    }
+
+    $scope.getExperiencia = function (val) {
+        switch (val)
+        {
+            case "1": return "Iniciante";
+            case "2": return  "Intermediário"; 
+            case "3": return  "Avançado"; 
+            case "4": return  "Especialista"; 
+            default: return  ""; 
+        }
     }
 
 }
