@@ -17,7 +17,7 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
 
         if ($stateParams.id != null) {
             if ($stateParams.id != Auth.get().Id) {
-                $scope.start();
+                $scope.start('menu.start');
                 return;
             }
 
@@ -168,11 +168,12 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
         }).then(function mySuccess(response) {
             if ($scope.editing) {
                 toastr.success("Seu perfil foi atualizado com sucesso!");
+                $scope.login('menu.start');
             }
             else {
                 toastr.success("Seu perfil foi cadastrado com sucesso!");
+                $scope.login('menu.assinaturas');
             }
-            $scope.login();
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
@@ -194,13 +195,13 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
             loading: true
         }).then(function mySuccess(response) {
             toastr.success("Perfil cadastrado com sucesso!");
-            $scope.login();
+            $scope.login('menu.start');
         }, function myError(response) {
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.login = function () {
+    $scope.login = function (tela) {
         var param = { email: $rootScope.cadastro.Email, senha: $rootScope.cadastro.Senha };
 
         $http({
@@ -210,18 +211,18 @@ var controller = function ($scope, $http, Auth, $state, $ionicHistory, $rootScop
             loading: true
         }).then(function mySuccess(response) {
             Auth.set(response.data);
-            $scope.start();
+            $scope.start(tela);
         }, function myError(response) {
             console.log(response.data);
             toastr.error(response.data.ExceptionMessage);
         });
     }
 
-    $scope.start = function () {
+    $scope.start = function (tela) {
         $ionicHistory.nextViewOptions({
             disableBack: true
         });
-        $state.go('menu.start');
+        $state.go(tela);
     }
 
     $scope.$on('$ionicView.afterEnter', function () {

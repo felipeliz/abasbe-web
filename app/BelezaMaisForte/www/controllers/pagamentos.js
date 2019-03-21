@@ -80,8 +80,9 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
     $scope.showAction = function (pagamento, index) {
         var hideSheet = $ionicActionSheet.show({
             buttons: [
+                { text: 'Código de Referência' },
                 { text: 'Efetuar Pagamento' },
-                { text: 'Atualizar Status' }
+                { text: 'Atualizar Status' },
             ],
             destructiveText: 'Excluir',
             titleText: 'Selecione uma opção...',
@@ -96,11 +97,15 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
             buttonClicked: function (index) {
                 switch (index) {
                     case 0: {
+                        alert(pagamento.CheckoutIdentifier);
+                        break;
+                    }
+                    case 1: {
                         $scope.pagar(pagamento);
                         hideSheet();
                         break;
                     }
-                    case 1: {
+                    case 2: {
                         $scope.atualizar(pagamento);
                         hideSheet();
                         break;

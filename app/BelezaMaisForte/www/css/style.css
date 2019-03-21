@@ -429,6 +429,14 @@ red {
     padding-top: 0px;
 }
 
+.m-l-1 {
+    margin-left: 8px;
+}
+
+.m-r-1 {
+    margin-right: 8px;
+}
+
 .no-border {
     border: none;
 }

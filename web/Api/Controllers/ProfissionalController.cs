@@ -267,6 +267,25 @@ namespace Api.Controllers
             return context.Cliente.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Cliente.Count().ToString();
         }
 
+        [HttpGet]
+        public bool PodeBuscar()
+        {
+            Entities context = new Entities();
+            var cliente = context.Cliente.Find(AppExtension.IdUsuarioLogado());
+
+            if (cliente.FlagCliente != "A")
+            {
+                throw new Exception("CLIENT_ONLY");
+            }
+
+            if (cliente.DataExpiracao < DateTime.Now)
+            {
+                throw new Exception("NEEDS_SUBSCRIPTION");
+            }
+
+            return true;
+        }
+
 
         [HttpPost]
         public InfinityPagedList<ClienteViewModel> Buscar([FromBody] dynamic param)

@@ -20,7 +20,7 @@
           <p>{{user.Email}}</p>
         </ion-item>
         <ion-item ng-click="go('menu.start')" menu-close="">Início</ion-item>
-        <ion-item ng-click="go('menu.buscar')" ng-if="loggedIn" menu-close="">Buscar Profissionais</ion-item>
+        <ion-item ng-click="go('menu.buscar')" ng-if="loggedIn && user.FlagCliente=='A'" menu-close="">Buscar Profissionais</ion-item>
         <ion-item ng-click="go('menu.banners')" ng-if="loggedIn" menu-close="">Meus Banners</ion-item>
         <ion-item ng-click="go('menu.publicar')" ng-if="loggedIn" menu-close="">Publicar Banner</ion-item>
         <ion-item ng-click="go('menu.assinaturas')" ng-if="loggedIn" menu-close="">

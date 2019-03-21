@@ -6,5 +6,9 @@
 <div class="banner-img">
     <img class="card-image" ng-src="{{getImage(banner.Imagem)}}" />
 </div>
+<p class="text-muted item-note reset-badge m-r-1">
+    <span ng-if="banner.Telefone!=null" class="badge badge-balanced">Entre em contato</span>
+    <span ng-if="banner.Link!=null" class="badge badge-calm">Acessar Site</span>
+</p>
 <h2 class="title">{{banner.Titulo}}</h2>
 <p class="subtitle">{{banner.Descricao}}</p>
