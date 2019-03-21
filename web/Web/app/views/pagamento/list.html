@@ -8,9 +8,13 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-1-2">
                         <label> Nome / CPF</label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Cliente" md-input />
+                    </div>
+                    <div class="uk-width-1-2">
+                        <label> Código de Referência</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.CheckoutIdentifier" md-input />
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
                         <label>De (Data de Registro) </label>
@@ -75,7 +79,7 @@
                                         <th>Valor</th>
                                         <th>Registro</th>
                                         <th>Confirmação</th>
-                                        <th>Referência</th>
+                                        <th>Código de Referência</th>
                                         <th>Situação</th>
                                         <th class="acoes-2">Ações</th>
                                     </tr>

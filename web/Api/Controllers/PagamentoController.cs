@@ -26,6 +26,7 @@ namespace Api.Controllers
         {
             string status = param.Situacao?.ToString();
             string cliente = param.Cliente?.ToString();
+            string referencia = param.CheckoutIdentifier?.ToString();
             string tipoplano = param.TipoPlano?.ToString();
             string de = param.De?.ToString();
             string ate = param.Ate?.ToString();
@@ -46,6 +47,11 @@ namespace Api.Controllers
             if (!string.IsNullOrEmpty(cliente))
             {
                 query = query.Where(pag => pag.Cliente.Nome.Contains(cliente) || pag.Cliente.CPF.Contains(cliente));
+            }
+
+            if (!string.IsNullOrEmpty(referencia))
+            {
+                query = query.Where(pag => pag.CheckoutIdentifier.Contains(referencia));
             }
 
             if (!string.IsNullOrEmpty(de))
