@@ -97,7 +97,7 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
             buttonClicked: function (index) {
                 switch (index) {
                     case 0: {
-                        alert(pagamento.CheckoutIdentifier);
+                        alert("Código de Referência: " + pagamento.CheckoutIdentifier);
                         break;
                     }
                     case 1: {
