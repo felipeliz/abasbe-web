@@ -3,21 +3,21 @@
     <ion-list id="experiNcias-list9">
       <ion-item class="item-divider" id="experiNcias-list-item-divider17"> Experiência Profissional</ion-item>
       <label class="item item-input item-stacked-label" id="experiNcias-input31">
-        <span class="input-label">Nome do Estabelecimento</span>
+        <span class="input-label">Nome do Estabelecimento <red>*</red></span>
         <input type="text" maxlength="100" ng-model="form.Empresa" placeholder="">
       </label>
       <label class="item item-select item-stacked">
-        <span class="input-label">Profissão</span>
+        <span class="input-label">Profissão <red>*</red></span>
         <select ng-options="x as x.Descricao for x in profissoes" ng-model="form.Profissao">
           <option value="">Selecione...</option>
         </select>
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input32">
-        <span class="input-label">Telefone</span>
+        <span class="input-label">Telefone <red>*</red></span>
         <input type="tel" ui-mask="(99) 99999-9999" ng-model="form.Telefone" placeholder="">
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input34">
-        <span class="input-label">Data Inicial</span>
+        <span class="input-label">Data Inicial <red>*</red></span>
         <input type="tel" ui-mask="99/99/9999" ng-model="form.DataInicial" placeholder="">
       </label>
       <label class="item item-input item-stacked-label" id="experiNcias-input33">
