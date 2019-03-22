@@ -235,10 +235,6 @@
         Validation.required("Estado", $scope.form.IdEstado);
         Validation.required("Cidade", $scope.form.IdCidade);
 
-        if (!($scope.form.Experiencias != null && $scope.form.Experiencias.length >= 1)) {
-            toastr.error("É obrigatório possuir pelo menos uma experiência profissional.");
-            return;
-        }
 
         $loading.show();
         $http({
