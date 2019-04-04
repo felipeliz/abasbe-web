@@ -52,7 +52,6 @@ namespace Api.Models
             DataCriacao = obj.DataCriacao.ToString("dd/MM/yyyy");
             DataConfirmacao = obj.DataConfirmacao?.ToString("dd/MM/yyyy");
             CheckoutIdentifier = obj.CheckoutIdentifier;
-            TipoPlanoFormatado = obj.Plano.TipoPlano == "A" ? "Pagamento de assinatura" : "Pagamento de banner";
             Situacao = GetSituacao(obj.Situacao);
             SituacaoValue = obj.Situacao;
             Vezes = obj.Vezes;
@@ -63,27 +62,34 @@ namespace Api.Models
             NomeCidade = obj.Cliente.Cidade.Nome;
 
 
-            if (obj.Plano.TipoPlano == "A")
+            switch (obj.TipoPlano)
             {
-                TipoPlanoFormatadoCompleto = "Associado";
-            }
-            else if (obj.Plano.TipoPlano == "P")
-            {
-                TipoPlanoFormatadoCompleto = "Profissional";
-            }
-            else
-            {
-                TipoPlanoFormatadoCompleto = "Banner";
+                case "A": TipoPlanoFormatado = "Pagamento de associado"; break;
+                case "P": TipoPlanoFormatado = "Pagamento de profissional"; break;
+                case "B": TipoPlanoFormatado = "Pagamento de banner"; break;
+                default: TipoPlanoFormatado = "Serviço Contabil"; break;
             }
 
+            switch (obj.TipoPlano)
+            {
+                case "A": TipoPlanoFormatadoCompleto = "Associado"; break;
+                case "P": TipoPlanoFormatadoCompleto = "Profissional"; break;
+                case "B": TipoPlanoFormatadoCompleto = "Banner"; break;
+                default: TipoPlanoFormatadoCompleto = "Serviço Contabil"; break;
+            }
+
+            switch (obj.TipoPlano)
+            {
+                case "A": Observacao = "Renovação da assinatura por " + obj.Dias + " dias"; break;
+                case "P": Observacao = "Renovação da assinatura por " + obj.Dias + " dias"; break;
+                case "B": Observacao = "Publicação de banner por " + obj.Dias + " dias"; break;
+                default: Observacao = "Serviço Contabil"; break;
+            }
 
             if (obj.Banner != null)
             {
                 Referencia = obj.Banner.Titulo;
             }
-
-            Observacao = obj.Plano.TipoPlano == "A" ? "Renovação da assinatura por " + obj.Dias + " dias" : "Publicação de banner por " + obj.Dias + " dias";
-
         }
 
         public static string GetSituacao(int s)

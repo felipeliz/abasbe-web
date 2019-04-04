@@ -154,7 +154,7 @@ namespace Api.Controllers
         public string ObterQtdAssociadosAtivosETotal([FromBody] dynamic param)
         {
             Entities context = new Entities();
-            return context.Cliente.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today).Count().ToString() + " / " + context.Cliente.Count().ToString();
+            return context.Cliente.Where(asc => asc.Situacao == true && asc.DataExpiracao > DateTime.Today && managed.Contains(asc.FlagCliente)).Count().ToString() + " / " + context.Cliente.Where(asc => managed.Contains(asc.FlagCliente)).Count().ToString();
         }
     }
 }

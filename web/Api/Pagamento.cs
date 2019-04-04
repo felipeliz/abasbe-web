@@ -24,6 +24,7 @@ namespace Api
         public int Situacao { get; set; }
         public string CheckoutIdentifier { get; set; }
         public Nullable<System.DateTime> DataConfirmacao { get; set; }
+        public Nullable<int> IdServicoContabil { get; set; }
         public Nullable<int> IdBanner { get; set; }
         public int Vezes { get; set; }
         public string Url { get; set; }
@@ -33,5 +34,6 @@ namespace Api
         public virtual Banner Banner { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Plano Plano { get; set; }
+        public virtual ServicoContabil ServicoContabil { get; set; }
     }
 }

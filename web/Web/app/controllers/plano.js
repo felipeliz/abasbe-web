@@ -111,7 +111,7 @@
             case 'B': return 'Banner';
             case 'A': return 'Associado';
             case 'P': return 'Profissional';
-            default: return 'Desconhecido';
+            default: return 'Serviço Contabil';
         }
     }
 }

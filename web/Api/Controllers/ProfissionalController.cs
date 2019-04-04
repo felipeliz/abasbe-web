@@ -264,7 +264,7 @@ namespace Api.Controllers
         public string ObterQtdProfissionaisAtivosETotal([FromBody] dynamic param)
         {
             Entities context = new Entities();
-            return context.Cliente.Where(pro => pro.Situacao == true).Count().ToString() + " / " + context.Cliente.Count().ToString();
+            return context.Cliente.Where(obj => obj.Situacao == true && obj.DataExpiracao > DateTime.Today && obj.FlagCliente == "P").Count().ToString() + " / " + context.Cliente.Where(obj => obj.FlagCliente == "P").Count().ToString();
         }
 
         [HttpGet]

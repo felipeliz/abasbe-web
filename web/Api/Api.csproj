@@ -109,11 +109,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="imgs\placeholder.png" />
     <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="imgs\placeholder.png" />
     <Content Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
@@ -162,6 +162,7 @@
     <Compile Include="ClienteProfissional.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ServicoContabilController.cs" />
     <Compile Include="Controllers\PagamentoController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
@@ -202,6 +203,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AssinaturaViewModel.cs" />
+    <Compile Include="Models\ServicoContabilViewModel.cs" />
     <Compile Include="Models\PagamentoViewModel.cs" />
     <Compile Include="Models\BannerViewModel.cs" />
     <Compile Include="Models\CidadeViewModel.cs" />
@@ -238,6 +240,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ServicoContabil.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">
       <DependentUpon>Model.tt</DependentUpon>

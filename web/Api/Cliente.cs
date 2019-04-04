@@ -23,6 +23,7 @@ namespace Api
             this.ClienteEquipamentos = new HashSet<ClienteEquipamentos>();
             this.ClienteExperiencia = new HashSet<ClienteExperiencia>();
             this.ClienteProfissional = new HashSet<ClienteProfissional>();
+            this.ServicoContabil = new HashSet<ServicoContabil>();
         }
     
         public int Id { get; set; }
@@ -59,5 +60,7 @@ namespace Api
         public virtual ICollection<ClienteExperiencia> ClienteExperiencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteProfissional> ClienteProfissional { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServicoContabil> ServicoContabil { get; set; }
     }
 }
