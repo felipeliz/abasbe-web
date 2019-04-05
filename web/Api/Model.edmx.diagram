@@ -42,6 +42,7 @@
         <AssociationConnector Association="Model.FK_ProfissionalFotos_ClienteProfissional" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AssociadoPagamento_Plano" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Pagamento_ServicoContabil" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.ExceptionLog" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using NLog;
 
 namespace Api.Controllers
 {
@@ -83,7 +84,7 @@ namespace Api.Controllers
                     context.Estado.Remove(obj);
                     context.SaveChanges();
                 }
-                catch
+                catch(Exception ex)
                 {
                     throw new Exception("Não foi possível excluir, existem registros dependentes.");
                 }

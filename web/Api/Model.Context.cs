@@ -43,5 +43,6 @@ namespace Api
         public virtual DbSet<ProfissionalFotos> ProfissionalFotos { get; set; }
         public virtual DbSet<ServicoContabil> ServicoContabil { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<ExceptionLog> ExceptionLog { get; set; }
     }
 }

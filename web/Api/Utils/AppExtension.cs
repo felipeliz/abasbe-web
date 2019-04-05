@@ -13,6 +13,10 @@ using System.Collections.Generic;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Text.RegularExpressions;
+using NLog;
+using NLog.Common;
+using NLog.Config;
+using NLog.Targets;
 
 namespace Api.Utils
 {
@@ -149,6 +153,40 @@ namespace Api.Utils
         {
             string begin = HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Split(new[] { "/api/" }, StringSplitOptions.None)[0];
             return begin + "/api" + (endpoint.StartsWith("/") ? endpoint : "/" + endpoint);
+        }
+
+        public static void ConfigureLog(string dbHost, string dbName, string dbUser, string dbPassword, bool debug = false)
+        {
+            var config = new LoggingConfiguration();
+
+            var dbTarget = new DatabaseTarget();
+
+            dbTarget.ConnectionString = "Data Source=" + dbHost + ";Initial Catalog=" + dbName + ";Persist Security Info=True;User ID=" + dbUser + ";Password=" + dbPassword;
+            dbTarget.CommandText = "INSERT INTO ExceptionLog ([TimeStamp], [Level], [Logger], [Message], [Exception], [StackTrace], [Request], [Arguments]) VALUES (@TimeStamp, @Level, @Logger, @Message, @Exception, @StackTrace, @request, @arguments);";
+
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@TimeStamp", new NLog.Layouts.SimpleLayout("${date}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Level", new NLog.Layouts.SimpleLayout("${level}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Logger", new NLog.Layouts.SimpleLayout("${logger}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Message", new NLog.Layouts.SimpleLayout("${message}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Exception", new NLog.Layouts.SimpleLayout("${exception}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@StackTrace", new NLog.Layouts.SimpleLayout("${stacktrace}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Request", new NLog.Layouts.SimpleLayout("${mdc:item=request}")));
+            dbTarget.Parameters.Add(new DatabaseParameterInfo("@Arguments", new NLog.Layouts.SimpleLayout("${mdc:item=arguments}")));
+
+            config.AddTarget("database", dbTarget);
+
+            var dbRule = new LoggingRule("*", LogLevel.Debug, dbTarget);
+            config.LoggingRules.Add(dbRule);
+
+            LogManager.Configuration = config;
+
+            if (debug)
+            {
+                InternalLogger.LogLevel = LogLevel.Trace;
+                InternalLogger.LogToConsole = true;
+                InternalLogger.LogToConsoleError = true;
+                InternalLogger.LogToTrace = true;
+            }
         }
     }
 }
