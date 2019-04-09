@@ -39,6 +39,9 @@ namespace Api
         public string NomeContratante { get; set; }
         public string DescricaoServico { get; set; }
         public Nullable<decimal> ValorServico { get; set; }
+        public string Endereco { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -5,44 +5,44 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a6962c6700a49a29ba1464d003e872e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Banner" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Certificado" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Cidade" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Cliente" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ClienteCertificado" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ClienteEquipamentos" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ClienteExperiencia" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ClienteProfissional" Width="1.5" PointX="10.25" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Disponibilidade" Width="1.5" PointX="8" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Equipamento" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Estado" Width="1.5" PointX="1.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Pagamento" Width="1.5" PointX="7.5" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Parametro" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Plano" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Profissao" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ProfissionalFotos" Width="1.5" PointX="12.5" PointY="19.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="31.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_Banner_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Pagamento_Banner" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteCertificado_Certificado" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Cidade_Estado" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Cliente_Cidade" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AssociadoPagamento_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Cliente_Plano" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteCertificado_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteEquipamentos_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteExperiencia_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteProfissional_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ServicoContabil_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteEquipamentos_Equipamento" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteExperiencia_Profissao" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteProfissional_Disponibilidade" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ClienteProfissional_Profissao" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_ProfissionalFotos_ClienteProfissional" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_AssociadoPagamento_Plano" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Pagamento_ServicoContabil" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.ExceptionLog" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.Banner" Width="1.5" PointX="5.25" PointY="33" />
+        <EntityTypeShape EntityType="Model.Certificado" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="Model.Cidade" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.Cliente" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="Model.ClienteCertificado" Width="1.5" PointX="5.25" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.ClienteEquipamentos" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="Model.ClienteExperiencia" Width="1.5" PointX="8.25" PointY="14.25" />
+        <EntityTypeShape EntityType="Model.ClienteProfissional" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="Model.Disponibilidade" Width="1.5" PointX="6" PointY="6.25" />
+        <EntityTypeShape EntityType="Model.Equipamento" Width="1.5" PointX="3" PointY="20" />
+        <EntityTypeShape EntityType="Model.Estado" Width="1.5" PointX="1.5" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.ExceptionLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Pagamento" Width="1.5" PointX="7.5" PointY="22.25" />
+        <EntityTypeShape EntityType="Model.Parametro" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Plano" Width="1.5" PointX="0.75" PointY="14.375" />
+        <EntityTypeShape EntityType="Model.Profissao" Width="1.5" PointX="6" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.ProfissionalFotos" Width="1.5" PointX="10.5" PointY="9.75" />
+        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="20.625" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="4.75" PointY="0.75" />
+        <AssociationConnector Association="Model.FK_Banner_Cliente" />
+        <AssociationConnector Association="Model.FK_Pagamento_Banner" />
+        <AssociationConnector Association="Model.FK_ClienteCertificado_Certificado" />
+        <AssociationConnector Association="Model.FK_Cidade_Estado" />
+        <AssociationConnector Association="Model.FK_Cliente_Cidade" />
+        <AssociationConnector Association="Model.FK_AssociadoPagamento_Cliente" />
+        <AssociationConnector Association="Model.FK_Cliente_Plano" />
+        <AssociationConnector Association="Model.FK_ClienteCertificado_Cliente" />
+        <AssociationConnector Association="Model.FK_ClienteEquipamentos_Cliente" />
+        <AssociationConnector Association="Model.FK_ClienteExperiencia_Cliente" />
+        <AssociationConnector Association="Model.FK_ClienteProfissional_Cliente" />
+        <AssociationConnector Association="Model.FK_ServicoContabil_Cliente" />
+        <AssociationConnector Association="Model.FK_ClienteEquipamentos_Equipamento" />
+        <AssociationConnector Association="Model.FK_ClienteExperiencia_Profissao" />
+        <AssociationConnector Association="Model.FK_ClienteProfissional_Disponibilidade" />
+        <AssociationConnector Association="Model.FK_ClienteProfissional_Profissao" />
+        <AssociationConnector Association="Model.FK_ProfissionalFotos_ClienteProfissional" />
+        <AssociationConnector Association="Model.FK_AssociadoPagamento_Plano" />
+        <AssociationConnector Association="Model.FK_Pagamento_ServicoContabil" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
