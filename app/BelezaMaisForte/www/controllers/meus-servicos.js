@@ -72,7 +72,7 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
     $scope.excluir = function (solicitacao, $index) {
         $http({
             method: "GET",
-            url: api.resolve("api/ServicoContabil/Excluir/" + solicitacao.Id),
+            url: api.resolve("api/ServicoContabil/Desabilitar/" + solicitacao.Id),
             loading: true
         }).then(function (response) {
             if (response.data) {

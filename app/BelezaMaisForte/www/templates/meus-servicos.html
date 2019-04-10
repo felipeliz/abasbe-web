@@ -13,12 +13,12 @@
           {{solicitacao.TipoServicoFormatado}}
         </ion-item>
         <ion-item ng-click="pagar(solicitacao)">
-          <h2>Situação - {{solicitacao.SituacaoFormatada}}</h2>
-          <p class="text-muted">{{solicitacao.NomeCompleto}}</p>
+          <h2>{{solicitacao.NomeCompleto}}</h2>
           <p class="text-muted">{{solicitacao.Email}}</p>
           <p class="text-muted">{{solicitacao.Telefone}}</p>
-          <p class="text-muted">{{solicitacao.DataSolicitacao}}</p>
-          <span class="text-muted item-note reset-badge"><span class="badge {{getBadgeClass(solicitacao)}}">{{solicitacao.SituacaoPagamentoFormatada}}</span></span>
+          <span class="text-muted">{{solicitacao.DataSolicitacao}}</span>
+          <span class="text-muted item-note reset-badge"><span class="badge {{getBadgeClass(solicitacao)}}">Situação - {{solicitacao.SituacaoFormatada}}</span></span>
+          <span class="text-muted item-note reset-badge"><span class="badge {{getBadgeClass(solicitacao)}}">Pagamento - {{solicitacao.SituacaoPagamentoFormatada}}</span></span>
         </ion-item>
       </div>
     </ion-list>
