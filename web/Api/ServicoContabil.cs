@@ -42,6 +42,7 @@ namespace Api
         public string Endereco { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
+        public string Rg { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

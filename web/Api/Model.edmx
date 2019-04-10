@@ -240,6 +240,7 @@
           <Property Name="Endereco" Type="varchar" MaxLength="250" />
           <Property Name="Email" Type="nchar" MaxLength="150" />
           <Property Name="Telefone" Type="varchar" MaxLength="11" />
+          <Property Name="Rg" Type="varchar" MaxLength="9" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -948,6 +949,7 @@
           <Property Name="Endereco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
           <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Rg" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="Model.FK_ServicoContabil_Cliente" FromRole="ServicoContabil" ToRole="Cliente" />
           <NavigationProperty Name="Pagamento" Relationship="Model.FK_Pagamento_ServicoContabil" FromRole="ServicoContabil" ToRole="Pagamento" />
         </EntityType>
@@ -1189,7 +1191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1424,6 +1426,7 @@
           <EntitySetMapping Name="ServicoContabil">
             <EntityTypeMapping TypeName="Model.ServicoContabil">
               <MappingFragment StoreEntitySet="ServicoContabil">
+                <ScalarProperty Name="Rg" ColumnName="Rg" />
                 <ScalarProperty Name="Telefone" ColumnName="Telefone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Endereco" ColumnName="Endereco" />

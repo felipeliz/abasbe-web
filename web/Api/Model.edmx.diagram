@@ -5,25 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6a6962c6700a49a29ba1464d003e872e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Banner" Width="1.5" PointX="5.25" PointY="33" />
-        <EntityTypeShape EntityType="Model.Certificado" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="Model.Cidade" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.Banner" Width="1.5" PointX="5.25" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.Certificado" Width="1.5" PointX="6" PointY="5.125" />
+        <EntityTypeShape EntityType="Model.Cidade" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="Model.Cliente" Width="1.5" PointX="3" PointY="12.625" />
-        <EntityTypeShape EntityType="Model.ClienteCertificado" Width="1.5" PointX="5.25" PointY="11.625" />
-        <EntityTypeShape EntityType="Model.ClienteEquipamentos" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="Model.ClienteCertificado" Width="1.5" PointX="8.25" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.ClienteEquipamentos" Width="1.5" PointX="8.25" PointY="18.75" />
         <EntityTypeShape EntityType="Model.ClienteExperiencia" Width="1.5" PointX="8.25" PointY="14.25" />
-        <EntityTypeShape EntityType="Model.ClienteProfissional" Width="1.5" PointX="8.25" PointY="8.125" />
-        <EntityTypeShape EntityType="Model.Disponibilidade" Width="1.5" PointX="6" PointY="6.25" />
-        <EntityTypeShape EntityType="Model.Equipamento" Width="1.5" PointX="3" PointY="20" />
-        <EntityTypeShape EntityType="Model.Estado" Width="1.5" PointX="1.5" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.ClienteProfissional" Width="1.5" PointX="5.25" PointY="13.25" />
+        <EntityTypeShape EntityType="Model.Disponibilidade" Width="1.5" PointX="3" PointY="20.125" />
+        <EntityTypeShape EntityType="Model.Equipamento" Width="1.5" PointX="6" PointY="38.125" />
+        <EntityTypeShape EntityType="Model.Estado" Width="1.5" PointX="1.5" PointY="7.875" />
         <EntityTypeShape EntityType="Model.ExceptionLog" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Pagamento" Width="1.5" PointX="7.5" PointY="22.25" />
+        <EntityTypeShape EntityType="Model.Pagamento" Width="1.5" PointX="7.5" PointY="22.375" />
         <EntityTypeShape EntityType="Model.Parametro" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.Plano" Width="1.5" PointX="0.75" PointY="14.375" />
-        <EntityTypeShape EntityType="Model.Profissao" Width="1.5" PointX="6" PointY="8.75" />
-        <EntityTypeShape EntityType="Model.ProfissionalFotos" Width="1.5" PointX="10.5" PointY="9.75" />
-        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="20.625" />
-        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.Plano" Width="1.5" PointX="0.75" PointY="14.5" />
+        <EntityTypeShape EntityType="Model.Profissao" Width="1.5" PointX="6" PointY="2" />
+        <EntityTypeShape EntityType="Model.ProfissionalFotos" Width="1.5" PointX="7.5" PointY="7.875" />
+        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="31.125" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="2.75" PointY="3.75" />
         <AssociationConnector Association="Model.FK_Banner_Cliente" />
         <AssociationConnector Association="Model.FK_Pagamento_Banner" />
         <AssociationConnector Association="Model.FK_ClienteCertificado_Certificado" />
