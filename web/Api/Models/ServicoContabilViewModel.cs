@@ -28,6 +28,7 @@ namespace Api.Models
         public decimal? ValorServico { get; set; }
         public string SituacaoFormatada { get; set; }
         public string SituacaoPagamentoFormatada { get; set; }
+        public int SituacaoPagamentoValue { get; set; }
         public SimpleClienteViewModel Cliente { get; set; }
         public List<PagamentoViewModel> Pagamentos { get; set; }
 
@@ -59,6 +60,7 @@ namespace Api.Models
             ValorServico = obj.ValorServico;
 
             SituacaoPagamentoFormatada = "N/A";
+            SituacaoPagamentoValue = 0;
 
             switch (obj.Status)
             {
@@ -95,6 +97,7 @@ namespace Api.Models
             obj.Pagamento.OrderByDescending(pag => pag.DataCriacao).ToList().ForEach(pag =>
             {
                 SituacaoPagamentoFormatada = PagamentoViewModel.GetSituacao(pag.Situacao);
+                SituacaoPagamentoValue = pag.Situacao;
                 Pagamentos.Add(new PagamentoViewModel(pag));
             });
         }
