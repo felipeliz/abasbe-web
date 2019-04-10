@@ -57,12 +57,12 @@
     }
 
 
-    $scope.changeStatus = function (orcamento) {
+    $scope.changeStatus = function (contabilidade) {
         $loading.show();
         $http({
             method: "POST",
             url: "api/ServicoContabil/mudarStatus",
-            data: orcamento
+            data: contabilidade
         }).then(function mySuccess(response) {
             $loading.hide();
             toastr.success("Status atualizado com sucesso");
