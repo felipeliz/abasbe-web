@@ -69,7 +69,11 @@ namespace Api.Controllers
             obj.Status = param.Status?.ToString();
             obj.Observacao = param.Observacao?.ToString();
             obj.NomeCompleto = param.NomeCompleto?.ToString();
+            obj.Email = param.Email?.ToString();
+            obj.Telefone = param.Telefone?.ToString();
             obj.Cpf = param.Cpf?.ToString();
+            obj.Rg = param.Rg?.ToString();
+            obj.Endereco = param.Endereco?.ToString();
             obj.DataNascimento = AppExtension.ToDateTime(param.DataNascimento);
             obj.TituloEleitor = param.TituloEleitor?.ToString();
             obj.Cnpj = param.Cnpj?.ToString();
