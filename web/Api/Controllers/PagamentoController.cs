@@ -345,6 +345,7 @@ namespace Api.Controllers
 
             var query = cliente.Pagamento.Where(pag => pag.Situacao != 7);
             query = query.Where(pag => pag.Banner == null || pag.Banner.Situacao != "I");
+            query = query.Where(pag => pag.ServicoContabil == null || pag.ServicoContabil.Status != "C");
 
             query.OrderBy(pag => pag.Situacao).ThenByDescending(pag => pag.DataCriacao).Skip(page * pageSize).Take(pageSize).ToList().ForEach(pag =>
             {

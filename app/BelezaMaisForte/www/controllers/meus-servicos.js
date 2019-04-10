@@ -84,7 +84,7 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
     }
 
     $scope.getBadgeClass = function (solicitacao) {
-        switch (solicitacao.SituacaoValue) {
+        switch (solicitacao.SituacaoPagamentoValue) {
             case 0: return 'badge-stable';
             case 1: return 'badge-energized';
             case 2: return 'badge-energized';

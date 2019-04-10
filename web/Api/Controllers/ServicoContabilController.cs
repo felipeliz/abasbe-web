@@ -62,6 +62,24 @@ namespace Api.Controllers
         }
 
 
+        [HttpGet]
+        public bool Desabilitar(int id)
+        {
+            int cliente = AppExtension.IdUsuarioLogado();
+
+            Entities context = new Entities();
+
+            var serv = context.ServicoContabil.FirstOrDefault(ser => ser.Id == id && ser.IdCliente == cliente);
+            if (serv == null)
+            {
+                throw new Exception("Registro não identificado.");
+            }
+
+            serv.Status = "C";
+            return context.SaveChanges() > 0;
+        }
+
+
         [HttpPost]
         public bool Salvar([FromBody] dynamic param)
         {
@@ -162,6 +180,8 @@ namespace Api.Controllers
             var query = context.ServicoContabil.AsQueryable();
 
             query = query.Where(ban => ban.IdCliente == cliente);
+
+            query = query.Where(ban => ban.Status != "C");
 
             query.OrderByDescending(ban => ban.DataSolicitacao).Skip(page * pageSize).Take(pageSize).ToList().ForEach(obj =>
             {

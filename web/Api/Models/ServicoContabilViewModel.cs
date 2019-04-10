@@ -13,6 +13,8 @@ namespace Api.Models
         public string DataSolicitacao { get; set; }
         public string DataAlteracao { get; set; }
         public string Status { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
         public string Observacao { get; set; }
         public string NomeCompleto { get; set; }
         public string Cpf { get; set; }
@@ -52,6 +54,8 @@ namespace Api.Models
             TituloEleitor = obj.TituloEleitor;
             Cnpj = obj.Cnpj;
             SenhaPrefeitura = obj.SenhaPrefeitura;
+            Email = obj.Email;
+            Telefone = obj.Telefone;
             DataReferencia = obj.DataReferencia;
             CodigoSimplesNacional = obj.CodigoSimplesNacional;
             CnpjContratante = obj.CnpjContratante;
