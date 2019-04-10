@@ -9,16 +9,25 @@
             <div class="md-card-content">
                 <div class="uk-grid">
                     <div class="uk-width-1-1">
-                        <label>Nome</label>
-                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Nome" md-input />
+                        <label> Nome / CPF</label>
+                        <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Cliente" md-input />
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
-                        <label>De </label>
-                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.De" md-input />
+                        <label>Data de Solicitação </label>
+                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.Data" md-input />
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
-                        <label>Até</label>
-                        <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.Ate" md-input />
+                        <label>Tipo de Serviço</label>
+                        <select class="md-input label-fixed" ng-model="filter.TipoPlano" md-input>
+                            <option value="">Selecione...</option>
+                            <option value="MEI">Abertura de MEI</option>
+                            <option value="DAS">Solicitação de DAS</option>
+                            <option value="NFE">Emitir Nota Fiscal</option>
+                            <option value="SME">Declaração Anual (SIMEI)</option>
+                            <option value="REG">Regularizar MEI</option>
+                            <option value="MAT">Solicitar Licença Maternidade</option>
+                            <option value="AUX">Solicitar Auxílio Doença</option>
+                        </select>
                     </div>
                     <div class="uk-width-1 uk-grid-margin">
                         <div class="uk-align-right">
@@ -31,7 +40,7 @@
         <div class="md-card">
             <div class="md-card-content">
                 <ul class="uk-tab uk-tab-grid">
-                    <li class="uk-width-1-4 {{filter.Status==0 ? 'uk-active' : ''}}" ng-click="getStatus(0)"><a href="#">Registrado</a></li>
+                    <li class="uk-width-1-4 {{filter.Status==0 ? 'uk-active' : ''}}" ng-click="getStatus(0)"><a href="#">Novo</a></li>
                     <li class="uk-width-1-4 {{filter.Status==1 ? 'uk-active' : ''}}" ng-click="getStatus(1)"><a href="#">Em andamento</a></li>
                     <li class="uk-width-1-4 {{filter.Status==2 ? 'uk-active' : ''}}" ng-click="getStatus(2)"><a href="#">Resolvido</a></li>
                     <li class="uk-width-1-4 {{filter.Status==3 ? 'uk-active' : ''}}" ng-click="getStatus(3)"><a href="#">Cancelado</a></li>
@@ -42,36 +51,32 @@
                             <table class="uk-table uk-table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Nome</th>
-                                        <th>Celular</th>
-                                        <th>Email</th>
-                                        <th>Data Solicitacao</th>
-                                        <th>Unidades</th>
-                                        <th>Valor Total</th>
-                                        <th>Status</th>
+                                        <th>Cliente</th>
+                                        <th>Tipo do Serviço</th>
+                                        <th>Data de Solicitacao</th>
+                                        <th>Data de Alteração</th>
+                                        <th>Contato</th>
+                                        <th>Status de Pagamento</th>
                                         <th class="acoes-2">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="orcamento in lista.list">
-                                        <td>{{orcamento.Nome}}</td>
-                                        <td>{{orcamento.Celular | tel}}</td>
-                                        <td>{{orcamento.Email}}</td>
-                                        <td>{{orcamento.DataSolicitacao}}</td>
-                                        <td>{{orcamento.QtdTotal}}</td>
-                                        <td>{{orcamento.ValorTotal | currency : "R$ " : 2}}</td>
-                                        <td>{{orcamento.StatusFormatado}}</td>
+                                    <tr ng-repeat="contabilidade in lista.list">
                                         <td>
-                                            <div class="uk-button-dropdown" data-uk-dropdown="" aria-haspopup="true" aria-expanded="false">
-                                                <button class="md-btn md-btn md-btn-small"><i class="material-icons md-icon-dark">print</i></button>
-                                                <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom" aria-hidden="true" tabindex="">
-                                                    <ul class="uk-nav uk-nav-dropdown">
-                                                        <li><a ng-click="pdf(orcamento.Id)" href="javascript:void(0)">PDF</a></li>
-                                                        <li><a ng-click="xls(orcamento.Id)" href="javascript:void(0)">XLS</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <a class="md-btn md-btn md-btn-small" title="Detalhe" ng-click="detalhe(orcamento.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">description</i></a>
+                                            <p class="uk-margin-remove">{{contabilidade.NomeCompleto}}</p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{contabilidade.Cpf}}</span></p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{contabilidade.Cnpj}}} </span></p>
+                                        </td>                                        
+                                        <td>{{contabilidade.TipoServicoFormatado}}</td>
+                                        <td>{{contabilidade.DataSolicitacao}}</td>
+                                        <td>{{contabilidade.DataAlteracao}}</td>
+                                        <td>
+                                            <p class="uk-margin-remove">{{contabilidade.Cliente.Email}}</p>
+                                            <p class="uk-margin-remove"><span class="uk-text-muted">{{contabilidade.Cliente.TelefoneCelular}}</span></p>
+                                        </td>
+                                        <td>{{contabilidade.SituacaoPagamentoFormatada}}</td>
+                                        <td>
+                                            <a class="md-btn md-btn md-btn-small" title="Detalhe" ng-click="detalhe(contabilidade.Id)" href="javascript:void(0)"><i class="material-icons md-icon-dark">description</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -91,17 +96,17 @@
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <div class='md-card-toolbar'>
             <h3 class='md-card-toolbar-heading-text'>
-                Detalhe do Orçamento
+                Detalhe do Serviço
             </h3>
         </div>
         <div class="uk-grid">
             <div class="uk-width-2-3">
                 <label>Nome do Solicitante</label>
-                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheOrcamento.Nome" md-input />
+                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheContabillidade.Nome" md-input />
             </div>
             <div class="uk-width-1-3">
                 <label>Status</label>
-                <select class="md-input label-fixed" ng-model="detalheOrcamento.Status" ng-change="changeStatus(detalheOrcamento)" md-input>
+                <select class="md-input label-fixed" ng-model="detalheContabillidade.Status" ng-change="changeStatus(detalheContabillidade)" md-input>
                     <option value="0">Registrado</option>
                     <option value="1">Em andamento</option>
                     <option value="2">Resolvido</option>
@@ -110,23 +115,23 @@
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Telefone</label>
-                <input type="text" ui-mask="(99)9999-9999" ng-disabled="true" class="md-input label-fixed" ng-model="detalheOrcamento.Telefone" md-input />
+                <input type="text" ui-mask="(99)9999-9999" ng-disabled="true" class="md-input label-fixed" ng-model="detalheContabillidade.Telefone" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Celular</label>
-                <input type="text" ui-mask="(99)9999-9999" ng-disabled="true" class="md-input label-fixed" ng-model="detalheOrcamento.Celular" md-input />
+                <input type="text" ui-mask="(99)9999-9999" ng-disabled="true" class="md-input label-fixed" ng-model="detalheContabillidade.Celular" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Email</label>
-                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheOrcamento.Email" md-input />
+                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheContabillidade.Email" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Data de Solicitação</label>
-                <input type="text" ui-mask="99/99/9999" ng-disabled="true" datepicker class="md-input label-fixed" ng-model="detalheOrcamento.DataSolicitacao" md-input />
+                <input type="text" ui-mask="99/99/9999" ng-disabled="true" datepicker class="md-input label-fixed" ng-model="detalheContabillidade.DataSolicitacao" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Unidades</label>
-                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheOrcamento.QtdTotal" md-input />
+                <input type="text" ng-disabled="true" class="md-input label-fixed" ng-model="detalheContabillidade.QtdTotal" md-input />
             </div>
             <div class="uk-width-1-2 uk-grid-margin">
                 <label>Valor Total</label>
