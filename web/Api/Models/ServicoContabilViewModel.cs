@@ -64,6 +64,7 @@ namespace Api.Models
                 case "N": SituacaoFormatada = "Novo"; break;
                 case "R": SituacaoFormatada = "Resolvido"; break;
                 case "C": SituacaoFormatada = "Cancelado"; break;
+                case "A": SituacaoFormatada = "Em Andamento"; break;
             }
 
             Cliente = new SimpleClienteViewModel(obj.Cliente);

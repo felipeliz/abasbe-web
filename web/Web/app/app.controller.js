@@ -56,6 +56,7 @@ app.controller('sidebarController', function ($timeout, $scope, $rootScope, Auth
         $scope.sections.push({ title: 'Profissionais', icon: 'supervisor_account', link: 'restricted.layout.profissional-lista' });
         $scope.sections.push({ title: 'Banner', icon: 'insert_photo', link: 'restricted.layout.banner-lista' });
         $scope.sections.push({ title: 'Pagamentos', icon: 'credit_card', link: 'restricted.layout.pagamento-lista' });
+        $scope.sections.push({ title: 'Serviços Contábeis', icon: 'attach_money', link: 'restricted.layout.contabilidade-lista' });
         $scope.sections.push({
             title: 'Cadastros Básicos', icon: '&#xE8D2;', submenu:
             [{ title: 'Certificados', link: 'restricted.layout.certificado-lista' },

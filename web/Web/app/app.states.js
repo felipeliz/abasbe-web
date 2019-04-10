@@ -633,6 +633,22 @@
         }
     });
 
+    $stateProvider.state("restricted.layout.contabilidade-lista", {
+        url: "/contabilidade",
+        templateUrl: 'app/views/contabilidade/list.html',
+        controller: 'contabilidade',
+        resolve: {
+            deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'app/controllers/contabilidade.js'
+                ], { serie: true });
+            }]
+        },
+        data: {
+            pageTitle: 'Serviços Contábeis'
+        }
+    });
+
 
 }
 ]);

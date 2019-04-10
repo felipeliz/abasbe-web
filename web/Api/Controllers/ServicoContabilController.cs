@@ -118,28 +118,15 @@ namespace Api.Controllers
             return true;
         }
 
-        [HttpGet]
-        public void Excluir(int id)
+
+        [HttpPost]
+        public bool MudarStatus(dynamic param)
         {
             Entities context = new Entities();
-
-            var obj = context.ServicoContabil.FirstOrDefault(ban => ban.Id == id);
-            if (obj == null)
-            {
-                throw new Exception("Registro não identificado.");
-            }
-            else
-            {
-                try
-                {
-                    context.ServicoContabil.Remove(obj);
-                    context.SaveChanges();
-                }
-                catch
-                {
-                    throw new Exception("Não foi possível excluir, existem registros dependentes.");
-                }
-            }
+            int id = Convert.ToInt32(param.Id);
+            var obj = context.ServicoContabil.FirstOrDefault(pro => pro.Id == id);
+            obj.Status = Convert.ToInt32(param.Status);
+            return context.SaveChanges() > 0;
         }
 
         [HttpPost]
