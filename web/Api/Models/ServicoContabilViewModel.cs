@@ -33,6 +33,7 @@ namespace Api.Models
         public int SituacaoPagamentoValue { get; set; }
         public SimpleClienteViewModel Cliente { get; set; }
         public List<PagamentoViewModel> Pagamentos { get; set; }
+        public string Rg { get; set; }
 
         public ServicoContabilViewModel(ServicoContabil obj)
         {
@@ -62,6 +63,7 @@ namespace Api.Models
             NomeContratante = obj.NomeContratante;
             DescricaoServico = obj.DescricaoServico;
             ValorServico = obj.ValorServico;
+            Rg = obj.Rg;
 
             SituacaoPagamentoFormatada = "N/A";
             SituacaoPagamentoValue = 0;

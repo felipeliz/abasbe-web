@@ -18,7 +18,9 @@ namespace Api.Controllers
         {
             string cliente = param.Cliente?.ToString();
             string situacaoPagamento = param.SituacaoPagamento;
-            string situacao = param.Situacao;
+            string status = param.Status?.ToString();
+            string data = param.Data?.ToString();
+            string tiposervico = param.TipoServico?.ToString(); 
 
             Entities context = new Entities();
 
@@ -26,12 +28,17 @@ namespace Api.Controllers
 
             if (!string.IsNullOrEmpty(cliente))
             {
-                query = query.Where(pag => pag.Cliente.Nome.Contains(cliente) || pag.Cliente.CPF.Contains(cliente));
+                query = query.Where(pag => pag.NomeCompleto.Contains(cliente) || pag.Cpf.Contains(cliente));
+            }
+            
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(ban => ban.Status == status);
             }
 
-            if (!string.IsNullOrEmpty(situacao))
+            if (!string.IsNullOrEmpty(tiposervico))
             {
-                query = query.Where(ban => ban.Status == situacao);
+                query = query.Where(ban => ban.TipoServico == tiposervico);
             }
 
             if (!string.IsNullOrEmpty(situacaoPagamento))
@@ -40,7 +47,20 @@ namespace Api.Controllers
                 query = query.Where(ban => ban.Pagamento.Any(pag => pag.Situacao == situPag));
             }
 
-            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderByDescending(ban => ban.DataSolicitacao));
+            if (!string.IsNullOrEmpty(data))
+            {
+                DateTime de = AppExtension.ToDateTime(param.Data);
+
+                query = query.Where(pag => pag.DataSolicitacao >= de);
+       
+                DateTime ate = AppExtension.ToDateTime(param.Data);
+                ate = ate.AddHours(23);
+                ate = ate.AddMinutes(59);
+                ate = ate.AddSeconds(59);
+                query = query.Where(pag => pag.DataSolicitacao <= ate);
+            }
+
+            PagedList paged = PagedList.Create(param.page?.ToString(), 10, query.OrderBy(ban => ban.DataSolicitacao).ThenByDescending(ban => ban.TipoServico));
             paged.ReplaceList(paged.list.ConvertAll<object>(obj => new ServicoContabilViewModel(obj as ServicoContabil)));
 
             return paged;
@@ -154,16 +174,6 @@ namespace Api.Controllers
             return true;
         }
 
-
-        [HttpPost]
-        public bool MudarStatus(dynamic param)
-        {
-            Entities context = new Entities();
-            int id = Convert.ToInt32(param.Id);
-            var obj = context.ServicoContabil.FirstOrDefault(pro => pro.Id == id);
-            obj.Status = Convert.ToInt32(param.Status);
-            return context.SaveChanges() > 0;
-        }
 
         [HttpPost]
         public InfinityPagedList<ServicoContabilViewModel> MeusServicoSolicitados([FromBody] dynamic param)

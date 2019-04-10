@@ -3,17 +3,11 @@
     $scope.detalheContabillidade = {};
     $scope.filter = {
         Nome: "",
-        Status: 0
     };
 
 
     $scope.init = function () {
-        if (typeof ($stateParams.id) == "string") {
-            $scope.carregarEditar($stateParams.id);
-        }
-        else if (!$location.path().endsWith('/form')) {
-            $scope.filtrar(0, true);
-        }
+        $scope.getStatus('N');
     }
 
     $scope.getStatus = function (sts) {
@@ -56,18 +50,21 @@
         });
     }
 
+    $scope.salvar = function () {
+        Validation.required("Nome Completo", $scope.detalheContabillidade.NomeCompleto);
+        Validation.required("Celular do Titular", $scope.detalheContabillidade.Telefone);
+        Validation.required("E-mail", $scope.detalheContabillidade.Email);
 
-    $scope.changeStatus = function (contabilidade) {
         $loading.show();
         $http({
             method: "POST",
-            url: "api/ServicoContabil/mudarStatus",
-            data: contabilidade
+            url: "api/ServicoContabil/salvar",
+            data: $scope.detalheContabillidade
         }).then(function mySuccess(response) {
             $loading.hide();
-            toastr.success("Status atualizado com sucesso");
-            var page = $scope.filter.page == null ? 0 : $scope.filter.page;
-            $scope.filtrar(page, false);
+            toastr.success("Registro salvo com sucesso!");
+            $scope.filtrar($scope.filter.page, false);
+            UIkit.modal("#detalhe").hide();
         }, function myError(response) {
             $loading.hide();
             toastr.error(response.data.ExceptionMessage);
