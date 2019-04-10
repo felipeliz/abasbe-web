@@ -199,6 +199,11 @@ namespace Api.Controllers
                 throw new Exception("Não é possível excluir um pagamento de banner");
             }
 
+            if (pagamento.ServicoContabil != null)
+            {
+                throw new Exception("Não é possível excluir um pagamento de serviço contábil");
+            }
+
             if (pagamento.Situacao != 0)
             {
                 throw new Exception("Não é possível excluir um pagamento processado ou em processamento");
@@ -392,6 +397,25 @@ namespace Api.Controllers
                                 expiracao = DateTime.Now.AddDays(pagamento.Dias);
                             }
                             pagamento.Cliente.DataExpiracao = expiracao;
+                        }
+                        if(pagamento.IdServicoContabil != null)
+                        {
+                            string line = "<p><strong>{0}: </strong><span>{1}</span></p>";
+                            string body = "<strong>Pagamento de serviço contábil confirmado!</strong><br/>";
+                            body += string.Format(line, "Cliente", pagamento.ServicoContabil.NomeCompleto);
+                            body += string.Format(line, "E-mail", pagamento.ServicoContabil.Email);
+                            body += string.Format(line, "Telefone", pagamento.ServicoContabil.Telefone);
+                            AppExtension.EnviarEmailGmail(ParametroController.ObterParam("EmailContabilidade"), "Beleza Mais Forte - Pagamento Confirmado", body);
+                        }
+                        if(pagamento.IdBanner != null)
+                        {
+                            string line = "<p><strong>{0}: </strong><span>{1}</span></p>";
+                            string body = "<strong>Pagamento de banner confirmado!</strong><br/>";
+                            body += string.Format(line, "Titulo", pagamento.Banner.Titulo);
+                            body += string.Format(line, "Estreia em", pagamento.Banner.Estreia.ToString("dd/MM/yyyy"));
+                            body += string.Format(line, "Expira em", pagamento.Banner.Expiracao.ToString("dd/MM/yyyy"));
+                            body += string.Format(line, "Cadastrado em", pagamento.Banner.Cadastro.ToString("dd/MM/yyyy"));
+                            AppExtension.EnviarEmailGmail(ParametroController.ObterParam("EmailContato"), "Beleza Mais Forte - Pagamento Confirmado", body);
                         }
                     }
                     break;

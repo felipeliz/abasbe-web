@@ -448,3 +448,8 @@ red {
 .item h2 {
     padding: 0 0 2px 0;
 }
+
+.tab-nav.button-bar .button {
+    font-size: 14px;
+    padding: 0 4px;
+}

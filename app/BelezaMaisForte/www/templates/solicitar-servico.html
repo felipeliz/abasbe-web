@@ -1,20 +1,17 @@
 <ion-view title="Contabilidade" id="page3" ng-init="init();">
   <ion-content padding="true" class="has-header">
     <h3>{{getTitulo()}}</h3>
-    <div class="show-list-numbers-and-dots">
-      <p>Preencha os campos para efetuar sua solicitação</p>
-    </div>
     <div class="list">
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Nome Completo</span>
+        <span class="input-label">Nome Completo <red>*</red></span>
         <input type="text" ng-model="form.NomeCompleto" maxlength="150">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">E-mail</span>
+        <span class="input-label">E-mail <red>*</red></span>
         <input type="text" ng-model="form.Email" maxlength="150">
       </label>
       <label class="item item-input item-stacked-label">
-        <span class="input-label">Telefone de contato</span>
+        <span class="input-label">Telefone de contato <red>*</red></span>
         <input type="text" ng-model="form.Telefone" model-view-value="true" ui-mask="(99) 99999-9999">
       </label>
       <label class="item item-input item-stacked-label" ng-if="formType == 1">
@@ -77,7 +74,8 @@
       <hr />
       <ion-item>
         <h2>Observação</h2>
-        <p class="allow-linebreak">Caso seja necessário entraremos em contato em até 72h</p>
+        <p class="allow-linebreak">Ganhe tempo preenchendo o máximo de informações possiveis.</p>
+        <p class="allow-linebreak">Caso seja necessário entraremos em contato em até 72h.</p>
       </ion-item>
       <a ng-click="confirmar()" class="button button-positive button-block">
         Confirmar</a>
