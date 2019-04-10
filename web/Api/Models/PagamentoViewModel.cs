@@ -67,7 +67,7 @@ namespace Api.Models
                 case "A": TipoPlanoFormatado = "Pagamento de associado"; break;
                 case "P": TipoPlanoFormatado = "Pagamento de profissional"; break;
                 case "B": TipoPlanoFormatado = "Pagamento de banner"; break;
-                default: TipoPlanoFormatado = "Serviço Contabil"; break;
+                default: TipoPlanoFormatado = "Serviço Contábil"; break;
             }
 
             switch (obj.TipoPlano)
@@ -75,7 +75,7 @@ namespace Api.Models
                 case "A": TipoPlanoFormatadoCompleto = "Associado"; break;
                 case "P": TipoPlanoFormatadoCompleto = "Profissional"; break;
                 case "B": TipoPlanoFormatadoCompleto = "Banner"; break;
-                default: TipoPlanoFormatadoCompleto = "Serviço Contabil"; break;
+                default: TipoPlanoFormatadoCompleto = "Serviço Contábil"; break;
             }
 
             switch (obj.TipoPlano)
@@ -83,7 +83,7 @@ namespace Api.Models
                 case "A": Observacao = "Renovação da assinatura por " + obj.Dias + " dias"; break;
                 case "P": Observacao = "Renovação da assinatura por " + obj.Dias + " dias"; break;
                 case "B": Observacao = "Publicação de banner por " + obj.Dias + " dias"; break;
-                default: Observacao = "Serviço Contabil"; break;
+                default: Observacao = "Serviço Contábil"; break;
             }
 
             if (obj.Banner != null)
