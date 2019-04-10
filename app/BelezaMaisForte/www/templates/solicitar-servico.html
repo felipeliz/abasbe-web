@@ -1,0 +1,71 @@
+<ion-view title="Contabilidade" id="page3" ng-init="init();">
+  <ion-content padding="true" class="has-header">
+    <h3>{{getTitulo()}}</h3>
+    <div class="show-list-numbers-and-dots">
+      <p>Preencha os campos para efetuar sua solicitação</p>
+    </div>
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Nome Completo</span>
+        <input type="text" ng-model="form.NomeCompleto" maxlength="150">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">E-mail</span>
+        <input type="text" ng-model="form.Email" maxlength="150">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Telefone de contato</span>
+        <input type="text" ng-model="form.Telefone" ui-mask="(99) 99999-9999">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 1">
+        <span class="input-label">CPF</span>
+        <input type="text" ng-model="form.Cpf" ui-mask="999.999.999-99">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 1">
+        <span class="input-label">RG</span>
+        <input type="text" ng-model="form.Rg" ui-mask="999999999">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 1">
+        <span class="input-label">Endereço completo</span>
+        <input type="text" ng-model="form.Endereco" maxlength="250">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 1">
+        <span class="input-label">Titulo de eleitor</span>
+        <input type="text" ng-model="form.TituloEleitor" integer maxlength="20">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 2 || formType == 3 || formType == 4 || formType == 5">
+        <span class="input-label">Meu CNPJ</span>
+        <input type="text" ng-model="form.Cnpj" cnpj>
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 3">
+        <span class="input-label">Nome do contratante</span>
+        <input type="text" ng-model="form.NomeContratante" maxlength="150">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 3">
+        <span class="input-label">CNPJ do contratante</span>
+        <input type="text" ng-model="form.CnpjContratante" cnpj>
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 2 || formType == 3">
+        <span class="input-label">Data de referência (mês/ano)</span>
+        <input type="text" ng-model="form.DataReferencia" model-view-value="true" ui-mask='99/9999'>
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 3">
+        <span class="input-label">Valor da nota</span>
+        <input type="text" ng-model="form.ValorServico" ui-money-mask>
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 3">
+        <span class="input-label">Descrição do serviço</span>
+        <input type="text" ng-model="form.DescricaoServico" maxlength="250">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 3 || formType == 4">
+        <span class="input-label">Senha da prefeitura</span>
+        <input type="text" ng-model="form.SenhaPrefeitura" maxlength="50">
+      </label>
+      <div class="show-list-numbers-and-dots">
+        <p>Caso seja necessário entraremos em contato em até 72h</p>
+      </div>
+      <a ng-click="confirmar()" class="button button-positive button-block">
+        Confirmar</a>
+      </form>
+  </ion-content>
+</ion-view>

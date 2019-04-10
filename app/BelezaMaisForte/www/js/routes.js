@@ -272,6 +272,38 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
+      .state('menu.menu-contabilidade', {
+        url: '/menu-contabilidade',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/menu-contabilidade.html',
+            controller: 'menu-contabilidade'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/menu-contabilidade.js');
+          }]
+        }
+      })
+
+      .state('menu.solicitar-servico', {
+        url: '/solicitar-servico/:tipo',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/solicitar-servico.html',
+            controller: 'solicitar-servico'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/solicitar-servico.js');
+          }]
+        }
+      })
+
       .state('menu.pagamentos', {
         url: '/pagamentos',
         cache: false,
