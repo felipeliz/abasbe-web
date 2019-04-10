@@ -69,25 +69,16 @@ namespace Api.Models
                 case "C": SituacaoFormatada = "Cancelado"; break;
                 case "A": SituacaoFormatada = "Em Andamento"; break;
             }
-            /*
-             *              <option value="">Selecione...</option>
-                            <option value="MEI">Abertura de MEI</option>
-                            <option value="DAS">Solicitação de DAS</option>
-                            <option value="NFE">Emitir Nota Fiscal</option>
-                            <option value="SME">Declaração Anual (SIMEI)</option>
-                            <option value="REG">Regularizar MEI</option>
-                            <option value="MAT">Solicitar Licença Maternidade</option>
-                            <option value="AUX">Solicitar Auxílio Doença</option>
-             */
+            
             switch (obj.TipoServico)
             {
                 case "MEI": TipoServicoFormatado = "Abertura de MEI"; break;
                 case "DAS": TipoServicoFormatado = "Solicitação de DAS"; break;
                 case "NFE": TipoServicoFormatado = "Emitir Nota Fiscal"; break;
                 case "SME": TipoServicoFormatado = "Declaração Anual (SIMEI)"; break;
-                case "REG": TipoServicoFormatado = ">Regularizar MEI"; break;
+                case "REG": TipoServicoFormatado = "Regularizar MEI"; break;
                 case "MAT": TipoServicoFormatado = "Solicitar Licença Maternidade"; break;
-                case "AUX": TipoServicoFormatado = ">Solicitar Auxílio Doença"; break;
+                case "AUX": TipoServicoFormatado = "Solicitar Auxílio Doença"; break;
 
             }
 

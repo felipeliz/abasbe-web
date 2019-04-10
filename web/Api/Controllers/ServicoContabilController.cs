@@ -16,13 +16,18 @@ namespace Api.Controllers
         [HttpPost]
         public PagedList Lista([FromBody] dynamic param)
         {
-            string cliente = param.Cliente;
+            string cliente = param.Cliente?.ToString();
             string situacaoPagamento = param.SituacaoPagamento;
             string situacao = param.Situacao;
 
             Entities context = new Entities();
 
-            var query = context.ServicoContabil.Where(ban => ban.Cliente.Nome.Contains(cliente));
+            var query = context.ServicoContabil.AsQueryable();
+
+            if (!string.IsNullOrEmpty(cliente))
+            {
+                query = query.Where(pag => pag.Cliente.Nome.Contains(cliente) || pag.Cliente.CPF.Contains(cliente));
+            }
 
             if (!string.IsNullOrEmpty(situacao))
             {

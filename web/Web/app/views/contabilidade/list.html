@@ -8,13 +8,27 @@
             </div>
             <div class="md-card-content">
                 <div class="uk-grid">
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-1-2">
                         <label> Nome / CPF</label>
                         <input type="text" maxlength="250" class="md-input label-fixed" ng-model="filter.Cliente" md-input />
                     </div>
-                    <div class="uk-width-1-2 uk-grid-margin">
+                    <div class="uk-width-1-2">
                         <label>Data de Solicitação </label>
                         <input type="text" ui-mask="99/99/9999" datepicker class="md-input label-fixed" ng-model="filter.Data" md-input />
+                    </div>
+                    <div class="uk-width-small-1-1 uk-grid-margin-small uk-width-medium-1-2 uk-grid-margin">
+                        <label>Situação Pagamento</label>
+                        <select class="md-input label-fixed" ng-model="filter.SituacaoPagamento" md-input>
+                            <option value="">Selecione...</option>
+                            <option value="0">Novo</option>
+                            <option value="1">Esperando pagamento</option>
+                            <option value="2">Em analise</option>
+                            <option value="3">Pago</option>
+                            <option value="4">Disponivel</option>
+                            <option value="5">Em disputa</option>
+                            <option value="6">Reembolsado</option>
+                            <option value="7">Cancelado</option>
+                        </select>
                     </div>
                     <div class="uk-width-1-2 uk-grid-margin">
                         <label>Tipo de Serviço</label>
