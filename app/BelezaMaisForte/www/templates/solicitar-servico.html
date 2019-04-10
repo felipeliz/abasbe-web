@@ -65,9 +65,20 @@
         <span class="input-label">Senha da prefeitura</span>
         <input type="text" ng-model="form.SenhaPrefeitura" maxlength="50">
       </label>
-      <div class="show-list-numbers-and-dots">
-        <p>Caso seja necessário entraremos em contato em até 72h</p>
-      </div>
+      <hr />
+      <ion-item ng-if="plano != null">
+        <h2>Pagamento</h2>
+        <p class="allow-linebreak">
+          {{plano.Descricao}}
+        </p>
+        <p ng-if="plano.Vezes > 1">{{plano.Vezes}}x de {{plano.ValorDivididoFormatado}}</p>
+        <p ng-if="plano.Vezes == 1">{{plano.ValorFormatado}}</p>
+      </ion-item>
+      <hr />
+      <ion-item>
+        <h2>Observação</h2>
+        <p class="allow-linebreak">Caso seja necessário entraremos em contato em até 72h</p>
+      </ion-item>
       <a ng-click="confirmar()" class="button button-positive button-block">
         Confirmar</a>
       </form>

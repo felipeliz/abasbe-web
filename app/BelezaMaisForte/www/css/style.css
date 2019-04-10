@@ -444,3 +444,7 @@ red {
 .item-stacked-label .input-label + .range {
     margin-left: -21px !important;    
 }
+
+.item h2 {
+    padding: 0 0 2px 0;
+}

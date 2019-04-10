@@ -130,6 +130,20 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        public PlanoViewModel PorTipoServico(dynamic param)
+        {
+            Entities context = new Entities();
+
+            string TipoServico = param.TipoServico?.ToString();
+
+            Plano plano = context.Plano.Where(pla => pla.TipoPlano == TipoServico).OrderBy(pla => pla.Ordem).FirstOrDefault();
+
+            return new PlanoViewModel(plano);
+        }
+
+
+
+        [HttpPost]
         public bool Salvar([FromBody] dynamic param)
         {
             int id = Convert.ToInt32(param.Id);

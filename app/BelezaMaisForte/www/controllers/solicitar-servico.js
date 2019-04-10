@@ -3,6 +3,7 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
     $scope.form = {};
     $scope.tipo = $stateParams.tipo;
     $scope.formType = 0;
+    $scope.plano = {};
 
     $scope.getTitulo = function () {
         switch ($scope.tipo) {
@@ -36,6 +37,17 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
         $scope.form.Cpf = user.CPF;
         $scope.form.TipoServico = $scope.tipo;
         $scope.formType = $scope.getFormType();
+
+        $http({
+            method: "POST",
+            url: api.resolve("api/Plano/PorTipoServico"),
+            data: $scope.form,
+            loading: true
+        }).then(function mySuccess(response) {
+            $scope.plano = response.data;
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
     }
 
     $scope.confirmar = function () {
