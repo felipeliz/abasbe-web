@@ -15,11 +15,11 @@
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">Telefone de contato</span>
-        <input type="text" ng-model="form.Telefone" ui-mask="(99) 99999-9999">
+        <input type="text" ng-model="form.Telefone" model-view-value="true" ui-mask="(99) 99999-9999">
       </label>
       <label class="item item-input item-stacked-label" ng-if="formType == 1">
         <span class="input-label">CPF</span>
-        <input type="text" ng-model="form.Cpf" ui-mask="999.999.999-99">
+        <input type="text" ng-model="form.Cpf" model-view-value="true" ui-mask="999.999.999-99">
       </label>
       <label class="item item-input item-stacked-label" ng-if="formType == 1">
         <span class="input-label">RG</span>

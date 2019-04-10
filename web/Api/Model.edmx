@@ -239,7 +239,7 @@
           <Property Name="ValorServico" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Endereco" Type="varchar" MaxLength="250" />
           <Property Name="Email" Type="nchar" MaxLength="150" />
-          <Property Name="Telefone" Type="varchar" MaxLength="11" />
+          <Property Name="Telefone" Type="varchar" MaxLength="15" />
           <Property Name="Rg" Type="varchar" MaxLength="9" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -599,7 +599,6 @@
           <EntitySet Name="Plano" EntityType="Model.Plano" />
           <EntitySet Name="Profissao" EntityType="Model.Profissao" />
           <EntitySet Name="ProfissionalFotos" EntityType="Model.ProfissionalFotos" />
-          <EntitySet Name="ServicoContabil" EntityType="Model.ServicoContabil" />
           <EntitySet Name="Usuario" EntityType="Model.Usuario" />
           <AssociationSet Name="FK_Banner_Cliente" Association="Model.FK_Banner_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -645,10 +644,6 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ClienteProfissional" EntitySet="ClienteProfissional" />
           </AssociationSet>
-          <AssociationSet Name="FK_ServicoContabil_Cliente" Association="Model.FK_ServicoContabil_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ServicoContabil" EntitySet="ServicoContabil" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClienteEquipamentos_Equipamento" Association="Model.FK_ClienteEquipamentos_Equipamento">
             <End Role="Equipamento" EntitySet="Equipamento" />
             <End Role="ClienteEquipamentos" EntitySet="ClienteEquipamentos" />
@@ -672,6 +667,11 @@
           <AssociationSet Name="FK_AssociadoPagamento_Plano" Association="Model.FK_AssociadoPagamento_Plano">
             <End Role="Plano" EntitySet="Plano" />
             <End Role="Pagamento" EntitySet="Pagamento" />
+          </AssociationSet>
+          <EntitySet Name="ServicoContabil" EntityType="Model.ServicoContabil" />
+          <AssociationSet Name="FK_ServicoContabil_Cliente" Association="Model.FK_ServicoContabil_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ServicoContabil" EntitySet="ServicoContabil" />
           </AssociationSet>
           <AssociationSet Name="FK_Pagamento_ServicoContabil" Association="Model.FK_Pagamento_ServicoContabil">
             <End Role="ServicoContabil" EntitySet="ServicoContabil" />
@@ -923,36 +923,6 @@
           <Property Name="IdProfissional" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClienteProfissional" Relationship="Model.FK_ProfissionalFotos_ClienteProfissional" FromRole="ProfissionalFotos" ToRole="ClienteProfissional" />
         </EntityType>
-        <EntityType Name="ServicoContabil">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
-          <Property Name="TipoServico" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="DataSolicitacao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NomeCompleto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="DataNascimento" Type="DateTime" Precision="3" />
-          <Property Name="TituloEleitor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Cnpj" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-          <Property Name="SenhaPrefeitura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DataReferencia" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoSimplesNacional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CnpjContratante" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
-          <Property Name="NomeContratante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="DescricaoServico" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ValorServico" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Endereco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
-          <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="Rg" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cliente" Relationship="Model.FK_ServicoContabil_Cliente" FromRole="ServicoContabil" ToRole="Cliente" />
-          <NavigationProperty Name="Pagamento" Relationship="Model.FK_Pagamento_ServicoContabil" FromRole="ServicoContabil" ToRole="Pagamento" />
-        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -1095,18 +1065,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ServicoContabil_Cliente">
-          <End Type="Model.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="Model.ServicoContabil" Role="ServicoContabil" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServicoContabil">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClienteEquipamentos_Equipamento">
           <End Type="Model.Equipamento" Role="Equipamento" Multiplicity="1" />
           <End Type="Model.ClienteEquipamentos" Role="ClienteEquipamentos" Multiplicity="*" />
@@ -1176,6 +1134,48 @@
             </Principal>
             <Dependent Role="Pagamento">
               <PropertyRef Name="IdPlano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServicoContabil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="TipoServico" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DataSolicitacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataAlteracao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NomeCompleto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="3" />
+          <Property Name="TituloEleitor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="SenhaPrefeitura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataReferencia" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoSimplesNacional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CnpjContratante" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="NomeContratante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DescricaoServico" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ValorServico" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Endereco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Rg" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Model.FK_ServicoContabil_Cliente" FromRole="ServicoContabil" ToRole="Cliente" />
+          <NavigationProperty Name="Pagamento" Relationship="Model.FK_Pagamento_ServicoContabil" FromRole="ServicoContabil" ToRole="Pagamento" />
+        </EntityType>
+        <Association Name="FK_ServicoContabil_Cliente">
+          <End Type="Model.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="Model.ServicoContabil" Role="ServicoContabil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicoContabil">
+              <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1423,6 +1423,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="FlagAdministrador" ColumnName="FlagAdministrador" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ServicoContabil">
             <EntityTypeMapping TypeName="Model.ServicoContabil">
               <MappingFragment StoreEntitySet="ServicoContabil">
@@ -1448,17 +1459,6 @@
                 <ScalarProperty Name="DataSolicitacao" ColumnName="DataSolicitacao" />
                 <ScalarProperty Name="TipoServico" ColumnName="TipoServico" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="Model.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="FlagAdministrador" ColumnName="FlagAdministrador" />
-                <ScalarProperty Name="Senha" ColumnName="Senha" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

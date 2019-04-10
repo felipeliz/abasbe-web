@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="Model.Plano" Width="1.5" PointX="0.75" PointY="14.5" />
         <EntityTypeShape EntityType="Model.Profissao" Width="1.5" PointX="6" PointY="2" />
         <EntityTypeShape EntityType="Model.ProfissionalFotos" Width="1.5" PointX="7.5" PointY="7.875" />
-        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="31.125" />
         <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="2.75" PointY="3.75" />
         <AssociationConnector Association="Model.FK_Banner_Cliente" />
         <AssociationConnector Association="Model.FK_Pagamento_Banner" />
@@ -35,13 +34,14 @@
         <AssociationConnector Association="Model.FK_ClienteEquipamentos_Cliente" />
         <AssociationConnector Association="Model.FK_ClienteExperiencia_Cliente" />
         <AssociationConnector Association="Model.FK_ClienteProfissional_Cliente" />
-        <AssociationConnector Association="Model.FK_ServicoContabil_Cliente" />
         <AssociationConnector Association="Model.FK_ClienteEquipamentos_Equipamento" />
         <AssociationConnector Association="Model.FK_ClienteExperiencia_Profissao" />
         <AssociationConnector Association="Model.FK_ClienteProfissional_Disponibilidade" />
         <AssociationConnector Association="Model.FK_ClienteProfissional_Profissao" />
         <AssociationConnector Association="Model.FK_ProfissionalFotos_ClienteProfissional" />
         <AssociationConnector Association="Model.FK_AssociadoPagamento_Plano" />
+        <EntityTypeShape EntityType="Model.ServicoContabil" Width="1.5" PointX="5.25" PointY="19.875" />
+        <AssociationConnector Association="Model.FK_ServicoContabil_Cliente" />
         <AssociationConnector Association="Model.FK_Pagamento_ServicoContabil" />
       </Diagram>
     </edmx:Diagrams>

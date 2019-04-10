@@ -2,6 +2,7 @@
 using Api.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -83,7 +84,7 @@ namespace Api.Controllers
             obj.CnpjContratante = param.CnpjContratante?.ToString();
             obj.NomeContratante = param.NomeContratante?.ToString();
             obj.DescricaoServico = param.DescricaoServico?.ToString();
-            obj.ValorServico = string.IsNullOrEmpty(param.ValorServico) ? null : Convert.ToDecimal(param.ValorServico);
+            obj.ValorServico = string.IsNullOrEmpty(param.ValorServico?.ToString()) ? null : Convert.ToDecimal(param.ValorServico?.ToString());
 
             if (obj.Id <= 0)
             {
@@ -92,12 +93,12 @@ namespace Api.Controllers
                 Cliente cliente = context.Cliente.Find(AppExtension.IdUsuarioLogado());
 
                 obj.Cliente = cliente;
-                obj.DataSolicitacao = param.prop;
+                obj.DataSolicitacao = DateTime.Now;
                 context.ServicoContabil.Add(obj);
 
                 Plano plano = context.Plano.Where(pla => pla.TipoPlano == obj.TipoServico).OrderBy(pla => pla.Ordem).FirstOrDefault();
 
-                if(plano == null)
+                if (plano == null)
                 {
                     throw new Exception("Não há plano disponível para esse serviço");
                 }
@@ -118,7 +119,15 @@ namespace Api.Controllers
                 obj.Pagamento.Add(pagamento);
             }
 
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw ex;
+            }
+
             return true;
         }
 

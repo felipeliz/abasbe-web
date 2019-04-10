@@ -34,6 +34,7 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
         $scope.form.Email = user.Email;
         $scope.form.Telefone = user.TelefoneCelular;
         $scope.form.Cpf = user.CPF;
+        $scope.form.TipoServico = $scope.tipo;
         $scope.formType = $scope.getFormType();
     }
 
@@ -42,7 +43,20 @@ var controller = function ($scope, $http, Validation, Auth, $state, $ionicHistor
         Validation.required("E-mail", $scope.form.Email);
         Validation.required("Telefone de contato", $scope.form.Telefone);
 
-        
+        $http({
+            method: "POST",
+            url: api.resolve("api/ServicoContabil/salvar"),
+            data: $scope.form,
+            loading: true
+        }).then(function mySuccess(response) {
+            toastr.success("Serviço contabil solicitado com sucesso!");
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go("menu.pagamentos");
+        }, function myError(response) {
+            toastr.error(response.data.ExceptionMessage);
+        });
     }
 
 }
