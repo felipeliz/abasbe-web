@@ -170,7 +170,7 @@ namespace Api.Controllers
         {
             int page = Convert.ToInt32(param.page);
             int pageSize = 5;
-
+            string status = param.status?.ToString();
             int cliente = AppExtension.IdUsuarioLogado();
 
             Entities context = new Entities();
@@ -181,7 +181,7 @@ namespace Api.Controllers
 
             query = query.Where(ban => ban.IdCliente == cliente);
 
-            query = query.Where(ban => ban.Status != "C");
+            query = query.Where(ban => ban.Status == status);
 
             query.OrderByDescending(ban => ban.DataSolicitacao).Skip(page * pageSize).Take(pageSize).ToList().ForEach(obj =>
             {

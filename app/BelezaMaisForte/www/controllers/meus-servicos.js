@@ -1,4 +1,4 @@
-var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
+var controller = function ($scope, $http, Auth, $ionicActionSheet, $rootScope) {
 
     $scope.solicitacoes = [];
     $scope.lastUpdate = (new Date()).getTime();
@@ -8,6 +8,18 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
     }
 
     $scope.init = function () {
+        if (Auth.isLoggedIn()) {
+            $scope.mudarTipo(0);
+        }
+        else {
+            $state.go("menu.start")
+        }
+    }
+
+    $scope.reset = function (status) {
+        $scope.canUpdate = true;
+        $scope.filter.page = 0;
+        $scope.filter.status = status;
         $scope.filtrar();
     }
 
@@ -83,15 +95,29 @@ var controller = function ($scope, $http, $ionicActionSheet, $rootScope) {
         });
     }
 
-    $scope.getBadgeClass = function (solicitacao) {
-        switch (solicitacao.SituacaoPagamentoValue) {
-            case 0: return 'badge-stable';
-            case 1: return 'badge-energized';
-            case 2: return 'badge-energized';
-            case 3: return 'badge-balanced';
-            case 4: return 'badge-balanced';
-            case 5: return 'badge-assertive';
-            case 6: return 'badge-calm';
+    $scope.getBadgeSituacaoClass = function (solicitacao) {
+        switch (solicitacao.Status) {
+            case "N": return 'badge-stable';
+            case "R": return 'badge-balanced';
+            case "C": return 'badge-assertive';
+            case "A": return 'badge-calm';
+        }
+    }
+
+    $scope.mudarTipo = function (t) {
+        $scope.filter.tipo = t;
+        switch (t) {
+            case 0: $scope.reset('N'); break;
+            case 1: $scope.reset('A'); break;
+            case 2: $scope.reset('R'); break;
+        }
+    }
+
+    $scope.getStatus = function () {
+        switch ($scope.filter.tipo) {
+            case 0: return 'Novo'; break;
+            case 1: return 'Em Andamento'; break;
+            case 2: return 'Resolvido'; break;
         }
     }
 }

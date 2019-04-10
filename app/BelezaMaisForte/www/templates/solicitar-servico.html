@@ -22,8 +22,12 @@
         <input type="text" ng-model="form.Cpf" model-view-value="true" ui-mask="999.999.999-99">
       </label>
       <label class="item item-input item-stacked-label" ng-if="formType == 1">
+        <span class="input-label">Data de nascimento</span>
+        <input type="text" ng-model="form.DataNascimento" model-view-value="true" ui-mask="99/99/9999">
+      </label>
+      <label class="item item-input item-stacked-label" ng-if="formType == 1">
         <span class="input-label">RG</span>
-        <input type="text" ng-model="form.Rg" ui-mask="999999999">
+        <input type="text" ng-model="form.Rg" ui-mask="9999999999">
       </label>
       <label class="item item-input item-stacked-label" ng-if="formType == 1">
         <span class="input-label">Endereço completo</span>
