@@ -304,6 +304,22 @@ angular.module('app.routes', ['oc.lazyLoad'])
         }
       })
 
+      .state('menu.meus-servicos', {
+        url: '/meus-servicos',
+        cache: false,
+        views: {
+          'side-menu21': {
+            templateUrl: 'templates/meus-servicos.html',
+            controller: 'meus-servicos'
+          }
+        },
+        resolve: {
+          loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+            return $ocLazyLoad.load('controllers/meus-servicos.js');
+          }]
+        }
+      })
+
       .state('menu.pagamentos', {
         url: '/pagamentos',
         cache: false,

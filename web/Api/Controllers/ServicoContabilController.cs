@@ -147,7 +147,6 @@ namespace Api.Controllers
         {
             int page = Convert.ToInt32(param.page);
             int pageSize = 5;
-            string status = param.status.ToString();
 
             int cliente = AppExtension.IdUsuarioLogado();
 

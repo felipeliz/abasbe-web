@@ -1,0 +1,14 @@
+<ion-view title="Minhas Solicitações" id="page14" ng-init="init()">
+  <ion-content padding="true" class="has-header">
+    <div ng-hide="loading || pagamentos.length > 0">
+      <h3>Não há registros</h3>
+      <div class="show-list-numbers-and-dots">
+        <p>Não existem serviços solicitados vinculados a sua conta de usuário.</p>
+      </div>
+    </div>
+    <ion-list>
+      <div ng-include="'templates/card-pagamento.html'" class="card" ng-repeat="solicitacao in solicitacoes"></div>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="onInfinite()" ng-hide="true" distance="50px"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
