@@ -48,7 +48,7 @@
           <Property Name="Foto" Type="varchar" MaxLength="250" />
           <Property Name="CPF" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Nascimento" Type="date" />
           <Property Name="TelefoneCelular" Type="varchar" MaxLength="11" />
           <Property Name="IdCidade" Type="int" Nullable="false" />
@@ -238,7 +238,7 @@
           <Property Name="DescricaoServico" Type="varchar" MaxLength="250" />
           <Property Name="ValorServico" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Endereco" Type="varchar" MaxLength="250" />
-          <Property Name="Email" Type="nchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
           <Property Name="Telefone" Type="varchar" MaxLength="15" />
           <Property Name="Rg" Type="varchar" MaxLength="10" />
         </EntityType>
@@ -249,7 +249,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Senha" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FlagAdministrador" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <Association Name="FK_AssociadoPagamento_Cliente">
@@ -726,7 +726,7 @@
           <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="CPF" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Senha" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nascimento" Type="DateTime" Precision="0" />
           <Property Name="TelefoneCelular" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="IdCidade" Type="Int32" Nullable="false" />
@@ -947,7 +947,7 @@
           <Property Name="DescricaoServico" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="ValorServico" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Endereco" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Rg" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="Model.FK_ServicoContabil_Cliente" FromRole="ServicoContabil" ToRole="Cliente" />
@@ -960,7 +960,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Senha" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FlagAdministrador" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Banner_Cliente">
